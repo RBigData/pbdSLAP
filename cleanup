@@ -1,0 +1,35 @@
+#! /bin/sh
+
+rm -rf ./chm
+rm -rf ./config.*
+rm -rf ./autom4te.cache
+rm -rf ./src/Makevars
+rm -rf ./src/Makedeps
+rm -rf ./src/*.dylib
+rm -rf ./src/*.so
+rm -rf ./src/*.o
+rm -rf ./src/*.d
+rm -rf ./src/*.dll
+rm -rf ./src/*.a
+rm -rf ./src/*.rc
+rm -rf ./src/*.rds
+rm -rf ./src/SLmake.inc
+rm -rf ./src/BLACS/*.fo
+rm -rf ./src/BLACS/*.oo
+rm -rf ./src/TOOLS/*.fo
+rm -rf ./src/TOOLS/*.co
+rm -rf ./src/TOOLS/LAPACK/*.fo
+rm -rf ./src/PBLAS/*.fo
+rm -rf ./src/PBLAS/*.co
+rm -rf ./src/PBLAS/PBBLAS/*.fo
+rm -rf ./src/PBLAS/PTZBLAS/*.fo
+rm -rf ./src/PBLAS/PTZBLAS/*.co
+rm -rf ./src/PBLAS/PTOOLS/*.fo
+rm -rf ./src/PBLAS/PTOOLS/*.co
+rm -rf ./src/REDIST/*.fo
+rm -rf ./src/REDIST/*.co
+rm -rf ./src/ScaLAPACK/*.fo
+rm -rf ./src/ScaLAPACK/*.co
+rm -rf ./src-*
+rm -rf ./inst/lib*
+rm -rf ./inst/etc*

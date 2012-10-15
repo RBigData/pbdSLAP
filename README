@@ -1,0 +1,17 @@
+pbdSLAP provides scalable linear algebra packages including BLACS, PBLAS, and
+ScaLAPACK via pbdMPI based on ScaLAPACK version 2.0.2.
+
+pbdSLAP requires
+  - R version 2.14.0 or higher with pbdMPI installed.
+  - SUN HPC 8.2.1 (OpenMPI) for Solaris.
+  - OpenMPI for Linux.
+  - OpenMPI for Mac OS X.
+  - MPICH2 for Windows.
+
+For installing pbdSLAP, 
+  - see "INSTALL" for Solaris, Linux and Mac OS.
+  - see "INSTALL.win.*" for Windows.
+
+More information about pbdSLAP can be found in
+  1. pbdSLAP vignette at 'pbdSLAP/inst/doc/pbdSLAP-guide.pdf'.
+  2. 'http://r-pbd.org/'.

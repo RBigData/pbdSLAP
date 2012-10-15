@@ -1,0 +1,107 @@
+%\VignetteIndexEntry{pbdSLAP-guide}
+
+\documentclass[article,shortnames,nojss]{pbdSLAP-include/jss}
+
+
+\usepackage{verbatim}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\definecolor{mygreen}{RGB}{0,150,0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% declarations for jss.cls %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% almost as usual
+\author{
+\begin{minipage}{6in}
+\centering
+Wei-Chen Chen$^1$, Drew Schmidt$^2$, George Ostrouchov$^{1,2}$, \\
+Pragneshkumar Patel$^2$
+\end{minipage}
+\\
+\\
+$^1$Computer Science and Mathematics Division, \\
+Oak Ridge National Laboratory, \\
+Oak Ridge, TN, USA \\
+\\
+$^2$Remote Data Analysis and Visualization Center,\\
+University of Tennessee, \\
+Knoxville, TN, USA \\
+%\\
+%\\
+%\today
+}
+\title{A Quick Guide for the \pkg{pbdSLAP} Package}
+%\\
+%\vspace{0.2cm} \large (Based on Version 0.1-2)}
+
+%% for pretty printing and a nice hypersummary also set:
+\Plainauthor{Wei-Chen Chen, Drew Schmidt, George Ostrouchov, Pragneshkumar Patel} %% comma-separated
+\Plaintitle{Quick Guide for pbdSLAP} %% without formatting
+\Shorttitle{Quick Guide for pbdSLAP} %% a short title (if necessary)
+
+%% an abstract and keywords
+%\Abstract{
+%}
+%\Keywords{}
+%\Plainkeywords{} %% without formatting
+%% at least one keyword must be supplied
+
+%% publication information
+%% NOTE: Typically, this can be left commented and will be filled out by the technical editor
+%% \Volume{13}
+%% \Issue{9}
+%% \Month{September}
+%% \Year{2004}
+%% \Submitdate{2004-09-29}
+%% \Acceptdate{2004-09-29}
+
+%% The address of (at least) one author should be given
+%% in the following format:
+\Address{
+  Wei-Chen Chen\\
+  E-mail: \email{wccsnow@gmail.com}\\
+  URL: \url{http://r-pbd.org/}
+}
+%% It is also possible to add a telephone and fax number
+%% before the e-mail in the following format:
+%% Telephone: +43/1/31336-5053
+%% Fax: +43/1/31336-734
+
+%% for those who use Sweave please include the following line (with % symbols):
+%% need no \usepackage{Sweave.sty}
+
+%% end of declarations %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{./pbdSLAP-include/00-preamble}
+
+\begin{document}
+
+\pagenumbering{roman}
+\tableofcontents
+
+%% include your article here, just as usual
+%% Note that you should use the \pkg{}, \proglang{} and \code{} commands.
+
+\newpage
+\input{./pbdSLAP-include/01-acknowledgement}
+
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\input{./pbdSLAP-include/01-introduction}
+\input{./pbdSLAP-include/02-extra}
+\input{./pbdSLAP-include/03-slap}
+\input{./pbdSLAP-include/04-blacs}
+
+\newpage
+\phantomsection
+\addcontentsline{toc}{section}{References}
+\bibliography{./pbdSLAP-include/pbdSLAP}
+
+\end{document}
+

@@ -1,0 +1,13 @@
+useDynLib(pbdSLAP)
+# exportPattern("[[:alpha:]]+")
+
+import(methods, rlecuyer, pbdMPI)
+
+export(
+  ### "R/blacs.r"
+  "slap.init.grid",
+  "slap.exit.grid",
+  "slap.finalize"
+)
+
+S3method(print, gridinfo)

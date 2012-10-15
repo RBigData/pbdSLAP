@@ -1,0 +1,88 @@
+{\color{red} \bf Warning:} This document is written to explain the main
+functions of \pkg{pbdSLAP}~\citep{Chen2012pbdSLAPpackage}, version 0.1-0.
+Every effort will be made to ensure future versions are consistent with
+these instructions, but features in later versions may not be explained
+in this document.
+
+Information about the functionality of this package,
+and any changes in future versions can be found on website:
+\url{http://r-pbd.org/}.
+
+
+
+\section[Quick Start]{Quick Start}
+\label{sec:quick_start}
+\addcontentsline{toc}{section}{\thesection. Quick Start}
+
+The \pkg{pbdSLAP} package serves as a mechanism to utilize a subset of
+functions from the ScaLAPACK~\citep{ScaLAPACK1997} library from within
+\proglang{R}~\citep{Rcore}, and in particular from the higher level
+\proglang{R} packages \pkg{pbdBASE}~\citep{Schmidt2012pbdBASEpackage} and
+\pkg{pbdDMAT}~\citep{Schmidt2012pbdDMATpackage}. It allows one to merely
+``plug in'' the necessary libraries without needing to do a complicated
+system installation.  It is a bundling of the official ScaLAPACK distribution
+from the ScaLAPACK Team at netlib (\url{http://www.netlib.org/scalapack/}).
+However, it is possible to use other ScaLAPACK libraries instead; see
+Section~\ref{sec:external} for details.
+
+The \pkg{pbdSLAP} package consists of a minimum set of double precision
+functions from the \pkg{ScaLAPACK} library
+for \proglang{R}'s distributed matrix computation. \pkg{ScaLAPACK}
+includes many important functions for distributed linear algebra, including
+LU factorization, singular value decomposition, etc.
+We also include the necessary components of the libraries that our subset of
+\pkg{ScaLAPACK} relies on, namely \pkg{BLACS},
+\pkg{PBLAS}, \pkg{BLAS}, and \pkg{LAPACK}.  
+
+The system requirements and installation instructions for \pkg{pbdSLAP} are
+provided in the following section.
+A technical issue for grid information of \pkg{BLACS} is described in
+the Section~\ref{sec:blacs}.
+
+
+\subsection[System Requirements]{System Requirements}
+\label{sec:system_requirements}
+\addcontentsline{toc}{subsection}{\thesubsection. System Requirements}
+
+\pkg{pbdSLAP} requires \pkg{pbdMPI}~\citep{Chen2012pbdMPIpackage}, which
+itself requires a system installation of MPI.
+(\url{http://en.wikipedia.org/wiki/Message_Passing_Interface}).
+\pkg{pbdSLAP} should also
+work with LAM/MPI (\url{http://www.lam-mpi.org/}) and
+MPICH2 (\url{http://www.mcs.anl.gov/research/projects/mpich2/}).
+
+\pkg{pbdSLAP} is mainly developed and tested under
+{\color{blue} OpenMPI} (\url{http://www.open-mpi.org/}) in
+Xubuntu 11.04 and 12.04 systems (\url{http://xubuntu.org/}).
+\pkg{pbdSLAP} should also run on other operating systems, such as
+Mac with OpenMPI, or Windows with MPICH2 if MPI is installed and launched
+properly.  However, we have not extensively tested installation and use of
+the \pkg{pbd} toolchain on other platforms. 
+The reader is encouraged to report his/her experience with \pkg{pbdSLAP}
+on other platforms.
+
+
+\subsection[Installation and Quick Start]{Installation and Quick Start}
+\label{sec:installation}
+\addcontentsline{toc}{subsection}{\thesubsection. Installation and Quick Start}
+
+The remaining assumes that \pkg{pbdMPI} is installed correctly.
+If \pkg{pbdMPI} is not yet installed, see the \pkg{pbdMPI}
+vignette~\citep{Chen2012pbdMPIvignette} for installation details.
+Users can download \pkg{pbdSLAP} from CRAN at
+\url{http://cran.r-project.org}, and
+the installation can be done with the following commands
+\begin{Command}
+tar zxvf pbdMPI_0.1-0.tar.gz
+R CMD INSTALL pbdSLAP
+\end{Command}
+
+Users can get started quickly with \pkg{pbdSLAP} by learning from the
+following example.
+\begin{Command}
+### Under command mode, run the demo with 2 processors by
+### (Use Rscript.exe for windows system)
+
+mpiexec -np 2 Rscript -e "demo(gridinfo,'pbdSLAP',ask=F,echo=F)"
+\end{Command}
+

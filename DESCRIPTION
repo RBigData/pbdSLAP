@@ -1,0 +1,26 @@
+Package: pbdSLAP
+Version: 0.1-0
+Date: 2012-10-08
+Title: Programming with Big Data -- Scalable Linear Algebra Packages
+Authors@R: c(person("Wei-Chen", "Chen", role = c("aut", "cre"), email =
+        "wccsnow@gmail.com"), person("Drew", "Schmidt", role = "aut"),
+        person("George", "Ostrouchov", role = "aut"),
+        person("Pragneshkumar", "Patel", role = "aut"),
+        person("ScaLAPACK", role = "ctb"))
+Depends: R (>= 2.13.0), methods, rlecuyer, pbdMPI (>= 0.1-1)
+LazyLoad: yes
+LazyData: yes
+Description: pbdSLAP utilizes scalable linear algebra packages mainly
+        including BLACS, PBLAS, and ScaLAPACK in double precision via
+        pbdMPI based on ScaLAPACK version 2.0.2.
+SystemRequirements: OpenMPI (>= 1.5.4) on Solaris, Linux and Mac,
+        MPICH2 (>= 1.4.1p1) on Windows
+License: BSD
+URL: http://r-pbd.org/
+Packaged: 2012-10-12 23:50:58 UTC; snoweye
+Author: Wei-Chen Chen [aut, cre],
+  Drew Schmidt [aut],
+  George Ostrouchov [aut],
+  Pragneshkumar Patel [aut],
+  ScaLAPACK [ctb]
+Maintainer: Wei-Chen Chen <wccsnow@gmail.com>

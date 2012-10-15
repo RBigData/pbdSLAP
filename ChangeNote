@@ -1,0 +1,12 @@
+### src/ is majorly taken from ScaLAPACK 2.0.2, but is cleaned out most code and
+### fixed STDIN/STDOUT problems for R.
+
+### Disable
+- src/: Clean out most single, complex, complex*16 files.
+- src/: Change "fprintf(stderr," to "REprintf(".
+- src/: Change "fprintf(stdout," to "Rprintf(".
+- src/: Change "exit(," to "error(".
+- src/: Change "EXIT", "WRITE", "STOP".
+
+### Rewrite
+- src/ScaLAPACK: Move all code inside "lamov.h" to "dlamov.c".

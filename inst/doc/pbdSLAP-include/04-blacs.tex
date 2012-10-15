@@ -1,0 +1,67 @@
+
+\section[Testing BLACS]{Testing BLACS}
+\label{sec:blacs}
+\addcontentsline{toc}{section}{\thesection. Testing BLACS}
+
+Strictly speaking, \pkg{pbdSLAP} does not use the original way of interacting with \pkg{BLACS} to
+deal with grid information. In \pkg{BLACS}, the grid information
+is pointers pointing to \proglang{C} structures containing
+MPI communicators for grid construction.
+The \code{ICTXT} value of the \proglang{C} structure is the original way for
+\proglang{Fortran} to access MPI communicators.
+
+In \proglang{R}, specifically \pkg{pbdBASE}, we use hidden global \proglang{R} objects (\code{.__grid_info_*})
+to store the grid information, where \code{*} is an integer depending on the BLACS context id (\code{ictxt}) for the grid initialized by function (\code{slap.init.grid}).
+
+When computing is finished, we need to exit all the BLACS grids.
+For each grid, \code{slap.exit.grid} function can free the grid
+via the id (\code{ictxt}).
+Initially, the maximum number of \code{ICTXT} is \code{10} in \pkg{BLACS},
+but can be dynamically allocated if this maximum is reached. Users do not need to directly manage this.
+
+When all grids exit completely, we need to finalize \pkg{pbdSLAP} by
+calling \code{slap.finalize}, and by default MPI is usually not finalized.
+\code{slap.finalize} will take care of freeing memory before quiting
+the \pkg{pbdSLAP}.
+
+Now save the next script in a file and run with
+\begin{Command}
+mpirun -np 4 Rscript gridinfo.r
+\end{Command}
+to see the grid information. 
+This example provides four grids \code{ictxt = 0,1,2,3} in \proglang{R},
+but \code{0, 1} are exited before initializing \code{2, 3}. The \code{ICTXT}
+shows that only \code{0, 1} in \proglang{Fortran}
+are used twice for all grids.
+\begin{Code}[title=SPMD R Script]
+### File Name: gridinfo.r
+library(pbdMPI, quiet = TRUE)
+library(pbdSLAP, quiet = TRUE)
+init()
+
+slap.init.grid(2, 2, ictxt = 0)
+slap.init.grid(1, 4, ictxt = 1)
+
+comm.cat(">> .__grid_info_0\n", quiet = TRUE)
+comm.print(.__grid_info_0, all.rank = TRUE)
+comm.cat(">> .__grid_info_1\n", quiet = TRUE)
+comm.print(.__grid_info_1, all.rank = TRUE)
+
+slap.exit.grid(0)
+slap.exit.grid(1)
+
+slap.init.grid(4, 1, ictxt = 2)
+slap.init.grid(2, 3, ictxt = 3)
+
+comm.cat(">> .__grid_info_2\n", quiet = TRUE)
+comm.print(.__grid_info_2, all.rank = TRUE)
+comm.cat(">> .__grid_info_3\n", quiet = TRUE)
+comm.print(.__grid_info_3, all.rank = TRUE)
+
+slap.exit.grid(2)
+slap.exit.grid(3)
+
+slap.finalize()
+finalize()
+\end{Code}
+

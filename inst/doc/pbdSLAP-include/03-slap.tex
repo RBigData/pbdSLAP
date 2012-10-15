@@ -1,0 +1,53 @@
+
+\section[Inside \pkg{pbdSLAP}]{Inside \pkg{pbdSLAP}}
+\label{sec:inside_slap}
+\addcontentsline{toc}{section}{\thesection. Inside \pkg{pbdSLAP}}
+
+Currently, \pkg{pbdSLAP} only supports MPI systems for communication.
+Some packages currently utilizing \pkg{pbdSLAP} are
+\pkg{pbdBASE} and \pkg{pbdDMAT},
+which use \proglang{R}'s S4 classes and methods for distributed
+matrix computations.
+For details, see the
+vignettes~\citep{Schmidt2012pbdBASEvignette,Schmidt2012pbdDMATvignette}
+of \pkg{pbdBASE} and \pkg{pbdDMAT}.
+\pkg{pbdSLAP} also provides a linking mechanism to export the library
+\code{libslap.a} for other applications.
+
+
+\subsection[Linking with \pkg{pbdSLAP}]{Linking with \pkg{pbdSLAP}}
+\label{sec:link_slap}
+\addcontentsline{toc}{subsection}{\thesubsection. Linking with \pkg{pbdSLAP}}
+
+\pkg{pbdSLAP} provides a static library \code{libslap.a} which is useful
+to link into other applications. For furture reference,
+all linking information is stored in the file \\
+\begin{center}
+\code{$\{R_HOME\}/library/pbdSLAP/etc$\{R_ARCH\}/Makeconf} \\
+\end{center}
+including the header files to \pkg{pbdMPI} and \pkg{pbdSLAP}, as well as the
+path to \code{libslap.a} or, if utilized, the external libraries such as \pkg{MKL}.
+An example configuration can be
+found in \code{pbdBASE/src/Makevars.in}. The linking flags are available from
+\begin{Command}[title=pbdBASE/src/Makevars.in]
+R_SCMD = ${R_HOME}/bin/Rscript -e
+SLAP_LDFLAGS = $(shell ${R_SCMD} \
+  "source('../R/get_lib.r'); \
+   get.lib('R_SLAP','"${R_ARCH}"')")
+\end{Command}
+
+It is also very likely to link with \pkg{pbdMPI} since MPI is a prerequisite.
+One can obtain the system's MPI information from \pkg{pbdMPI},
+and the linking flags are available from
+\begin{Command}[title=pbdSLAP/src/Makevars.in]
+R_SCMD = ${R_HOME}/bin/Rscript -e
+SPMD_CPPFLAGS = $(shell ${R_SCMD} \
+  "source('../R/get_conf.r'); \
+   get.conf('PKG_CPPFLAGS','"${R_ARCH}"')")
+SPMD_LDFLAGS = $(shell ${R_SCMD} \
+  "source('../R/get_conf.r'); \
+   get.conf('PKG_LIBS','"${R_ARCH}"')")
+\end{Command}
+where \code{${R_ARCH}} is avaialbe from the default \proglang{R}
+\code{Makeconf} file.
+

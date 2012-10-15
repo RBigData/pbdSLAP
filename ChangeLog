@@ -1,0 +1,31 @@
+
+======================= Log Before Release =====================================
+2012-10-08:
+  * Prepare fot the first submission.
+  * Change Makvars again for Solaris make.
+
+2012-09-17:
+  * Make changes for Nautilus. Drop "pbdMPI:::* ideas", use "inst/get_spmd.r".
+  * Make changes for pbdBASE and pbdMPI.
+
+2012-09-01:
+  * Delete configure.ac and use pbdMPI:::LdFlags() and others.
+  * Rename to 'pbdSLAP'.
+  * Adjust "Makevars.win".
+
+2012-08-12:
+  * Add ScaLAPACK's version including BLACS, PBLAS, TOOLS, REDIST,
+    LAPACK, ScaLAPACK, ...
+  * Change to pbdMPI's "configure.ac".
+  * Rename to pbdSLAP.
+
+2012-07-15:
+  * Fix linking problems for windows.
+  * Fix "configure.ac".
+  * Fix "src/Makevars.in", "src/Makevars.win", and "scripts/blacs_*".
+
+2012-07-07:
+  * First build for RmpiBLACS.
+  * Build binaries for Windows with OpenMPI only.
+  * Fix problems of "MSVC100D.DLL".
+
