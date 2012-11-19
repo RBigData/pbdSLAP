@@ -1,4 +1,4 @@
-citHeader("To cite RmpiSLAP in a publication use:")
+citHeader("To cite pbdSLAP in a publication use:")
 
 citEntry(
   entry = "Misc",

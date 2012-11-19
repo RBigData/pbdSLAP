@@ -1,6 +1,6 @@
 Package: pbdSLAP
-Version: 0.1-0
-Date: 2012-10-08
+Version: 0.1-1
+Date: 2012-10-30
 Title: Programming with Big Data -- Scalable Linear Algebra Packages
 Authors@R: c(person("Wei-Chen", "Chen", role = c("aut", "cre"), email =
         "wccsnow@gmail.com"), person("Drew", "Schmidt", role = "aut"),
@@ -17,7 +17,7 @@ SystemRequirements: OpenMPI (>= 1.5.4) on Solaris, Linux and Mac,
         MPICH2 (>= 1.4.1p1) on Windows
 License: BSD
 URL: http://r-pbd.org/
-Packaged: 2012-10-12 23:50:58 UTC; snoweye
+Packaged: 2012-11-19 07:53:47 UTC; snoweye
 Author: Wei-Chen Chen [aut, cre],
   Drew Schmidt [aut],
   George Ostrouchov [aut],
