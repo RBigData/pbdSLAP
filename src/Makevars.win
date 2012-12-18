@@ -45,7 +45,7 @@ $(R_OBJS): $(R_SLAP)
 
 SLmake:
 	@$(RM) -rf SLmake.inc
-	@$(ECHO) '### Added by Makevars' >> SLmake.inc
+	@$(ECHO) '### Added by Makevars' > SLmake.inc
 	@$(ECHO) 'MPI_ROOT = $(MPI_ROOT)' >> SLmake.inc
 	@$(ECHO) 'R_SLAP = $(R_SLAP)' >> SLmake.inc
 	@$(ECHO) 'include $(MkInclude)' >> SLmake.inc
@@ -61,8 +61,7 @@ $(R_SLAP): SLmake
 
 clean:
 	@$(RM) -rf *.o *.d *.rc *.so *.dll *.dylib *.a *.lib *.inc \
-                Makedeps Makevars $(SHLIB) $(OBJECTS) $(USER_CONF)
-	@$(RM) -rf SLmake.inc
+                Makedeps Makevars $(USER_CONF) $(SHLIB) $(OBJECTS)
 	( cd BLACS; $(MAKE) clean )
 	( cd TOOLS; $(MAKE) clean )
 	( cd PBLAS; $(MAKE) clean )

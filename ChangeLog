@@ -1,4 +1,8 @@
+2012-10-17: Ver. 0.1-2
+  * Fix multi-arch problem.
+
 2012-10-13: Ver. 0.1-1
+  * Fix .GlobalEnv problem.
 
 ======================= Log Before Release =====================================
 2012-10-08:

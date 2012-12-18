@@ -1,22 +1,26 @@
 ### Modified from Rserve/src/install.libs.R
 ### For libs
-libsarch <- if (nzchar(R_ARCH)) paste("libs", R_ARCH, sep='') else "libs"
-dest <- file.path(R_PACKAGE_DIR, libsarch)
-files <- if (WINDOWS) "pbdSLAP.dll" else c("pbdSLAP.so", "pbdSLAP.dylib")
+files <- c("pbdSLAP.so", "pbdSLAP.so.dSYM", "pbdSLAP.dylib", "pbdSLAP.dll")
 files <- files[file.exists(files)]
-dir.create(dest, recursive = TRUE, showWarnings = FALSE)
-file.copy(files, dest, overwrite = TRUE)
+if(length(files) > 0){
+  libsarch <- if (nzchar(R_ARCH)) paste("libs", R_ARCH, sep='') else "libs"
+  dest <- file.path(R_PACKAGE_DIR, libsarch)
+  dir.create(dest, recursive = TRUE, showWarnings = FALSE)
+  file.copy(files, dest, overwrite = TRUE, recursive = TRUE)
+}
 ### For lib
-libarch <- if (nzchar(R_ARCH)) paste("lib", R_ARCH, sep='') else "lib"
-dest <- file.path(R_PACKAGE_DIR, libarch)
 file <- "libslap.a"
 if(file.exists(file)){  ### External libraries do not build "libslap.a"
+  libarch <- if (nzchar(R_ARCH)) paste("lib", R_ARCH, sep='') else "lib"
+  dest <- file.path(R_PACKAGE_DIR, libarch)
   dir.create(dest, recursive = TRUE, showWarnings = FALSE)
   file.copy(file, dest, overwrite = TRUE)
 }
 ### For etc
-etcarch <- if (nzchar(R_ARCH)) paste("etc", R_ARCH, sep='') else "etc"
-dest <- file.path(R_PACKAGE_DIR, etcarch)
 file <- "Makeconf"
-dir.create(dest, recursive = TRUE, showWarnings = FALSE)
-file.copy(file, dest, overwrite = TRUE)
+if(file.exists(file)){
+  etcarch <- if (nzchar(R_ARCH)) paste("etc", R_ARCH, sep='') else "etc"
+  dest <- file.path(R_PACKAGE_DIR, etcarch)
+  dir.create(dest, recursive = TRUE, showWarnings = FALSE)
+  file.copy(file, dest, overwrite = TRUE)
+}

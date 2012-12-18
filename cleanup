@@ -5,6 +5,7 @@ rm -rf ./config.*
 rm -rf ./autom4te.cache
 rm -rf ./src/Makevars
 rm -rf ./src/Makedeps
+rm -rf ./src/Makeconf
 rm -rf ./src/*.dylib
 rm -rf ./src/*.so
 rm -rf ./src/*.o
@@ -31,3 +32,5 @@ rm -rf ./src/REDIST/*.co
 rm -rf ./src/ScaLAPACK/*.fo
 rm -rf ./src/ScaLAPACK/*.co
 rm -rf ./src-*
+rm -rf ./inst/etc*
+rm -rf ./inst/lib*

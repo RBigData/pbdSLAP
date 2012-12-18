@@ -58,7 +58,7 @@ userLibrary: $(R_SLAP)
 
 SLmake:
 	@rm -rf SLmake.inc
-	@echo "### Added by Makevars" >> SLmake.inc
+	@echo "### Added by Makevars" > SLmake.inc
 	@echo "CDEFS = $(CDEFS)" >> SLmake.inc
 	@echo "PKG_CPPFLAGS = $(PKG_CPPFLAGS)" >> SLmake.inc
 	@echo "PKG_CFLAGS = $(PKG_CFLAGS)" >> SLmake.inc
@@ -77,8 +77,7 @@ $(R_SLAP): SLmake
 
 clean:
 	@rm -rf *.o *.d *.rc *.so *.dylib *.dll *.a *.lib *.inc \
-                Makedeps Makevars $(SHLIB) $(OBJECTS) $(USER_CONF)
-	@rm -rf SLmake.inc
+                Makedeps Makevars $(SHLIB) $(USER_CONF) $(OBJECTS)
 	( cd BLACS; $(MAKE) clean )
 	( cd TOOLS; $(MAKE) clean )
 	( cd PBLAS; $(MAKE) clean )
