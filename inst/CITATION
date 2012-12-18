@@ -8,7 +8,7 @@ citEntry(
                       as.person("George Ostrouchov"),
                       as.person("Pragneshkumar Patel")),
   year = "2012",
-  note = "R Package, URL http://cran.r-project.org/package=pbdSLAP",
+  note = "{R} Package, URL http://cran.r-project.org/package=pbdSLAP",
   textVersion = "Chen, W.-C., Schmidt, D., Ostrouchov, G., and Patel, P. (2012) pbdSLAP: Programming with Big Data -- Scalable Linear Algebra Packages. R Package, URL http://cran.r-project.org/package=pbdSLAP",
   key = "Chen2012pbdSLAPpackage"
 )
@@ -21,7 +21,7 @@ citEntry(
                       as.person("George Ostrouchov"),
                       as.person("Pragneshkumar Patel")),
   year = "2012",
-  note = "R Vignette, URL http://cran.r-project.org/package=pbdSLAP",
+  note = "{R} Vignette, URL http://cran.r-project.org/package=pbdSLAP",
   textVersion = "Chen, W.-C., Schmidt, D., Ostrouchov, G., and Patel, P. (2012) A Quick Guide for the pbdMPI Package. R Vignette, URL http://cran.r-project.org/package=pbdSLAP",
   key = "Chen2012pbdSLAPvignette"
 )

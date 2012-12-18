@@ -31,5 +31,3 @@ rm -rf ./src/REDIST/*.co
 rm -rf ./src/ScaLAPACK/*.fo
 rm -rf ./src/ScaLAPACK/*.co
 rm -rf ./src-*
-rm -rf ./inst/lib*
-rm -rf ./inst/etc*
