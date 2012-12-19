@@ -76,7 +76,7 @@ $(R_SLAP): SLmake
 	( cd ScaLAPACK; $(MAKE) )
 
 clean:
-	@rm -rf *.o *.d *.rc *.so *.dylib *.dll *.a *.lib *.inc \
+	@rm -rf *.o *.d *.rc *.so* *.dylib *.dll *.a *.lib *.inc \
                 Makedeps Makevars $(SHLIB) $(USER_CONF) $(OBJECTS)
 	( cd BLACS; $(MAKE) clean )
 	( cd TOOLS; $(MAKE) clean )
