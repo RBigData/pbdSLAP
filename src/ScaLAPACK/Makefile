@@ -43,7 +43,8 @@ DLASRC = \
    ddbtf2.o  ddbtrf.o  ddttrf.o ddttrsv.o dpttrsv.o dtrmvt.o pdsyevr.o \
    bdlaapp.o bdlaexc.o bdtrexc.o dlaqr6.o pdtrord.o \
    pdtrsen.o pdgebal.o pdhseqr.o pdlamve.o pdlaqr0.o pdlaqr1.o pdlaqr2.o \
-   pdlaqr3.o pdlaqr4.o pdlaqr5.o pdrot.o
+   pdlaqr3.o pdlaqr4.o pdlaqr5.o pdrot.o \
+   pdtrcon.o
 
 PKG_DLASRC = $(DLASRC:.o=.fo)
 PKG_DZLAUX = $(DZLAUX:.o=.fo)
