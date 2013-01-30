@@ -2,7 +2,7 @@ citHeader("To cite pbdSLAP in a publication use:")
 
 citEntry(
   entry = "Misc",
-  title = "pbdSLAP: Programming with Big Data -- Scalable Linear Algebra Packages",
+  title = "{pbdSLAP}: Programming with Big Data -- Scalable Linear Algebra Packages",
   author = personList(as.person("Wei-Chen Chen"),
                       as.person("Drew Schmidt"),
                       as.person("George Ostrouchov"),
@@ -15,7 +15,7 @@ citEntry(
 
 citEntry(
   entry = "Manual",
-  title = "A Quick Guide for the pbdSLAP Package",
+  title = "A Quick Guide for the {pbdSLAP} Package",
   author = personList(as.person("Wei-Chen Chen"),
                       as.person("Drew Schmidt"),
                       as.person("George Ostrouchov"),
