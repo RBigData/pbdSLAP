@@ -1,5 +1,6 @@
 useDynLib(pbdSLAP)
 # exportPattern("[[:alpha:]]+")
+# exportPattern("^[\\.]")
 
 import(methods, rlecuyer, pbdMPI)
 

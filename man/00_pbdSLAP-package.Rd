@@ -34,7 +34,7 @@
 }
 \author{
   Wei-Chen Chen \email{wccsnow@gmail.com}, Drew Schmidt,
-  George Ostrouchov, Pragneshkumar Patel, and ScaLAPACK.
+  George Ostrouchov, and Pragneshkumar Patel.
 }
 \examples{
 \dontrun{

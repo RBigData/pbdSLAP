@@ -36,13 +36,10 @@ OBJECTS = $(R_OBJS) $(EXT_OBJS)
 BUILD_LIBS = $(SHLIB) $(EXT_LIBS)
 
 ### For user configuration.
-USER_LIB = ../inst/lib${R_ARCH}
-USER_ETC = ../inst/etc${R_ARCH}
-USER_CONF = $(USER_ETC)/Makeconf
+USER_CONF = Makeconf
  
 ### Start making here.
 all: $(BUILD_LIBS)
-	@if test ! -e $(USER_ETC); then mkdir -p $(USER_ETC); fi
 	@echo "SPMD_CPPFLAGS = $(SPMD_CPPFLAGS)" > $(USER_CONF)
 	@echo "SPMD_LDFLAGS = $(SPMD_LDFLAGS)" >> $(USER_CONF)
 	@echo "EXT_LDFLAGS = $(EXT_LDFLAGS)" >> $(USER_CONF)
@@ -56,13 +53,12 @@ all: $(BUILD_LIBS)
 
 $(SHLIB): $(OBJECTS)
 
+### Do not delete this coming from "../configure.in".
 userLibrary: $(R_SLAP)
-	@if test ! -e $(USER_LIB); then mkdir -p $(USER_LIB); fi
-	@cp libslap.a $(USER_LIB)
 
 SLmake:
 	@rm -rf SLmake.inc
-	@echo "### Added by Makevars" >> SLmake.inc
+	@echo "### Added by Makevars" > SLmake.inc
 	@echo "CDEFS = $(CDEFS)" >> SLmake.inc
 	@echo "PKG_CPPFLAGS = $(PKG_CPPFLAGS)" >> SLmake.inc
 	@echo "PKG_CFLAGS = $(PKG_CFLAGS)" >> SLmake.inc
@@ -80,13 +76,10 @@ $(R_SLAP): SLmake
 	( cd ScaLAPACK; $(MAKE) )
 
 clean:
-	@rm -rf *.o *.d *.rc *.so *.dylib *.dll *.a *.lib \
-                Makedeps Makevars $(SHLIB) $(OBJECTS)
-	@rm -rf $(USER_LIB) $(USER_ETC)
-	@rm -rf SLmake.inc
+	@rm -rf *.o *.d *.rc *.so* *.dylib *.dll *.a *.lib *.inc \
+                Makedeps Makevars $(SHLIB) $(USER_CONF) $(OBJECTS)
 	( cd BLACS; $(MAKE) clean )
 	( cd TOOLS; $(MAKE) clean )
 	( cd PBLAS; $(MAKE) clean )
 	( cd REDIST; $(MAKE) clean )
 	( cd ScaLAPACK; $(MAKE) clean )
-
