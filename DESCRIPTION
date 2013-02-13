@@ -1,6 +1,6 @@
 Package: pbdSLAP
 Version: 0.1-4
-Date: 2013-01-30
+Date: 2013-02-09
 Title: Programming with Big Data -- Scalable Linear Algebra Packages
 Authors@R: c(person("Wei-Chen", "Chen", role = c("aut", "cre"), email =
         "wccsnow@gmail.com"), person("Drew", "Schmidt", role = "aut"),
@@ -19,7 +19,7 @@ URL: http://r-pbd.org/
 BugReports: RBigDataProgramming on Google Group
 MailingList: Please send questions and comments regarding pbdR to
         RBigData@gmail.com
-Packaged: 2013-01-30 18:25:28 UTC; snoweye
+Packaged: 2013-02-13 19:23:03 UTC; snoweye
 Author: Wei-Chen Chen [aut, cre],
   Drew Schmidt [aut],
   George Ostrouchov [aut],
