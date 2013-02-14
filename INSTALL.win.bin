@@ -5,13 +5,12 @@
 --- 'pbdMPI' Installation:
    See 'pbdMPI/INSTALL.win.bin' for the details.
 
-
 --- 'pbdSLAP' Installation:
    Default Installation:
+   ("set_mpi.bat" is available in "pbdMPI/INSTALL.win.bin")
 
      C:/> set_mpi
      C:/> R CMD INSTALL pbdSLAP_0.1-0.zip
-
 
 --- Testing:
    Suppose all environments are set correctly, I can run test examples by

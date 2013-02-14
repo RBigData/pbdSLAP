@@ -24,7 +24,7 @@ blacs.grid.initialize <- function(nprow, npcol = 1, ictxt = 0){
                   MYCOL = as.integer(0),
                   PACKAGE = "pbdSLAP")
   class(ret) <- "gridinfo"
-  assign(grid.name, ret, envir = .GlobalEnv)
+  assign(grid.name, ret, envir = .pbdSLAPEnv)
 
   invisible()
 } # End of blacs.grid.initialize().
@@ -43,12 +43,12 @@ print.gridinfo <- function(x, ...){
 blacs.grid.exit <- function(ictxt){
   grid.name <- paste(".__grid_info_", ictxt, sep = "")
 
-  if(exists(grid.name, envir = .GlobalEnv)){
-    grid.info <- get(grid.name, envir = .GlobalEnv)
+  if(exists(grid.name, envir = .pbdSLAPEnv)){
+    grid.info <- get(grid.name, envir = .pbdSLAPEnv)
     .Fortran("slap_blacs_gridexit",
              ICTXT = as.integer(grid.info$ICTXT),
              PACKAGE = "pbdSLAP")
-    rm(list = grid.name, envir = .GlobalEnv)
+    rm(list = grid.name, envir = .pbdSLAPEnv)
   }
   invisible()
 } # End of blacs.grid.exit().

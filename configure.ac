@@ -41,6 +41,23 @@ dnl pbdMPI
 SPMD_CPPFLAGS=`${R_SCMD} "source('./R/get_conf.r');get.conf('PKG_CPPFLAGS','"${R_ARCH}"')"`
 SPMD_LDFLAGS=`${R_SCMD} "source('./R/get_conf.r');get.conf('PKG_LIBS','"${R_ARCH}"')"`
 
+
+dnl Report
+echo " "
+echo "****************** Results of pbdSLAP package configure *****************"
+echo " "
+echo ">> EXT_LDFLAGS = ${EXT_LDFLAGS}"
+echo ">> EXT_OBJS = ${EXT_OBJS}"
+echo ">> EXT_LIBS = ${EXT_LIBS}"
+echo ">> CDEFS = ${CDEFS}"
+echo ">> CDEFS_CHECK = ${CDEFS_CHECK}"
+echo ">> SPMD_CPPFLAGS = ${SPMD_CPPFLAGS}"
+echo ">> SPMD_LDFLAGS = ${SPMD_LDFLAGS}"
+echo " "
+echo "*************************************************************************"
+echo " "
+
+
 dnl Start to substitute templates
 AC_SUBST(EXT_LDFLAGS)
 AC_SUBST(EXT_OBJS)

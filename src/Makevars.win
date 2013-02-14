@@ -25,13 +25,10 @@ R_SLAP = libslap.a
 OBJECTS = $(R_OBJS) $(R_SLAP)
 
 ### For user library and configuration.
-USER_LIB = ../inst/lib${R_ARCH}
-USER_ETC = ../inst/etc${R_ARCH}
-USER_CONF = $(USER_ETC)/Makeconf
+USER_CONF = Makeconf
  
 ### Start making here.
 all: $(SHLIB) userLibrary
-	@if test ! -e $(USER_ETC); then mkdir -p $(USER_ETC); fi
 	@$(ECHO) 'MPI_ROOT = $(MPI_ROOT)' > $(USER_CONF)
 	@$(ECHO) 'MPI_LIB = $(MPI_LIB)' >> $(USER_CONF)
 	@$(ECHO) 'PKG_CPPFLAGS = $(PKG_CPPFLAGS)' >> $(USER_CONF)
@@ -43,12 +40,12 @@ all: $(SHLIB) userLibrary
 $(SHLIB): $(OBJECTS)
 
 userLibrary: $(SHLIB) $(R_SLAP)
-	@if test ! -e $(USER_LIB); then mkdir -p $(USER_LIB); fi
-	@$(CP) libslap.a $(USER_LIB)
+
+$(R_OBJS): $(R_SLAP)
 
 SLmake:
 	@$(RM) -rf SLmake.inc
-	@$(ECHO) '### Added by Makevars' >> SLmake.inc
+	@$(ECHO) '### Added by Makevars' > SLmake.inc
 	@$(ECHO) 'MPI_ROOT = $(MPI_ROOT)' >> SLmake.inc
 	@$(ECHO) 'R_SLAP = $(R_SLAP)' >> SLmake.inc
 	@$(ECHO) 'include $(MkInclude)' >> SLmake.inc
@@ -63,10 +60,8 @@ $(R_SLAP): SLmake
 	( cd ScaLAPACK; $(MAKE) )
 
 clean:
-	@$(RM) -rf *.o *.d *.rc *.so *.dll *.dylib *.a *.lib \
-                Makedeps Makevars $(SHLIB) $(OBJECTS)
-	@$(RM) -rf $(USER_LIB) $(USER_ETC)
-	@$(RM) -rf SLmake.inc
+	@$(RM) -rf *.o *.d *.rc *.so* *.dll *.dylib *.a *.lib *.inc \
+                Makedeps Makevars $(USER_CONF) $(SHLIB) $(OBJECTS)
 	( cd BLACS; $(MAKE) clean )
 	( cd TOOLS; $(MAKE) clean )
 	( cd PBLAS; $(MAKE) clean )
