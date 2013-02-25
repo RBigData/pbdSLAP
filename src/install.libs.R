@@ -1,6 +1,7 @@
 ### Modified from Rserve/src/install.libs.R
 ### For libs
-files <- c("pbdSLAP.so", "pbdSLAP.so.dSYM", "pbdSLAP.dylib", "pbdSLAP.dll")
+files <- c("pbdSLAP.so", "pbdSLAP.so.dSYM", "pbdSLAP.dylib", "pbdSLAP.dll",
+           "symbols.rds")
 files <- files[file.exists(files)]
 if(length(files) > 0){
   libsarch <- if (nzchar(R_ARCH)) paste("libs", R_ARCH, sep='') else "libs"
