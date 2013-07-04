@@ -1,0 +1,57 @@
+
+\section[Useful Information]{Useful Information}
+\label{sec:useful_info}
+\addcontentsline{toc}{section}{\thesection. Useful Information}
+
+
+\subsection[\code{CDEFS}~Flag for ScaLAPACK]{\code{CDEFS}~Flag of ScaLAPACK}
+\label{sec:compilers}
+\addcontentsline{toc}{subsection}{\thesubsection. \code{CDEFS}~Flag of ScaLAPACK}
+
+The \code{CDEFS} is a flag for interface between C and Fortran, and is
+required to compile \pkg{pbdSLAP}.
+\code{CDEFS = -DAdd_} is the default for GNU C and Fortran.
+The correct value can be determined by BLACS test intface
+tool in \code{pbdSLAP/inst/intface/}.
+For other compilers, the possible values could be \code{-DNoChange},
+\code{-Df77IsF2C}, or \code{-DUpCase}.
+
+For other values, user can provide an external \code{CDEFS} flag at
+installation time, such as
+\begin{Command}
+tar zxvf pbdMPI_0.1-0.tar.gz
+R CMD INSTALL pbdSLAP \
+  --configure-vars="CDEFS='other possible flags'"
+\end{Command}
+The value of \code{CDEFS} (other possible flags) can be
+one of the possible values above or other configurations.
+For PGI compiler, the value could be \code{-DAdd_ -DNO_IEEE $(USEMPI)}.
+Note that the \code{CDEFS} will overwrite the default \code{CDEFS}
+inside \code{pbdSLAP/src/Makevars.in} for compiling \code{libslap.a}.
+
+
+\subsection[Using Other Distributions of ScaLAPACK]{Using Other Distributions of ScaLAPACK}
+\label{sec:external}
+\addcontentsline{toc}{subsection}{\thesubsection. Using Other Distributions of ScaLAPACK}
+
+Some users may have access to other, often non-free, distributions of
+Scalapack, such as Intel's \pkg{MKL}
+(\url{http://software.intel.com/en-us/intel-mkl}) or Cray's \pkg{LibSci}
+(\url{http://docs.cray.com/}).  It may be possible to achieve some
+performance gains using these libraries over netlib ScaLAPACK, especially
+when using big machines, such as Nautilus and Kraken in
+NICS (\url{http://www.nics.tennessee.edu}).
+
+To use these external libraries with \pkg{pbdSLAP}, you need only supply the
+appropriate flag to \code{EXT_LDFLAGS} at compile time.  Specifically,
+the user would issue the command:
+\begin{Command}
+tar zxvf pbdMPI_0.1-0.tar.gz
+R CMD INSTALL pbdSLAP \
+  --configure-vars="EXT_LDFLAGS='external ldflags'"
+\end{Command}
+where "external ldflags" needs to include linking information to
+ScaLAPACK, BLACS, LAPACK, and BLAS.
+Please be aware that the order matters in the \code{EXT_LDFLAGS}.
+Note that \code{EXT_LDFLAGS} will be part of \code{PKG_LDFLAGS}
+inside \code{pbdSLAP/src/Makevars.in}.

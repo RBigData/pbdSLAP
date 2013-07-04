@@ -1,0 +1,14 @@
+CCFLAGS = $(ALL_CPPFLAGS) $(ALL_CFLAGS) -O3 -w
+FCFLAGS = $(ALL_CPPFLAGS) $(ALL_FFLAGS) -O3 -w
+ARCH = $(AR)
+ARCHFLAGS = cr
+# ARCHFLAGS = -rucs
+
+# SCALAPACKLIB = libslap.a
+SCALAPACKLIB = $(R_SLAP) 
+
+### Do not remove. Windows need these.
+CDEFS = -DAdd_ 
+PKG_CPPFLAGS = -I"$(MPI_ROOT)/include"
+PKG_CFLAGS = -w
+

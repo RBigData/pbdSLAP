@@ -1,0 +1,14 @@
+#!/bin/sh
+#
+# C:/> sh 00_make.win
+#
+
+CC=`${R_HOME}/bin${R_ARCH_BIN}/R CMD config CC`
+FC=`${R_HOME}/bin${R_ARCH_BIN}/R CMD config FC`
+
+${CC} -c *.c
+${FC} -c *.f
+${FC} -o xintface *.o
+
+./xintface
+rm -f *.o xintface
