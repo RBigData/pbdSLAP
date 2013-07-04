@@ -34,4 +34,3 @@ rm -rf ./src/ScaLAPACK/*.co
 rm -rf ./src-*
 rm -rf ./inst/etc*
 rm -rf ./inst/lib*
-rm -rf ./inst/doc/
