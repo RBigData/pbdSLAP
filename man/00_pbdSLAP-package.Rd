@@ -1,5 +1,6 @@
 \name{pbdSLAP-package}
 \alias{pbdSLAP-package}
+\alias{pbdSLAP}
 \docType{package}
 \title{Programming with Big Data -- Scalable Linear Algebra Packages}
 \description{
