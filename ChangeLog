@@ -1,3 +1,6 @@
+2013-08-01: Ver. 0.1-7
+  * chmod u+x inst/test_interface/*.sh
+
 2013-07-02: Ver. 0.1-6
   * Move inst/doc/vignettes/ to vignettes/.
 
