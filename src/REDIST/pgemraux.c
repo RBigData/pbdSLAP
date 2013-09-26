@@ -108,7 +108,7 @@ extern void Cpigemr2d();
 #include <assert.h>
 void *
 mr2d_malloc(n)
-  int   n;
+  long int   n;
 {
   void *ptr;
   assert(n > 0);
