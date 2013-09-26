@@ -10,3 +10,6 @@
 
 ### Rewrite
 - src/ScaLAPACK: Move all code inside "lamov.h" to "dlamov.c".
+
+### Modify
+- src/REDIST/pgemraux.c: line 111, change from "int n" to "long int n".

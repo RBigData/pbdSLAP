@@ -11,8 +11,8 @@
 .onLoad <- function(libname, pkgname){
   if(! is.loaded("spmd_initialize", PACKAGE = "pbdMPI")){
     library.dynam("pbdMPI", "pbdMPI", libname)
-    if(pbdMPI:::comm.is.null(0L) == -1){
-      pbdMPI:::init()
+    if(pbdMPI::comm.is.null(0L) == -1){
+      pbdMPI::init()
     }
   }
 
@@ -21,7 +21,7 @@
 } # End of .onLoad().
 
 .onUnload <- function(libpath){
-  pbdSLAP:::slap.finalize()
+  pbdSLAP::slap.finalize()
   library.dynam.unload("pbdSLAP", libpath)
   invisible()
 } # End of .onUnload().
