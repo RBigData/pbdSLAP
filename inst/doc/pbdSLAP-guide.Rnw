@@ -9,6 +9,7 @@
 \usepackage{amssymb}
 \definecolor{mygreen}{RGB}{0,150,0}
 
+\newcommand{\slapversion}{0.1-7}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% declarations for jss.cls %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -34,7 +35,7 @@ Knoxville, TN, USA \\
 %\\
 %\today
 }
-\title{A Quick Guide for the \pkg{pbdSLAP} Package}
+\title{A Quick Guide for the \pkg{pbdSLAP} Package {\small (Ver. \slapversion)}}
 %\\
 %\vspace{0.2cm} \large (Based on Version 0.1-2)}
 
