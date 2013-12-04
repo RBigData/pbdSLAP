@@ -9,6 +9,6 @@ SCALAPACKLIB = $(R_SLAP)
 
 ### Do not remove. Windows need these.
 CDEFS = -DAdd_ 
-PKG_CPPFLAGS = -I"$(MPI_ROOT)/include"
+PKG_CPPFLAGS = -I"$(MPI_INCLUDE)"
 PKG_CFLAGS = -w
 

@@ -1,6 +1,6 @@
 Package: pbdSLAP
 Version: 0.1-7
-Date: 2013-09-28
+Date: 2013-12-04
 Title: Programming with Big Data -- Scalable Linear Algebra Packages
 Authors@R: c(person("Wei-Chen", "Chen", role = c("aut", "cre"), email =
         "wccsnow@gmail.com"), person("Drew", "Schmidt", role = "aut"),
@@ -18,12 +18,12 @@ Description: pbdSLAP utilizes scalable linear algebra packages mainly
         pbdMPI based on ScaLAPACK version 2.0.2.
 SystemRequirements: OpenMPI (>= 1.5.4) on Solaris, Linux and Mac,
         MPICH2 (>= 1.4.1p1) on Windows
-License: BSD
+License: Revised BSD
 URL: http://r-pbd.org/
 BugReports: http://group.r-pbd.org/
 MailingList: Please send questions and comments regarding pbdR to
         RBigData@gmail.com
-Packaged: 2013-09-28 19:44:48 UTC; snoweye
+Packaged: 2013-12-04 05:37:30 UTC; snoweye
 Author: Wei-Chen Chen [aut, cre],
   Drew Schmidt [aut],
   George Ostrouchov [aut],
