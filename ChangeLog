@@ -1,3 +1,9 @@
+2014-01-04: Ver. 0.1-7
+  * Add MS-MPI and FreeBSD support.
+
+2013-12-04: Ver. 0.1-7
+  * Add Intel Miscrosoft HPC Pack 2012 (MS-MPI) support.
+
 2013-08-01: Ver. 0.1-7
   * chmod u+x inst/test_interface/*.sh
 

@@ -4,6 +4,8 @@ R_SCMD = ${R_HOME}/bin${R_ARCH_BIN}/Rscript -e
 ### Get MPI information from "pbdMPI". Note that Windows uses different FLAGS.
 MPI_ROOT = $(shell ${R_SCMD} \
   "source('../R/get_conf.r');get.conf('MPI_ROOT','"${R_ARCH}"')")
+MPI_INCLUDE = $(shell ${R_SCMD} \
+  "source('../R/get_conf.r');get.conf('MPI_INCLUDE','"${R_ARCH}"')")
 MPI_LIB = $(shell ${R_SCMD} \
   "source('../R/get_conf.r');get.conf('MPI_LIB','"${R_ARCH}"')")
 
@@ -11,11 +13,11 @@ MPI_LIB = $(shell ${R_SCMD} \
 MkInclude = ${R_HOME}/etc${R_ARCH}/Makeconf
 
 ### Setup R package flags and substitute by configure for ${MPI_...}.
-PKG_CPPFLAGS = -I"$(MPI_ROOT)/include"
+PKG_CPPFLAGS = -I"$(MPI_INCLUDE)"
 PKG_CFLAGS = -w
 PKG_FFLAGS = -w
 ### Order is matter.
-PKG_LIBS = $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) -L"$(MPI_LIB)" -lmpi
+PKG_LIBS = $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) $(MPI_LIB)
 
 ### Setup R source code and objects.
 R_SRCS_C = $(wildcard *.c)
@@ -30,6 +32,7 @@ USER_CONF = Makeconf
 ### Start making here.
 all: $(SHLIB) userLibrary
 	@$(ECHO) 'MPI_ROOT = $(MPI_ROOT)' > $(USER_CONF)
+	@$(ECHO) 'MPI_INCLUDE = $(MPI_INCLUDE)' >> $(USER_CONF)
 	@$(ECHO) 'MPI_LIB = $(MPI_LIB)' >> $(USER_CONF)
 	@$(ECHO) 'PKG_CPPFLAGS = $(PKG_CPPFLAGS)' >> $(USER_CONF)
 	@$(ECHO) 'PKG_CFLAGS = $(PKG_CFLAGS)' >> $(USER_CONF)
@@ -47,6 +50,7 @@ SLmake:
 	@$(RM) -rf SLmake.inc
 	@$(ECHO) '### Added by Makevars' > SLmake.inc
 	@$(ECHO) 'MPI_ROOT = $(MPI_ROOT)' >> SLmake.inc
+	@$(ECHO) 'MPI_INCLUDE = $(MPI_INCLUDE)' >> SLmake.inc
 	@$(ECHO) 'R_SLAP = $(R_SLAP)' >> SLmake.inc
 	@$(ECHO) 'include $(MkInclude)' >> SLmake.inc
 	@$(ECHO) '' >> SLmake.inc
