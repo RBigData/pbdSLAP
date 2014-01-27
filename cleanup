@@ -36,3 +36,4 @@ rm -rf ./src/LAPACK/*.co
 rm -rf ./src-*
 rm -rf ./inst/etc*
 rm -rf ./inst/lib*
+rm -rf ./man/*.pdf

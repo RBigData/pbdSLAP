@@ -17,13 +17,14 @@ Description: pbdSLAP utilizes scalable linear algebra packages mainly
         including BLACS, PBLAS, and ScaLAPACK in double precision via
         pbdMPI based on ScaLAPACK version 2.0.2.
 SystemRequirements: OpenMPI (>= 1.5.4) on Solaris, Linux, Mac, and
-        FreeBSD, MPICH2 (>= 1.4.1p1) on Windows
+        FreeBSD. MS-MPI (Microsoft HPC Pack 2012) or MPICH2 (>= 1.4.1p1)
+        on Windows.
 License: Mozilla Public License 2.0
 URL: http://r-pbd.org/
 BugReports: http://group.r-pbd.org/
 MailingList: Please send questions and comments regarding pbdR to
         RBigData@gmail.com
-Packaged: 2014-01-05 05:23:43 UTC; snoweye
+Packaged: 2014-01-05 21:08:34 UTC; snoweye
 Author: Wei-Chen Chen [aut, cre],
   Drew Schmidt [aut],
   George Ostrouchov [aut],
