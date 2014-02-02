@@ -15,14 +15,14 @@ citEntry(
 
 citEntry(
   entry = "Manual",
-  title = "A Quick Guide for the {pbdSLAP} Package",
+  title = "A Quick Guide for the {pbdSLAP} Package (Ver. 0.1-7)",
   author = personList(as.person("Wei-Chen Chen"),
                       as.person("Drew Schmidt"),
                       as.person("George Ostrouchov"),
                       as.person("Pragneshkumar Patel")),
-  year = "2012",
+  year = "2014",
   note = "{R} Vignette, URL http://cran.r-project.org/package=pbdSLAP",
-  textVersion = "Chen, W.-C., Schmidt, D., Ostrouchov, G., and Patel, P. (2012) A Quick Guide for the pbdMPI Package. R Vignette, URL http://cran.r-project.org/package=pbdSLAP",
-  key = "Chen2012pbdSLAPvignette"
+  textVersion = "Chen, W.-C., Schmidt, D., Ostrouchov, G., and Patel, P. (2014) A Quick Guide for the pbdMPI Package (Ver. 0.1-7). R Vignette, URL http://cran.r-project.org/package=pbdSLAP",
+  key = "Chen2014pbdSLAPvignette"
 )
 
