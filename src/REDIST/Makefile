@@ -18,4 +18,4 @@ clean:
 
 .SUFFIXES: .co
 .c.co:
-	$(CC) -o $*.co -c $(CDEFS) $(CCFLAGS) $*.c
+	$(MY_CC) -o $*.co -c $(CDEFS) $(CCFLAGS) $*.c
