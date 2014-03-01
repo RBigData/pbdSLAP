@@ -60,6 +60,6 @@ clean:
   
 .SUFFIXES: .fo .co
 .f.fo:
-	$(FC) -o $*.fo -c $(FCFLAGS) $*.f
+	$(MY_FC) -o $*.fo -c $(FCFLAGS) $*.f
 .c.co:
-	$(CC) -o $*.co -c $(CDEFS) $(CCFLAGS) $*.c
+	$(MY_CC) -o $*.co -c $(CDEFS) $(CCFLAGS) $*.c
