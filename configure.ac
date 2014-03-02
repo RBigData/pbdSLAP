@@ -1,13 +1,15 @@
 dnl Process this file with autoconf to produce a configure script
 AC_INIT(DESCRIPTION)
 
+dnl Check chmod
+chmod +x ./inst/test_intface/00_make.*
+
 dnl Determine R_HOME.
 : ${R_HOME=‘R RHOME‘}
 if test -z "${R_HOME}"; then
   echo "could not determine R_HOME"
   exit 1
 fi
-
 R_SCMD="${R_HOME}/bin/Rscript -e"
 
 dnl Set EXT_LDFLAGS, otherwise default LDFLAGS, OBJS, and LIBS will be set.
