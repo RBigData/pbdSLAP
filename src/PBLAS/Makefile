@@ -51,9 +51,9 @@ clean :
 
 .SUFFIXES: .fo .co
 .f.fo :
-	$(MY_FC) -o $*.fo -c $(FCFLAGS) $*.f
+	$(FC) -o $*.fo -c $(FCFLAGS) $*.f
 .c.co :
-	$(MY_CC) -o $*.co -c $(CDEFS) $(CCFLAGS) $*.c
+	$(CC) -o $*.co -c $(CDEFS) $(CCFLAGS) $*.c
 #
 # To compile  without  input  argument checking replace previous line by
 # .c.o : ; $(CC) -c $(CCFLAGS)  -DNO_ARGCHK $*.c
