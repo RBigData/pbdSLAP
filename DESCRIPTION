@@ -9,7 +9,7 @@ Authors@R: c(person("Wei-Chen", "Chen", role = c("aut", "cre"), email =
 Depends: R (>= 3.0.0), methods, rlecuyer, pbdMPI (>= 0.2-2)
 LazyLoad: yes
 LazyData: yes
-Copyright: See pbdSLAP/inst/ScaLAPACK_LICENSE for the files in
+Copyright: See pbdSLAP/inst/ScaLAPACK_LICENSE.txt for the files in
         src/BLACS/, src/PBLAS/, src/REDIST/, src/ScaLAPACK/, and
         src/TOOLS/. See pbdSLAP/inst/LAPACK_LICENSE.txt for the files
         in src/LAPACK/.
@@ -24,7 +24,7 @@ URL: http://r-pbd.org/
 BugReports: http://group.r-pbd.org/
 MailingList: Please send questions and comments regarding pbdR to
         RBigData@gmail.com
-Packaged: 2014-03-14 03:49:36 UTC; snoweye
+Packaged: 2014-03-26 02:06:41 UTC; snoweye
 Author: Wei-Chen Chen [aut, cre],
   Drew Schmidt [aut],
   George Ostrouchov [aut],
