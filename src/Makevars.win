@@ -59,8 +59,8 @@ SLmake:
 	$(ECHO) 'MY_FC = $(FC)' >> SLmake.inc
 	$(ECHO) 'R_SLAP = $(R_SLAP)' >> SLmake.inc
 	$(ECHO) 'include $(MkInclude)' >> SLmake.inc
-	$(ECHO) '' >> SLmake.inc
-	$(CAT)  SLmake.inc.win >> SLmake.inc
+	@$(ECHO) '' >> SLmake.inc
+	@$(CAT)  SLmake.inc.win >> SLmake.inc
 
 $(R_SLAP): SLmake
 	( cd LAPACK; $(MAKE) )
