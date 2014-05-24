@@ -44,7 +44,7 @@ Makeconf:
 	$(ECHO) 'PKG_LIBS = $(PKG_LIBS)' >> $(USER_CONF)
 	$(ECHO) 'R_SLAP = lib${R_ARCH}/$(R_SLAP)' >> $(USER_CONF)
 
-$(SHLIB): Makeconf $(OBJECTS)
+$(SHLIB): $(OBJECTS)
 
 userLibrary: $(SHLIB) $(R_SLAP)
 

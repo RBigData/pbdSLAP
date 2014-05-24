@@ -59,7 +59,7 @@ Makeconf:
 	echo "PKG_LIBS = $(PKG_LIBS)" >> $(USER_CONF)
 	echo "R_SLAP = lib${R_ARCH}/$(R_SLAP)" >> $(USER_CONF)
 
-$(SHLIB): Makeconf $(OBJECTS)
+$(SHLIB): $(OBJECTS)
 
 ### Do not delete this coming from "../configure.in".
 userLibrary: $(R_SLAP)
