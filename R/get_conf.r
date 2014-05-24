@@ -11,10 +11,9 @@ get.conf <- function(arg, arch = '', package = "pbdMPI"){
   id <- grep(paste("^", arg, " = ", sep = ""), ret)
   if(length(id) > 0){
     ret <- gsub(paste("^", arg, " = (.*)", sep = ""), "\\1", ret[id[1]])
-    if(arg == "MPI_LIB" && .Platform$OS.type == "windows" &&
-       length(grep("-L", ret)) == 0){
-      ret <- gsub("\\\\", "/", shortPathName(ret))
-    }
+    # if(arg == "MPI_LIB" && .Platform$OS.type == "windows"){
+    #   ret <- paste("\\\"", ret, "\\\"", sep = "")
+    # }
     cat(ret)
   } else{
     stop("The arg is not found.")
