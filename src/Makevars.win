@@ -17,7 +17,7 @@ PKG_CPPFLAGS = -I"$(MPI_INCLUDE)"
 PKG_CFLAGS = -w
 PKG_FFLAGS = -w
 ### Order is matter.
-PKG_LIBS = $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) $(MPI_LIB)
+PKG_LIBS = $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) "$(MPI_LIB)"
 
 ### Setup R source code and objects.
 R_SRCS_C = $(wildcard *.c)
@@ -30,17 +30,19 @@ OBJECTS = $(R_OBJS) $(R_SLAP)
 USER_CONF = Makeconf
  
 ### Start making here.
-all: $(SHLIB) userLibrary
-	@$(ECHO) 'MPI_ROOT = $(MPI_ROOT)' > $(USER_CONF)
-	@$(ECHO) 'MPI_INCLUDE = $(MPI_INCLUDE)' >> $(USER_CONF)
-	@$(ECHO) 'MPI_LIB = $(MPI_LIB)' >> $(USER_CONF)
-	@$(ECHO) 'MY_CC = $(CC)' >> $(USER_CONF)
-	@$(ECHO) 'MY_FC = $(FC)' >> $(USER_CONF)
-	@$(ECHO) 'PKG_CPPFLAGS = $(PKG_CPPFLAGS)' >> $(USER_CONF)
-	@$(ECHO) 'PKG_CFLAGS = $(PKG_CFLAGS)' >> $(USER_CONF)
-	@$(ECHO) 'PKG_FFLAGS = $(PKG_FFLAGS)' >> $(USER_CONF)
-	@$(ECHO) 'PKG_LIBS = $(PKG_LIBS)' >> $(USER_CONF)
-	@$(ECHO) 'R_SLAP = lib${R_ARCH}/$(R_SLAP)' >> $(USER_CONF)
+all: Makeconf $(SHLIB) userLibrary
+
+Makeconf:
+	$(ECHO) 'MPI_ROOT = $(MPI_ROOT)' > $(USER_CONF)
+	$(ECHO) 'MPI_INCLUDE = $(MPI_INCLUDE)' >> $(USER_CONF)
+	$(ECHO) 'MPI_LIB = $(MPI_LIB)' >> $(USER_CONF)
+	$(ECHO) 'MY_CC = $(CC)' >> $(USER_CONF)
+	$(ECHO) 'MY_FC = $(FC)' >> $(USER_CONF)
+	$(ECHO) 'PKG_CPPFLAGS = $(PKG_CPPFLAGS)' >> $(USER_CONF)
+	$(ECHO) 'PKG_CFLAGS = $(PKG_CFLAGS)' >> $(USER_CONF)
+	$(ECHO) 'PKG_FFLAGS = $(PKG_FFLAGS)' >> $(USER_CONF)
+	$(ECHO) 'PKG_LIBS = $(PKG_LIBS)' >> $(USER_CONF)
+	$(ECHO) 'R_SLAP = lib${R_ARCH}/$(R_SLAP)' >> $(USER_CONF)
 
 $(SHLIB): $(OBJECTS)
 
@@ -50,13 +52,13 @@ $(R_OBJS): $(R_SLAP)
 
 SLmake:
 	@$(RM) -rf SLmake.inc
-	@$(ECHO) '### Added by Makevars' > SLmake.inc
-	@$(ECHO) 'MPI_ROOT = $(MPI_ROOT)' >> SLmake.inc
-	@$(ECHO) 'MPI_INCLUDE = $(MPI_INCLUDE)' >> SLmake.inc
-	@$(ECHO) 'MY_CC = $(CC)' >> SLmake.inc
-	@$(ECHO) 'MY_FC = $(FC)' >> SLmake.inc
-	@$(ECHO) 'R_SLAP = $(R_SLAP)' >> SLmake.inc
-	@$(ECHO) 'include $(MkInclude)' >> SLmake.inc
+	$(ECHO) '### Added by Makevars' > SLmake.inc
+	$(ECHO) 'MPI_ROOT = $(MPI_ROOT)' >> SLmake.inc
+	$(ECHO) 'MPI_INCLUDE = $(MPI_INCLUDE)' >> SLmake.inc
+	$(ECHO) 'MY_CC = $(CC)' >> SLmake.inc
+	$(ECHO) 'MY_FC = $(FC)' >> SLmake.inc
+	$(ECHO) 'R_SLAP = $(R_SLAP)' >> SLmake.inc
+	$(ECHO) 'include $(MkInclude)' >> SLmake.inc
 	@$(ECHO) '' >> SLmake.inc
 	@$(CAT)  SLmake.inc.win >> SLmake.inc
 

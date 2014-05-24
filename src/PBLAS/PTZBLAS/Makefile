@@ -37,4 +37,4 @@ clean:
 
 .SUFFIXES: .fo
 .f.fo:
-	$(MY_FC) -o $*.fo -c $(FCFLAGS) $*.f
+	$(FC) -o $*.fo -c $(FCFLAGS) $*.f

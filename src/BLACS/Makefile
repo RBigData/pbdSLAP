@@ -93,6 +93,6 @@ clean :
 #  ------------------------------------------------------------------------
 .SUFFIXES: .fo .oo
 .c.oo:
-	$(MY_CC) -o $*.oo -c $(CDEFS) $(CCFLAGS) -DCallFromC $<
+	$(CC) -o $*.oo -c $(CDEFS) $(CCFLAGS) -DCallFromC $<
 .c.fo:
-	$(MY_CC) -o $*.fo -c $(CDEFS) $(CCFLAGS) $<
+	$(CC) -o $*.fo -c $(CDEFS) $(CCFLAGS) $<

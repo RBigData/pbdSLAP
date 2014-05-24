@@ -36,47 +36,48 @@ OBJECTS = $(R_OBJS) $(EXT_OBJS)
 BUILD_LIBS = $(SHLIB) $(EXT_LIBS)
 
 ### For user configuration.
-MY_CC = @CC@
-MY_FC = $(FC)
+CC = @CC@
+F77 = @F77@
+FC = @FC@
 USER_CONF = Makeconf
  
 ### Start making here.
-all: $(BUILD_LIBS)
-	@echo "MY_CC = $(MY_CC)" > $(USER_CONF)
-	@echo "MY_FC = $(MY_FC)" >> $(USER_CONF)
-	@echo "SPMD_CPPFLAGS = $(SPMD_CPPFLAGS)" >> $(USER_CONF)
-	@echo "SPMD_LDFLAGS = $(SPMD_LDFLAGS)" >> $(USER_CONF)
-	@echo "EXT_LDFLAGS = $(EXT_LDFLAGS)" >> $(USER_CONF)
-	@echo "MY_CC = $(CC)" >> $(USER_CONF)
-	@echo "MY_FC = $(FC)" >> $(USER_CONF)
-	@echo "CDEFS = $(CDEFS)" >> $(USER_CONF)
-	@echo "CDEFS_CHECK = $(CDEFS_CHECK)" >> $(USER_CONF)
-	@echo "PKG_CPPFLAGS = $(PKG_CPPFLAGS)" >> $(USER_CONF)
-	@echo "PKG_CFLAGS = $(PKG_CFLAGS)" >> $(USER_CONF)
-	@echo "PKG_FFLAGS = $(PKG_FFLAGS)" >> $(USER_CONF)
-	@echo "PKG_LIBS = $(PKG_LIBS)" >> $(USER_CONF)
-	@echo "R_SLAP = lib${R_ARCH}/$(R_SLAP)" >> $(USER_CONF)
+all: Makeconf $(BUILD_LIBS)
 
-### Overwrite for using MY_CC
+Makeconf:
+	echo "CC = @CC@" > $(USER_CONF)
+	echo "F77 = @F77@" >> $(USER_CONF)
+	echo "FC = @FC@" >> $(USER_CONF)
+	echo "SPMD_CPPFLAGS = $(SPMD_CPPFLAGS)" >> $(USER_CONF)
+	echo "SPMD_LDFLAGS = $(SPMD_LDFLAGS)" >> $(USER_CONF)
+	echo "EXT_LDFLAGS = $(EXT_LDFLAGS)" >> $(USER_CONF)
+	echo "CDEFS = $(CDEFS)" >> $(USER_CONF)
+	echo "CDEFS_CHECK = $(CDEFS_CHECK)" >> $(USER_CONF)
+	echo "PKG_CPPFLAGS = $(PKG_CPPFLAGS)" >> $(USER_CONF)
+	echo "PKG_CFLAGS = $(PKG_CFLAGS)" >> $(USER_CONF)
+	echo "PKG_FFLAGS = $(PKG_FFLAGS)" >> $(USER_CONF)
+	echo "PKG_LIBS = $(PKG_LIBS)" >> $(USER_CONF)
+	echo "R_SLAP = lib${R_ARCH}/$(R_SLAP)" >> $(USER_CONF)
+
 $(SHLIB): $(OBJECTS)
-
 
 ### Do not delete this coming from "../configure.in".
 userLibrary: $(R_SLAP)
 
 SLmake:
 	@rm -rf SLmake.inc
-	@echo "### Added by Makevars" > SLmake.inc
-	@echo "MY_CC = $(MY_CC)" >> SLmake.inc
-	@echo "MY_FC = $(MY_FC)" >> SLmake.inc
-	@echo "CDEFS = $(CDEFS)" >> SLmake.inc
-	@echo "PKG_CPPFLAGS = $(PKG_CPPFLAGS)" >> SLmake.inc
-	@echo "PKG_CFLAGS = $(PKG_CFLAGS)" >> SLmake.inc
-	@echo "PKG_FFLAGS = $(PKG_FFLAGS)" >> SLmake.inc
-	@echo "R_SLAP = $(R_SLAP)" >> SLmake.inc
-	@echo "include $(MkInclude)" >> SLmake.inc
-	@echo "" >> SLmake.inc
-	@cat SLmake.inc.org >> SLmake.inc
+	echo "### Added by Makevars" > SLmake.inc
+	echo "include $(MkInclude)" >> SLmake.inc
+	echo "CC = @CC@" >> SLmake.inc		# overwrite MkInclude
+	echo "F77 = @F77@" >> SLmake.inc	# overwrite MkInclude
+	echo "FC = @FC@" >> SLmake.inc		# overwrite MkInclude
+	echo "CDEFS = $(CDEFS)" >> SLmake.inc
+	echo "PKG_CPPFLAGS = $(PKG_CPPFLAGS)" >> SLmake.inc
+	echo "PKG_CFLAGS = $(PKG_CFLAGS)" >> SLmake.inc
+	echo "PKG_FFLAGS = $(PKG_FFLAGS)" >> SLmake.inc
+	echo "R_SLAP = $(R_SLAP)" >> SLmake.inc
+	echo "" >> SLmake.inc
+	cat SLmake.inc.org >> SLmake.inc
 
 $(R_SLAP): SLmake
 	( cd LAPACK; $(MAKE) )
@@ -88,7 +89,7 @@ $(R_SLAP): SLmake
 
 clean:
 	@rm -rf *.o *.d *.rc *.so* *.dylib *.dll *.a *.lib *.inc \
-                Makedeps Makevars $(SHLIB) $(USER_CONF) $(OBJECTS)
+	        Makedeps Makevars $(SHLIB) $(USER_CONF) $(OBJECTS)
 	( cd LAPACK; $(MAKE) clean )
 	( cd BLACS; $(MAKE) clean )
 	( cd TOOLS; $(MAKE) clean )
