@@ -21,16 +21,6 @@ if test "X${CC}" = "X"; then
     CC="gcc -std=gnu99"
   fi
 fi
-AC_PROG_CC
-
-if test "X${F77}" = "X"; then
-  FC=`"${R_HOME}/bin/R" CMD config F77`
-  if test "X$F77" = "X" ; then
-    # Our best guess...
-    FC="gfortran"
-  fi
-fi
-AC_PROG_F77
 
 if test "X${FC}" = "X"; then
   FC=`"${R_HOME}/bin/R" CMD config FC`
@@ -39,7 +29,6 @@ if test "X${FC}" = "X"; then
     FC="gfortran"
   fi
 fi
-AC_PROG_FC
 
 
 dnl Set EXT_LDFLAGS, otherwise default LDFLAGS, OBJS, and LIBS will be set.
