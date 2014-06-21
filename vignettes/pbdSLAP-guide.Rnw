@@ -1,6 +1,6 @@
 %\VignetteIndexEntry{pbdSLAP-guide}
 
-\documentclass[article,shortnames,nojss]{pbdSLAP-include/jss}
+\documentclass[article,shortnames,nojss]{jss}
 
 
 \usepackage{verbatim}
@@ -9,7 +9,7 @@
 \usepackage{amssymb}
 \definecolor{mygreen}{RGB}{0,150,0}
 
-\newcommand{\slapversion}{0.1-7}
+\newcommand{\slapversion}{0.2-0}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% declarations for jss.cls %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -81,6 +81,7 @@ Oak Ridge, TN, USA \\
 
 %% end of declarations %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\input{./pbdSLAP-include/my_jss.cls}
 \input{./pbdSLAP-include/00-preamble}
 
 \begin{document}
