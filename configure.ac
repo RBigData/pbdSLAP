@@ -53,7 +53,8 @@ if test "X$CDEFS" = "X" ; then
   CDEFS=-D`${R_SCMD} "invisible(system('cd ./inst/test_intface/;./00_make.sh'))"`
   CDEFS_CHECK=TRUE
 fi
-if test "X$CDEFS" = "X" ; then
+dnl The best guess when "00_make.sh" fails.
+if test "X$CDEFS" = "X-D" ; then
   CDEFS=-DAdd_
   CDEFS_CHECK=FALSE
 fi
