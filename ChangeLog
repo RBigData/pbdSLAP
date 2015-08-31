@@ -1,3 +1,13 @@
+2015-08-21: Ver. 0.2-1
+  * Fix configure.ac.
+
+2014-12-23: Ver. 0.2-0
+  * Fix ASAN+UBSAN problem again.
+
+2014-10-02: Ver. 0.2-0
+  * Add FLIBS to ./inst/test_intface/00_make.sh to fix ASAN+UBSAN problem.
+  * Fix no visible binding for global variable.
+
 2014-06-21: Ver. 0.2-0
   * Get rid of jss.cls and jss.bst.
 
@@ -36,7 +46,7 @@
 
 ======================= Log Before Release =====================================
 2012-10-08:
-  * Prepare fot the first submission.
+  * Prepare for the first submission.
   * Change Makvars again for Solaris make.
 
 2012-09-17:

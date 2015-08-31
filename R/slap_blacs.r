@@ -50,6 +50,7 @@ blacs.grid.exit <- function(ictxt){
              PACKAGE = "pbdSLAP")
     rm(list = grid.name, envir = .pbdSLAPEnv)
   }
+
   invisible()
 } # End of blacs.grid.exit().
 
