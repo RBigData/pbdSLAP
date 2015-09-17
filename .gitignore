@@ -1,0 +1,10 @@
+*.o
+*.so
+*.a
+*.fo
+*.co
+*.oo
+
+src/Makeconf
+src/Makevars
+src/SLmake.inc
