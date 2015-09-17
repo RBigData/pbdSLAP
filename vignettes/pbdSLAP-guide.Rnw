@@ -24,9 +24,7 @@ Pragneshkumar Patel$^2$
 \end{minipage}
 \\
 \\
-$^1$Center for Biologics Evaluation and Research, \\
-Food and Drug Adminstration, \\
-Silver Spring, MD, USA \\
+$^1$pbdR Core Team \\
 \\
 $^2$National Institute for Computational Sciences, \\
 University of Tennessee, \\
