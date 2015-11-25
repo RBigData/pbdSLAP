@@ -41,7 +41,8 @@ Oak Ridge, TN, USA \\
 %\\
 %\today
 }
-\title{A Quick Guide for the \pkg{pbdSLAP} Package {\small (Ver. \slapversion)}}
+% \title{A Quick Guide for the \pkg{pbdSLAP} Package {\small (Ver. \slapversion)}}
+\title{A Quick Guide for the \pkg{pbdSLAP} Package}
 %\\
 %\vspace{0.2cm} \large (Based on Version 0.1-2)}
 
