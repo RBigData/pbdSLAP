@@ -2,7 +2,7 @@
 blacs.grid.initialize <- function(nprow, npcol = 1, ictxt = 0){
   grid.name <- paste(".__grid_info_", ictxt, sep = "")
 
-  if(exists(grid.name, envir = .GlobalEnv)){
+  if(exists(grid.name, envir = .pbd_env)){
     stop(paste("ictxt = ", ictxt, " is initialized."))
   }
 
@@ -24,7 +24,7 @@ blacs.grid.initialize <- function(nprow, npcol = 1, ictxt = 0){
                   MYCOL = as.integer(0),
                   PACKAGE = "pbdSLAP")
   class(ret) <- "gridinfo"
-  assign(grid.name, ret, envir = .pbdSLAPEnv)
+  assign(grid.name, ret, envir = .pbd_env)
 
   invisible()
 } # End of blacs.grid.initialize().
@@ -43,12 +43,12 @@ print.gridinfo <- function(x, ...){
 blacs.grid.exit <- function(ictxt){
   grid.name <- paste(".__grid_info_", ictxt, sep = "")
 
-  if(exists(grid.name, envir = .pbdSLAPEnv)){
-    grid.info <- get(grid.name, envir = .pbdSLAPEnv)
+  if(exists(grid.name, envir = .pbd_env)){
+    grid.info <- get(grid.name, envir = .pbd_env)
     .Fortran("slap_blacs_gridexit",
              ICTXT = as.integer(grid.info$ICTXT),
              PACKAGE = "pbdSLAP")
-    rm(list = grid.name, envir = .pbdSLAPEnv)
+    rm(list = grid.name, envir = .pbd_env)
   }
 
   invisible()
@@ -63,7 +63,7 @@ blacs.finalize <- function(quit.mpi = FALSE){
            NOTDONE = as.integer(! quit.mpi),
            PACKAGE = "pbdSLAP")
   rm(list = ls(all.names = TRUE, pattern = ".__grid_info_*"),
-     envir = .GlobalEnv)
+     envir = .pbd_env)
   invisible()
 } # End of blacs.finalize().
 
