@@ -1,13 +1,13 @@
 Package: pbdSLAP
 Version: 0.2-1
-Date: 2015-11-24
+Date: 2015-12-30
 Title: Programming with Big Data -- Scalable Linear Algebra Packages
 Authors@R: c(person("Wei-Chen", "Chen", role = c("aut", "cre"), email =
         "wccsnow@gmail.com"), person("Drew", "Schmidt", role = "aut"),
         person("George", "Ostrouchov", role = "aut"),
         person("Pragneshkumar", "Patel", role = "aut"),
         person("Brian", "Ripley", role = "ctb", comment = "Solaris & Mac"))
-Depends: R (>= 3.0.0), methods, rlecuyer, pbdMPI (>= 0.2-3)
+Depends: R (>= 3.0.0), methods, rlecuyer, pbdMPI (>= 0.3-1)
 LazyLoad: yes
 LazyData: yes
 Copyright: See pbdSLAP/inst/ScaLAPACK_LICENSE.txt for the files in
@@ -26,7 +26,7 @@ BugReports: http://group.r-pbd.org/
 MailingList: Please send questions and comments regarding pbdR to
         RBigData@gmail.com
 NeedsCompilation: yes
-Packaged: 2015-12-20 02:44:01 UTC; snoweye
+Packaged: 2015-12-31 00:36:52 UTC; snoweye
 Author: Wei-Chen Chen [aut, cre],
   Drew Schmidt [aut],
   George Ostrouchov [aut],
