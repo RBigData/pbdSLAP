@@ -2,7 +2,6 @@
 \alias{slap.init.grid}
 \alias{slap.exit.grid}
 \alias{slap.finalize}
-\alias{.pbdSLAPEnv}
 \title{SLAP Grid}
 \description{
   These functions initializes a grid of \code{pbdSLAP}, assigns the
@@ -12,7 +11,6 @@
   slap.init.grid(nprow, npcol = 1, ictxt = 0)
   slap.exit.grid(ictxt)
   slap.finalize(quit.mpi = FALSE)
-  .pbdSLAPEnv
 }
 \arguments{
   \item{nprow}{number of row processors.}
@@ -23,8 +21,6 @@
 \details{
   This function arranges all processors in a (nprow * npcol) grid and
   the grid will map the big data matrix.
-
-  \code{.pbdSLAPEnv} is the environment to store global grid information.
 }
 \value{
   \code{slap.init.grid} assigns a global object \code{.__grid_info_0} for
