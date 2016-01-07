@@ -23,7 +23,7 @@ citEntry(
                       as.person("Pragneshkumar Patel")),
   year = "2012",
   note = "{R} Vignette",
-  ur l= "http://cran.r-project.org/package=pbdSLAP",
+  url = "http://cran.r-project.org/package=pbdSLAP",
   textVersion = "Chen, W.-C., Schmidt, D., Ostrouchov, G., and Patel, P. (2012) A Quick Guide for the pbdSLAP Package. R Vignette, URL http://cran.r-project.org/package=pbdSLAP",
   key = "Chen2012pbdSLAPvignette"
 )
