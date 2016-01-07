@@ -1,7 +1,7 @@
 ### SHELL> mpiexec -np 4 Rscript --vanilla [...].r
 
-library(pbdMPI, quiet = TRUE)
-library(pbdSLAP, quiet = TRUE)
+suppressMessages(library(pbdMPI, quietly = TRUE))
+suppressMessages(library(pbdSLAP, quietly = TRUE))
 init()
 
 slap.init.grid(2, 2, ictxt = 0)
