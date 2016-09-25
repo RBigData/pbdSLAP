@@ -7,3 +7,8 @@
 #ifdef CRAY
 #define float double
 #endif
+
+//WCC:add
+#undef NDEBUG
+#include "../BLACS/Bdef.h"
+#include "../BLACS/Bdef_wcc.h"

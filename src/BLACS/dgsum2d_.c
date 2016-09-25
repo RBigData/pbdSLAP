@@ -1,5 +1,8 @@
 #include "Bdef.h"
 
+//WCC:add
+#include "Bdef_wcc.h"
+
 
 #if (INTFACE == C_CALL)
 void Cdgsum2d(int ConTxt, char *scope, char *top, int m, int n, double *A,

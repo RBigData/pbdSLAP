@@ -1,4 +1,9 @@
 #include "Bdef.h"
+
+//WCC:add
+#include "Bdef_wcc.h"
+
+
 #if (INTFACE == C_CALL)
 void Cblacs_get(int ConTxt, int what, int *val)
 #else
@@ -23,7 +28,12 @@ F_VOID_FUNC blacs_get_(int *ConTxt, int *what, int *val)
    case SGET_MSGIDS:
       if (BI_COMM_WORLD == NULL) Cblacs_pinfo(val, &val[1]);
       iptr = &val[1];
+//WCC:add
+#if defined MPI_VERSION && MPI_VERSION >= 2
+      ierr=MPI_Comm_get_attr(MPI_COMM_WORLD, MPI_TAG_UB, (BVOID **) &iptr,val);
+#else
       ierr=MPI_Attr_get(MPI_COMM_WORLD, MPI_TAG_UB, (BVOID **) &iptr,val);
+#endif
       val[0] = 0;
       val[1] = *iptr;
       break;

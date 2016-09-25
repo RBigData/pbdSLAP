@@ -1,5 +1,9 @@
 #include "Bdef.h"
 
+//WCC:add
+#include "Bdef_wcc.h"
+
+
 #if (INTFACE == C_CALL)
 void Cblacs_gridinit(int *ConTxt, char *order, int nprow, int npcol)
 #else

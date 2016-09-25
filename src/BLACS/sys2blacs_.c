@@ -1,5 +1,9 @@
 #include "Bdef.h"
 
+//WCC:add
+#include "Bdef_wcc.h"
+
+
 #if (INTFACE == C_CALL)
 int Csys2blacs_handle(MPI_Comm SysCtxt)
 #else
