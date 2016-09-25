@@ -1,3 +1,8 @@
+2016-09-24: Ver. 0.2-1
+  * Fix "-w" problem.
+  * Fix BLACS problems.
+  * Fix REDIST problems.
+
 2016-01-05: Ver. 0.2-1
   * Added pigemr2d.
 
