@@ -35,7 +35,7 @@
   \url{http://www.netlib.org/scalapack/}
 
   ScaLAPACK Block Cyclic Data Distribution Website:
-  \url{http://acts.nersc.gov/scalapack/hands-on/datadist.html}
+  \url{http://www.netlib.org/utk/papers/sc96-scalapack/NODE8.HTM}
 }
 \author{
   Wei-Chen Chen \email{wccsnow@gmail.com}, Drew Schmidt,
