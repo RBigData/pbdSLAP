@@ -19,22 +19,18 @@
 \author{
 \begin{minipage}{6in}
 \centering
-Wei-Chen Chen$^1$, Drew Schmidt$^2$, George Ostrouchov$^{3,4}$, \\
-Pragneshkumar Patel$^3$
+Wei-Chen Chen$^1$, Drew Schmidt$^1$, George Ostrouchov$^{2,3}$, \\
+Pragneshkumar Patel$^2$
 \end{minipage}
 \\
 \\
 $^1$pbdR Core Team \\
 \\
-$^2$Business Analytics and Statistics, \\
+$^2$National Institute for Computational Sciences, \\
 University of Tennessee, \\
 Knoxville, TN, USA \\
 \\
-$^3$National Institute for Computational Sciences, \\
-University of Tennessee, \\
-Knoxville, TN, USA \\
-\\
-$^4$Computer Science and Mathematics Division, \\
+$^3$Computer Science and Mathematics Division, \\
 Oak Ridge National Laboratory, \\
 Oak Ridge, TN, USA \\
 %\\

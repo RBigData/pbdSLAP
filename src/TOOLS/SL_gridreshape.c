@@ -1,5 +1,9 @@
 #include <R.h>	//WCC:add
 
+//WCC:add
+#include "../BLACS/Bdef.h"
+#include "../BLACS/Bdef_wcc.h"
+
 #include <stdlib.h>
 #include <stdio.h>
 

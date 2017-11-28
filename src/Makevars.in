@@ -24,13 +24,13 @@ MkInclude = ${R_HOME}/etc${R_ARCH}/Makeconf
 
 ### Setup R package flags and substitute by configure for ${MPI_...}.
 PKG_CPPFLAGS = $(SPMD_CPPFLAGS)
-PKG_CFLAGS = -w
-PKG_FFLAGS = $(SAFE_FFLAGS) -w
+PKG_CFLAGS = 
+PKG_FFLAGS = $(SAFE_FFLAGS)
 ### Order is matter.
 PKG_LIBS = $(EXT_LDFLAGS) $(FLIBS) $(SPMD_LDFLAGS)
 
 ### Setup R source code and objects.
-R_OBJS = slap_blacs.o
+R_OBJS = slap_blacs.o zzz.o
 R_SLAP = libslap.a
 OBJECTS = $(R_OBJS) $(EXT_OBJS)
 BUILD_LIBS = $(SHLIB) $(EXT_LIBS)

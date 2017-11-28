@@ -213,7 +213,8 @@ checkequal(ctxt, a)
 void 
 paramcheck(a, i, j, m, n, p, q, gcontext)
   MDESC *a;
-  int   i, j, m, n, p, q;
+//WCC  int   i, j, m, n, p, q;
+  int   i, j, m, n, p, q, gcontext; //WCC:add
 {
   int   p2, q2, myprow, mypcol;
 #ifndef NDEBUG

@@ -14,8 +14,8 @@ MkInclude = ${R_HOME}/etc${R_ARCH}/Makeconf
 
 ### Setup R package flags and substitute by configure for ${MPI_...}.
 PKG_CPPFLAGS = -I"$(MPI_INCLUDE)"
-PKG_CFLAGS = -w
-PKG_FFLAGS = -w
+PKG_CFLAGS =
+PKG_FFLAGS =
 ### Order is matter.
 PKG_LIBS = $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) "$(MPI_LIB)"
 
