@@ -420,15 +420,19 @@
 *
                LLKBOT = LLKTOP + LNWIN - 1
                IF( LKTOP.EQ.KTOP .AND. LKBOT.EQ.KBOT ) THEN
-                  JOB = 'All steps'
+                  !JOB = 'All steps'
+                  JOB = 'A'
                   ICHOFF = 1
                ELSEIF( LKTOP.EQ.KTOP ) THEN
-                  JOB = 'Introduce and chase'
+                  !JOB = 'Introduce and chase'
+                  JOB = 'I'
                ELSEIF( LKBOT.EQ.KBOT ) THEN
-                  JOB = 'Off-chase bulges'
+                  !JOB = 'Off-chase bulges'
+                  JOB = 'O'
                   ICHOFF = 1
                ELSE
-                  JOB = 'Chase bulges'
+                  !JOB = 'Chase bulges'
+                  JOB = 'C'
                END IF
 *
 *              Copy submatrix of H corresponding to window WIN into
