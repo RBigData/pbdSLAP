@@ -30,7 +30,7 @@ PKG_FFLAGS = $(SAFE_FFLAGS)
 PKG_LIBS = $(EXT_LDFLAGS) $(FLIBS) $(SPMD_LDFLAGS)
 
 ### Setup R source code and objects.
-R_OBJS = slap_blacs.o
+R_OBJS = slap_blacs.o zzz.o
 R_SLAP = libslap.a
 OBJECTS = $(R_OBJS) $(EXT_OBJS)
 BUILD_LIBS = $(SHLIB) $(EXT_LIBS)
