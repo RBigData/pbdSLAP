@@ -2,6 +2,8 @@
 
 * **Version:** 0.2-1
 * **License:** [![License](http://img.shields.io/badge/license-MPL%202-orange.svg?style=flat)](https://www.mozilla.org/MPL/2.0/)
+* **Download:** [![Download](http://cranlogs.r-pkg.org/badges/pbdSLAP)](https://cran.r-project.org/package=pbdSLAP)
+* **Status:** [![Build Status](https://travis-ci.org/snoweye/pbdSLAP.png)](https://travis-ci.org/snoweye/pbdSLAP)
 * **Author:** See section below.
 
 
