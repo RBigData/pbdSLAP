@@ -1,3 +1,6 @@
+2018-01-05: Ver. 0.2-4
+  * Modify DESCRIPTION.
+
 2018-01-03: Ver. 0.2-3
   * Fix a few warnings from CRAN R CMD check (char truncations).
   * Move SAFE_FFLAGS inside ScaLapack.

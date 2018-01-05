@@ -1,6 +1,6 @@
 Package: pbdSLAP
-Version: 0.2-3
-Date: 2018-01-03
+Version: 0.2-4
+Date: 2018-01-05
 Title: Programming with Big Data -- Scalable Linear Algebra Packages
 Authors@R: c(person("Wei-Chen", "Chen", role = c("aut", "cre"), email =
         "wccsnow@gmail.com"), person("Drew", "Schmidt", role = "aut"),
@@ -10,15 +10,15 @@ Authors@R: c(person("Wei-Chen", "Chen", role = c("aut", "cre"), email =
 Depends: R (>= 3.0.0), methods, rlecuyer, pbdMPI (>= 0.3-1)
 LazyLoad: yes
 LazyData: yes
-Copyright: See pbdSLAP/inst/ScaLAPACK_LICENSE.txt for the files in
-        src/BLACS/, src/PBLAS/, src/REDIST/, src/ScaLAPACK/, and
-        src/TOOLS/. See pbdSLAP/inst/LAPACK_LICENSE.txt for the files
-        in src/LAPACK/.
+Copyright: See 'pbdSLAP/inst/ScaLAPACK_LICENSE.txt' for the files in
+        'src/BLACS/', 'src/PBLAS/', 'src/REDIST/', 'src/ScaLAPACK/', and
+        'src/TOOLS/'. 'See pbdSLAP/inst/LAPACK_LICENSE.txt' for the files
+        in 'src/LAPACK/'.
 Description: Utilizing scalable linear algebra packages mainly
-        including BLACS, PBLAS, and ScaLAPACK in double precision via
-        pbdMPI based on ScaLAPACK version 2.0.2.
-SystemRequirements: OpenMPI (>= 1.5.4) on Solaris, Linux, Mac, and
-        FreeBSD. MS-MPI (Microsoft HPC Pack 2012 R2 MS-MPI
+        including 'BLACS', 'PBLAS', and 'ScaLAPACK' in double precision via
+        'pbdMPI' based on 'ScaLAPACK' version 2.0.2.
+SystemRequirements: 'OpenMPI' (>= 1.5.4) on Solaris, Linux, Mac, and
+        FreeBSD. 'MS-MPI' (Microsoft HPC Pack 2012 R2 MS-MPI
         Redistributable Package) on Windows.
 License: Mozilla Public License 2.0
 URL: http://r-pbd.org/
