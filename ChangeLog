@@ -1,3 +1,7 @@
+2018-01-03: Ver. 0.2-3
+  * Fix a few warnings from CRAN R CMD check (char truncations).
+  * Move SAFE_FFLAGS inside ScaLapack.
+
 2016-09-24: Ver. 0.2-1
   * Fix "-w" problem.
   * Fix BLACS problems.

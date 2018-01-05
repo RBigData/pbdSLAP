@@ -5,6 +5,9 @@
 *.co
 *.oo
 
+*~
+*.swp
+
 src/Makeconf
 src/Makevars
 src/SLmake.inc

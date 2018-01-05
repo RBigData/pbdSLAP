@@ -1,0 +1,31 @@
+language: r
+
+r:
+  # - devel
+  - release
+
+os:
+  - linux
+
+before_install:
+  - sudo apt-get update -q
+  - sudo apt-get install -y -q libopenmpi-dev openmpi-bin
+  - LD_PRELOAD=/usr/lib/openmpi/lib/libmpi.so
+  - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
+  - chmod 755 ./travis-tool.sh
+  - ./travis-tool.sh bootstrap
+  - ./travis-tool.sh install_github snoweye/pbdMPI
+
+r_packages:
+  - rlecuyer
+
+install:
+  - ./travis-tool.sh install_deps
+
+sudo: required
+dist: trusty
+
+notifications:
+  email:
+    on_success: never
+    on_failure: never

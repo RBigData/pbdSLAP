@@ -18,6 +18,7 @@ PKG_CFLAGS =
 PKG_FFLAGS =
 ### Order is matter.
 PKG_LIBS = $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) "$(MPI_LIB)"
+SLAP_FFLAGS = $(R_XTRA_FFLAGS) $(FPICFLAGS) $(SHLIB_FFLAGS) $(SAFE_FFLAGS)
 
 ### Setup R source code and objects.
 R_SRCS_C = $(wildcard *.c)
@@ -42,9 +43,13 @@ Makeconf:
 	$(ECHO) 'PKG_CFLAGS = $(PKG_CFLAGS)' >> $(USER_CONF)
 	$(ECHO) 'PKG_FFLAGS = $(PKG_FFLAGS)' >> $(USER_CONF)
 	$(ECHO) 'PKG_LIBS = $(PKG_LIBS)' >> $(USER_CONF)
+	$(ECHO) 'SLAP_FFLAGS = $(SLAP_FFLAGS)' >> $(USER_CONF)
 	$(ECHO) 'R_SLAP = lib${R_ARCH}/$(R_SLAP)' >> $(USER_CONF)
 
 $(SHLIB): $(OBJECTS)
+
+slap_blacs.o: slap_blacs.f
+	$(F77) $(SLAP_FFLAGS) -c -o slap_blacs.o slap_blacs.f
 
 userLibrary: $(SHLIB) $(R_SLAP)
 

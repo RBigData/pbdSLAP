@@ -25,9 +25,10 @@ MkInclude = ${R_HOME}/etc${R_ARCH}/Makeconf
 ### Setup R package flags and substitute by configure for ${MPI_...}.
 PKG_CPPFLAGS = $(SPMD_CPPFLAGS)
 PKG_CFLAGS = 
-PKG_FFLAGS = $(SAFE_FFLAGS)
+PKG_FFLAGS = 
 ### Order is matter.
 PKG_LIBS = $(EXT_LDFLAGS) $(FLIBS) $(SPMD_LDFLAGS)
+SLAP_FFLAGS = $(R_XTRA_FFLAGS) $(FPICFLAGS) $(SHLIB_FFLAGS) $(SAFE_FFLAGS)
 
 ### Setup R source code and objects.
 R_OBJS = slap_blacs.o zzz.o
@@ -57,9 +58,13 @@ Makeconf:
 	echo "PKG_CFLAGS = $(PKG_CFLAGS)" >> $(USER_CONF)
 	echo "PKG_FFLAGS = $(PKG_FFLAGS)" >> $(USER_CONF)
 	echo "PKG_LIBS = $(PKG_LIBS)" >> $(USER_CONF)
+	echo "SLAP_FFLAGS = $(SLAP_FFLAGS)" >> $(USER_CONF)
 	echo "R_SLAP = lib${R_ARCH}/$(R_SLAP)" >> $(USER_CONF)
 
 $(SHLIB): $(OBJECTS)
+
+slap_blacs.o: slap_blacs.f
+	$(F77) $(SLAP_FFLAGS) -c -o slap_blacs.o slap_blacs.f
 
 ### Do not delete this coming from "../configure.in".
 userLibrary: $(R_SLAP)

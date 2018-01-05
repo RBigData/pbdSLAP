@@ -629,13 +629,17 @@
 *                 possibly be exploited or not.
 *
                   IF( LKTOP.EQ.KTOP .AND. LKBOT.EQ.KBOT ) THEN
-                     JOB = 'All steps'
+                     !JOB = 'All steps'
+                     JOB = 'A'
                   ELSEIF( LKTOP.EQ.KTOP ) THEN
-                     JOB = 'Introduce and chase'
+                     !JOB = 'Introduce and chase'
+                     JOB = 'I'
                   ELSEIF( LKBOT.EQ.KBOT ) THEN
-                     JOB = 'Off-chase bulges'
+                     !JOB = 'Off-chase bulges'
+                     JOB = 'O'
                   ELSE
-                     JOB = 'Chase bulges'
+                     !JOB = 'Chase bulges'
+                     JOB = 'C'
                   END IF
                END IF
 *
@@ -1224,16 +1228,20 @@
      $                 (MYROW.EQ.RSRC4 .AND. MYCOL.EQ.CSRC4) ) THEN
                      IF( LKTOP.EQ.KTOP .AND. LKBOT.EQ.KBOT .AND.
      $                    (DIM1.LE.LCHAIN .OR. DIM1.LE.NTINY ) ) THEN
-                        JOB = 'All steps'
+                        !JOB = 'All steps'
+                        JOB = 'A'
                         ICHOFF = 1
                      ELSEIF( LKTOP.EQ.KTOP .AND.
      $                    ( DIM1.LE.LCHAIN .OR. DIM1.LE.NTINY ) ) THEN
-                        JOB = 'Introduce and chase'
+                        !JOB = 'Introduce and chase'
+                        JOB = 'I'
                      ELSEIF( LKBOT.EQ.KBOT ) THEN
-                        JOB = 'Off-chase bulges'
+                        !JOB = 'Off-chase bulges'
+                        JOB = 'O'
                         ICHOFF = 1
                      ELSE
-                        JOB = 'Chase bulges'
+                        !JOB = 'Chase bulges'
+                        JOB = 'C'
                      END IF
                      KU = LNWIN - KDU + 1
                      KWH = KDU + 1
@@ -1782,15 +1790,19 @@
 *                    could possibly be exploited.
 *
                      IF( LKTOP.EQ.KTOP .AND. LKBOT.EQ.KBOT ) THEN
-                        JOB = 'All steps'
+                        !JOB = 'All steps'
+                        JOB = 'A'
                      ELSEIF( LKTOP.EQ.KTOP .AND.
      $                    ( DIM1.LT.LCHAIN+1 .OR. DIM1.LE.NTINY ) )
      $                    THEN
-                        JOB = 'Introduce and chase'
+                        !JOB = 'Introduce and chase'
+                        JOB = 'I'
                      ELSEIF( LKBOT.EQ.KBOT ) THEN
-                        JOB = 'Off-chase bulges'
+                        !JOB = 'Off-chase bulges'
+                        JOB = 'O'
                      ELSE
-                        JOB = 'Chase bulges'
+                        !JOB = 'Chase bulges'
+                        JOB = 'C'
                      END IF
                   END IF
 *
