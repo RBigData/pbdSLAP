@@ -12,8 +12,8 @@ ITOOLS = picol2row.o  pirow2col.o  pilaprnt.o   pitreecomb.o  pifillpad.o  \
 
 DTOOLS = dddot.o      dlatcpy.o    dmatadd.o    pdmatadd.o    pdcol2row.o \
          pdrow2col.o  pdlaprnt.o   pdtreecomb.o pdfillpad.o   pdchekpad.o \
-         pdelset.o    pdelset2.o   pdelget.o \
-         pdlaread.o   pdlawrite.o
+         pdelset.o    pdelset2.o   pdelget.o #\
+#         pdlaread.o   pdlawrite.o
 
 PKG_ATOOLS = $(ATOOLS:.o=.fo)
 PKG_ATOOLS_C = $(ATOOLS_C:.o=.co)
