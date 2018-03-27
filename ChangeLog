@@ -1,3 +1,11 @@
+2018-03-26: Ver. 0.2-4
+  * Fix the CRAN WARN due to [-Wparentheses] including files: BI_TreeComb.c,
+    BI_MringComb.c, pdswap_.c, PB_Cpaxpby.c, pdgemr.c, pdtrmr.c, pigemr.c,
+    and pitrmr.c.
+
+2018-01-05: Ver. 0.2-4
+  * Modify DESCRIPTION.
+
 2018-01-03: Ver. 0.2-3
   * Fix a few warnings from CRAN R CMD check (char truncations).
   * Move SAFE_FFLAGS inside ScaLapack.
