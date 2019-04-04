@@ -49,7 +49,7 @@ Makeconf:
 $(SHLIB): $(OBJECTS)
 
 slap_blacs.o: slap_blacs.f
-	$(F77) $(SLAP_FFLAGS) -c -o slap_blacs.o slap_blacs.f
+	$(FC) $(SLAP_FFLAGS) -c -o slap_blacs.o slap_blacs.f
 
 userLibrary: $(SHLIB) $(R_SLAP)
 

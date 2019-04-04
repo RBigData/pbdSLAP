@@ -38,7 +38,7 @@ BUILD_LIBS = $(SHLIB) $(EXT_LIBS)
 
 ### For user configuration.
 CC = @CC@
-F77 = @F77@
+F77 = @FC@
 FC = @FC@
 USER_CONF = Makeconf
  
@@ -64,7 +64,7 @@ Makeconf:
 $(SHLIB): $(OBJECTS)
 
 slap_blacs.o: slap_blacs.f
-	$(F77) $(SLAP_FFLAGS) -c -o slap_blacs.o slap_blacs.f
+	$(FC) $(SLAP_FFLAGS) -c -o slap_blacs.o slap_blacs.f
 
 ### Do not delete this coming from "../configure.in".
 userLibrary: $(R_SLAP)
