@@ -3,11 +3,11 @@ R_SCMD = ${R_HOME}/bin${R_ARCH_BIN}/Rscript -e
 
 ### Get MPI information from "pbdMPI". Note that Windows uses different FLAGS.
 MPI_ROOT = $(shell ${R_SCMD} \
-  "source('../R/get_conf.r');get.conf('MPI_ROOT','"${R_ARCH}"')")
+  "library(pbdMPI);get.conf('MPI_ROOT','"${R_ARCH}"','pbdMPI')")
 MPI_INCLUDE = $(shell ${R_SCMD} \
-  "source('../R/get_conf.r');get.conf('MPI_INCLUDE','"${R_ARCH}"')")
+  "library(pbdMPI);get.conf('MPI_INCLUDE','"${R_ARCH}"','pbdMPI')")
 MPI_LIB = $(shell ${R_SCMD} \
-  "source('../R/get_conf.r');get.conf('MPI_LIB','"${R_ARCH}"')")
+  "library(pbdMPI);get.conf('MPI_LIB','"${R_ARCH}"','pbdMPI')")
 
 ### Default Makeconf
 MkInclude = ${R_HOME}/etc${R_ARCH}/Makeconf
@@ -49,7 +49,7 @@ Makeconf:
 $(SHLIB): $(OBJECTS)
 
 slap_blacs.o: slap_blacs.f
-	$(F77) $(SLAP_FFLAGS) -c -o slap_blacs.o slap_blacs.f
+	$(FC) $(SLAP_FFLAGS) -c -o slap_blacs.o slap_blacs.f
 
 userLibrary: $(SHLIB) $(R_SLAP)
 

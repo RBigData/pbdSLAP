@@ -60,8 +60,8 @@ if test "X$CDEFS" = "X-D" ; then
 fi
 
 dnl pbdMPI
-SPMD_CPPFLAGS=`${R_SCMD} "source('./R/get_conf.r');get.conf('PKG_CPPFLAGS','"${R_ARCH}"')"`
-SPMD_LDFLAGS=`${R_SCMD} "source('./R/get_conf.r');get.conf('PKG_LIBS','"${R_ARCH}"')"`
+SPMD_CPPFLAGS=`${R_SCMD} "pbdMPI::get.conf('PKG_CPPFLAGS','"${R_ARCH}"','pbdMPI')"`
+SPMD_LDFLAGS=`${R_SCMD} "pbdMPI::get.conf('PKG_LIBS','"${R_ARCH}"','pbdMPI')"`
 
 
 dnl Report
@@ -69,7 +69,7 @@ echo " "
 echo "****************** Results of pbdSLAP package configure *****************"
 echo " "
 echo ">> CC = ${CC}"
-echo ">> F77 = ${F77}"
+echo ">> F77 = ${FC}"
 echo ">> FC = ${FC}"
 echo ">> EXT_LDFLAGS = ${EXT_LDFLAGS}"
 echo ">> EXT_OBJS = ${EXT_OBJS}"
@@ -85,7 +85,7 @@ echo " "
 
 dnl Start to substitute templates
 AC_SUBST(CC)
-AC_SUBST(F77)
+# AC_SUBST(F77)
 AC_SUBST(FC)
 AC_SUBST(EXT_LDFLAGS)
 AC_SUBST(EXT_OBJS)
