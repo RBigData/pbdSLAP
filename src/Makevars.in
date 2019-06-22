@@ -85,7 +85,6 @@ SLmake:
 	cat SLmake.inc.org >> SLmake.inc
 
 $(R_SLAP): SLmake
-	( cd LAPACK; $(MAKE) )
 	( cd BLACS; $(MAKE) )
 	( cd TOOLS; $(MAKE) )
 	( cd PBLAS; $(MAKE) )
@@ -95,7 +94,6 @@ $(R_SLAP): SLmake
 clean:
 	@rm -rf *.o *.d *.rc *.so* *.dylib *.dll *.a *.lib *.inc \
 	        Makedeps Makevars $(SHLIB) $(USER_CONF) $(OBJECTS)
-	( cd LAPACK; $(MAKE) clean )
 	( cd BLACS; $(MAKE) clean )
 	( cd TOOLS; $(MAKE) clean )
 	( cd PBLAS; $(MAKE) clean )
