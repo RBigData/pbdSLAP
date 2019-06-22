@@ -1,6 +1,6 @@
 Package: pbdSLAP
-Version: 0.2-5
-Date: 2019-04-03
+Version: 0.2-6
+Date: 2019-06-21
 Title: Programming with Big Data -- Scalable Linear Algebra Packages
 Authors@R: c(person("Wei-Chen", "Chen", role = c("aut", "cre"), email =
         "wccsnow@gmail.com"), person("Drew", "Schmidt", role = "aut"),
@@ -12,8 +12,7 @@ LazyLoad: yes
 LazyData: yes
 Copyright: See 'pbdSLAP/inst/ScaLAPACK_LICENSE.txt' for the files in
         'src/BLACS/', 'src/PBLAS/', 'src/REDIST/', 'src/ScaLAPACK/',
-        and 'src/TOOLS/'. 'See pbdSLAP/inst/LAPACK_LICENSE.txt' for the
-        files in 'src/LAPACK/'.
+        and 'src/TOOLS/'.
 Description: Utilizing scalable linear algebra packages mainly
         including 'BLACS', 'PBLAS', and 'ScaLAPACK' in double precision via
         'pbdMPI' based on 'ScaLAPACK' version 2.0.2.
