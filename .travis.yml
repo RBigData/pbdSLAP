@@ -11,16 +11,22 @@ before_install:
   - sudo apt-get update -q
   - sudo apt-get install -y -q libopenmpi-dev openmpi-bin
   - LD_PRELOAD=/usr/lib/openmpi/lib/libmpi.so
-  - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
-  - chmod 755 ./travis-tool.sh
-  - ./travis-tool.sh bootstrap
-  - ./travis-tool.sh install_github snoweye/pbdMPI
+  # - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
+  # - chmod 755 ./travis-tool.sh
+  # - ./travis-tool.sh bootstrap
+  # - ./travis-tool.sh install_github snoweye/pbdMPI
+  - cd ../
+  - R CMD build --no-resave-data --no-manual --no-build-vignettes pbdSLAP
 
-r_packages:
-  - rlecuyer
+# r_packages:
+#   - rlecuyer
 
 install:
-  - ./travis-tool.sh install_deps
+  # - ./travis-tool.sh install_deps
+  - Rscript -e "install.packages(c('float','rlecuyer','pbdMPI'),repos='https://cran.r-project.org/')"
+  - R CMD check ./pbdSLAP_*.tar.gz --as-cran
+  - cat ./pbdSLAP.Rcheck/pbdSLAP-Ex.Rout
+  - cat ./pbdSLAP.Rcheck/pbdSLAP-Ex.timings
 
 sudo: required
 dist: trusty
