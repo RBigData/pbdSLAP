@@ -28,6 +28,9 @@ install:
   - cat ./pbdSLAP.Rcheck/pbdSLAP-Ex.Rout
   - cat ./pbdSLAP.Rcheck/pbdSLAP-Ex.timings
 
+script:
+  - R CMD INSTALL ./pbdSLAP_*.tar.gz
+
 sudo: required
 dist: trusty
 
