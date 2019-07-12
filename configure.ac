@@ -60,8 +60,8 @@ if test "X$CDEFS" = "X-D" ; then
 fi
 
 dnl pbdMPI
-SPMD_CPPFLAGS=`${R_SCMD} "pbdMPI::get.conf('PKG_CPPFLAGS','"${R_ARCH}"','pbdMPI')"`
-SPMD_LDFLAGS=`${R_SCMD} "pbdMPI::get.conf('PKG_LIBS','"${R_ARCH}"','pbdMPI')"`
+SPMD_CPPFLAGS=`${R_SCMD} "source('./R/get_conf.r');get.conf('PKG_CPPFLAGS','"${R_ARCH}"')"`
+SPMD_LDFLAGS=`${R_SCMD} "source('./R/get_conf.r');get.conf('PKG_LIBS','"${R_ARCH}"')"`
 
 
 dnl Report
