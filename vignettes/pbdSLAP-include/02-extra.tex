@@ -17,15 +17,15 @@ For other compilers, the possible values could be \code{-DNoChange},
 \code{-Df77IsF2C}, or \code{-DUpCase}.
 
 For other values, user can provide an external \code{CDEFS} flag at
-installation time, such as
-\begin{Command}
-tar zxvf pbdMPI_0.1-0.tar.gz
+installation time, such as \slapversion
+\begin{Command}[escapechar=\^]
+tar zxvf pbdSLAP_^\slapversion^.tar.gz
 R CMD INSTALL pbdSLAP \
   --configure-vars="CDEFS='other possible flags'"
 \end{Command}
 The value of \code{CDEFS} (other possible flags) can be
 one of the possible values above or other configurations.
-For PGI compiler, the value could be \code{-DAdd_ -DNO_IEEE $(USEMPI)}.
+For PGI compiler, the value could be \code{-DAdd_ -DNO_IEEE $(USEMPI)}.%$
 Note that the \code{CDEFS} will overwrite the default \code{CDEFS}
 inside \code{pbdSLAP/src/Makevars.in} for compiling \code{libslap.a}.
 
@@ -45,8 +45,8 @@ NICS (\url{http://www.nics.tennessee.edu}).
 To use these external libraries with \pkg{pbdSLAP}, you need only supply the
 appropriate flag to \code{EXT_LDFLAGS} at compile time.  Specifically,
 the user would issue the command:
-\begin{Command}
-tar zxvf pbdMPI_0.1-0.tar.gz
+\begin{Command}[escapechar=\^]
+tar zxvf pbdSLAP_^\slapversion^.tar.gz
 R CMD INSTALL pbdSLAP \
   --configure-vars="EXT_LDFLAGS='external ldflags'"
 \end{Command}
