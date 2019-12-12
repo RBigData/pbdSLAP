@@ -1,3 +1,8 @@
+2019-12-11: Ver. 0.2-7
+  * Fix the CRAN WARN due to [-Wincompatible-pointer-types]
+    'MPI_Op_create' from incompatible pointer type including files:
+    igamx2d_.c, dgamx2d_.c, igamn2d_.c, and dgamn2d_.c.
+
 2018-06-21: Ver. 0.2-6
   * Remove LAPACK dependency.
 
