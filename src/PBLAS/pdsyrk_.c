@@ -17,11 +17,20 @@
 #include "PBblas.h"
 
 #ifdef __STDC__
+#ifdef FC_LEN_T
+void pdsyrk_( F_CHAR_T UPLO, F_CHAR_T TRANS, int * N, int * K,
+              double * ALPHA,
+              double * A, int * IA, int * JA, int * DESCA,
+              double * BETA,
+              double * C, int * IC, int * JC, int * DESCC,
+              FC_LEN_T UPLO_len, FC_LEN_T TRANS_len )
+#else
 void pdsyrk_( F_CHAR_T UPLO, F_CHAR_T TRANS, int * N, int * K,
               double * ALPHA,
               double * A, int * IA, int * JA, int * DESCA,
               double * BETA,
               double * C, int * IC, int * JC, int * DESCC )
+#endif
 #else
 void pdsyrk_( UPLO, TRANS, N, K, ALPHA, A, IA, JA, DESCA, BETA,
               C, IC, JC, DESCC )
@@ -361,7 +370,12 @@ void pdsyrk_( UPLO, TRANS, N, K, ALPHA, A, IA, JA, DESCA, BETA,
 *  logical block size returned by pilaenv_. Otherwise, it is assumed that the
 *  routine calling this routine has already selected an adequate topology.
 */
+#ifdef FC_LEN_T
+   nb       = pilaenv_( &ctxt, C2F_CHAR( &type->type ),
+                        (FC_LEN_T) strlen(C2F_CHAR( &type->type )) );
+#else
    nb       = pilaenv_( &ctxt, C2F_CHAR( &type->type ) );
+#endif
    ForceTop = ( ( *N > nb ) && ( *K > nb ) );
 
    if( ChooseAC )

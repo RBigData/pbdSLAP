@@ -17,14 +17,14 @@ int ctxt, pstart, row_major_in, row_major_out, P, Q;
    Np = P * Q;
    if (Np+pstart > P0*Q0)
    {
-//WCC      fprintf(stderr, "Illegal reshape command in %s\n",__FILE__);
+/*WCC      fprintf(stderr, "Illegal reshape command in %s\n",__FILE__); */
       REprintf("Illegal reshape command in %s\n",__FILE__);
       Cblacs_abort(ctxt, -22);
    }
    g = (int *) malloc(Np * sizeof(int));
    if (!g)
    {
-//WCC      fprintf(stderr, "Cannot allocate memory in %s\n",__FILE__);
+/*WCC      fprintf(stderr, "Cannot allocate memory in %s\n",__FILE__); */
       REprintf("Cannot allocate memory in %s\n",__FILE__);
       Cblacs_abort(ctxt, -23);
    }

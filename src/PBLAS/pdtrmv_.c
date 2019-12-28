@@ -387,8 +387,14 @@ void pdtrmv_( UPLO, TRANS, DIAG, N, A, IA, JA, DESCA, X, IX, JX,
 *  Computational partitioning size is computed as the product of the logical
 *  value returned by pilaenv_ and 2 * lcm( nprow, npcol ).
 */
+#ifdef FC_LEN_T
+      nb = 2 * pilaenv_( &ctxt, C2F_CHAR( &type->type ),
+                         (FC_LEN_T) strlen(C2F_CHAR( &type->type )) ) *
+           PB_Clcm( ( Arow >= 0 ? nprow : 1 ), ( Acol >= 0 ? npcol : 1 ) );
+#else
       nb = 2 * pilaenv_( &ctxt, C2F_CHAR( &type->type ) ) *
            PB_Clcm( ( Arow >= 0 ? nprow : 1 ), ( Acol >= 0 ? npcol : 1 ) );
+#endif
 
       if( upper )
       {
@@ -402,9 +408,16 @@ void pdtrmv_( UPLO, TRANS, DIAG, N, A, IA, JA, DESCA, X, IX, JX,
                Anq0 = PB_Cnumroc( kb, k, Ainb1, Anb, mycol, Acol, npcol );
                if( Akp > 0 && Anq0 > 0 )
                {
+#ifdef FC_LEN_T
+                  dgemv_( TRANS, &Akp, &Anq0, one, Mptr( Aptr, 0, Akq, Ald,
+                               size ), &Ald, Mptr( XA, 0, Akq, XAld, size ),
+                               &XAld, one, YA, &ione,
+                               (FC_LEN_T) strlen(TRANS) );
+#else
                   dgemv_( TRANS, &Akp, &Anq0, one, Mptr( Aptr, 0, Akq, Ald,
                                size ), &Ald, Mptr( XA, 0, Akq, XAld, size ),
                                &XAld, one, YA, &ione );
+#endif
                }
                PB_Cptrm( type, type, LEFT, UPPER, &TranOp, &DiagA, kb, 1, one,
                          Aptr, k, k, Ad0, Mptr( XA, 0, Akq, XAld, size ), XAld,
@@ -421,9 +434,16 @@ void pdtrmv_( UPLO, TRANS, DIAG, N, A, IA, JA, DESCA, X, IX, JX,
                Anq0 = PB_Cnumroc( kb, k, Ainb1, Anb, mycol, Acol, npcol );
                if( Akp > 0 && Anq0 > 0 )
                {
+#ifdef FC_LEN_T
+                  dgemv_( TRANS, &Akp, &Anq0, one, Mptr( Aptr, 0, Akq, Ald,
+                          size ), &Ald, XA, &ione, one, Mptr( YA, 0, Akq, YAld,
+                          size ), &YAld,
+                          (FC_LEN_T) strlen(TRANS) );
+#else
                   dgemv_( TRANS, &Akp, &Anq0, one, Mptr( Aptr, 0, Akq, Ald,
                           size ), &Ald, XA, &ione, one, Mptr( YA, 0, Akq, YAld,
                           size ), &YAld );
+#endif
                }
                PB_Cptrm( type, type, LEFT, UPPER, &TranOp, &DiagA, kb, 1, one,
                          Aptr, k, k, Ad0, Mptr( XA, Akp, 0, XAld, size ), XAld,
@@ -448,10 +468,18 @@ void pdtrmv_( UPLO, TRANS, DIAG, N, A, IA, JA, DESCA, X, IX, JX,
                Anq0 = PB_Cnumroc( kb,   k, Ainb1, Anb, mycol, Acol, npcol );
                if( Amp0 > 0 && Anq0 > 0 )
                {
+#ifdef FC_LEN_T
+                  dgemv_( TRANS, &Amp0, &Anq0, one,
+                          Mptr( Aptr, Akp, Akq,  Ald, size ),  &Ald,
+                          Mptr( XA,     0, Akq, XAld, size ), &XAld, one,
+                          Mptr( YA,   Akp,   0, YAld, size ), &ione,
+                          (FC_LEN_T) strlen(TRANS) );
+#else
                   dgemv_( TRANS, &Amp0, &Anq0, one,
                           Mptr( Aptr, Akp, Akq,  Ald, size ),  &Ald,
                           Mptr( XA,     0, Akq, XAld, size ), &XAld, one,
                           Mptr( YA,   Akp,   0, YAld, size ), &ione );
+#endif
                }
             }
          }
@@ -470,10 +498,18 @@ void pdtrmv_( UPLO, TRANS, DIAG, N, A, IA, JA, DESCA, X, IX, JX,
                Anq0 = PB_Cnumroc( kb,   k, Ainb1, Anb, mycol, Acol, npcol );
                if( Amp0 > 0 && Anq0 > 0 )
                {
+#ifdef FC_LEN_T
+                  dgemv_( TRANS, &Amp0, &Anq0, one,
+                          Mptr( Aptr, Akp, Akq,  Ald, size ),  &Ald,
+                          Mptr( XA,   Akp,   0, XAld, size ), &ione, one,
+                          Mptr( YA,     0, Akq, YAld, size ), &YAld,
+                          (FC_LEN_T) strlen(TRANS) );
+#else
                   dgemv_( TRANS, &Amp0, &Anq0, one,
                           Mptr( Aptr, Akp, Akq,  Ald, size ),  &Ald,
                           Mptr( XA,   Akp,   0, XAld, size ), &ione, one,
                           Mptr( YA,     0, Akq, YAld, size ), &YAld );
+#endif
                }
             }
          }

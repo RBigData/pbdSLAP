@@ -1,4 +1,10 @@
 //WCC:add
+// For C/Fortran char* string lengths using size_t
+#ifdef USE_FC_LEN_T
+  #include <stddef.h>
+  #include <Rconfig.h>    // this defines FC_LEN_T
+  #include <string.h>
+#endif
 #include <R.h>
 #include <Rinternals.h>
 
@@ -224,11 +230,13 @@ int BI_ContxtNum(BLACSCONTEXT *ctxt);
 /*
  * A small macro useful for debugging
  */
-//WCC #define ErrPrint \
-//WCC { \
-//WCC    extern int BI_Iam; \
-//WCC    fprintf(stderr, "%d: line %d of file %s\n", BI_Iam, __LINE__, __FILE__); \
-//WCC }
+/*WCC
+ * #define ErrPrint \
+ * { \
+ *    extern int BI_Iam; \
+ *    fprintf(stderr, "%d: line %d of file %s\n", BI_Iam, __LINE__, __FILE__); \
+ * }
+ */
 #define ErrPrint \
 { \
    extern int BI_Iam; \

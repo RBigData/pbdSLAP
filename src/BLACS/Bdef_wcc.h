@@ -1,7 +1,7 @@
-void BI_imvcopy(int, int, int*, int, char*);
-void BI_ivmcopy(int, int, int*, int, char*);
-void BI_dmvcopy(int, int, double*, int, char*);
-void BI_dvmcopy(int, int, double*, int, char*);
+void BI_imvcopy(int, int, int*, int, int*);
+void BI_ivmcopy(int, int, int*, int, int*);
+void BI_dmvcopy(int, int, double*, int, double*);
+void BI_dvmcopy(int, int, double*, int, double*);
 void BI_TransDist(BLACSCONTEXT*, char, int, int, int*,
                   int*, int, BI_DistType*, int, int);
 

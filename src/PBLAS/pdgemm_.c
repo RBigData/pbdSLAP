@@ -17,6 +17,16 @@
 #include "PBblas.h"
 
 #ifdef __STDC__
+#ifdef FC_LEN_T
+void pdgemm_( F_CHAR_T TRANSA, F_CHAR_T TRANSB,
+              int * M, int * N, int * K,
+              double * ALPHA,
+              double * A, int * IA, int * JA, int * DESCA,
+              double * B, int * IB, int * JB, int * DESCB,
+              double * BETA,
+              double * C, int * IC, int * JC, int * DESCC,
+              FC_LEN_T TRANSA_len, FC_LEN_T TRANSB_len )
+#else
 void pdgemm_( F_CHAR_T TRANSA, F_CHAR_T TRANSB,
               int * M, int * N, int * K,
               double * ALPHA,
@@ -24,6 +34,7 @@ void pdgemm_( F_CHAR_T TRANSA, F_CHAR_T TRANSB,
               double * B, int * IB, int * JB, int * DESCB,
               double * BETA,
               double * C, int * IC, int * JC, int * DESCC )
+#endif
 #else
 void pdgemm_( TRANSA, TRANSB, M, N, K, ALPHA, A, IA, JA, DESCA,
               B, IB, JB, DESCB, BETA, C, IC, JC, DESCC )
@@ -422,7 +433,12 @@ void pdgemm_( TRANSA, TRANSB, M, N, K, ALPHA, A, IA, JA, DESCA,
 *  logical block size returned by pilaenv_. Otherwise, it is assumed that the
 *  routine calling this routine has already selected an adequate topology.
 */
+#ifdef FC_LEN_T
+   nb       = pilaenv_( &ctxt, C2F_CHAR( &type->type ),
+                        (FC_LEN_T) strlen(C2F_CHAR( &type->type )) );
+#else
    nb       = pilaenv_( &ctxt, C2F_CHAR( &type->type ) );
+#endif
    ForceTop = ( ( *M > nb ) && ( *N > nb ) && ( *K > nb ) );
 
    if( ChooseAB )

@@ -1,3 +1,11 @@
+//WCC:add
+// For C/Fortran char* string lengths using size_t
+#ifdef USE_FC_LEN_T
+  #include <stddef.h>
+  #include <Rconfig.h>    // this defines FC_LEN_T
+  #include <string.h>
+#endif
+
 /* ---------------------------------------------------------------------
 *
 *  -- PBLAS routine (version 2.0) --
@@ -886,9 +894,14 @@ F_VOID_FCT     immadd_         ( int *,     int *,     char *,
 F_VOID_FCT     smmadd_         ( int *,     int *,     char *,
                                  char *,    int *,     char *,
                                  char *,    int * );
+/*WCC
 F_VOID_FCT     dmmadd_         ( int *,     int *,     char *,
                                  char *,    int *,     char *,
                                  char *,    int * );
+*/
+F_VOID_FCT     dmmadd_         ( int *,     int *,     double *,
+                                 double *,  int *,     double *,
+                                 double *,  int * );
 F_VOID_FCT     cmmadd_         ( int *,     int *,     char *,
                                  char *,    int *,     char *,
                                  char *,    int * );
@@ -899,9 +912,14 @@ F_VOID_FCT     zmmadd_         ( int *,     int *,     char *,
 F_VOID_FCT     smmcadd_        ( int *,     int *,     char *,
                                  char *,    int *,     char *,
                                  char *,    int * );
+/*WCC
 F_VOID_FCT     dmmcadd_        ( int *,     int *,     char *,
                                  char *,    int *,     char *,
                                  char *,    int * );
+*/
+F_VOID_FCT     dmmcadd_        ( int *,     int *,     double *,
+                                 double *,  int *,     double *,
+                                 double *,  int * );
 F_VOID_FCT     cmmcadd_        ( int *,     int *,     char *,
                                  char *,    int *,     char *,
                                  char *,    int * );
@@ -915,9 +933,14 @@ F_VOID_FCT     immtadd_        ( int *,     int *,     char *,
 F_VOID_FCT     smmtadd_        ( int *,     int *,     char *,
                                  char *,    int *,     char *,
                                  char *,    int * );
+/*WCC
 F_VOID_FCT     dmmtadd_        ( int *,     int *,     char *,
                                  char *,    int *,     char *,
                                  char *,    int * );
+*/
+F_VOID_FCT     dmmtadd_        ( int *,     int *,     double *,
+                                 double *,  int *,     double *,
+                                 double *,  int * );
 F_VOID_FCT     cmmtadd_        ( int *,     int *,     char *,
                                  char *,    int *,     char *,
                                  char *,    int * );
@@ -928,9 +951,14 @@ F_VOID_FCT     zmmtadd_        ( int *,     int *,     char *,
 F_VOID_FCT     smmtcadd_       ( int *,     int *,     char *,
                                  char *,    int *,     char *,
                                  char *,    int * );
+/*WCC
 F_VOID_FCT     dmmtcadd_       ( int *,     int *,     char *,
                                  char *,    int *,     char *,
                                  char *,    int * );
+*/
+F_VOID_FCT     dmmtcadd_       ( int *,     int *,     double *,
+                                 double *,  int *,     double *,
+                                 double *,  int * );
 F_VOID_FCT     cmmtcadd_       ( int *,     int *,     char *,
                                  char *,    int *,     char *,
                                  char *,    int * );
@@ -944,9 +972,14 @@ F_VOID_FCT     immdda_         ( int *,     int *,     char *,
 F_VOID_FCT     smmdda_         ( int *,     int *,     char *,
                                  char *,    int *,     char *,
                                  char *,    int * );
+/*WCC
 F_VOID_FCT     dmmdda_         ( int *,     int *,     char *,
                                  char *,    int *,     char *,
                                  char *,    int * );
+*/
+F_VOID_FCT     dmmdda_         ( int *,     int *,     double *,
+                                 double *,  int *,     double *,
+                                 double *,  int * );
 F_VOID_FCT     cmmdda_         ( int *,     int *,     char *,
                                  char *,    int *,     char *,
                                  char *,    int * );
@@ -957,9 +990,14 @@ F_VOID_FCT     zmmdda_         ( int *,     int *,     char *,
 F_VOID_FCT     smmddac_        ( int *,     int *,     char *,
                                  char *,    int *,     char *,
                                  char *,    int * );
+/*WCC
 F_VOID_FCT     dmmddac_        ( int *,     int *,     char *,
                                  char *,    int *,     char *,
                                  char *,    int * );
+*/
+F_VOID_FCT     dmmddac_        ( int *,     int *,     double *,
+                                 double *,  int *,     double *,
+                                 double *,  int * );
 F_VOID_FCT     cmmddac_        ( int *,     int *,     char *,
                                  char *,    int *,     char *,
                                  char *,    int * );
@@ -973,9 +1011,14 @@ F_VOID_FCT     immddat_        ( int *,     int *,     char *,
 F_VOID_FCT     smmddat_        ( int *,     int *,     char *,
                                  char *,    int *,     char *,
                                  char *,    int * );
+/*WCC
 F_VOID_FCT     dmmddat_        ( int *,     int *,     char *,
                                  char *,    int *,     char *,
                                  char *,    int * );
+*/
+F_VOID_FCT     dmmddat_        ( int *,     int *,     double *,
+                                 double *,  int *,     double *,
+                                 double *,  int * );
 F_VOID_FCT     cmmddat_        ( int *,     int *,     char *,
                                  char *,    int *,     char *,
                                  char *,    int * );
@@ -986,9 +1029,14 @@ F_VOID_FCT     zmmddat_        ( int *,     int *,     char *,
 F_VOID_FCT     smmddact_       ( int *,     int *,     char *,
                                  char *,    int *,     char *,
                                  char *,    int * );
+/*WCC
 F_VOID_FCT     dmmddact_       ( int *,     int *,     char *,
                                  char *,    int *,     char *,
                                  char *,    int * );
+*/
+F_VOID_FCT     dmmddact_       ( int *,     int *,     double *,
+                                 double *,  int *,     double *,
+                                 double *,  int * );
 F_VOID_FCT     cmmddact_       ( int *,     int *,     char *,
                                  char *,    int *,     char *,
                                  char *,    int * );
@@ -1001,7 +1049,11 @@ F_VOID_FCT     dasqrtb_        ( double *,  double *,  double * );
 
 F_VOID_FCT     sset_           ( int *,     char *,    char *,
                                  int * );
+/*WCC
 F_VOID_FCT     dset_           ( int *,     char *,    char *,
+                                 int * );
+*/
+F_VOID_FCT     dset_           ( int *,     double *,  double *,
                                  int * );
 F_VOID_FCT     cset_           ( int *,     char *,    char *,
                                  int * );
@@ -1010,7 +1062,11 @@ F_VOID_FCT     zset_           ( int *,     char *,    char *,
 
 F_VOID_FCT     svasum_         ( int *,     char *,    char *,
                                  int * );
+/*WCC
 F_VOID_FCT     dvasum_         ( int *,     char *,    char *,
+                                 int * );
+*/
+F_VOID_FCT     dvasum_         ( int *,     double *,  double *,
                                  int * );
 F_VOID_FCT     scvasum_        ( int *,     char *,    char *,
                                  int * );
@@ -1024,8 +1080,12 @@ F_VOID_FCT     dascal_         ( int *,     char *,    char *,
 
 F_VOID_FCT     scshft_         ( int *,     int *,     int *,
                                  char *,    int * );
+/*WCC
 F_VOID_FCT     dcshft_         ( int *,     int *,     int *,
                                  char *,    int * );
+*/
+F_VOID_FCT     dcshft_         ( int *,     int *,     int *,
+                                 double *,  int * );
 F_VOID_FCT     ccshft_         ( int *,     int *,     int *,
                                  char *,    int * );
 F_VOID_FCT     zcshft_         ( int *,     int *,     int *,
@@ -1033,8 +1093,12 @@ F_VOID_FCT     zcshft_         ( int *,     int *,     int *,
 
 F_VOID_FCT     srshft_         ( int *,     int *,     int *,
                                  char *,    int * );
+/*WCC
 F_VOID_FCT     drshft_         ( int *,     int *,     int *,
                                  char *,    int * );
+*/
+F_VOID_FCT     drshft_         ( int *,     int *,     int *,
+                                 double *,  int * );
 F_VOID_FCT     crshft_         ( int *,     int *,     int *,
                                  char *,    int * );
 F_VOID_FCT     zrshft_         ( int *,     int *,     int *,
@@ -1042,8 +1106,12 @@ F_VOID_FCT     zrshft_         ( int *,     int *,     int *,
 
 F_VOID_FCT     svvdot_         ( int *,     char *,    char *,
                                  int *,     char *,    int * );
+/*WCC
 F_VOID_FCT     dvvdot_         ( int *,     char *,    char *,
                                  int *,     char *,    int * );
+*/
+F_VOID_FCT     dvvdot_         ( int *,     double *,  double *,
+                                 int *,     double *,  int * );
 F_VOID_FCT     cvvdotu_        ( int *,     char *,    char *,
                                  int *,     char *,    int * );
 F_VOID_FCT     cvvdotc_        ( int *,     char *,    char *,
@@ -1056,9 +1124,21 @@ F_VOID_FCT     zvvdotc_        ( int *,     char *,    char *,
 F_VOID_FCT     stzpad_         ( F_CHAR_T,  F_CHAR_T,  int *,
                                  int *,     int *,     char *,
                                  char *,    char *,    int * );
+#ifdef FC_LEN_T
+F_VOID_FCT     dtzpad_         ( F_CHAR_T,  F_CHAR_T,  int *,
+                                 int *,     int *,     double *,
+                                 double *,  double *,  int *,
+                                 FC_LEN_T,  FC_LEN_T );
+#else
+/*WCC
 F_VOID_FCT     dtzpad_         ( F_CHAR_T,  F_CHAR_T,  int *,
                                  int *,     int *,     char *,
                                  char *,    char *,    int * );
+*/
+F_VOID_FCT     dtzpad_         ( F_CHAR_T,  F_CHAR_T,  int *,
+                                 int *,     int *,     double *,
+                                 double *,  double *,  int * );
+#endif
 F_VOID_FCT     ctzpad_         ( F_CHAR_T,  F_CHAR_T,  int *,
                                  int *,     int *,     char *,
                                  char *,    char *,    int * );
@@ -1069,9 +1149,21 @@ F_VOID_FCT     ztzpad_         ( F_CHAR_T,  F_CHAR_T,  int *,
 F_VOID_FCT     stzpadcpy_      ( F_CHAR_T,  F_CHAR_T,  int *,
                                  int *,     int *,     char *,
                                  int *,     char *,    int * );
+#ifdef FC_LEN_T
+F_VOID_FCT     dtzpadcpy_      ( F_CHAR_T,  F_CHAR_T,  int *,
+                                 int *,     int *,     double *,
+                                 int *,     double *,  int *,
+                                 FC_LEN_T,  FC_LEN_T );
+#else
+/*WCC
 F_VOID_FCT     dtzpadcpy_      ( F_CHAR_T,  F_CHAR_T,  int *,
                                  int *,     int *,     char *,
                                  int *,     char *,    int * );
+*/
+F_VOID_FCT     dtzpadcpy_      ( F_CHAR_T,  F_CHAR_T,  int *,
+                                 int *,     int *,     double *,
+                                 int *,     double *,  int * );
+#endif
 F_VOID_FCT     ctzpadcpy_      ( F_CHAR_T,  F_CHAR_T,  int *,
                                  int *,     int *,     char *,
                                  int *,     char *,    int * );
@@ -1082,9 +1174,21 @@ F_VOID_FCT     ztzpadcpy_      ( F_CHAR_T,  F_CHAR_T,  int *,
 F_VOID_FCT     stzscal_        ( F_CHAR_T,  int *,     int *,
                                  int *,     char *,    char *,
                                  int * );
+#ifdef FC_LEN_T
+F_VOID_FCT     dtzscal_        ( F_CHAR_T,  int *,     int *,
+                                 int *,     double *,  double *,
+                                 int *,
+                                 FC_LEN_T );
+#else
+/*WCC
 F_VOID_FCT     dtzscal_        ( F_CHAR_T,  int *,     int *,
                                  int *,     char *,    char *,
                                  int * );
+*/
+F_VOID_FCT     dtzscal_        ( F_CHAR_T,  int *,     int *,
+                                 int *,     double *,  double *,
+                                 int * );
+#endif
 F_VOID_FCT     ctzscal_        ( F_CHAR_T,  int *,     int *,
                                  int *,     char *,    char *,
                                  int * );
@@ -1110,10 +1214,24 @@ F_VOID_FCT     sagemv_         ( F_CHAR_T,  int *,     int *,
                                  char *,    char *,    int *,
                                  char *,    int *,     char *,
                                  char *,    int * );
+#ifdef FC_LEN_T
+F_VOID_FCT     dagemv_         ( F_CHAR_T,  int *,     int *,
+                                 double *,  double *,  int *,
+                                 double *,  int *,     double *,
+                                 double *,  int *,
+                                 FC_LEN_T );
+#else
+/*WCC
 F_VOID_FCT     dagemv_         ( F_CHAR_T,  int *,     int *,
                                  char *,    char *,    int *,
                                  char *,    int *,     char *,
                                  char *,    int * );
+*/
+F_VOID_FCT     dagemv_         ( F_CHAR_T,  int *,     int *,
+                                 double *,  double *,  int *,
+                                 double *,  int *,     double *,
+                                 double *,  int * );
+#endif
 F_VOID_FCT     cagemv_         ( F_CHAR_T,  int *,     int *,
                                  char *,    char *,    int *,
                                  char *,    int *,     char *,
@@ -1127,10 +1245,24 @@ F_VOID_FCT     sasymv_         ( F_CHAR_T,  int *,     char *,
                                  char *,    int *,     char *,
                                  int *,     char *,    char *,
                                  int * );
+#ifdef FC_LEN_T
+F_VOID_FCT     dasymv_         ( F_CHAR_T,  int *,     double *,
+                                 double *,  int *,     double *,
+                                 int *,     double *,  double *,
+                                 int *,
+                                 FC_LEN_T );
+#else
+/*WCC
 F_VOID_FCT     dasymv_         ( F_CHAR_T,  int *,     char *,
                                  char *,    int *,     char *,
                                  int *,     char *,    char *,
                                  int * );
+*/
+F_VOID_FCT     dasymv_         ( F_CHAR_T,  int *,     double *,
+                                 double *,  int *,     double *,
+                                 int *,     double *,  double *,
+                                 int * );
+#endif
 F_VOID_FCT     casymv_         ( F_CHAR_T,  int *,     char *,
                                  char *,    int *,     char *,
                                  int *,     char *,    char *,
@@ -1152,10 +1284,24 @@ F_VOID_FCT     satrmv_         ( F_CHAR_T,  F_CHAR_T,  F_CHAR_T,
                                  int *,     char *,    char *,
                                  int *,     char *,    int *,
                                  char *,    char *,    int * );
+#ifdef FC_LEN_T
+F_VOID_FCT     datrmv_         ( F_CHAR_T,  F_CHAR_T,  F_CHAR_T,
+                                 int *,     double *,  double *,
+                                 int *,     double *,  int *,
+                                 double *,  double *,  int *,
+                                 FC_LEN_T,  FC_LEN_T,  FC_LEN_T );
+#else
+/*WCC
 F_VOID_FCT     datrmv_         ( F_CHAR_T,  F_CHAR_T,  F_CHAR_T,
                                  int *,     char *,    char *,
                                  int *,     char *,    int *,
                                  char *,    char *,    int * );
+*/
+F_VOID_FCT     datrmv_         ( F_CHAR_T,  F_CHAR_T,  F_CHAR_T,
+                                 int *,     double *,  double *,
+                                 int *,     double *,  int *,
+                                 double *,  double *,  int * );
+#endif
 F_VOID_FCT     catrmv_         ( F_CHAR_T,  F_CHAR_T,  F_CHAR_T,
                                  int *,     char *,    char *,
                                  int *,     char *,    int *,
@@ -1745,7 +1891,12 @@ PBTYP_T *      PB_Cdtypeset    ( void );
 PBTYP_T *      PB_Cctypeset    ( void );
 PBTYP_T *      PB_Cztypeset    ( void );
 
+#ifdef FC_LEN_T
+int            pilaenv_        ( int *,     F_CHAR_T,
+                                 FC_LEN_T );
+#else
 int            pilaenv_        ( int *,     F_CHAR_T );
+#endif
 char *         PB_Ctop         ( int *,     char *,    char *,
                                  char * );
 

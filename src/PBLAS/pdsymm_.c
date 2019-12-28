@@ -393,7 +393,12 @@ void pdsymm_( SIDE, UPLO, M, N, ALPHA, A, IA, JA, DESCA,
 *  logical block size returned by pilaenv_. Otherwise, it is assumed that the
 *  routine calling this routine has already selected an adequate topology.
 */
+#ifdef FC_LEN_T
+   nb       = pilaenv_( &ctxt, C2F_CHAR( &type->type ),
+                        (FC_LEN_T) strlen(C2F_CHAR( &type->type )) );
+#else
    nb       = pilaenv_( &ctxt, C2F_CHAR( &type->type ) );
+#endif
    ForceTop = ( ( *M > nb ) && ( *N > nb ) );
 
    rbtop = *PB_Ctop( &ctxt, BCAST,   ROW,    TOP_GET );

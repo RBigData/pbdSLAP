@@ -17,11 +17,20 @@
 #include "PBblas.h"
 
 #ifdef __STDC__
+#ifdef FC_LEN_T
+void pdgemv_( F_CHAR_T TRANS, int * M, int * N, double * ALPHA,
+              double * A, int * IA, int * JA, int * DESCA,
+              double * X, int * IX, int * JX, int * DESCX, int * INCX,
+              double * BETA,
+              double * Y, int * IY, int * JY, int * DESCY, int * INCY,
+              FC_LEN_T TRANS_len)
+#else
 void pdgemv_( F_CHAR_T TRANS, int * M, int * N, double * ALPHA,
               double * A, int * IA, int * JA, int * DESCA,
               double * X, int * IX, int * JX, int * DESCX, int * INCX,
               double * BETA,
               double * Y, int * IY, int * JY, int * DESCY, int * INCY )
+#endif
 #else
 void pdgemv_( TRANS, M, N, ALPHA, A, IA, JA, DESCA, X, IX, JX, DESCX,
               INCX, BETA, Y, IY, JY, DESCY, INCY )
@@ -409,9 +418,16 @@ void pdgemv_( TRANS, M, N, ALPHA, A, IA, JA, DESCA, X, IX, JX, DESCX,
       Anq = PB_Cnumroc( *N, 0, Ad0[INB_], Ad0[NB_], mycol, Ad0[CSRC_], npcol );
       if( ( Amp > 0 ) && ( Anq > 0 ) )
       {
+#ifdef FC_LEN_T
+         dgemv_( TRANS, &Amp, &Anq, ((char *) ALPHA), Mptr( ((char *)A),
+                 Aii, Ajj, Ald, type->size ), &Ald, XA, &XAd[LLD_], tbeta,
+                 YA, &ione,
+                 (FC_LEN_T) strlen(TRANS) );
+#else
          dgemv_( TRANS, &Amp, &Anq, ((char *) ALPHA), Mptr( ((char *)A),
                  Aii, Ajj, Ald, type->size ), &Ald, XA, &XAd[LLD_], tbeta,
                  YA, &ione );
+#endif
       }
       if( XAfr ) free( XA );
 /*
@@ -451,9 +467,16 @@ void pdgemv_( TRANS, M, N, ALPHA, A, IA, JA, DESCA, X, IX, JX, DESCX,
       Anq = PB_Cnumroc( *N, 0, Ad0[INB_], Ad0[NB_], mycol, Ad0[CSRC_], npcol );
       if( ( Amp > 0 ) && ( Anq > 0 ) )
       {
+#ifdef FC_LEN_T
+         dgemv_( TRANS, &Amp, &Anq, ((char *) ALPHA), Mptr( ((char *)A),
+                 Aii, Ajj, Ald, type->size ), &Ald, XA, &ione, tbeta,
+                 YA, &YAd[LLD_],
+                 (FC_LEN_T) strlen(TRANS) );
+#else
          dgemv_( TRANS, &Amp, &Anq, ((char *) ALPHA), Mptr( ((char *)A),
                  Aii, Ajj, Ald, type->size ), &Ald, XA, &ione, tbeta,
                  YA, &YAd[LLD_] );
+#endif
       }
       if( XAfr ) free( XA );
 /*

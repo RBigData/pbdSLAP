@@ -352,8 +352,14 @@ void pdsyr2_( UPLO, N, ALPHA, X, IX, JX, DESCX, INCX, Y, IY, JY,
 *  Computational partitioning size is computed as the product of the logical
 *  value returned by pilaenv_ and 2 * lcm( nprow, npcol ).
 */
+#ifdef FC_LEN_T
+      nb = 2 * pilaenv_( &ctxt, C2F_CHAR( &type->type ),
+                         (FC_LEN_T) strlen(C2F_CHAR( &type->type )) ) *
+           PB_Clcm( ( Arow >= 0 ? nprow : 1 ), ( Acol >= 0 ? npcol : 1 ) );
+#else
       nb = 2 * pilaenv_( &ctxt, C2F_CHAR( &type->type ) ) *
            PB_Clcm( ( Arow >= 0 ? nprow : 1 ), ( Acol >= 0 ? npcol : 1 ) );
+#endif
       if( upper )
       {
          for( k = 0; k < *N; k += nb )

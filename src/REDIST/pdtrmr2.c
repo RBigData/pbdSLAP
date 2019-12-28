@@ -232,8 +232,8 @@ intersect(uplo, diag,
   case SIZEBUFF:	/* computation of sizebuff */
     break;
   default:
-//WCC    printf("action is  %d outside the scope of the case [0..2] !! \n ", action);
-//WCC    exit(0);
+/*WCC    printf("action is  %d outside the scope of the case [0..2] !! \n ", action); */
+/*WCC    exit(0); */
     Rprintf("action is  %d outside the scope of the case [0..2] !! \n ", action);
     error("exit intersect");
     break;

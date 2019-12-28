@@ -17,10 +17,18 @@
 #include "PBblas.h"
 
 #ifdef __STDC__
+#ifdef FC_LEN_T
+void pdtrsv_( F_CHAR_T UPLO, F_CHAR_T TRANS, F_CHAR_T DIAG, int * N,
+              double * A, int * IA, int * JA, int * DESCA,
+              double * X, int * IX, int * JX, int * DESCX,
+              int * INCX,
+              FC_LEN_T UPLO_len, FC_LEN_T TRANS_len, FC_LEN_T DIAG_len )
+#else
 void pdtrsv_( F_CHAR_T UPLO, F_CHAR_T TRANS, F_CHAR_T DIAG, int * N,
               double * A, int * IA, int * JA, int * DESCA,
               double * X, int * IX, int * JX, int * DESCX,
               int * INCX )
+#endif
 #else
 void pdtrsv_( UPLO, TRANS, DIAG, N, A, IA, JA, DESCA, X, IX, JX,
               DESCX, INCX )
@@ -295,8 +303,14 @@ void pdtrsv_( UPLO, TRANS, DIAG, N, A, IA, JA, DESCA, X, IX, JX,
 *  Computational partitioning size is computed as the product of the logical
 *  value returned by pilaenv_ and 2 * lcm( nprow, npcol )
 */
+#ifdef FC_LEN_T
+   nb = 2 * pilaenv_( &ctxt, C2F_CHAR( &type->type ),
+                      (FC_LEN_T) strlen(C2F_CHAR( &type->type )) ) *
+        PB_Clcm( ( Arow >= 0 ? nprow : 1 ), ( Acol >= 0 ? npcol : 1 ) );
+#else
    nb = 2 * pilaenv_( &ctxt, C2F_CHAR( &type->type ) ) *
         PB_Clcm( ( Arow >= 0 ? nprow : 1 ), ( Acol >= 0 ? npcol : 1 ) );
+#endif
 
    Xroc = ( *INCX == Xd[M_] ? CROW : CCOLUMN );
 
@@ -370,10 +384,20 @@ void pdtrsv_( UPLO, TRANS, DIAG, N, A, IA, JA, DESCA, X, IX, JX,
                   if( ktmp > 0 )
                   {
                      if( Anq0 > 0 )
+                     {
+#ifdef FC_LEN_T
+                        dgemv_( TRANS, &ktmp, &Anq0, negone,
+                           Mptr( Aptr, Akp, Akq,   Ald, size ), &Ald,
+                           Mptr( XAR,    0, Akq, XARld, size ), &XARld, one,
+                           Mptr( XAC,  Akp,   0, XACld, size ), &ione,
+                           (FC_LEN_T) strlen(TRANS) );
+#else
                         dgemv_( TRANS, &ktmp, &Anq0, negone,
                            Mptr( Aptr, Akp, Akq,   Ald, size ), &Ald,
                            Mptr( XAR,    0, Akq, XARld, size ), &XARld, one,
                            Mptr( XAC,  Akp,   0, XACld, size ), &ione );
+#endif
+                     }
                      Asrc = PB_Cindxg2p( k-1, Ainb1, Anb, Acol, Acol, npcol );
                      Cdgsum2d( ctxt, ROW, &ctop, ktmp, 1, Mptr( XAC, Akp,
                                0, XACld, size ), XACld, myrow, Asrc );
@@ -382,18 +406,38 @@ void pdtrsv_( UPLO, TRANS, DIAG, N, A, IA, JA, DESCA, X, IX, JX,
                                size ), &ione );
                   }
                   if( Akp > 0 && Anq0 > 0 )
+                  {
+#ifdef FC_LEN_T
+                     dgemv_( TRANS, &Akp, &Anq0, negone,
+                             Mptr( Aptr, 0, Akq,   Ald, size ),   &Ald,
+                             Mptr( XAR,  0, Akq, XARld, size ), &XARld, one,
+                             XAC, &ione,
+                             (FC_LEN_T) strlen(TRANS) );
+#else
                      dgemv_( TRANS, &Akp, &Anq0, negone,
                              Mptr( Aptr, 0, Akq,   Ald, size ),   &Ald,
                              Mptr( XAR,  0, Akq, XARld, size ), &XARld, one,
                              XAC, &ione );
+#endif
+                  }
                }
                else
                {
                   if( Anq0 > 0 )
+                  {
+#ifdef FC_LEN_T
+                     dgemv_( TRANS, &Akp, &Anq0, negone,
+                             Mptr( Aptr, 0, Akq,   Ald, size ),   &Ald,
+                             Mptr( XAR,  0, Akq, XARld, size ), &XARld, one,
+                             XAC, &ione,
+                             (FC_LEN_T) strlen(TRANS) );
+#else
                      dgemv_( TRANS, &Akp, &Anq0, negone,
                              Mptr( Aptr, 0, Akq,   Ald, size ),   &Ald,
                              Mptr( XAR,  0, Akq, XARld, size ), &XARld, one,
                              XAC, &ione );
+#endif
+                  }
                }
             }
          }
@@ -488,10 +532,20 @@ void pdtrsv_( UPLO, TRANS, DIAG, N, A, IA, JA, DESCA, X, IX, JX,
                   if( ktmp > 0 )
                   {
                      if( Anq0 > 0 )
+                     {
+#ifdef FC_LEN_T
+                        dgemv_( TRANS, &ktmp, &Anq0, negone,
+                          Mptr( Aptr, Akp, Akq,   Ald, size ), &Ald,
+                          Mptr( XAR,    0, Akq, XARld, size ), &XARld, one,
+                          Mptr( XAC,  Akp,   0, XACld, size ), &ione,
+                          (FC_LEN_T) strlen(TRANS) );
+#else
                         dgemv_( TRANS, &ktmp, &Anq0, negone,
                           Mptr( Aptr, Akp, Akq,   Ald, size ), &Ald,
                           Mptr( XAR,    0, Akq, XARld, size ), &XARld, one,
                           Mptr( XAC,  Akp,   0, XACld, size ), &ione );
+#endif
+                     }
                      Asrc = PB_Cindxg2p( k+kb, Ainb1, Anb, Acol, Acol, npcol );
                      Cdgsum2d( ctxt, ROW, &ctop, ktmp, 1, Mptr( XAC, Akp,
                                  0, XACld, size ), XACld, myrow, Asrc );
@@ -500,20 +554,42 @@ void pdtrsv_( UPLO, TRANS, DIAG, N, A, IA, JA, DESCA, X, IX, JX,
                                size ), &ione );
                   }
                   if( Anp0 > 0 && Anq0 > 0 )
+                  {
+#ifdef FC_LEN_T
+                     dgemv_( TRANS, &Anp0, &Anq0, negone,
+                      Mptr( Aptr, Akp+ktmp, Akq,   Ald, size ), &Ald,
+                      Mptr( XAR,         0, Akq, XARld, size ), &XARld,
+                      one,
+                      Mptr( XAC,  Akp+ktmp,   0, XACld, size ), &ione,
+                      (FC_LEN_T) strlen(TRANS) );
+#else
                      dgemv_( TRANS, &Anp0, &Anq0, negone,
                       Mptr( Aptr, Akp+ktmp, Akq,   Ald, size ), &Ald,
                       Mptr( XAR,         0, Akq, XARld, size ), &XARld,
                       one,
                       Mptr( XAC,  Akp+ktmp,   0, XACld, size ), &ione );
+#endif
+                  }
                }
                else
                {
                   if( Anq0 > 0 )
+                  {
+#ifdef FC_LEN_T
+                     dgemv_( TRANS, &Anp0, &Anq0, negone,
+                          Mptr( Aptr, Akp, Akq,   Ald, size ), &Ald,
+                          Mptr( XAR,    0, Akq, XARld, size ), &XARld,
+                          one,
+                          Mptr( XAC,  Akp,   0, XACld, size ), &ione,
+                          (FC_LEN_T) strlen(TRANS) );
+#else
                      dgemv_( TRANS, &Anp0, &Anq0, negone,
                           Mptr( Aptr, Akp, Akq,   Ald, size ), &Ald,
                           Mptr( XAR,    0, Akq, XARld, size ), &XARld,
                           one,
                           Mptr( XAC,  Akp,   0, XACld, size ), &ione );
+#endif
+                  }
                }
             }
          }
@@ -611,10 +687,20 @@ void pdtrsv_( UPLO, TRANS, DIAG, N, A, IA, JA, DESCA, X, IX, JX,
                   if( ktmp > 0 )
                   {
                      if( Anp0 > 0 )
+                     {
+#ifdef FC_LEN_T
+                        dgemv_( TRANS, &Anp0, &ktmp, negone,
+                         Mptr( Aptr, Akp, Akq,   Ald, size ), &Ald,
+                         Mptr( XAC,  Akp,   0, XACld, size ), &ione, one,
+                         Mptr( XAR,    0, Akq, XARld, size ), &XARld,
+                         (FC_LEN_T) strlen(TRANS) );
+#else
                         dgemv_( TRANS, &Anp0, &ktmp, negone,
                          Mptr( Aptr, Akp, Akq,   Ald, size ), &Ald,
                          Mptr( XAC,  Akp,   0, XACld, size ), &ione, one,
                          Mptr( XAR,    0, Akq, XARld, size ), &XARld );
+#endif
+                     }
                      Asrc = PB_Cindxg2p( k+kb, Aimb1, Amb, Arow, Arow, nprow );
                      Cdgsum2d( ctxt, COLUMN, &ctop, 1, ktmp, Mptr( XAR, 0,
                                Akq, XARld, size ), XARld, Asrc, mycol );
@@ -623,18 +709,38 @@ void pdtrsv_( UPLO, TRANS, DIAG, N, A, IA, JA, DESCA, X, IX, JX,
                                size ), &XARld );
                   }
                   if( Anp0 > 0 && Anq0 > 0 )
+                  {
+#ifdef FC_LEN_T
+                     dgemv_( TRANS, &Anp0, &Anq0, negone,
+                     Mptr( Aptr, Akp, Akq+ktmp,   Ald, size ),   &Ald,
+                     Mptr( XAC,  Akp,        0, XACld, size ),  &ione, one,
+                     Mptr( XAR,    0, Akq+ktmp, XARld, size ), &XARld,
+                     (FC_LEN_T) strlen(TRANS) );
+#else
                      dgemv_( TRANS, &Anp0, &Anq0, negone,
                      Mptr( Aptr, Akp, Akq+ktmp,   Ald, size ),   &Ald,
                      Mptr( XAC,  Akp,        0, XACld, size ),  &ione, one,
                      Mptr( XAR,    0, Akq+ktmp, XARld, size ), &XARld );
+#endif
+                  }
                }
                else
                {
                   if( Anp0 > 0 )
+                  {
+#ifdef FC_LEN_T
+                     dgemv_( TRANS, &Anp0, &Anq0, negone,
+                        Mptr( Aptr, Akp, Akq,   Ald, size ),   &Ald,
+                        Mptr( XAC,  Akp,   0, XACld, size ),  &ione, one,
+                        Mptr( XAR,    0, Akq, XARld, size ), &XARld,
+                        (FC_LEN_T) strlen(TRANS) );
+#else
                      dgemv_( TRANS, &Anp0, &Anq0, negone,
                         Mptr( Aptr, Akp, Akq,   Ald, size ),   &Ald,
                         Mptr( XAC,  Akp,   0, XACld, size ),  &ione, one,
                         Mptr( XAR,    0, Akq, XARld, size ), &XARld );
+#endif
+                  }
                }
             }
          }
@@ -728,10 +834,20 @@ void pdtrsv_( UPLO, TRANS, DIAG, N, A, IA, JA, DESCA, X, IX, JX,
                   if( ktmp > 0 )
                   {
                      if( Anp0 > 0 )
+                     {
+#ifdef FC_LEN_T
+                        dgemv_( TRANS, &Anp0, &ktmp, negone,
+                                Mptr( Aptr, Akp, Akq,   Ald, size ), &Ald,
+                                Mptr( XAC,  Akp,   0, XACld, size ), &ione, one,
+                                Mptr( XAR,    0, Akq, XARld, size ), &XARld,
+                                (FC_LEN_T) strlen(TRANS) );
+#else
                         dgemv_( TRANS, &Anp0, &ktmp, negone,
                                 Mptr( Aptr, Akp, Akq,   Ald, size ), &Ald,
                                 Mptr( XAC,  Akp,   0, XACld, size ), &ione, one,
                                 Mptr( XAR,    0, Akq, XARld, size ), &XARld );
+#endif
+                     }
                      Asrc = PB_Cindxg2p( k-1, Aimb1, Amb, Arow, Arow, nprow );
                      Cdgsum2d( ctxt, COLUMN, &ctop, 1, ktmp, Mptr( XAR, 0,
                                Akq, XARld, size ), XARld, Asrc, mycol );
@@ -740,18 +856,38 @@ void pdtrsv_( UPLO, TRANS, DIAG, N, A, IA, JA, DESCA, X, IX, JX,
                                size ), &XARld );
                   }
                   if( Anp0 > 0 && Akq > 0 )
+                  {
+#ifdef FC_LEN_T
+                     dgemv_( TRANS, &Anp0, &Akq, negone,
+                             Mptr( Aptr, Akp, 0,   Ald, size ), &Ald,
+                             Mptr( XAC,  Akp, 0, XACld, size ), &ione,
+                             one, XAR, &XARld,
+                             (FC_LEN_T) strlen(TRANS) );
+#else
                      dgemv_( TRANS, &Anp0, &Akq, negone,
                              Mptr( Aptr, Akp, 0,   Ald, size ), &Ald,
                              Mptr( XAC,  Akp, 0, XACld, size ), &ione,
                              one, XAR, &XARld );
+#endif
+                  }
                }
                else
                {
                   if( Anp0 > 0 )
+                  {
+#ifdef FC_LEN_T
+                     dgemv_( TRANS, &Anp0, &Akq, negone,
+                             Mptr( Aptr, Akp, 0,   Ald, size ), &Ald,
+                             Mptr( XAC,  Akp, 0, XACld, size ), &ione,
+                             one, XAR, &XARld,
+                             (FC_LEN_T) strlen(TRANS) );
+#else
                      dgemv_( TRANS, &Anp0, &Akq, negone,
                              Mptr( Aptr, Akp, 0,   Ald, size ), &Ald,
                              Mptr( XAC,  Akp, 0, XACld, size ), &ione,
                              one, XAR, &XARld );
+#endif
+                  }
                }
             }
          }

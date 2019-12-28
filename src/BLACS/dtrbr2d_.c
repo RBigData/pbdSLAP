@@ -4,9 +4,17 @@
 void Cdtrbr2d(int ConTxt, char *scope, char *top, char *uplo, char *diag,
               int m, int n, double *A, int lda, int rsrc, int csrc)
 #else
+#ifdef FC_LEN_T
+F_VOID_FUNC dtrbr2d_(int *ConTxt, F_CHAR scope, F_CHAR top, F_CHAR uplo,
+                     F_CHAR diag, int *m, int *n, double *A, int *lda,
+                     int *rsrc, int *csrc,
+                     FC_LEN_T scope_len, FC_LEN_T top_len, FC_LEN_T uplo_len,
+                     FC_LEN_T diag_len)
+#else
 F_VOID_FUNC dtrbr2d_(int *ConTxt, F_CHAR scope, F_CHAR top, F_CHAR uplo,
                      F_CHAR diag, int *m, int *n, double *A, int *lda,
                      int *rsrc, int *csrc)
+#endif
 #endif
 /*
  *  -- V1.1 BLACS routine --

@@ -60,7 +60,7 @@ char * PB_Cmalloc( LENGTH )
    {
       if( !( bufptr = (char *) malloc( (unsigned)LENGTH ) ) )
       {
-//WCC         (void) fprintf( stderr, "Not enough memory on line %d of file %s!!\n",
+/*WCC         (void) fprintf( stderr, "Not enough memory on line %d of file %s!!\n", */
          REprintf("Not enough memory on line %d of file %s!!\n",
                          __LINE__, __FILE__ );
          Cblacs_abort( -1, -1 );

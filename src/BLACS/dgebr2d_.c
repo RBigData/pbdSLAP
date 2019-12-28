@@ -4,8 +4,14 @@
 void Cdgebr2d(int ConTxt, char *scope, char *top, int m, int n, double *A,
               int lda, int rsrc, int csrc)
 #else
+#ifdef FC_LEN_T
+F_VOID_FUNC dgebr2d_(int *ConTxt, F_CHAR scope, F_CHAR top, int *m, int *n,
+                     double *A, int *lda, int *rsrc, int *csrc,
+                     FC_LEN_T scope_len, FC_LEN_T top_len)
+#else
 F_VOID_FUNC dgebr2d_(int *ConTxt, F_CHAR scope, F_CHAR top, int *m, int *n,
                      double *A, int *lda, int *rsrc, int *csrc)
+#endif
 #endif
 /*
  *  -- V1.1 BLACS routine --

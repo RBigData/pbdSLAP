@@ -3,7 +3,12 @@
 #if (INTFACE == C_CALL)
 void Cblacs_barrier(int ConTxt, char *scope)
 #else
+#ifdef FC_LEN_T
+F_VOID_FUNC blacs_barrier_(int *ConTxt, F_CHAR scope,
+                           FC_LEN_T scope_len)
+#else
 F_VOID_FUNC blacs_barrier_(int *ConTxt, F_CHAR scope)
+#endif
 #endif
 {
    char tscope;

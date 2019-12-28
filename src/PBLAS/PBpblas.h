@@ -1,3 +1,12 @@
+//WCC:add
+// For C/Fortran char* string lengths using size_t
+#ifdef USE_FC_LEN_T
+  #include <stddef.h>
+  #include <Rconfig.h>    // this defines FC_LEN_T
+  #include <string.h>
+#endif
+
+
 /* ---------------------------------------------------------------------
 *
 *  -- PBLAS routine (version 2.0) --
@@ -379,11 +388,23 @@
 
 void           PB_freebuf_     ( void );
 
+#ifdef FC_LEN_T
+void           PB_topget_      ( int *,     F_CHAR_T,  F_CHAR_T,
+                                 F_CHAR_T,
+                                 FC_LEN_T,  FC_LEN_T,  FC_LEN_T );
+#else
 void           PB_topget_      ( int *,     F_CHAR_T,  F_CHAR_T,
                                  F_CHAR_T );
+#endif
 
+#ifdef FC_LEN_T
+void           PB_topset_      ( int *,     F_CHAR_T,  F_CHAR_T,
+                                 F_CHAR_T,
+                                 FC_LEN_T,  FC_LEN_T,  FC_LEN_T );
+#else
 void           PB_topset_      ( int *,     F_CHAR_T,  F_CHAR_T,
                                  F_CHAR_T );
+#endif
 
 void           picopy_         ( int *,     int *,     int *,
                                  int *,     int *,     int *,
@@ -530,6 +551,16 @@ void           psgemv_         ( F_CHAR_T,  int *,     int *,
                                  int *,     float *,   float *,
                                  int *,     int *,     int *,
                                  int * );
+#ifdef FC_LEN_T
+void           pdgemv_         ( F_CHAR_T,  int *,     int *,
+                                 double *,  double *,  int *,
+                                 int *,     int *,     double *,
+                                 int *,     int *,     int *,
+                                 int *,     double *,  double *,
+                                 int *,     int *,     int *,
+                                 int *,
+                                 FC_LEN_T );
+#else
 void           pdgemv_         ( F_CHAR_T,  int *,     int *,
                                  double *,  double *,  int *,
                                  int *,     int *,     double *,
@@ -537,6 +568,7 @@ void           pdgemv_         ( F_CHAR_T,  int *,     int *,
                                  int *,     double *,  double *,
                                  int *,     int *,     int *,
                                  int * );
+#endif
 void           pcgemv_         ( F_CHAR_T,  int *,     int *,
                                  float *,   float *,   int *,
                                  int *,     int *,     float *,
@@ -559,6 +591,16 @@ void           psagemv_        ( F_CHAR_T,  int *,     int *,
                                  int *,     float *,   float *,
                                  int *,     int *,     int *,
                                  int * );
+#ifdef FC_LEN_T
+void           pdagemv_        ( F_CHAR_T,  int *,     int *,
+                                 double *,  double *,  int *,
+                                 int *,     int *,     double *,
+                                 int *,     int *,     int *,
+                                 int *,     double *,  double *,
+                                 int *,     int *,     int *,
+                                 int *,
+                                 FC_LEN_T );
+#else
 void           pdagemv_        ( F_CHAR_T,  int *,     int *,
                                  double *,  double *,  int *,
                                  int *,     int *,     double *,
@@ -566,6 +608,7 @@ void           pdagemv_        ( F_CHAR_T,  int *,     int *,
                                  int *,     double *,  double *,
                                  int *,     int *,     int *,
                                  int * );
+#endif
 void           pcagemv_        ( F_CHAR_T,  int *,     int *,
                                  float *,   float *,   int *,
                                  int *,     int *,     float *,
@@ -624,12 +667,22 @@ void           pssymv_         ( F_CHAR_T,  int *,     float *,
                                  int *,     int *,     int *,
                                  float *,   float *,   int *,
                                  int *,     int *,     int * );
+#ifdef FC_LEN_T
+void           pdsymv_         ( F_CHAR_T,  int *,     double *,
+                                 double *,  int *,     int *,
+                                 int *,     double *,  int *,
+                                 int *,     int *,     int *,
+                                 double *,  double *,  int *,
+                                 int *,     int *,     int *,
+                                 FC_LEN_T );
+#else
 void           pdsymv_         ( F_CHAR_T,  int *,     double *,
                                  double *,  int *,     int *,
                                  int *,     double *,  int *,
                                  int *,     int *,     int *,
                                  double *,  double *,  int *,
                                  int *,     int *,     int * );
+#endif
 void           pchemv_         ( F_CHAR_T,  int *,     float *,
                                  float *,   int *,     int *,
                                  int *,     float *,   int *,
@@ -649,12 +702,22 @@ void           psasymv_        ( F_CHAR_T,  int *,     float *,
                                  int *,     int *,     int *,
                                  float *,   float *,   int *,
                                  int *,     int *,     int * );
+#ifdef FC_LEN_T
+void           pdasymv_        ( F_CHAR_T,  int *,     double *,
+                                 double *,  int *,     int *,
+                                 int *,     double *,  int *,
+                                 int *,     int *,     int *,
+                                 double *,  double *,  int *,
+                                 int *,     int *,     int *,
+                                 FC_LEN_T );
+#else
 void           pdasymv_        ( F_CHAR_T,  int *,     double *,
                                  double *,  int *,     int *,
                                  int *,     double *,  int *,
                                  int *,     int *,     int *,
                                  double *,  double *,  int *,
                                  int *,     int *,     int * );
+#endif
 void           pcahemv_        ( F_CHAR_T,  int *,     float *,
                                  float *,   int *,     int *,
                                  int *,     float *,   int *,
@@ -738,6 +801,16 @@ void           psatrmv_        ( F_CHAR_T,  F_CHAR_T,  F_CHAR_T,
                                  int *,     int *,     float *,
                                  float *,   int *,     int *,
                                  int *,     int * );
+#ifdef FC_LEN_T
+void           pdatrmv_        ( F_CHAR_T,  F_CHAR_T,  F_CHAR_T,
+                                 int *,     double *,  double *,
+                                 int *,     int *,     int *,
+                                 double *,  int *,     int *,
+                                 int *,     int *,     double *,
+                                 double *,  int *,     int *,
+                                 int *,     int *,
+                                 FC_LEN_T,  FC_LEN_T,  FC_LEN_T );
+#else
 void           pdatrmv_        ( F_CHAR_T,  F_CHAR_T,  F_CHAR_T,
                                  int *,     double *,  double *,
                                  int *,     int *,     int *,
@@ -745,6 +818,7 @@ void           pdatrmv_        ( F_CHAR_T,  F_CHAR_T,  F_CHAR_T,
                                  int *,     int *,     double *,
                                  double *,  int *,     int *,
                                  int *,     int * );
+#endif
 void           pcatrmv_        ( F_CHAR_T,  F_CHAR_T,  F_CHAR_T,
                                  int *,     float *,   float *,
                                  int *,     int *,     int *,
@@ -765,11 +839,20 @@ void           pstrsv_         ( F_CHAR_T,  F_CHAR_T,  F_CHAR_T,
                                  int *,     int *,     float *,
                                  int *,     int *,     int *,
                                  int * );
+#ifdef FC_LEN_T
+void           pdtrsv_         ( F_CHAR_T,  F_CHAR_T,  F_CHAR_T,
+                                 int *,     double *,  int *,
+                                 int *,     int *,     double *,
+                                 int *,     int *,     int *,
+                                 int *,
+                                 FC_LEN_T,  FC_LEN_T,  FC_LEN_T );
+#else
 void           pdtrsv_         ( F_CHAR_T,  F_CHAR_T,  F_CHAR_T,
                                  int *,     double *,  int *,
                                  int *,     int *,     double *,
                                  int *,     int *,     int *,
                                  int * );
+#endif
 void           pctrsv_         ( F_CHAR_T,  F_CHAR_T,  F_CHAR_T,
                                  int *,     float *,   int *,
                                  int *,     int *,     float *,
@@ -786,11 +869,20 @@ void           psgeadd_        ( F_CHAR_T,  int *,     int *,
                                  int *,     int *,     float *,
                                  float *,   int *,     int *,
                                  int * );
+#ifdef FC_LEN_T
+void           pdgeadd_        ( F_CHAR_T,  int *,     int *,
+                                 double *,  double *,  int *,
+                                 int *,     int *,     double *,
+                                 double *,  int *,     int *,
+                                 int *,
+                                 FC_LEN_T );
+#else
 void           pdgeadd_        ( F_CHAR_T,  int *,     int *,
                                  double *,  double *,  int *,
                                  int *,     int *,     double *,
                                  double *,  int *,     int *,
                                  int * );
+#endif
 void           pcgeadd_        ( F_CHAR_T,  int *,     int *,
                                  float *,   float *,   int *,
                                  int *,     int *,     float *,
@@ -809,6 +901,16 @@ void           psgemm_         ( F_CHAR_T,  F_CHAR_T,  int *,
                                  int *,     int *,     float *,
                                  float *,   int *,     int *,
                                  int * );
+#ifdef FC_LEN_T
+void           pdgemm_         ( F_CHAR_T,  F_CHAR_T,  int *,
+                                 int *,     int *,     double *,
+                                 double *,  int *,     int *,
+                                 int *,     double *,  int *,
+                                 int *,     int *,     double *,
+                                 double *,  int *,     int *,
+                                 int *,
+                                 FC_LEN_T,  FC_LEN_T );
+#else
 void           pdgemm_         ( F_CHAR_T,  F_CHAR_T,  int *,
                                  int *,     int *,     double *,
                                  double *,  int *,     int *,
@@ -816,6 +918,7 @@ void           pdgemm_         ( F_CHAR_T,  F_CHAR_T,  int *,
                                  int *,     int *,     double *,
                                  double *,  int *,     int *,
                                  int * );
+#endif
 void           pcgemm_         ( F_CHAR_T,  F_CHAR_T,  int *,
                                  int *,     int *,     float *,
                                  float *,   int *,     int *,
@@ -874,12 +977,22 @@ void           pssyr2k_        ( F_CHAR_T,  F_CHAR_T,  int *,
                                  float *,   int *,     int *,
                                  int *,     float *,   float *,
                                  int *,     int *,     int * );
+#ifdef FC_LEN_T
+void           pdsyr2k_        ( F_CHAR_T,  F_CHAR_T,  int *,
+                                 int *,     double *,  double *,
+                                 int *,     int *,     int *,
+                                 double *,  int *,     int *,
+                                 int *,     double *,  double *,
+                                 int *,     int *,     int *,
+                                 FC_LEN_T,  FC_LEN_T );
+#else
 void           pdsyr2k_        ( F_CHAR_T,  F_CHAR_T,  int *,
                                  int *,     double *,  double *,
                                  int *,     int *,     int *,
                                  double *,  int *,     int *,
                                  int *,     double *,  double *,
                                  int *,     int *,     int * );
+#endif
 void           pcsyr2k_        ( F_CHAR_T,  F_CHAR_T,  int *,
                                  int *,     float *,   float *,
                                  int *,     int *,     int *,
@@ -910,11 +1023,20 @@ void           pssyrk_         ( F_CHAR_T,  F_CHAR_T,  int *,
                                  int *,     int *,     int *,
                                  float *,   float *,   int *,
                                  int *,     int * );
+#ifdef FC_LEN_T
+void           pdsyrk_         ( F_CHAR_T,  F_CHAR_T,  int *,
+                                 int *,     double *,  double *,
+                                 int *,     int *,     int *,
+                                 double *,  double *,  int *,
+                                 int *,     int *,
+                                 FC_LEN_T,  FC_LEN_T );
+#else
 void           pdsyrk_         ( F_CHAR_T,  F_CHAR_T,  int *,
                                  int *,     double *,  double *,
                                  int *,     int *,     int *,
                                  double *,  double *,  int *,
                                  int *,     int * );
+#endif
 void           pcsyrk_         ( F_CHAR_T,  F_CHAR_T,  int *,
                                  int *,     float *,   float *,
                                  int *,     int *,     int *,
@@ -987,11 +1109,21 @@ void           pstrmm_         ( F_CHAR_T,  F_CHAR_T,  F_CHAR_T,
                                  float *,   float *,   int *,
                                  int *,     int *,     float *,
                                  int *,     int *,     int * );
+#ifdef FC_LEN_T
+void           pdtrmm_         ( F_CHAR_T,  F_CHAR_T,  F_CHAR_T,
+                                 F_CHAR_T,  int *,     int *,
+                                 double *,  double *,  int *,
+                                 int *,     int *,     double *,
+                                 int *,     int *,     int *,
+                                 FC_LEN_T,  FC_LEN_T,  FC_LEN_T,
+                                 FC_LEN_T );
+#else
 void           pdtrmm_         ( F_CHAR_T,  F_CHAR_T,  F_CHAR_T,
                                  F_CHAR_T,  int *,     int *,
                                  double *,  double *,  int *,
                                  int *,     int *,     double *,
                                  int *,     int *,     int * );
+#endif
 void           pctrmm_         ( F_CHAR_T,  F_CHAR_T,  F_CHAR_T,
                                  F_CHAR_T,  int *,     int *,
                                  float *,   float *,   int *,
@@ -1008,11 +1140,21 @@ void           pstrsm_         ( F_CHAR_T,  F_CHAR_T,  F_CHAR_T,
                                  float *,   float *,   int *,
                                  int *,     int *,     float *,
                                  int *,     int *,     int * );
+#ifdef FC_LEN_T
+void           pdtrsm_         ( F_CHAR_T,  F_CHAR_T,  F_CHAR_T,
+                                 F_CHAR_T,  int *,     int *,
+                                 double *,  double *,  int *,
+                                 int *,     int *,     double *,
+                                 int *,     int *,     int *,
+                                 FC_LEN_T,  FC_LEN_T,  FC_LEN_T,
+                                 FC_LEN_T );
+#else
 void           pdtrsm_         ( F_CHAR_T,  F_CHAR_T,  F_CHAR_T,
                                  F_CHAR_T,  int *,     int *,
                                  double *,  double *,  int *,
                                  int *,     int *,     double *,
                                  int *,     int *,     int * );
+#endif
 void           pctrsm_         ( F_CHAR_T,  F_CHAR_T,  F_CHAR_T,
                                  F_CHAR_T,  int *,     int *,
                                  float *,   float *,   int *,

@@ -291,7 +291,12 @@ void PB_CpgemmBC( TYPE, DIRECB, DIRECC, TRANSA, TRANSB, M, N, K, ALPHA,
 
    size = TYPE->size;  one    = TYPE->one;     zero = TYPE->zero;
    gemm = TYPE->Fgemm; gsum2d = TYPE->Cgsum2d;
+#ifdef FC_LEN_T
+   nb   = pilaenv_( &ctxt, C2F_CHAR( &TYPE->type ),
+                    (FC_LEN_T) strlen(C2F_CHAR( &TYPE->type )) );
+#else
    nb   = pilaenv_( &ctxt, C2F_CHAR( &TYPE->type ) );
+#endif
 /*
 *  Compute local information for sub( A ), sub( B ) and sub( C )
 */

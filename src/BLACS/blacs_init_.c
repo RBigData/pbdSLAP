@@ -7,7 +7,12 @@
 #if (INTFACE == C_CALL)
 void Cblacs_gridinit(int *ConTxt, char *order, int nprow, int npcol)
 #else
+#ifdef FC_LEN_T
+F_VOID_FUNC blacs_gridinit_(int *ConTxt, F_CHAR order, int *nprow, int *npcol,
+                            FC_LEN_T order_len)
+#else
 F_VOID_FUNC blacs_gridinit_(int *ConTxt, F_CHAR order, int *nprow, int *npcol)
+#endif
 #endif
 {
    void Cblacs_gridmap(int *, int *, int, int, int);

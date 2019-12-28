@@ -287,7 +287,12 @@ void PB_CptrmmB( TYPE, DIRECB, SIDE, UPLO, TRANSA, DIAG, M, N, ALPHA, A,
 
    size   = TYPE->size;  one    = TYPE->one;     zero   = TYPE->zero;
    gemm   = TYPE->Fgemm; gsum2d = TYPE->Cgsum2d;
+#ifdef FC_LEN_T
+   nb     = pilaenv_( &ctxt, C2F_CHAR( &TYPE->type ),
+                      (FC_LEN_T) strlen(C2F_CHAR( &TYPE->type )) );
+#else
    nb     = pilaenv_( &ctxt, C2F_CHAR( &TYPE->type ) );
+#endif
 /*
 *  Compute local information for sub( A ) and sub( B )
 */

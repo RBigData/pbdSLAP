@@ -357,7 +357,12 @@ void PB_CpgemmAB( TYPE, DIRECA, DIRECB, TRANSA, TRANSB, M, N, K, ALPHA,
    Bfwd  = ( Mupcase( DIRECB[0] ) == CFORWARD );
 
    one   = TYPE->one; zero = TYPE->zero; tbeta = BETA; gemm = TYPE->Fgemm;
+#ifdef FC_LEN_T
+   kb    = pilaenv_( &ctxt, C2F_CHAR( &TYPE->type ),
+                     (FC_LEN_T) strlen(C2F_CHAR( &TYPE->type )) );
+#else
    kb    = pilaenv_( &ctxt, C2F_CHAR( &TYPE->type ) );
+#endif
 /*
 *  Compute local information for sub( A ) and sub( B )
 */

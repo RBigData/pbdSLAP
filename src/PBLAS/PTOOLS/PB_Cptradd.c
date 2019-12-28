@@ -243,7 +243,12 @@ void PB_Cptradd( TYPE, DIRECAC, UPLO, TRANS, M, N, ALPHA, A, IA, JA, DESCA,
    PB_Cplascal( TYPE, UPLO, NOCONJG, M, N, BETA, C, IC, JC, DESCC );
 
    one  = TYPE->one; zero  = TYPE->zero;
+#ifdef FC_LEN_T
+   kb   = pilaenv_( &DESCC[CTXT_], C2F_CHAR( &TYPE->type ),
+                    (FC_LEN_T) strlen(C2F_CHAR( &TYPE->type )) );
+#else
    kb   = pilaenv_( &DESCC[CTXT_], C2F_CHAR( &TYPE->type ) );
+#endif
 
    if( Mupcase( DIRECAC[0] ) == CFORWARD )
    {
