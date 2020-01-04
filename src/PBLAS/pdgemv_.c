@@ -351,12 +351,20 @@ void pdgemv_( TRANS, M, N, ALPHA, A, IA, JA, DESCA, X, IX, JX, DESCX,
                Yld = Yd[LLD_];
                if( BETA[REAL_PART] == ZERO )
                {
+/*WCC
                   dset_( &Ynq, ((char *) BETA), Mptr( ((char *) Y), Yii,
+                         Yjj, Yld, type->size ), &Yld );
+*/
+                  dset_( &Ynq, ((double *) BETA), (double*) Mptr( ((char *) Y), Yii,
                          Yjj, Yld, type->size ), &Yld );
                }
                else
                {
+/*WCC
                   dscal_( &Ynq, ((char *) BETA), Mptr( ((char *) Y), Yii,
+                          Yjj, Yld, type->size ), &Yld );
+*/
+                  dscal_( &Ynq, ((double *) BETA), (double*) Mptr( ((char *) Y), Yii,
                           Yjj, Yld, type->size ), &Yld );
                }
             }
@@ -378,12 +386,20 @@ void pdgemv_( TRANS, M, N, ALPHA, A, IA, JA, DESCA, X, IX, JX, DESCX,
             {
                if( BETA[REAL_PART] == ZERO )
                {
+/*WCC
                   dset_( &Ynp, ((char *) BETA), Mptr( ((char *) Y), Yii,
+                         Yjj, Yd[LLD_], type->size ), INCY );
+*/
+                  dset_( &Ynp, ((double *) BETA), (double*) Mptr( ((char *) Y), Yii,
                          Yjj, Yd[LLD_], type->size ), INCY );
                }
                else
                {
+/*WCC
                   dscal_( &Ynp, ((char *) BETA), Mptr( ((char *) Y), Yii,
+                          Yjj, Yd[LLD_], type->size ), INCY );
+*/
+                  dscal_( &Ynp, ((double *) BETA), (double*) Mptr( ((char *) Y), Yii,
                           Yjj, Yd[LLD_], type->size ), INCY );
                }
             }
@@ -419,14 +435,19 @@ void pdgemv_( TRANS, M, N, ALPHA, A, IA, JA, DESCA, X, IX, JX, DESCX,
       if( ( Amp > 0 ) && ( Anq > 0 ) )
       {
 #ifdef FC_LEN_T
-         dgemv_( TRANS, &Amp, &Anq, ((char *) ALPHA), Mptr( ((char *)A),
-                 Aii, Ajj, Ald, type->size ), &Ald, XA, &XAd[LLD_], tbeta,
-                 YA, &ione,
+         dgemv_( TRANS, &Amp, &Anq, ((double *) ALPHA), (double*) Mptr( ((char *)A),
+                 Aii, Ajj, Ald, type->size ), &Ald, (double*) XA, &XAd[LLD_], (double*) tbeta,
+                 (double*) YA, &ione,
                  (FC_LEN_T) strlen(TRANS) );
 #else
+/*WCC
          dgemv_( TRANS, &Amp, &Anq, ((char *) ALPHA), Mptr( ((char *)A),
                  Aii, Ajj, Ald, type->size ), &Ald, XA, &XAd[LLD_], tbeta,
                  YA, &ione );
+*/
+         dgemv_( TRANS, &Amp, &Anq, ((double *) ALPHA), (double*) Mptr( ((char *)A),
+                 Aii, Ajj, Ald, type->size ), &Ald, (double*) XA, &XAd[LLD_], (double*) tbeta,
+                 (double*) YA, &ione );
 #endif
       }
       if( XAfr ) free( XA );
@@ -436,7 +457,11 @@ void pdgemv_( TRANS, M, N, ALPHA, A, IA, JA, DESCA, X, IX, JX, DESCX,
       if( YAsum && ( Amp > 0 ) )
       {
          top = *PB_Ctop( &ctxt, COMBINE, ROW, TOP_GET );
+/*WCC
          Cdgsum2d( ctxt, ROW, &top, Amp, 1, YA, YAd[LLD_], myrow,
+                   YAd[CSRC_] );
+*/
+         Cdgsum2d( ctxt, ROW, &top, Amp, 1, (double*) YA, YAd[LLD_], myrow,
                    YAd[CSRC_] );
       }
 /*
@@ -468,14 +493,19 @@ void pdgemv_( TRANS, M, N, ALPHA, A, IA, JA, DESCA, X, IX, JX, DESCX,
       if( ( Amp > 0 ) && ( Anq > 0 ) )
       {
 #ifdef FC_LEN_T
-         dgemv_( TRANS, &Amp, &Anq, ((char *) ALPHA), Mptr( ((char *)A),
-                 Aii, Ajj, Ald, type->size ), &Ald, XA, &ione, tbeta,
-                 YA, &YAd[LLD_],
+         dgemv_( TRANS, &Amp, &Anq, ((double *) ALPHA), (double*) Mptr( ((char *)A),
+                 Aii, Ajj, Ald, type->size ), &Ald, (double*) XA, &ione, (double*) tbeta,
+                 (double*) YA, &YAd[LLD_],
                  (FC_LEN_T) strlen(TRANS) );
 #else
+/*
          dgemv_( TRANS, &Amp, &Anq, ((char *) ALPHA), Mptr( ((char *)A),
                  Aii, Ajj, Ald, type->size ), &Ald, XA, &ione, tbeta,
                  YA, &YAd[LLD_] );
+*/
+         dgemv_( TRANS, &Amp, &Anq, ((double *) ALPHA), (double*) Mptr( ((char *)A),
+                 Aii, Ajj, Ald, type->size ), &Ald, (double*) XA, &ione, (double*) tbeta,
+                 (double*) YA, &YAd[LLD_] );
 #endif
       }
       if( XAfr ) free( XA );
@@ -485,7 +515,11 @@ void pdgemv_( TRANS, M, N, ALPHA, A, IA, JA, DESCA, X, IX, JX, DESCX,
       if( YAsum && ( Anq > 0 ) )
       {
          top = *PB_Ctop( &ctxt, COMBINE, COLUMN, TOP_GET );
+/*WCC
          Cdgsum2d( ctxt, COLUMN, &top, 1, Anq, YA, YAd[LLD_], YAd[RSRC_],
+                   mycol );
+*/
+         Cdgsum2d( ctxt, COLUMN, &top, 1, Anq, (double*) YA, YAd[LLD_], YAd[RSRC_],
                    mycol );
       }
 /*

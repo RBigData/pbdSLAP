@@ -316,9 +316,16 @@ void pdsyr_( UPLO, N, ALPHA, X, IX, JX, DESCX, INCX, A, IA, JA, DESCA )
             Akq  = PB_Cnumroc( k,  0, Ainb1, Anb, mycol, Acol, npcol );
             Anq0 = PB_Cnumroc( kb, k, Ainb1, Anb, mycol, Acol, npcol );
             if( Akp > 0 && Anq0 > 0 )
+            {
+/*WCC
                dger_( &Akp, &Anq0, ((char *) ALPHA), XC, &ione,
                       Mptr( XR, 0, Akq, XRld, size ), &XRld, Mptr( Aptr, 0, Akq,
                       Ald, size ), &Ald );
+*/
+               dger_( &Akp, &Anq0, ((double *) ALPHA), (double*) XC, &ione,
+                      (double*) Mptr( XR, 0, Akq, XRld, size ), &XRld, (double*) Mptr( Aptr, 0, Akq,
+                      Ald, size ), &Ald );
+            }
             PB_Cpsyr( type, UPPER, kb, 1, ((char *) ALPHA), Mptr( XC, Akp, 0,
                       XCld, size ), XCld, Mptr( XR, 0, Akq, XRld, size ), XRld,
                       Aptr, k, k, Ad0, PB_Ctzsyr );
@@ -338,9 +345,16 @@ void pdsyr_( UPLO, N, ALPHA, X, IX, JX, DESCX, INCX, A, IA, JA, DESCA )
             Amp0 = Amp - Akp;
             Anq0 = PB_Cnumroc( kb,   k, Ainb1, Anb, mycol, Acol, npcol );
             if( Amp0 > 0 && Anq0 > 0 )
+            {
+/*WCC
                dger_( &Amp0, &Anq0, ((char *) ALPHA), Mptr( XC, Akp,
                       0, XCld, size ), &ione, Mptr( XR, 0, Akq, XRld, size ),
                       &XRld, Mptr( Aptr, Akp, Akq, Ald, size ), &Ald );
+*/
+               dger_( &Amp0, &Anq0, ((double *) ALPHA), (double*) Mptr( XC, Akp,
+                      0, XCld, size ), &ione, (double*) Mptr( XR, 0, Akq, XRld, size ),
+                      &XRld, (double*) Mptr( Aptr, Akp, Akq, Ald, size ), &Ald );
+            }
          }
       }
    }

@@ -285,8 +285,12 @@ void pdger_( M, N, ALPHA, X, IX, JX, DESCX, INCX, Y, IY, JY, DESCY,
 
    if( ( Amp > 0 ) && ( Anq > 0 ) )
    {
+/*WCC
       dger_( &Amp, &Anq, ((char *) ALPHA), XA, &ione, YA, &YAd[LLD_],
              ((char *) (A+(Aii+Ajj*Ald))), &Ald );
+*/
+      dger_( &Amp, &Anq, ((double *) ALPHA), (double*) XA, &ione, (double*) YA, &YAd[LLD_],
+             ((double *) (A+(Aii+Ajj*Ald))), &Ald );
    }
    if( XAfr ) free( XA );
    if( YAfr ) free( YA );

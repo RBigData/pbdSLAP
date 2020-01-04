@@ -515,16 +515,22 @@ void pdatrmv_( UPLO, TRANS, DIAG, N, ALPHA, A, IA, JA, DESCA, X, IX,
                if( Akp > 0 && Anq0 > 0 )
                {
 #ifdef FC_LEN_T
-                  dagemv_( TRANS, &Akp, &Anq0, ((char *) ALPHA),
-                           Mptr( Aptr, 0, Akq,  Ald, size ), &Ald,
-                           Mptr( XA,   0, Akq, XAld, size ), &XAld, one,
-                           YA, &ione,
+                  dagemv_( TRANS, &Akp, &Anq0, ((double *) ALPHA),
+                           (double*) Mptr( Aptr, 0, Akq,  Ald, size ), &Ald,
+                           (double*) Mptr( XA,   0, Akq, XAld, size ), &XAld, (double*) one,
+                           (double*) YA, &ione,
                            (FC_LEN_T) strlen(TRANS) );
 #else
+/*WCC
                   dagemv_( TRANS, &Akp, &Anq0, ((char *) ALPHA),
                            Mptr( Aptr, 0, Akq,  Ald, size ), &Ald,
                            Mptr( XA,   0, Akq, XAld, size ), &XAld, one,
                            YA, &ione );
+*/
+                  dagemv_( TRANS, &Akp, &Anq0, ((double *) ALPHA),
+                           (double*) Mptr( Aptr, 0, Akq,  Ald, size ), &Ald,
+                           (double*) Mptr( XA,   0, Akq, XAld, size ), &XAld, (double*) one,
+                           (double*) YA, &ione );
 #endif
                }
                PB_Cptrm( type, utyp, LEFT, UPPER, &TranOp, &DiagA, kb, 1,
@@ -544,14 +550,19 @@ void pdatrmv_( UPLO, TRANS, DIAG, N, ALPHA, A, IA, JA, DESCA, X, IX,
                if( Akp > 0 && Anq0 > 0 )
                {
 #ifdef FC_LEN_T
-                  dagemv_( TRANS, &Akp, &Anq0, ((char *) ALPHA),
-                           Mptr( Aptr, 0, Akq, Ald, size ), &Ald, XA, &ione,
-                           one, Mptr( YA, 0, Akq, YAld, usiz ), &YAld,
+                  dagemv_( TRANS, &Akp, &Anq0, ((double *) ALPHA),
+                           (double*) Mptr( Aptr, 0, Akq, Ald, size ), &Ald, (double*) XA, &ione,
+                           (double*) one, (double*) Mptr( YA, 0, Akq, YAld, usiz ), &YAld,
                            (FC_LEN_T) strlen(TRANS) );
 #else
+/*WCC
                   dagemv_( TRANS, &Akp, &Anq0, ((char *) ALPHA),
                            Mptr( Aptr, 0, Akq, Ald, size ), &Ald, XA, &ione,
                            one, Mptr( YA, 0, Akq, YAld, usiz ), &YAld );
+*/
+                  dagemv_( TRANS, &Akp, &Anq0, ((double *) ALPHA),
+                           (double*) Mptr( Aptr, 0, Akq, Ald, size ), &Ald, (double*) XA, &ione,
+                           (double*) one, (double*) Mptr( YA, 0, Akq, YAld, usiz ), &YAld );
 #endif
                }
                PB_Cptrm( type, utyp, LEFT, UPPER, &TranOp, &DiagA, kb, 1,
@@ -580,16 +591,22 @@ void pdatrmv_( UPLO, TRANS, DIAG, N, ALPHA, A, IA, JA, DESCA, X, IX,
                if( Amp0 > 0 && Anq0 > 0 )
                {
 #ifdef FC_LEN_T
-                  dagemv_( TRANS, &Amp0, &Anq0, ((char *) ALPHA),
-                           Mptr( Aptr, Akp, Akq,  Ald, size ), &Ald,
-                           Mptr( XA,     0, Akq, XAld, size ), &XAld, one,
-                           Mptr( YA,   Akp,   0, YAld, usiz ), &ione,
+                  dagemv_( TRANS, &Amp0, &Anq0, ((double *) ALPHA),
+                           (double*) Mptr( Aptr, Akp, Akq,  Ald, size ), &Ald,
+                           (double*) Mptr( XA,     0, Akq, XAld, size ), &XAld, (double*) one,
+                           (double*) Mptr( YA,   Akp,   0, YAld, usiz ), &ione,
                            (FC_LEN_T) strlen(TRANS) );
 #else
+/*WCC
                   dagemv_( TRANS, &Amp0, &Anq0, ((char *) ALPHA),
                            Mptr( Aptr, Akp, Akq,  Ald, size ), &Ald,
                            Mptr( XA,     0, Akq, XAld, size ), &XAld, one,
                            Mptr( YA,   Akp,   0, YAld, usiz ), &ione );
+*/
+                  dagemv_( TRANS, &Amp0, &Anq0, ((double *) ALPHA),
+                           (double*) Mptr( Aptr, Akp, Akq,  Ald, size ), &Ald,
+                           (double*) Mptr( XA,     0, Akq, XAld, size ), &XAld, (double*) one,
+                           (double*) Mptr( YA,   Akp,   0, YAld, usiz ), &ione );
 #endif
                }
             }
@@ -611,16 +628,22 @@ void pdatrmv_( UPLO, TRANS, DIAG, N, ALPHA, A, IA, JA, DESCA, X, IX,
                if( Amp0 > 0 && Anq0 > 0 )
                {
 #ifdef FC_LEN_T
-                  dagemv_( TRANS, &Amp0, &Anq0, one,
-                           Mptr( Aptr, Akp, Akq,  Ald, size ), &Ald,
-                           Mptr( XA,   Akp,   0, XAld, size ), &ione, one,
-                           Mptr( YA,     0, Akq, YAld, usiz ), &YAld,
+                  dagemv_( TRANS, &Amp0, &Anq0, (double*) one,
+                           (double*) Mptr( Aptr, Akp, Akq,  Ald, size ), &Ald,
+                           (double*) Mptr( XA,   Akp,   0, XAld, size ), &ione, (double*) one,
+                           (double*) Mptr( YA,     0, Akq, YAld, usiz ), &YAld,
                            (FC_LEN_T) strlen(TRANS) );
 #else
+/*WCC
                   dagemv_( TRANS, &Amp0, &Anq0, one,
                            Mptr( Aptr, Akp, Akq,  Ald, size ), &Ald,
                            Mptr( XA,   Akp,   0, XAld, size ), &ione, one,
                            Mptr( YA,     0, Akq, YAld, usiz ), &YAld );
+*/
+                  dagemv_( TRANS, &Amp0, &Anq0, (double*) one,
+                           (double*) Mptr( Aptr, Akp, Akq,  Ald, size ), &Ald,
+                           (double*) Mptr( XA,   Akp,   0, XAld, size ), &ione, (double*) one,
+                           (double*) Mptr( YA,     0, Akq, YAld, usiz ), &YAld );
 #endif
                }
             }
@@ -637,7 +660,11 @@ void pdatrmv_( UPLO, TRANS, DIAG, N, ALPHA, A, IA, JA, DESCA, X, IX,
       if( YAsum && ( Amp > 0 ) )
       {
          top = *PB_Ctop( &ctxt, COMBINE, ROW, TOP_GET );
+/*WCC
          Cdgsum2d( ctxt, ROW, &top, Amp, 1, YA, YAd[LLD_], myrow,
+                   YAd[CSRC_] );
+*/
+         Cdgsum2d( ctxt, ROW, &top, Amp, 1, (double*) YA, YAd[LLD_], myrow,
                    YAd[CSRC_] );
       }
    }
@@ -649,7 +676,11 @@ void pdatrmv_( UPLO, TRANS, DIAG, N, ALPHA, A, IA, JA, DESCA, X, IX,
       if( YAsum && ( Anq > 0 ) )
       {
          top = *PB_Ctop( &ctxt, COMBINE, COLUMN, TOP_GET );
+/*WCC
          Cdgsum2d( ctxt, COLUMN, &top, 1, Anq, YA, YAd[LLD_], YAd[RSRC_],
+                   mycol );
+*/
+         Cdgsum2d( ctxt, COLUMN, &top, 1, Anq, (double*) YA, YAd[LLD_], YAd[RSRC_],
                    mycol );
       }
    }

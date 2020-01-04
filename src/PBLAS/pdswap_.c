@@ -461,9 +461,14 @@ void pdswap_( N, X, IX, JX, DESCX, INCX, Y, IY, JY, DESCY, INCY )
                                YnprocsD );
             if( ( XnpD > 0 ) && ( YnpD > 0 ) )
             {
+/*WCC
                dswap_( &XnpD,
                        Mptr( ((char *) X), Xii, Xjj, Xld, size ), &Xlinc,
                        Mptr( ((char *) Y), Yii, Yjj, Yld, size ), &Ylinc );
+*/
+               dswap_( &XnpD,
+                       (double*) Mptr( ((char *) X), Xii, Xjj, Xld, size ), &Xlinc,
+                       (double*) Mptr( ((char *) Y), Yii, Yjj, Yld, size ), &Ylinc );
             }
             if( RRorCC && XisR && YisR ) return;
          }
@@ -492,17 +497,32 @@ void pdswap_( N, X, IX, JX, DESCX, INCX, Y, IY, JY, DESCY, INCY )
                   dst = MPosMod( dst, YnprocsD );
                   if( XisRow )
                   {
+/*WCC
                      Cdgesd2d( ctxt, 1, XnpD, Mptr( ((char*) X), Xii, Xjj,
                                Xld, size ), Xld, YprocR, dst );
+*/
+                     Cdgesd2d( ctxt, 1, XnpD, (double*) Mptr( ((char*) X), Xii, Xjj,
+                               Xld, size ), Xld, YprocR, dst );
+/*WCC
                      Cdgerv2d( ctxt, 1, XnpD, Mptr( ((char*) X), Xii, Xjj,
+                               Xld, size ), Xld, YprocR, dst );
+*/
+                     Cdgerv2d( ctxt, 1, XnpD, (double*) Mptr( ((char*) X), Xii, Xjj,
                                Xld, size ), Xld, YprocR, dst );
                   }
                   else
                   {
-
+/*WCC
                      Cdgesd2d( ctxt, XnpD, 1, Mptr( ((char*) X), Xii, Xjj,
                                Xld, size ), Xld, dst, YprocR );
+*/
+                     Cdgesd2d( ctxt, XnpD, 1, (double*) Mptr( ((char*) X), Xii, Xjj,
+                               Xld, size ), Xld, dst, YprocR );
+/*WCC
                      Cdgerv2d( ctxt, XnpD, 1, Mptr( ((char*) X), Xii, Xjj,
+                               Xld, size ), Xld, dst, YprocR );
+*/
+                     Cdgerv2d( ctxt, XnpD, 1, (double*) Mptr( ((char*) X), Xii, Xjj,
                                Xld, size ), Xld, dst, YprocR );
                   }
                }
@@ -517,16 +537,32 @@ void pdswap_( N, X, IX, JX, DESCX, INCX, Y, IY, JY, DESCY, INCY )
                   dst = MPosMod( dst, XnprocsD );
                   if( YisRow )
                   {
+/*WCC
                      Cdgesd2d( ctxt, 1, YnpD, Mptr( ((char*) Y), Yii, Yjj,
                                Yld, size ), Yld, XprocR, dst );
+*/
+                     Cdgesd2d( ctxt, 1, YnpD, (double*) Mptr( ((char*) Y), Yii, Yjj,
+                               Yld, size ), Yld, XprocR, dst );
+/*WCC
                      Cdgerv2d( ctxt, 1, YnpD, Mptr( ((char*) Y), Yii, Yjj,
+                               Yld, size ), Yld, XprocR, dst );
+*/
+                     Cdgerv2d( ctxt, 1, YnpD, (double*) Mptr( ((char*) Y), Yii, Yjj,
                                Yld, size ), Yld, XprocR, dst );
                   }
                   else
                   {
+/*WCC
                      Cdgesd2d( ctxt, YnpD, 1, Mptr( ((char*) Y), Yii, Yjj,
                                Yld, size ), Yld, dst, XprocR );
+*/
+                     Cdgesd2d( ctxt, YnpD, 1, (double*) Mptr( ((char*) Y), Yii, Yjj,
+                               Yld, size ), Yld, dst, XprocR );
+/*WCC
                      Cdgerv2d( ctxt, YnpD, 1, Mptr( ((char*) Y), Yii, Yjj,
+                               Yld, size ), Yld, dst, XprocR );
+*/
+                     Cdgerv2d( ctxt, YnpD, 1, (double*) Mptr( ((char*) Y), Yii, Yjj,
                                Yld, size ), Yld, dst, XprocR );
                   }
                }
@@ -554,18 +590,35 @@ void pdswap_( N, X, IX, JX, DESCX, INCX, Y, IY, JY, DESCY, INCY )
 
                   if( ( myrow == rdst ) && ( mycol == cdst ) )
                   {
+/*WCC
                      dswap_( &XnpD,  Mptr( ((char *) X), Xii, Xjj, Xld,
                              size ), &Xlinc, Mptr( ((char *) Y), Yii, Yjj, Yld,
+                             size ), &Ylinc );
+*/
+                     dswap_( &XnpD,  (double*) Mptr( ((char *) X), Xii, Xjj, Xld,
+                             size ), &Xlinc, (double*) Mptr( ((char *) Y), Yii, Yjj, Yld,
                              size ), &Ylinc );
                   }
                   else
                   {
                      if( XisRow )
+                     {
+/*WCC
                         Cdgesd2d( ctxt, 1, XnpD, Mptr( ((char *) X), Xii,
                                   Xjj, Xld, size ), Xld, rdst, cdst );
+*/
+                        Cdgesd2d( ctxt, 1, XnpD, (double*) Mptr( ((char *) X), Xii,
+                                  Xjj, Xld, size ), Xld, rdst, cdst );
+                     }
                      else
+                     {
+/*WCC
                         Cdgesd2d( ctxt, XnpD, 1, Mptr( ((char *) X), Xii,
                                   Xjj, Xld, size ), Xld, rdst, cdst );
+*/
+                        Cdgesd2d( ctxt, XnpD, 1, (double*) Mptr( ((char *) X), Xii,
+                                  Xjj, Xld, size ), Xld, rdst, cdst );
+                     }
                   }
                }
             }
@@ -588,16 +641,38 @@ void pdswap_( N, X, IX, JX, DESCX, INCX, Y, IY, JY, DESCY, INCY )
                   {
                      buf = PB_Cmalloc( YnpD * size );
                      if( XisRow )
-                        Cdgerv2d( ctxt, 1, YnpD, buf,    1, rsrc, csrc );
+                     {
+                        /*WCC Cdgerv2d( ctxt, 1, YnpD, buf,    1, rsrc, csrc ); */
+                        Cdgerv2d( ctxt, 1, YnpD, (double*) buf,    1, rsrc, csrc );
+                     }
                      else
-                        Cdgerv2d( ctxt, YnpD, 1, buf, YnpD, rsrc, csrc );
+                     {
+                        /*WCC Cdgerv2d( ctxt, YnpD, 1, buf, YnpD, rsrc, csrc ); */
+                        Cdgerv2d( ctxt, YnpD, 1, (double*) buf, YnpD, rsrc, csrc );
+                     }
                      if( YisRow )
+                     {
+/*WCC
                         Cdgesd2d( ctxt, 1, YnpD, Mptr( ((char *) Y), Yii,
                                   Yjj, Yld, size ), Yld, rsrc, csrc );
+*/
+                        Cdgesd2d( ctxt, 1, YnpD, (double*) Mptr( ((char *) Y), Yii,
+                                  Yjj, Yld, size ), Yld, rsrc, csrc );
+                     }
                      else
+                     {
+/*WCC
                         Cdgesd2d( ctxt, YnpD, 1, Mptr( ((char *) Y), Yii,
                                   Yjj, Yld, size ), Yld, rsrc, csrc );
+*/
+                        Cdgesd2d( ctxt, YnpD, 1, (double*) Mptr( ((char *) Y), Yii,
+                                  Yjj, Yld, size ), Yld, rsrc, csrc );
+                     }
+/*WCC
                      dcopy_( &YnpD, buf, &ione, Mptr( ((char *) Y), Yii,
+                             Yjj, Yld, size ), &Ylinc );
+*/
+                     dcopy_( &YnpD, (double*) buf, &ione, (double*) Mptr( ((char *) Y), Yii,
                              Yjj, Yld, size ), &Ylinc );
                      if( buf ) free( buf );
                   }
@@ -615,10 +690,20 @@ void pdswap_( N, X, IX, JX, DESCX, INCX, Y, IY, JY, DESCY, INCY )
                   {
                      buf = PB_Cmalloc( XnpD * size );
                      if( YisRow )
-                        Cdgerv2d( ctxt, 1, XnpD, buf,    1, rdst, cdst );
+                     {
+                        /*WCC Cdgerv2d( ctxt, 1, XnpD, buf,    1, rdst, cdst ); */
+                        Cdgerv2d( ctxt, 1, XnpD, (double*) buf,    1, rdst, cdst );
+                     }
                      else
-                        Cdgerv2d( ctxt, XnpD, 1, buf, XnpD, rdst, cdst );
+                     {
+                        /*WCC Cdgerv2d( ctxt, XnpD, 1, buf, XnpD, rdst, cdst ); */
+                        Cdgerv2d( ctxt, XnpD, 1, (double*) buf, XnpD, rdst, cdst );
+                     }
+/*WCC
                      dcopy_( &XnpD, buf, &ione, Mptr( ((char *) X), Xii,
+                             Xjj, Xld, size ), &Xlinc );
+*/
+                     dcopy_( &XnpD, (double*) buf, &ione, (double*) Mptr( ((char *) X), Xii,
                              Xjj, Xld, size ), &Xlinc );
                      if( buf ) free( buf );
                   }
@@ -694,8 +779,10 @@ void pdswap_( N, X, IX, JX, DESCX, INCX, Y, IY, JY, DESCY, INCY )
                            PB_CVMpack( type, &VM, ROW, &Xscope, PACKING, NOTRAN,
                                        npq, 1, one, Mptr( ((char *) X), Xii,
                                        Xjj, Xld, size ), Xld, zero, buf, Xm );
-                           Cdgesd2d( ctxt, Xm, Xn, buf, Xm, rdst, cdst );
-                           Cdgerv2d( ctxt, Ym, Yn, buf, Ym, rdst, cdst );
+                           /*WCC Cdgesd2d( ctxt, Xm, Xn, buf, Xm, rdst, cdst ); */
+                           Cdgesd2d( ctxt, Xm, Xn, (double*) buf, Xm, rdst, cdst );
+                           /*WCC Cdgerv2d( ctxt, Ym, Yn, buf, Ym, rdst, cdst ); */
+                           Cdgerv2d( ctxt, Ym, Yn, (double*) buf, Ym, rdst, cdst );
                            PB_CVMpack( type, &VM, ROW, &Xscope, UNPACKING,
                                        &tran, npq, 1, zero, Mptr( ((char *) X),
                                        Xii, Xjj, Xld, size ), Xld, one, buf,
@@ -713,8 +800,10 @@ void pdswap_( N, X, IX, JX, DESCX, INCX, Y, IY, JY, DESCY, INCY )
                                        NOTRAN, npq, 1, one, Mptr( ((char *) Y),
                                        Yii, Yjj, Yld, size ), Yld, zero, buf,
                                        Ym );
-                           Cdgesd2d( ctxt, Ym, Yn, buf, Ym, rsrc, csrc );
-                           Cdgerv2d( ctxt, Xm, Xn, buf, Xm, rsrc, csrc );
+                           /*WCC Cdgesd2d( ctxt, Ym, Yn, buf, Ym, rsrc, csrc ); */
+                           Cdgesd2d( ctxt, Ym, Yn, (double*) buf, Ym, rsrc, csrc );
+                           /*WCC Cdgerv2d( ctxt, Xm, Xn, buf, Xm, rsrc, csrc ); */
+                           Cdgerv2d( ctxt, Xm, Xn, (double*) buf, Xm, rsrc, csrc );
                            PB_CVMpack( type, &VM, COLUMN, &Yscope, UNPACKING,
                                        &tran, npq, 1, zero, Mptr( ((char *) Y),
                                        Yii, Yjj, Yld, size ), Yld, one, buf,
@@ -742,21 +831,45 @@ void pdswap_( N, X, IX, JX, DESCX, INCX, Y, IY, JY, DESCY, INCY )
             {
                top = PB_Ctop( &ctxt, BCAST, COLUMN, TOP_GET );
                if( XmyprocR == XprocR )
+               {
+/*WCC
                   Cdgebs2d( ctxt, COLUMN, top, 1, XnpD, Mptr( ((char *) X),
                             Xii, Xjj, Xld, size ), Xld );
+*/
+                  Cdgebs2d( ctxt, COLUMN, top, 1, XnpD, (double*) Mptr( ((char *) X),
+                            Xii, Xjj, Xld, size ), Xld );
+               }
                else
+               {
+/*WCC
                   Cdgebr2d( ctxt, COLUMN, top, 1, XnpD, Mptr( ((char *) X),
                             Xii, Xjj, Xld, size ), Xld, XprocR, XmyprocD );
+*/
+                  Cdgebr2d( ctxt, COLUMN, top, 1, XnpD, (double*) Mptr( ((char *) X),
+                            Xii, Xjj, Xld, size ), Xld, XprocR, XmyprocD );
+               }
             }
             else
             {
                top = PB_Ctop( &ctxt, BCAST, ROW,    TOP_GET );
                if( XmyprocR == XprocR )
+               {
+/*WCC
                   Cdgebs2d( ctxt, ROW,    top, XnpD, 1, Mptr( ((char *) X),
                             Xii, Xjj, Xld, size ), Xld );
+*/
+                  Cdgebs2d( ctxt, ROW,    top, XnpD, 1, (double*) Mptr( ((char *) X),
+                            Xii, Xjj, Xld, size ), Xld );
+               }
                else
+               {
+/*WCC
                   Cdgebr2d( ctxt, ROW,    top, XnpD, 1, Mptr( ((char *) X),
                             Xii, Xjj, Xld, size ), Xld, XmyprocD, XprocR );
+*/
+                  Cdgebr2d( ctxt, ROW,    top, XnpD, 1, (double*) Mptr( ((char *) X),
+                            Xii, Xjj, Xld, size ), Xld, XmyprocD, XprocR );
+               }
             }
          }
       }
@@ -773,21 +886,45 @@ void pdswap_( N, X, IX, JX, DESCX, INCX, Y, IY, JY, DESCY, INCY )
             {
                top = PB_Ctop( &ctxt, BCAST, COLUMN, TOP_GET );
                if( YmyprocR == YprocR )
+               {
+/*WCC
                   Cdgebs2d( ctxt, COLUMN, top, 1, YnpD, Mptr( ((char *) Y),
                             Yii, Yjj, Yld, size ), Yld );
+*/
+                  Cdgebs2d( ctxt, COLUMN, top, 1, YnpD, (double*) Mptr( ((char *) Y),
+                            Yii, Yjj, Yld, size ), Yld );
+               }
                else
+               {
+/*WCC
                   Cdgebr2d( ctxt, COLUMN, top, 1, YnpD, Mptr( ((char *) Y),
                             Yii, Yjj, Yld, size ), Yld, YprocR, YmyprocD );
+*/
+                  Cdgebr2d( ctxt, COLUMN, top, 1, YnpD, (double*) Mptr( ((char *) Y),
+                            Yii, Yjj, Yld, size ), Yld, YprocR, YmyprocD );
+               }
             }
             else
             {
                top = PB_Ctop( &ctxt, BCAST, ROW,    TOP_GET );
                if( YmyprocR == YprocR )
+               {
+/*WCC
                   Cdgebs2d( ctxt, ROW,    top, YnpD, 1, Mptr( ((char *) Y),
                             Yii, Yjj, Yld, size ), Yld );
+*/
+                  Cdgebs2d( ctxt, ROW,    top, YnpD, 1, (double*) Mptr( ((char *) Y),
+                            Yii, Yjj, Yld, size ), Yld );
+               }
                else
+               {
+/*WCC
                   Cdgebr2d( ctxt, ROW,    top, YnpD, 1, Mptr( ((char *) Y),
                             Yii, Yjj, Yld, size ), Yld, YmyprocD, YprocR );
+*/
+                  Cdgebr2d( ctxt, ROW,    top, YnpD, 1, (double*) Mptr( ((char *) Y),
+                            Yii, Yjj, Yld, size ), Yld, YmyprocD, YprocR );
+               }
             }
          }
       }

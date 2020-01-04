@@ -27,7 +27,7 @@ GFORTRAN_FLAGS = -DUSE_FC_LEN_T
 
 ### Setup R package flags and substitute by configure for ${MPI_...}.
 PKG_CPPFLAGS = $(SPMD_CPPFLAGS) $(GFORTRAN_FLAGS)
-PKG_CFLAGS = 
+PKG_CFLAGS = # -Wincompatible-pointer-types
 PKG_FFLAGS = 
 ### Order is matter.
 PKG_LIBS = $(EXT_LDFLAGS) $(FLIBS) $(SPMD_LDFLAGS)

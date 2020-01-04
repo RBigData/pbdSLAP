@@ -210,12 +210,20 @@ void pdscal_( N, ALPHA, X, IX, JX, DESCX, INCX )
             Xld = Xd[LLD_];
             if( ALPHA[REAL_PART] == ZERO )
             {
+/*WCC
                dset_( &Xnq, ((char *) ALPHA), ((char *)(X+(Xii+Xjj*Xld))),
+                      &Xld );
+*/
+               dset_( &Xnq, ((double *) ALPHA), ((double *)(X+(Xii+Xjj*Xld))),
                       &Xld );
             }
             else
             {
+/*WCC
                dscal_( &Xnq, ((char *) ALPHA), ((char *)(X+(Xii+Xjj*Xld))),
+                       &Xld );
+*/
+               dscal_( &Xnq, ((double *) ALPHA), ((double *)(X+(Xii+Xjj*Xld))),
                        &Xld );
             }
          }
@@ -238,13 +246,21 @@ void pdscal_( N, ALPHA, X, IX, JX, DESCX, INCX )
          {
             if( ALPHA[REAL_PART] == ZERO )
             {
+/*WCC
                dset_( &Xnp, ((char *) ALPHA),
                       ((char *)( X+(Xii+Xjj*Xd[LLD_]) )), INCX );
+*/
+               dset_( &Xnp, ((double *) ALPHA),
+                      ((double *)( X+(Xii+Xjj*Xd[LLD_]) )), INCX );
             }
             else
             {
+/*WCC
                dscal_( &Xnp, ((char *) ALPHA),
                        ((char *)( X+(Xii+Xjj*Xd[LLD_]) )), INCX );
+*/
+               dscal_( &Xnp, ((double *) ALPHA),
+                       ((double *)( X+(Xii+Xjj*Xd[LLD_]) )), INCX );
             }
          }
       }

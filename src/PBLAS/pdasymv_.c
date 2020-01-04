@@ -480,24 +480,34 @@ void pdasymv_( UPLO, N, ALPHA, A, IA, JA, DESCA, X, IX, JX, DESCX,
             if( Akp > 0 && Anq0 > 0 )
             {
 #ifdef FC_LEN_T
-               dagemv_( C2F_CHAR( NOTRAN ), &Akp, &Anq0, ((char *)ALPHA),
-                        Mptr( Aptr, 0, Akq, Ald, size ), &Ald, Mptr( XR, 0, Akq,
-                        XRld, size ), &XRld, one, YC, &ione,
+               dagemv_( C2F_CHAR( NOTRAN ), &Akp, &Anq0, ((double *)ALPHA),
+                        (double*) Mptr( Aptr, 0, Akq, Ald, size ), &Ald, (double*) Mptr( XR, 0, Akq,
+                        XRld, size ), &XRld, (double*) one, (double*) YC, &ione,
                         (FC_LEN_T) strlen(C2F_CHAR( NOTRAN )) );
 #else
+/*WCC
                dagemv_( C2F_CHAR( NOTRAN ), &Akp, &Anq0, ((char *)ALPHA),
                         Mptr( Aptr, 0, Akq, Ald, size ), &Ald, Mptr( XR, 0, Akq,
                         XRld, size ), &XRld, one, YC, &ione );
+*/
+               dagemv_( C2F_CHAR( NOTRAN ), &Akp, &Anq0, ((double *)ALPHA),
+                        (double*) Mptr( Aptr, 0, Akq, Ald, size ), &Ald, (double*) Mptr( XR, 0, Akq,
+                        XRld, size ), &XRld, (double*) one, (double*) YC, &ione );
 #endif
 #ifdef FC_LEN_T
-               dagemv_( C2F_CHAR( TRAN   ), &Akp, &Anq0, ((char *)ALPHA),
-                       Mptr( Aptr, 0, Akq, Ald, size ), &Ald, XC, &ione, one,
-                       Mptr( YR, 0, Akq, YRld, usiz ), &YRld,
+               dagemv_( C2F_CHAR( TRAN   ), &Akp, &Anq0, ((double *)ALPHA),
+                       (double*) Mptr( Aptr, 0, Akq, Ald, size ), &Ald, (double*) XC, &ione, (double*) one,
+                       (double*) Mptr( YR, 0, Akq, YRld, usiz ), &YRld,
                        (FC_LEN_T) strlen(C2F_CHAR( TRAN   )) );
 #else
+/*WCC
                dagemv_( C2F_CHAR( TRAN   ), &Akp, &Anq0, ((char *)ALPHA),
                        Mptr( Aptr, 0, Akq, Ald, size ), &Ald, XC, &ione, one,
                        Mptr( YR, 0, Akq, YRld, usiz ), &YRld );
+*/
+               dagemv_( C2F_CHAR( TRAN   ), &Akp, &Anq0, ((double *)ALPHA),
+                       (double*) Mptr( Aptr, 0, Akq, Ald, size ), &Ald, (double*) XC, &ione, (double*) one,
+                       (double*) Mptr( YR, 0, Akq, YRld, usiz ), &YRld );
 #endif
             }
             PB_Cpsym( type, utyp, LEFT, UPPER, kb, 1, ((char *) ALPHA), Aptr, k,
@@ -523,27 +533,39 @@ void pdasymv_( UPLO, N, ALPHA, A, IA, JA, DESCA, X, IX, JX, DESCX,
             if( Amp0 > 0 && Anq0 > 0 )
             {
 #ifdef FC_LEN_T
-               dagemv_( C2F_CHAR( NOTRAN ), &Amp0, &Anq0, ((char *) ALPHA),
-                        Mptr( Aptr, Akp, Akq, Ald, size ), &Ald, Mptr( XR, 0,
-                        Akq, XRld, size ), &XRld, one, Mptr( YC, Akp, 0, YCld,
+               dagemv_( C2F_CHAR( NOTRAN ), &Amp0, &Anq0, ((double *) ALPHA),
+                        (double*) Mptr( Aptr, Akp, Akq, Ald, size ), &Ald, (double*) Mptr( XR, 0,
+                        Akq, XRld, size ), &XRld, (double*) one, (double*) Mptr( YC, Akp, 0, YCld,
                         usiz ), &ione,
                         (FC_LEN_T) strlen(C2F_CHAR( NOTRAN )) );
 #else
+/*WCC
                dagemv_( C2F_CHAR( NOTRAN ), &Amp0, &Anq0, ((char *) ALPHA),
                         Mptr( Aptr, Akp, Akq, Ald, size ), &Ald, Mptr( XR, 0,
                         Akq, XRld, size ), &XRld, one, Mptr( YC, Akp, 0, YCld,
                         usiz ), &ione );
+*/
+               dagemv_( C2F_CHAR( NOTRAN ), &Amp0, &Anq0, ((double *) ALPHA),
+                        (double*) Mptr( Aptr, Akp, Akq, Ald, size ), &Ald, (double*) Mptr( XR, 0,
+                        Akq, XRld, size ), &XRld, (double*) one, (double*) Mptr( YC, Akp, 0, YCld,
+                        usiz ), &ione );
 #endif
 #ifdef FC_LEN_T
-               dagemv_( C2F_CHAR( TRAN   ), &Amp0, &Anq0, ((char *) ALPHA),
-                        Mptr( Aptr, Akp, Akq, Ald, size ), &Ald, Mptr( XC, Akp,
-                        0, XCld, size ), &ione, one, Mptr( YR, 0, Akq, YRld,
+               dagemv_( C2F_CHAR( TRAN   ), &Amp0, &Anq0, ((double *) ALPHA),
+                        (double*) Mptr( Aptr, Akp, Akq, Ald, size ), &Ald, (double*) Mptr( XC, Akp,
+                        0, XCld, size ), &ione, (double*) one, (double*) Mptr( YR, 0, Akq, YRld,
                         usiz ), &YRld,
                         (FC_LEN_T) strlen(C2F_CHAR( TRAN   )) );
 #else
+/*WCC
                dagemv_( C2F_CHAR( TRAN   ), &Amp0, &Anq0, ((char *) ALPHA),
                         Mptr( Aptr, Akp, Akq, Ald, size ), &Ald, Mptr( XC, Akp,
                         0, XCld, size ), &ione, one, Mptr( YR, 0, Akq, YRld,
+                        usiz ), &YRld );
+*/
+               dagemv_( C2F_CHAR( TRAN   ), &Amp0, &Anq0, ((double *) ALPHA),
+                        (double*) Mptr( Aptr, Akp, Akq, Ald, size ), &Ald, (double*) Mptr( XC, Akp,
+                        0, XCld, size ), &ione, (double*) one, (double*) Mptr( YR, 0, Akq, YRld,
                         usiz ), &YRld );
 #endif
             }
@@ -564,7 +586,8 @@ void pdasymv_( UPLO, N, ALPHA, A, IA, JA, DESCA, X, IX, JX, DESCX,
          if( Amp > 0 )
          {
             top        = *PB_Ctop( &ctxt, COMBINE, ROW, TOP_GET );
-            Cdgsum2d( ctxt, ROW, &top, Amp, 1, YC, YCd[LLD_], myrow, 0 );
+            /*WCC Cdgsum2d( ctxt, ROW, &top, Amp, 1, YC, YCd[LLD_], myrow, 0 ); */
+            Cdgsum2d( ctxt, ROW, &top, Amp, 1, (double*) YC, YCd[LLD_], myrow, 0 );
          }
       }
 /*
@@ -573,7 +596,11 @@ void pdasymv_( UPLO, N, ALPHA, A, IA, JA, DESCA, X, IX, JX, DESCX,
       if( YRsum && ( Anq > 0 ) )
       {
          top = *PB_Ctop( &ctxt, COMBINE, COLUMN, TOP_GET );
+/*WCC
          Cdgsum2d( ctxt, COLUMN, &top, 1, Anq, YR, YRd[LLD_], YRd[RSRC_],
+                   mycol );
+*/
+         Cdgsum2d( ctxt, COLUMN, &top, 1, Anq, (double*) YR, YRd[LLD_], YRd[RSRC_],
                    mycol );
       }
 /*
@@ -623,7 +650,11 @@ void pdasymv_( UPLO, N, ALPHA, A, IA, JA, DESCA, X, IX, JX, DESCX,
          if( Anq > 0 )
          {
             top = *PB_Ctop( &ctxt, COMBINE, COLUMN, TOP_GET );
+/*WCC
             Cdgsum2d( ctxt, COLUMN, &top, 1, Anq, YR, YRd[LLD_], 0,
+                      mycol );
+*/
+            Cdgsum2d( ctxt, COLUMN, &top, 1, Anq, (double*) YR, YRd[LLD_], 0,
                       mycol );
          }
       }
@@ -633,7 +664,11 @@ void pdasymv_( UPLO, N, ALPHA, A, IA, JA, DESCA, X, IX, JX, DESCX,
       if( YCsum && ( Amp > 0 ) )
       {
          top = *PB_Ctop( &ctxt, COMBINE, ROW, TOP_GET );
+/*WCC
          Cdgsum2d( ctxt, ROW, &top, Amp, 1, YC, YCd[LLD_], myrow,
+                   YCd[CSRC_] );
+*/
+         Cdgsum2d( ctxt, ROW, &top, Amp, 1, (double*) YC, YCd[LLD_], myrow,
                    YCd[CSRC_] );
       }
 /*
