@@ -812,7 +812,7 @@ F_VOID_FCT     dtrsm_          ( F_CHAR_T,  F_CHAR_T,  F_CHAR_T,
 */
 F_VOID_FCT     dtrsm_          ( F_CHAR_T,  F_CHAR_T,  F_CHAR_T,
                                  F_CHAR_T,  int *,     int *,
-                                 double *,  double *,    int *,
+                                 double *,  double *,  int *,
                                  double *,  int * );
 #endif
 F_VOID_FCT     ctrsm_          ( F_CHAR_T,  F_CHAR_T,  F_CHAR_T,

@@ -279,14 +279,12 @@ F_VOID_FUNC igamx2d_(int *ConTxt, F_CHAR scope, F_CHAR top, int *m, int *n,
       i = 1;
       if (Mpval(ldia) == -1)
       {
-         //WCC ierr=MPI_Op_create(BI_iMPI_amx2, i, &BlacComb);
-         //WCC:add
+         /*WCC ierr=MPI_Op_create(BI_iMPI_amx2, i, &BlacComb); */
          ierr=MPI_Op_create((MPI_User_function *) BI_iMPI_amx2, i, &BlacComb);
       }
       else
       {
-         //WCC ierr=MPI_Op_create(BI_iMPI_amx, i, &BlacComb);
-         //WCC:add
+         /*WCC ierr=MPI_Op_create(BI_iMPI_amx, i, &BlacComb); */
          ierr=MPI_Op_create((MPI_User_function *) BI_iMPI_amx, i, &BlacComb);
          BI_AuxBuff.Len = N;  /* set this up for the MPI OP wrappers */
       }
