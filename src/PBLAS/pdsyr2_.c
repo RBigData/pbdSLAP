@@ -352,8 +352,14 @@ void pdsyr2_( UPLO, N, ALPHA, X, IX, JX, DESCX, INCX, Y, IY, JY,
 *  Computational partitioning size is computed as the product of the logical
 *  value returned by pilaenv_ and 2 * lcm( nprow, npcol ).
 */
+#ifdef FC_LEN_T
+      nb = 2 * pilaenv_( &ctxt, C2F_CHAR( &type->type ),
+                         (FC_LEN_T) strlen(C2F_CHAR( &type->type )) ) *
+           PB_Clcm( ( Arow >= 0 ? nprow : 1 ), ( Acol >= 0 ? npcol : 1 ) );
+#else
       nb = 2 * pilaenv_( &ctxt, C2F_CHAR( &type->type ) ) *
            PB_Clcm( ( Arow >= 0 ? nprow : 1 ), ( Acol >= 0 ? npcol : 1 ) );
+#endif
       if( upper )
       {
          for( k = 0; k < *N; k += nb )
@@ -364,12 +370,22 @@ void pdsyr2_( UPLO, N, ALPHA, X, IX, JX, DESCX, INCX, Y, IY, JY,
             Anq0 = PB_Cnumroc( kb, k, Ainb1, Anb, mycol, Acol, npcol );
             if( Akp > 0 && Anq0 > 0 )
             {
+/*WCC
                dger_( &Akp, &Anq0, ((char *) ALPHA), XC, &ione,
                       Mptr( YR,   0, Akq, YRld, size ), &YRld,
                       Mptr( Aptr, 0, Akq,  Ald, size ), &Ald );
+*/
+               dger_( &Akp, &Anq0, ((double *) ALPHA), (double*) XC, &ione,
+                      (double*) Mptr( YR,   0, Akq, YRld, size ), &YRld,
+                      (double*) Mptr( Aptr, 0, Akq,  Ald, size ), &Ald );
+/*WCC
                dger_( &Akp, &Anq0, ((char *) ALPHA), YC, &ione,
                       Mptr( XR,   0, Akq, XRld, size ), &XRld,
                       Mptr( Aptr, 0, Akq,  Ald, size ), &Ald );
+*/
+               dger_( &Akp, &Anq0, ((double *) ALPHA), (double*) YC, &ione,
+                      (double*) Mptr( XR,   0, Akq, XRld, size ), &XRld,
+                      (double*) Mptr( Aptr, 0, Akq,  Ald, size ), &Ald );
             }
             PB_Cpsyr2( type, UPPER, kb, 1, ((char *) ALPHA),
                        Mptr( XC, Akp,   0, XCld, size ), XCld,
@@ -397,14 +413,26 @@ void pdsyr2_( UPLO, N, ALPHA, X, IX, JX, DESCX, INCX, Y, IY, JY,
             Anq0 = PB_Cnumroc( kb,   k, Ainb1, Anb, mycol, Acol, npcol );
             if( Amp0 > 0 && Anq0 > 0 )
             {
+/*WCC
                dger_( &Amp0, &Anq0, ((char *) ALPHA),
                       Mptr( XC,   Akp,   0, XCld, size ), &ione,
                       Mptr( YR,     0, Akq, YRld, size ), &YRld,
                       Mptr( Aptr, Akp, Akq,  Ald, size ), &Ald );
+*/
+               dger_( &Amp0, &Anq0, ((double *) ALPHA),
+                      (double*) Mptr( XC,   Akp,   0, XCld, size ), &ione,
+                      (double*) Mptr( YR,     0, Akq, YRld, size ), &YRld,
+                      (double*) Mptr( Aptr, Akp, Akq,  Ald, size ), &Ald );
+/*WCC
                dger_( &Amp0, &Anq0, ((char *) ALPHA),
                       Mptr( YC,   Akp,   0, YCld, size ), &ione,
                       Mptr( XR,     0, Akq, XRld, size ), &XRld,
                       Mptr( Aptr, Akp, Akq,  Ald, size ), &Ald );
+*/
+               dger_( &Amp0, &Anq0, ((double *) ALPHA),
+                      (double*) Mptr( YC,   Akp,   0, YCld, size ), &ione,
+                      (double*) Mptr( XR,     0, Akq, XRld, size ), &XRld,
+                      (double*) Mptr( Aptr, Akp, Akq,  Ald, size ), &Ald );
             }
          }
       }

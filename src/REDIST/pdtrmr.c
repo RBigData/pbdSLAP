@@ -434,8 +434,8 @@ Cpdtrmr2d(uplo, diag, m, n,
   }
   for (i = 0; i < NBPARAM; i++) {
     if (param[i] == MAGIC_MAX) {
-//WCC      fprintf(stderr, "xxGEMR2D:something wrong in the parameters\n");
-//WCC      exit(1);
+/*WCC      fprintf(stderr, "xxGEMR2D:something wrong in the parameters\n"); */
+/*WCC      exit(1); */
       REprintf("xxGEMR2D:something wrong in the parameters\n");
       error("exit Cpdtrmr2d");
     }
@@ -537,8 +537,8 @@ Cpdtrmr2d(uplo, diag, m, n,
 		 v_inter, vinter_nb, h_inter, hinter_nb,
 		 ptrmyblock);
 	}	/* if (mesending...) { */
-	//WCC if (mesending && recver[step] >= 0 &&
-	//WCC     (sens == myrang > step)) {
+	/*WCC if (mesending && recver[step] >= 0 && */
+	/*WCC     (sens == myrang > step)) { */
 	if (mesending && (recver[step] >= 0) &&
 	    (sens == (myrang > step))) {
 	  i = recver[step] / q1;
@@ -550,8 +550,8 @@ Cpdtrmr2d(uplo, diag, m, n,
 		     0, proc1[i * q1 + j]);
 	  }	/* sendsize > 0 */
 	}	/* if (mesending ... */
-	//WCC if (merecving && sender[step] >= 0 &&
-	//WCC     (sens == myrang <= step)) {
+	/*WCC if (merecving && sender[step] >= 0 && */
+	/*WCC     (sens == myrang <= step)) { */
 	if (merecving && (sender[step] >= 0) &&
 	    (sens == (myrang <= step))) {
 	  i = sender[step] / q0;

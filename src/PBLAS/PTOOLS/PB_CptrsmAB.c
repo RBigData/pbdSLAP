@@ -279,7 +279,12 @@ void PB_CptrsmAB( TYPE, VARIANT, SIDE, UPLO, TRANSA, DIAG, M, N, ALPHA, A,
    size   = TYPE->size; negone = TYPE->negone;  one  = TYPE->one;
    zero   = TYPE->zero; gsum2d = TYPE->Cgsum2d; gemm = TYPE->Fgemm;
    talph  = ALPHA;
+#ifdef FC_LEN_T
+   kb     = pilaenv_( &ctxt, C2F_CHAR( &TYPE->type ),
+                      (FC_LEN_T) strlen(C2F_CHAR( &TYPE->type )) );
+#else
    kb     = pilaenv_( &ctxt, C2F_CHAR( &TYPE->type ) );
+#endif
 /*
 *  Retrieve process grid information
 */

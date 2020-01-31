@@ -358,7 +358,12 @@ void PB_Cpsyr2kA( TYPE, DIRECAB, CONJUG, UPLO, TRANS, N, K, ALPHA, A, IA,
    conjg = ( Mupcase( CONJUG [0] ) == CCONJG );
 
    size = TYPE->size; one = TYPE->one; zero = TYPE->zero; gemm = TYPE->Fgemm;
+#ifdef FC_LEN_T
+   kb   = pilaenv_( &ctxt, C2F_CHAR( &TYPE->type ),
+                    (FC_LEN_T) strlen(C2F_CHAR( &TYPE->type )) );
+#else
    kb   = pilaenv_( &ctxt, C2F_CHAR( &TYPE->type ) );
+#endif
 /*
 *  Compute descriptor Cd0 for sub( C )
 */

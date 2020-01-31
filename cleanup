@@ -27,6 +27,8 @@ rm -rf ./src/PBLAS/PTZBLAS/*.fo
 rm -rf ./src/PBLAS/PTZBLAS/*.co
 rm -rf ./src/PBLAS/PTOOLS/*.fo
 rm -rf ./src/PBLAS/PTOOLS/*.co
+rm -rf ./src/PBLAS/wcc_PTOOLS/*.fo
+rm -rf ./src/PBLAS/wcc_PTOOLS/*.co
 rm -rf ./src/REDIST/*.fo
 rm -rf ./src/REDIST/*.co
 rm -rf ./src/ScaLAPACK/*.fo

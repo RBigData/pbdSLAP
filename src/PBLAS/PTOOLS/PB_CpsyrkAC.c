@@ -308,7 +308,12 @@ void PB_CpsyrkAC( TYPE, DIRECA, CONJUG, UPLO, TRANS, N, K, ALPHA, A, IA,
 /*
 *  Figure out the loop bounds accordingly to DIRECA
 */
+#ifdef FC_LEN_T
+   kb = pilaenv_( &ctxt, C2F_CHAR( &TYPE->type ),
+                  (FC_LEN_T) strlen(C2F_CHAR( &TYPE->type )));
+#else
    kb = pilaenv_( &ctxt, C2F_CHAR( &TYPE->type ) );
+#endif
    if( fwd )
    {
       kstart = 0; kend = ( ( N - 1 ) / kb + 1 ) * kb; kstep = kb;

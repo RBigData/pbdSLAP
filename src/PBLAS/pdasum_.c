@@ -243,7 +243,11 @@ void pdasum_( N, ASUM, X, IX, JX, DESCX, INCX )
          if( Xnq > 0 )
          {
             Xld = Xd[LLD_];
+/*WCC
             dvasum_( &Xnq, ((char *) ASUM), ((char *)( X+(Xii+Xjj*Xld) )),
+                     &Xld );
+*/
+            dvasum_( &Xnq, ((double *) ASUM), ((double *)( X+(Xii+Xjj*Xld) )),
                      &Xld );
          }
 /*
@@ -256,7 +260,11 @@ void pdasum_( N, ASUM, X, IX, JX, DESCX, INCX )
 *  distributed.
 */
             top = *PB_Ctop( &ctxt, COMBINE, ROW, TOP_GET );
+/*WCC
             Cdgsum2d( ctxt, ROW, &top, 1, 1, ((char *)ASUM), 1, -1,
+                      mycol );
+*/
+            Cdgsum2d( ctxt, ROW, &top, 1, 1, ((double *)ASUM), 1, -1,
                       mycol );
          }
       }
@@ -275,8 +283,12 @@ void pdasum_( N, ASUM, X, IX, JX, DESCX, INCX )
          Xnp = PB_Cnumroc( *N, Xi, Xd[IMB_], Xd[MB_], myrow, Xd[RSRC_], nprow );
          if( Xnp > 0 )
          {
+/*WCC
             dvasum_( &Xnp, ((char *) ASUM),
                      ((char *)( X+(Xii+Xjj*Xd[LLD_]) )), INCX );
+*/
+            dvasum_( &Xnp, ((double *) ASUM),
+                     ((double *)( X+(Xii+Xjj*Xd[LLD_]) )), INCX );
          }
 /*
 *  If Xnp <= 0, ASUM is zero (see initialization above)
@@ -288,7 +300,11 @@ void pdasum_( N, ASUM, X, IX, JX, DESCX, INCX )
 *  distributed.
 */
             top = *PB_Ctop( &ctxt, COMBINE, COLUMN, TOP_GET );
+/*WCC
             Cdgsum2d( ctxt, COLUMN, &top, 1, 1, ((char *)ASUM), 1, -1,
+                      mycol );
+*/
+            Cdgsum2d( ctxt, COLUMN, &top, 1, 1, ((double *)ASUM), 1, -1,
                       mycol );
          }
       }

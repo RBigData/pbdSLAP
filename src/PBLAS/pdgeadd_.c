@@ -17,11 +17,20 @@
 #include "PBblas.h"
 
 #ifdef __STDC__
+#ifdef FC_LEN_T
+void pdgeadd_( F_CHAR_T TRANS, int * M, int * N,
+               double * ALPHA,
+               double * A, int * IA, int * JA, int * DESCA,
+               double * BETA,
+               double * C, int * IC, int * JC, int * DESCC,
+               FC_LEN_T TRANS_len )
+#else
 void pdgeadd_( F_CHAR_T TRANS, int * M, int * N,
                double * ALPHA,
                double * A, int * IA, int * JA, int * DESCA,
                double * BETA,
                double * C, int * IC, int * JC, int * DESCC )
+#endif
 #else
 void pdgeadd_( TRANS, M, N, ALPHA, A, IA, JA, DESCA, BETA, C, IC, JC, DESCC )
 /*

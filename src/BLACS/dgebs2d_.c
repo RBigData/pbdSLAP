@@ -3,8 +3,14 @@
 #if (INTFACE == C_CALL)
 void Cdgebs2d(int ConTxt, char *scope, char *top, int m, int n, double *A, int lda)
 #else
+#ifdef FC_LEN_T
+F_VOID_FUNC dgebs2d_(int *ConTxt, F_CHAR scope, F_CHAR top, int *m, int *n,
+                     double *A, int *lda,
+                     FC_LEN_T scope_len, FC_LEN_T top_len)
+#else
 F_VOID_FUNC dgebs2d_(int *ConTxt, F_CHAR scope, F_CHAR top, int *m, int *n,
                      double *A, int *lda)
+#endif
 #endif
 /*
  *  -- V1.1 BLACS routine --

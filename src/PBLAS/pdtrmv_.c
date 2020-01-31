@@ -323,7 +323,11 @@ void pdtrmv_( UPLO, TRANS, DIAG, N, A, IA, JA, DESCA, X, IX, JX,
                               nprow );
             if( Xnp > 0 )
             {
+/*WCC
                dset_( &Xnp, zero, Mptr( ((char *) X), Xii, Xjj, Xd[LLD_],
+                      size ), &ione );
+*/
+               dset_( &Xnp, (double*) zero, (double*) Mptr( ((char *) X), Xii, Xjj, Xd[LLD_],
                       size ), &ione );
             }
          }
@@ -364,7 +368,11 @@ void pdtrmv_( UPLO, TRANS, DIAG, N, A, IA, JA, DESCA, X, IX, JX,
             if( Xnq > 0 )
             {
                Xld = Xd[LLD_];
+/*WCC
                dset_( &Xnq, zero, Mptr( ((char *) X), Xii, Xjj, Xld,
+                      size ), &Xld );
+*/
+               dset_( &Xnq, (double*) zero, (double*) Mptr( ((char *) X), Xii, Xjj, Xld,
                       size ), &Xld );
             }
          }
@@ -387,8 +395,14 @@ void pdtrmv_( UPLO, TRANS, DIAG, N, A, IA, JA, DESCA, X, IX, JX,
 *  Computational partitioning size is computed as the product of the logical
 *  value returned by pilaenv_ and 2 * lcm( nprow, npcol ).
 */
+#ifdef FC_LEN_T
+      nb = 2 * pilaenv_( &ctxt, C2F_CHAR( &type->type ),
+                         (FC_LEN_T) strlen(C2F_CHAR( &type->type )) ) *
+           PB_Clcm( ( Arow >= 0 ? nprow : 1 ), ( Acol >= 0 ? npcol : 1 ) );
+#else
       nb = 2 * pilaenv_( &ctxt, C2F_CHAR( &type->type ) ) *
            PB_Clcm( ( Arow >= 0 ? nprow : 1 ), ( Acol >= 0 ? npcol : 1 ) );
+#endif
 
       if( upper )
       {
@@ -402,9 +416,21 @@ void pdtrmv_( UPLO, TRANS, DIAG, N, A, IA, JA, DESCA, X, IX, JX,
                Anq0 = PB_Cnumroc( kb, k, Ainb1, Anb, mycol, Acol, npcol );
                if( Akp > 0 && Anq0 > 0 )
                {
+#ifdef FC_LEN_T
+                  dgemv_( TRANS, &Akp, &Anq0, (double*) one, (double*) Mptr( Aptr, 0, Akq, Ald,
+                               size ), &Ald, (double*) Mptr( XA, 0, Akq, XAld, size ),
+                               &XAld, (double*) one, (double*) YA, &ione,
+                               (FC_LEN_T) strlen(TRANS) );
+#else
+/*WCC
                   dgemv_( TRANS, &Akp, &Anq0, one, Mptr( Aptr, 0, Akq, Ald,
                                size ), &Ald, Mptr( XA, 0, Akq, XAld, size ),
                                &XAld, one, YA, &ione );
+*/
+                  dgemv_( TRANS, &Akp, &Anq0, (double*) one, (double*) Mptr( Aptr, 0, Akq, Ald,
+                               size ), &Ald, (double*) Mptr( XA, 0, Akq, XAld, size ),
+                               &XAld, (double*) one, (double*) YA, &ione );
+#endif
                }
                PB_Cptrm( type, type, LEFT, UPPER, &TranOp, &DiagA, kb, 1, one,
                          Aptr, k, k, Ad0, Mptr( XA, 0, Akq, XAld, size ), XAld,
@@ -421,9 +447,21 @@ void pdtrmv_( UPLO, TRANS, DIAG, N, A, IA, JA, DESCA, X, IX, JX,
                Anq0 = PB_Cnumroc( kb, k, Ainb1, Anb, mycol, Acol, npcol );
                if( Akp > 0 && Anq0 > 0 )
                {
+#ifdef FC_LEN_T
+                  dgemv_( TRANS, &Akp, &Anq0, (double*) one, (double*) Mptr( Aptr, 0, Akq, Ald,
+                          size ), &Ald, (double*) XA, &ione, (double*) one, (double*) Mptr( YA, 0, Akq, YAld,
+                          size ), &YAld,
+                          (FC_LEN_T) strlen(TRANS) );
+#else
+/*WCC
                   dgemv_( TRANS, &Akp, &Anq0, one, Mptr( Aptr, 0, Akq, Ald,
                           size ), &Ald, XA, &ione, one, Mptr( YA, 0, Akq, YAld,
                           size ), &YAld );
+*/
+                  dgemv_( TRANS, &Akp, &Anq0, (double*) one, (double*) Mptr( Aptr, 0, Akq, Ald,
+                          size ), &Ald, (double*) XA, &ione, (double*) one, (double*) Mptr( YA, 0, Akq, YAld,
+                          size ), &YAld );
+#endif
                }
                PB_Cptrm( type, type, LEFT, UPPER, &TranOp, &DiagA, kb, 1, one,
                          Aptr, k, k, Ad0, Mptr( XA, Akp, 0, XAld, size ), XAld,
@@ -448,10 +486,24 @@ void pdtrmv_( UPLO, TRANS, DIAG, N, A, IA, JA, DESCA, X, IX, JX,
                Anq0 = PB_Cnumroc( kb,   k, Ainb1, Anb, mycol, Acol, npcol );
                if( Amp0 > 0 && Anq0 > 0 )
                {
+#ifdef FC_LEN_T
+                  dgemv_( TRANS, &Amp0, &Anq0, (double*) one,
+                          (double*) Mptr( Aptr, Akp, Akq,  Ald, size ),  &Ald,
+                          (double*) Mptr( XA,     0, Akq, XAld, size ), &XAld, (double*) one,
+                          (double*) Mptr( YA,   Akp,   0, YAld, size ), &ione,
+                          (FC_LEN_T) strlen(TRANS) );
+#else
+/*WCC
                   dgemv_( TRANS, &Amp0, &Anq0, one,
                           Mptr( Aptr, Akp, Akq,  Ald, size ),  &Ald,
                           Mptr( XA,     0, Akq, XAld, size ), &XAld, one,
                           Mptr( YA,   Akp,   0, YAld, size ), &ione );
+*/
+                  dgemv_( TRANS, &Amp0, &Anq0, (double*) one,
+                          (double*) Mptr( Aptr, Akp, Akq,  Ald, size ),  &Ald,
+                          (double*) Mptr( XA,     0, Akq, XAld, size ), &XAld, (double*) one,
+                          (double*) Mptr( YA,   Akp,   0, YAld, size ), &ione );
+#endif
                }
             }
          }
@@ -470,10 +522,24 @@ void pdtrmv_( UPLO, TRANS, DIAG, N, A, IA, JA, DESCA, X, IX, JX,
                Anq0 = PB_Cnumroc( kb,   k, Ainb1, Anb, mycol, Acol, npcol );
                if( Amp0 > 0 && Anq0 > 0 )
                {
+#ifdef FC_LEN_T
+                  dgemv_( TRANS, &Amp0, &Anq0, (double*) one,
+                          (double*) Mptr( Aptr, Akp, Akq,  Ald, size ),  &Ald,
+                          (double*) Mptr( XA,   Akp,   0, XAld, size ), &ione, (double*) one,
+                          (double*) Mptr( YA,     0, Akq, YAld, size ), &YAld,
+                          (FC_LEN_T) strlen(TRANS) );
+#else
+/*WCC
                   dgemv_( TRANS, &Amp0, &Anq0, one,
                           Mptr( Aptr, Akp, Akq,  Ald, size ),  &Ald,
                           Mptr( XA,   Akp,   0, XAld, size ), &ione, one,
                           Mptr( YA,     0, Akq, YAld, size ), &YAld );
+*/
+                  dgemv_( TRANS, &Amp0, &Anq0, (double*) one,
+                          (double*) Mptr( Aptr, Akp, Akq,  Ald, size ),  &Ald,
+                          (double*) Mptr( XA,   Akp,   0, XAld, size ), &ione, (double*) one,
+                          (double*) Mptr( YA,     0, Akq, YAld, size ), &YAld );
+#endif
                }
             }
          }
@@ -489,7 +555,11 @@ void pdtrmv_( UPLO, TRANS, DIAG, N, A, IA, JA, DESCA, X, IX, JX,
       if( YAsum && ( Amp > 0 ) )
       {
          top = *PB_Ctop( &ctxt, COMBINE, ROW, TOP_GET );
+/*WCC
          Cdgsum2d( ctxt, ROW, &top, Amp, 1, YA, YAd[LLD_], myrow,
+                   YAd[CSRC_] );
+*/
+         Cdgsum2d( ctxt, ROW, &top, Amp, 1, (double*) YA, YAd[LLD_], myrow,
                    YAd[CSRC_] );
       }
 /*
@@ -509,7 +579,11 @@ void pdtrmv_( UPLO, TRANS, DIAG, N, A, IA, JA, DESCA, X, IX, JX,
       if( YAsum && ( Anq > 0 ) )
       {
          top = *PB_Ctop( &ctxt, COMBINE, COLUMN, TOP_GET );
+/*WCC
          Cdgsum2d( ctxt, COLUMN, &top, 1, Anq, YA, YAd[LLD_], YAd[RSRC_],
+                   mycol );
+*/
+         Cdgsum2d( ctxt, COLUMN, &top, 1, Anq, (double*) YA, YAd[LLD_], YAd[RSRC_],
                    mycol );
       }
 /*

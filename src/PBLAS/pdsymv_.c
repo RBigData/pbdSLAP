@@ -17,11 +17,20 @@
 #include "PBblas.h"
 
 #ifdef __STDC__
+#ifdef FC_LEN_T
+void pdsymv_( F_CHAR_T UPLO, int * N, double * ALPHA,
+              double * A, int * IA, int * JA, int * DESCA,
+              double * X, int * IX, int * JX, int * DESCX, int * INCX,
+              double * BETA,
+              double * Y, int * IY, int * JY, int * DESCY, int * INCY,
+              FC_LEN_T UPLO_len )
+#else
 void pdsymv_( F_CHAR_T UPLO, int * N, double * ALPHA,
               double * A, int * IA, int * JA, int * DESCA,
               double * X, int * IX, int * JX, int * DESCX, int * INCX,
               double * BETA,
               double * Y, int * IY, int * JY, int * DESCY, int * INCY )
+#endif
 #else
 void pdsymv_( UPLO, N, ALPHA, A, IA, JA, DESCA, X, IX, JX, DESCX,
               INCX, BETA, Y, IY, JY, DESCY, INCY )
@@ -328,12 +337,20 @@ void pdsymv_( UPLO, N, ALPHA, A, IA, JA, DESCA, X, IX, JX, DESCX,
                Yld = Yd[LLD_];
                if( BETA[REAL_PART] == ZERO )
                {
+/*WCC
                   dset_( &Ynq, ((char *) BETA), Mptr( ((char *) Y), Yii,
+                         Yjj, Yld, type->size ), &Yld );
+*/
+                  dset_( &Ynq, ((double *) BETA), (double*) Mptr( ((char *) Y), Yii,
                          Yjj, Yld, type->size ), &Yld );
                }
                else
                {
+/*WCC
                   dscal_( &Ynq, ((char *) BETA), Mptr( ((char *) Y), Yii,
+                          Yjj, Yld, type->size ), &Yld );
+*/
+                  dscal_( &Ynq, ((double *) BETA), (double*) Mptr( ((char *) Y), Yii,
                           Yjj, Yld, type->size ), &Yld );
                }
             }
@@ -355,12 +372,20 @@ void pdsymv_( UPLO, N, ALPHA, A, IA, JA, DESCA, X, IX, JX, DESCX,
             {
                if( BETA[REAL_PART] == ZERO )
                {
+/*WCC
                   dset_( &Ynp, ((char *) BETA), Mptr( ((char *) Y), Yii,
+                         Yjj, Yd[LLD_], type->size ), INCY );
+*/
+                  dset_( &Ynp, ((double *) BETA), (double*) Mptr( ((char *) Y), Yii,
                          Yjj, Yd[LLD_], type->size ), INCY );
                }
                else
                {
+/*WCC
                   dscal_( &Ynp, ((char *) BETA), Mptr( ((char *) Y), Yii,
+                          Yjj, Yd[LLD_], type->size ), INCY );
+*/
+                  dscal_( &Ynp, ((double *) BETA), (double*) Mptr( ((char *) Y), Yii,
                           Yjj, Yd[LLD_], type->size ), INCY );
                }
             }
@@ -444,11 +469,13 @@ void pdsymv_( UPLO, N, ALPHA, A, IA, JA, DESCA, X, IX, JX, DESCX,
                {
                   if( tbeta[REAL_PART] == ZERO )
                   {
-                     dset_( &Anq, ((char *) tbeta), YR, &YRld );
+                     /*WCC dset_( &Anq, ((char *) tbeta), YR, &YRld ); */
+                     dset_( &Anq, ((double *) tbeta), (double*) YR, &YRld );
                   }
                   else
                   {
-                     dscal_( &Anq, ((char *) tbeta), YR, &YRld );
+                     /*WCC dscal_( &Anq, ((char *) tbeta), YR, &YRld ); */
+                     dscal_( &Anq, ((double *) tbeta), (double*) YR, &YRld );
                   }
                }
             }
@@ -470,11 +497,13 @@ void pdsymv_( UPLO, N, ALPHA, A, IA, JA, DESCA, X, IX, JX, DESCX,
                {
                   if( tbeta[REAL_PART] == ZERO )
                   {
-                     dset_( &Amp, ((char *) tbeta), YC, &ione );
+                     /*WCC dset_( &Amp, ((char *) tbeta), YC, &ione ); */
+                     dset_( &Amp, ((double *) tbeta), (double*) YC, &ione );
                   }
                   else
                   {
-                     dscal_( &Amp, ((char *) tbeta), YC, &ione );
+                     /*WCC dscal_( &Amp, ((char *) tbeta), YC, &ione ); */
+                     dscal_( &Amp, ((double *) tbeta), (double*) YC, &ione );
                   }
                }
             }
@@ -484,8 +513,14 @@ void pdsymv_( UPLO, N, ALPHA, A, IA, JA, DESCA, X, IX, JX, DESCX,
 *  Computational partitioning size is computed as the product of the logical
 *  value returned by pilaenv_ and 2 * lcm( nprow, npcol ).
 */
+#ifdef FC_LEN_T
+      nb = 2 * pilaenv_( &ctxt, C2F_CHAR( &type->type ),
+                         (FC_LEN_T) strlen(C2F_CHAR( &type->type )) ) *
+           PB_Clcm( ( Arow >= 0 ? nprow : 1 ), ( Acol >= 0 ? npcol : 1 ) );
+#else
       nb = 2 * pilaenv_( &ctxt, C2F_CHAR( &type->type ) ) *
            PB_Clcm( ( Arow >= 0 ? nprow : 1 ), ( Acol >= 0 ? npcol : 1 ) );
+#endif
 
       if( upper )
       {
@@ -497,12 +532,36 @@ void pdsymv_( UPLO, N, ALPHA, A, IA, JA, DESCA, X, IX, JX, DESCX,
             Anq0 = PB_Cnumroc( kb, k, Ainb1, Anb, mycol, Acol, npcol );
             if( Akp > 0 && Anq0 > 0 )
             {
+#ifdef FC_LEN_T
+               dgemv_( C2F_CHAR( NOTRAN ), &Akp, &Anq0, ((double *)ALPHA),
+                       (double*) Mptr( Aptr, 0, Akq, Ald, size ), &Ald, (double*) Mptr( XR, 0, Akq,
+                       XRld, size ), &XRld, (double*) one, (double*) YC, &ione,
+                       (FC_LEN_T) strlen(C2F_CHAR( NOTRAN )) );
+#else
+/*WCC
                dgemv_( C2F_CHAR( NOTRAN ), &Akp, &Anq0, ((char *)ALPHA),
                        Mptr( Aptr, 0, Akq, Ald, size ), &Ald, Mptr( XR, 0, Akq,
                        XRld, size ), &XRld, one, YC, &ione );
+*/
+               dgemv_( C2F_CHAR( NOTRAN ), &Akp, &Anq0, ((double *)ALPHA),
+                       (double*) Mptr( Aptr, 0, Akq, Ald, size ), &Ald, (double*) Mptr( XR, 0, Akq,
+                       XRld, size ), &XRld, (double*) one, (double*) YC, &ione );
+#endif
+#ifdef FC_LEN_T
+               dgemv_( C2F_CHAR( TRAN   ), &Akp, &Anq0, ((double *)ALPHA),
+                       (double*) Mptr( Aptr, 0, Akq, Ald, size ), &Ald, (double*) XC, &ione, (double*) one,
+                       (double*) Mptr( YR, 0, Akq, YRld, size ), &YRld,
+                       (FC_LEN_T) strlen(C2F_CHAR( TRAN   )) );
+#else
+/*WCC
                dgemv_( C2F_CHAR( TRAN   ), &Akp, &Anq0, ((char *)ALPHA),
                        Mptr( Aptr, 0, Akq, Ald, size ), &Ald, XC, &ione, one,
                        Mptr( YR, 0, Akq, YRld, size ), &YRld );
+*/
+               dgemv_( C2F_CHAR( TRAN   ), &Akp, &Anq0, ((double *)ALPHA),
+                       (double*) Mptr( Aptr, 0, Akq, Ald, size ), &Ald, (double*) XC, &ione, (double*) one,
+                       (double*) Mptr( YR, 0, Akq, YRld, size ), &YRld );
+#endif
             }
             PB_Cpsym( type, type, LEFT, UPPER, kb, 1, ((char *) ALPHA),
                       Aptr, k, k, Ad0, Mptr( XC, Akp, 0, XCld, size ), XCld,
@@ -528,14 +587,42 @@ void pdsymv_( UPLO, N, ALPHA, A, IA, JA, DESCA, X, IX, JX, DESCX,
             Anq0 = PB_Cnumroc( kb,   k, Ainb1, Anb, mycol, Acol, npcol );
             if( Amp0 > 0 && Anq0 > 0 )
             {
+#ifdef FC_LEN_T
+               dgemv_( C2F_CHAR( NOTRAN ), &Amp0, &Anq0, ((double *) ALPHA),
+                       (double*) Mptr( Aptr, Akp, Akq, Ald, size ), &Ald, (double*) Mptr( XR, 0,
+                       Akq, XRld, size ), &XRld, (double*) one, (double*) Mptr( YC, Akp, 0, YCld,
+                       size ), &ione,
+                       (FC_LEN_T) strlen(C2F_CHAR( NOTRAN )) );
+#else
+/*WCC
                dgemv_( C2F_CHAR( NOTRAN ), &Amp0, &Anq0, ((char *) ALPHA),
                        Mptr( Aptr, Akp, Akq, Ald, size ), &Ald, Mptr( XR, 0,
                        Akq, XRld, size ), &XRld, one, Mptr( YC, Akp, 0, YCld,
                        size ), &ione );
+*/
+               dgemv_( C2F_CHAR( NOTRAN ), &Amp0, &Anq0, ((double *) ALPHA),
+                       (double*) Mptr( Aptr, Akp, Akq, Ald, size ), &Ald, (double*) Mptr( XR, 0,
+                       Akq, XRld, size ), &XRld, (double*) one, (double*) Mptr( YC, Akp, 0, YCld,
+                       size ), &ione );
+#endif
+#ifdef FC_LEN_T
+               dgemv_( C2F_CHAR( TRAN   ), &Amp0, &Anq0, ((double *) ALPHA),
+                       (double*) Mptr( Aptr, Akp, Akq, Ald, size ), &Ald, (double*) Mptr( XC, Akp,
+                       0, XCld, size ), &ione, (double*) one, (double*) Mptr( YR, 0, Akq, YRld,
+                       size ), &YRld,
+                       (FC_LEN_T) strlen(C2F_CHAR( TRAN   )) );
+#else
+/*WCC
                dgemv_( C2F_CHAR( TRAN   ), &Amp0, &Anq0, ((char *) ALPHA),
                        Mptr( Aptr, Akp, Akq, Ald, size ), &Ald, Mptr( XC, Akp,
                        0, XCld, size ), &ione, one, Mptr( YR, 0, Akq, YRld,
                        size ), &YRld );
+*/
+               dgemv_( C2F_CHAR( TRAN   ), &Amp0, &Anq0, ((double *) ALPHA),
+                       (double*) Mptr( Aptr, Akp, Akq, Ald, size ), &Ald, (double*) Mptr( XC, Akp,
+                       0, XCld, size ), &ione, (double*) one, (double*) Mptr( YR, 0, Akq, YRld,
+                       size ), &YRld );
+#endif
             }
          }
       }
@@ -554,7 +641,8 @@ void pdsymv_( UPLO, N, ALPHA, A, IA, JA, DESCA, X, IX, JX, DESCX,
          if( Amp > 0 )
          {
             top        = *PB_Ctop( &ctxt, COMBINE, ROW, TOP_GET );
-            Cdgsum2d( ctxt, ROW, &top, Amp, 1, YC, YCd[LLD_], myrow, 0 );
+            /*WCC Cdgsum2d( ctxt, ROW, &top, Amp, 1, YC, YCd[LLD_], myrow, 0 ); */
+            Cdgsum2d( ctxt, ROW, &top, Amp, 1, (double*) YC, YCd[LLD_], myrow, 0 );
          }
       }
 /*
@@ -563,7 +651,11 @@ void pdsymv_( UPLO, N, ALPHA, A, IA, JA, DESCA, X, IX, JX, DESCX,
       if( YRsum && ( Anq > 0 ) )
       {
          top = *PB_Ctop( &ctxt, COMBINE, COLUMN, TOP_GET );
+/*WCC
          Cdgsum2d( ctxt, COLUMN, &top, 1, Anq, YR, YRd[LLD_], YRd[RSRC_],
+                   mycol );
+*/
+         Cdgsum2d( ctxt, COLUMN, &top, 1, Anq, (double*) YR, YRd[LLD_], YRd[RSRC_],
                    mycol );
       }
 
@@ -592,7 +684,11 @@ void pdsymv_( UPLO, N, ALPHA, A, IA, JA, DESCA, X, IX, JX, DESCX,
          if( Anq > 0 )
          {
             top = *PB_Ctop( &ctxt, COMBINE, COLUMN, TOP_GET );
+/*WCC
             Cdgsum2d( ctxt, COLUMN, &top, 1, Anq, YR, YRd[LLD_], 0,
+                      mycol );
+*/
+            Cdgsum2d( ctxt, COLUMN, &top, 1, Anq, (double*) YR, YRd[LLD_], 0,
                       mycol );
          }
       }
@@ -602,7 +698,11 @@ void pdsymv_( UPLO, N, ALPHA, A, IA, JA, DESCA, X, IX, JX, DESCX,
       if( YCsum && ( Amp > 0 ) )
       {
          top = *PB_Ctop( &ctxt, COMBINE, ROW, TOP_GET );
+/*WCC
          Cdgsum2d( ctxt, ROW, &top, Amp, 1, YC, YCd[LLD_], myrow,
+                   YCd[CSRC_] );
+*/
+         Cdgsum2d( ctxt, ROW, &top, Amp, 1, (double*) YC, YCd[LLD_], myrow,
                    YCd[CSRC_] );
       }
 /*

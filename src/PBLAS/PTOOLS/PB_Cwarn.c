@@ -152,12 +152,12 @@ va_dcl
 *  Display an error message
 */
    if( LINE <= 0 )
-//WCC      (void) fprintf( stderr, "%s'%s'\n%s{%d,%d}, %s%d, %s%d%s'%s'.\n\n",
+/*WCC      (void) fprintf( stderr, "%s'%s'\n%s{%d,%d}, %s%d, %s%d%s'%s'.\n\n", */
       Rprintf("%s'%s'\n%s{%d,%d}, %s%d, %s%d%s'%s'.\n\n",
                       "PBLAS ERROR ", cline, "from ", myrow, mycol, "pnum=",
                       iam, "Contxt=", ICTXT, ", in routine ", ROUT );
    else
-//WCC      (void) fprintf( stderr, "%s'%s'\n%s{%d,%d}, %s%d, %s%d%s%d%s'%s'.\n\n",
+/*WCC      (void) fprintf( stderr, "%s'%s'\n%s{%d,%d}, %s%d, %s%d%s%d%s'%s'.\n\n", */
       Rprintf("%s'%s'\n%s{%d,%d}, %s%d, %s%d%s%d%s'%s'.\n\n",
                       "PBLAS ERROR ", cline, "from ", myrow, mycol, "pnum=",
                       iam, "Contxt=", ICTXT, ", on line ", LINE,

@@ -287,7 +287,8 @@ l_10:
             {
                dist = k * ( mydist - 1 );
                dst  = MPosMod( dist, npcol );
-               Cdgesd2d( ctxt, 2, 1, ((char*) work), 2, myrow, dst );
+               /*WCC Cdgesd2d( ctxt, 2, 1, ((char*) work), 2, myrow, dst ); */
+               Cdgesd2d( ctxt, 2, 1, ((double*) work), 2, myrow, dst );
                goto l_20;
             }
             else
@@ -297,7 +298,8 @@ l_10:
 
                if( mycol < src )
                {
-                  Cdgerv2d( ctxt, 2, 1, ((char*)&work[2]), 2, myrow, src );
+                  /*WCC Cdgerv2d( ctxt, 2, 1, ((char*)&work[2]), 2, myrow, src ); */
+                  Cdgerv2d( ctxt, 2, 1, ((double*)&work[2]), 2, myrow, src );
                   if( work[0] >= work[2] )
                   {
                      if( work[0] != ZERO )
@@ -326,11 +328,16 @@ l_20:
             top = *PB_Ctop( &ctxt, BCAST, ROW, TOP_GET );
             if( mycol == 0 )
             {
-               Cdgebs2d( ctxt, ROW, &top, 2, 1, ((char*)work), 2 );
+               /*WCC Cdgebs2d( ctxt, ROW, &top, 2, 1, ((char*)work), 2 ); */
+               Cdgebs2d( ctxt, ROW, &top, 2, 1, ((double*)work), 2 );
             }
             else
             {
+/*WCC
                Cdgebr2d( ctxt, ROW, &top, 2, 1, ((char*)work), 2,
+                         myrow, 0 );
+*/
+               Cdgebr2d( ctxt, ROW, &top, 2, 1, ((double*)work), 2,
                          myrow, 0 );
             }
 /*
@@ -407,7 +414,8 @@ l_30:
             {
                dist = k * ( mydist - 1 );
                dst  = MPosMod( dist, nprow );
-               Cdgesd2d( ctxt, 2, 1, ((char*)work), 2, dst, mycol );
+               /*WCC Cdgesd2d( ctxt, 2, 1, ((char*)work), 2, dst, mycol ); */
+               Cdgesd2d( ctxt, 2, 1, ((double*)work), 2, dst, mycol );
                goto l_40;
             }
             else
@@ -417,7 +425,8 @@ l_30:
 
                if( myrow < src )
                {
-                  Cdgerv2d( ctxt, 2, 1, ((char*)&work[2]), 2, src, mycol );
+                  /*WCC Cdgerv2d( ctxt, 2, 1, ((char*)&work[2]), 2, src, mycol ); */
+                  Cdgerv2d( ctxt, 2, 1, ((double*)&work[2]), 2, src, mycol );
                   if( work[0] >= work[2] )
                   {
                      if( work[0] != ZERO )
@@ -446,11 +455,16 @@ l_40:
             top = *PB_Ctop( &ctxt, BCAST, COLUMN, TOP_GET );
             if( myrow == 0 )
             {
-               Cdgebs2d( ctxt, COLUMN, &top, 2, 1, ((char*)work), 2 );
+               /*WCC Cdgebs2d( ctxt, COLUMN, &top, 2, 1, ((char*)work), 2 ); */
+               Cdgebs2d( ctxt, COLUMN, &top, 2, 1, ((double*)work), 2 );
             }
             else
             {
+/*WCC
                Cdgebr2d( ctxt, COLUMN, &top, 2, 1, ((char*)work), 2,
+                         0, mycol );
+*/
+               Cdgebr2d( ctxt, COLUMN, &top, 2, 1, ((double*)work), 2,
                          0, mycol );
             }
 /*

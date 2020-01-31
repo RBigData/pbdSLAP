@@ -300,8 +300,14 @@ void PB_Cplascal( TYPE, UPLO, CONJUG, M, N, ALPHA, A, IA, JA, DESCA )
 *  value returned by pilaenv_ and two times the least common multiple of nprow
 *  and npcol.
 */
+#ifdef FC_LEN_T
+   nb = 2 * pilaenv_( &ctxt, C2F_CHAR( &type ),
+                      (FC_LEN_T) strlen(C2F_CHAR( &type )) ) *
+        PB_Clcm( ( Arow >= 0 ? nprow : 1 ), ( Acol >= 0 ? npcol : 1 ) );
+#else
    nb = 2 * pilaenv_( &ctxt, C2F_CHAR( &type ) ) *
         PB_Clcm( ( Arow >= 0 ? nprow : 1 ), ( Acol >= 0 ? npcol : 1 ) );
+#endif
 
    mn = MIN( M, N );
 

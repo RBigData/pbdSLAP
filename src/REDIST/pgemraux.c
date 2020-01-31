@@ -114,8 +114,8 @@ mr2d_malloc(n)
   assert(n > 0);
   ptr = (void *) malloc(n);
   if (ptr == NULL) {
-//WCC    fprintf(stderr, "xxmr2d:out of memory\n");
-//WCC    exit(2);
+/*WCC    fprintf(stderr, "xxmr2d:out of memory\n"); */
+/*WCC    exit(2); */
     REprintf("xxmr2d:out of memory\n");
     error("exit mr2d_malloc");
   }
@@ -213,7 +213,7 @@ checkequal(ctxt, a)
 void 
 paramcheck(a, i, j, m, n, p, q, gcontext)
   MDESC *a;
-//WCC  int   i, j, m, n, p, q;
+/*WCC  int   i, j, m, n, p, q; */
   int   i, j, m, n, p, q, gcontext; //WCC:add
 {
   int   p2, q2, myprow, mypcol;
@@ -234,23 +234,23 @@ paramcheck(a, i, j, m, n, p, q, gcontext)
   if (myprow >= p2 || mypcol >= q2)
     myprow = mypcol = -1;
   if ((myprow >= 0 || mypcol >= 0) && (p2 != p && q2 != q)) {
-//WCC    fprintf(stderr, "??MR2D:incoherent p,q parameters\n");
-//WCC    exit(1);
+/*WCC    fprintf(stderr, "??MR2D:incoherent p,q parameters\n"); */
+/*WCC    exit(1); */
     REprintf("??MR2D:incoherent p,q parameters\n");
     error("exit paramcheck 1");
   }
   assert(myprow < p && mypcol < q);
   if (a->sprow < 0 || a->sprow >= p || a->spcol < 0 || a->spcol >= q) {
-//WCC    fprintf(stderr, "??MR2D:Bad first processor coordinates\n");
-//WCC    exit(1);
+/*WCC    fprintf(stderr, "??MR2D:Bad first processor coordinates\n"); */
+/*WCC    exit(1); */
     REprintf("??MR2D:Bad first processor coordinates\n");
     error("exit paramcheck 2");
   }
   if (i < 0 || j < 0 || i + m > a->m || j + n > a->n) {
-//WCC    fprintf(stderr, "??MR2D:Bad submatrix:i=%d,j=%d,\
-//WCC m=%d,n=%d,M=%d,N=%d\n",
-//WCC	    i, j, m, n, a->m, a->n);
-//WCC    exit(1);
+/*WCC    fprintf(stderr, "??MR2D:Bad submatrix:i=%d,j=%d,\ */
+/*WCC m=%d,n=%d,M=%d,N=%d\n", */
+/*WCC	    i, j, m, n, a->m, a->n); */
+/*WCC    exit(1); */
     REprintf("??MR2D:Bad submatrix:i=%d,j=%d,\
 m=%d,n=%d,M=%d,N=%d\n",
 	    i, j, m, n, a->m, a->n);
@@ -258,10 +258,10 @@ m=%d,n=%d,M=%d,N=%d\n",
   }
   if ((myprow >= 0 || mypcol >= 0) &&
       localsize(SHIFT(myprow, a->sprow, p), p, a->nbrow, a->m) > a->lda) {
-//WCC     fprintf(stderr, "??MR2D:bad lda arg:row=%d,m=%d,p=%d,\
-//WCC nbrow=%d,lda=%d,sprow=%d\n",
-//WCC 	    myprow, a->m, p, a->nbrow, a->lda, a->sprow);
-//WCC     exit(1);
+/*WCC     fprintf(stderr, "??MR2D:bad lda arg:row=%d,m=%d,p=%d,\ */
+/*WCC nbrow=%d,lda=%d,sprow=%d\n", */
+/*WCC 	    myprow, a->m, p, a->nbrow, a->lda, a->sprow); */
+/*WCC     exit(1); */
     REprintf("??MR2D:bad lda arg:row=%d,m=%d,p=%d,\
 nbrow=%d,lda=%d,sprow=%d\n",
 	    myprow, a->m, p, a->nbrow, a->lda, a->sprow);
