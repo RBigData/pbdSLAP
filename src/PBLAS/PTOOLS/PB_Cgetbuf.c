@@ -78,7 +78,7 @@ char * PB_Cgetbuf( MESS, LENGTH )
          pblasbuf = (char *) malloc( (unsigned) LENGTH );
          if( !pblasbuf )
          {
-//WCC            (void) fprintf( stderr, "ERROR: Memory allocation failed\n%s\n",
+/*WCC            (void) fprintf( stderr, "ERROR: Memory allocation failed\n%s\n", */
             (void) REprintf("ERROR: Memory allocation failed\n%s\n",
                             MESS );
             Cblacs_abort( -1, -1 );

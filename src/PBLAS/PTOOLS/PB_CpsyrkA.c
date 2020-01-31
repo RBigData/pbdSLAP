@@ -300,7 +300,12 @@ void PB_CpsyrkA( TYPE, DIRECA, CONJUG, UPLO, TRANS, N, K, ALPHA, A, IA,
    Cblacs_gridinfo( ( ctxt = DESCC[CTXT_] ), &nprow, &npcol, &myrow, &mycol );
 
    size = TYPE->size; one = TYPE->one; gemm  = TYPE->Fgemm;
+#ifdef FC_LEN_T
+   kb   = pilaenv_( &ctxt, C2F_CHAR( &TYPE->type ),
+                    (FC_LEN_T) strlen(C2F_CHAR( &TYPE->type )) );
+#else
    kb   = pilaenv_( &ctxt, C2F_CHAR( &TYPE->type ) );
+#endif
 /*
 *  Compute descriptor Cd0 for sub( C )
 */

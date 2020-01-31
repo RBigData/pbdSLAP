@@ -255,53 +255,53 @@
 *
       END
 *
-      SUBROUTINE DCOMBSSQ( V1, V2 )
-*
-*  -- ScaLAPACK tools routine (version 1.7) --
-*     University of Tennessee, Knoxville, Oak Ridge National Laboratory,
-*     and University of California, Berkeley.
-*     May 1, 1997
-*
-*     .. Array Arguments ..
-      DOUBLE PRECISION   V1( 2 ), V2( 2 )
-*     ..
-*
-*  Purpose
-*  =======
-*
-*  DCOMBSSQ does a scaled sum of squares on two scalars.
-*
-*  Arguments
-*  =========
-*
-*  V1        (local input/local output) DOUBLE PRECISION array of
-*            dimension 2.  The first scaled sum. V1(1) = SCALE,
-*            V1(2) = SUMSQ.
-*
-*  V2        (local input) DOUBLE PRECISION array of dimension 2.
-*            The second scaled sum. V2(1) = SCALE, V2(2) = SUMSQ.
-*
-*  =====================================================================
-*
-*     .. Parameters ..
-      DOUBLE PRECISION   ZERO
-      PARAMETER          ( ZERO = 0.0D+0 )
-*     ..
-*     .. Executable Statements ..
-*
-      IF( V1( 1 ).GE.V2( 1 ) ) THEN
-         IF( V1( 1 ).NE.ZERO )
-     $      V1( 2 ) = V1( 2 ) + ( V2( 1 ) / V1( 1 ) )**2 * V2( 2 )
-      ELSE
-         V1( 2 ) = V2( 2 ) + ( V1( 1 ) / V2( 1 ) )**2 * V1( 2 )
-         V1( 1 ) = V2( 1 )
-      END IF
-*
-      RETURN
-*
-*     End of DCOMBSSQ
-*
-      END
+*      SUBROUTINE DCOMBSSQ( V1, V2 )
+**
+**  -- ScaLAPACK tools routine (version 1.7) --
+**     University of Tennessee, Knoxville, Oak Ridge National Laboratory,
+**     and University of California, Berkeley.
+**     May 1, 1997
+**
+**     .. Array Arguments ..
+*      DOUBLE PRECISION   V1( 2 ), V2( 2 )
+**     ..
+**
+**  Purpose
+**  =======
+**
+**  DCOMBSSQ does a scaled sum of squares on two scalars.
+**
+**  Arguments
+**  =========
+**
+**  V1        (local input/local output) DOUBLE PRECISION array of
+**            dimension 2.  The first scaled sum. V1(1) = SCALE,
+**            V1(2) = SUMSQ.
+**
+**  V2        (local input) DOUBLE PRECISION array of dimension 2.
+**            The second scaled sum. V2(1) = SCALE, V2(2) = SUMSQ.
+**
+**  =====================================================================
+**
+**     .. Parameters ..
+*      DOUBLE PRECISION   ZERO
+*      PARAMETER          ( ZERO = 0.0D+0 )
+**     ..
+**     .. Executable Statements ..
+**
+*      IF( V1( 1 ).GE.V2( 1 ) ) THEN
+*         IF( V1( 1 ).NE.ZERO )
+*     $      V1( 2 ) = V1( 2 ) + ( V2( 1 ) / V1( 1 ) )**2 * V2( 2 )
+*      ELSE
+*         V1( 2 ) = V2( 2 ) + ( V1( 1 ) / V2( 1 ) )**2 * V1( 2 )
+*         V1( 1 ) = V2( 1 )
+*      END IF
+**
+*      RETURN
+**
+**     End of DCOMBSSQ
+**
+*      END
 *
       SUBROUTINE DCOMBNRM2( X, Y )
 *

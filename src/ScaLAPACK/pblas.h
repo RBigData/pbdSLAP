@@ -1,3 +1,12 @@
+//WCC:add
+// For C/Fortran char* string lengths using size_t
+#ifdef USE_FC_LEN_T
+  #include <stddef.h>
+  #include <Rconfig.h>    // this defines FC_LEN_T
+  #include <string.h>
+#endif
+
+
 /* ---------------------------------------------------------------------
 *
 *  -- ScaLAPACK routine (version 1.0) --

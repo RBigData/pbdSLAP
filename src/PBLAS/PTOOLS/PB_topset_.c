@@ -17,7 +17,12 @@
 #include "../PBblas.h"
 
 #ifdef __STDC__
+#ifdef FC_LEN_T
+void PB_topset_( int * ICTXT, F_CHAR_T OP, F_CHAR_T SCOPE, F_CHAR_T TOP,
+                 FC_LEN_T OP_len, FC_LEN_T SCOPE_len, FC_LEN_T TOP_len )
+#else
 void PB_topset_( int * ICTXT, F_CHAR_T OP, F_CHAR_T SCOPE, F_CHAR_T TOP )
+#endif
 #else
 void PB_topset_( ICTXT, OP, SCOPE, TOP )
 /*

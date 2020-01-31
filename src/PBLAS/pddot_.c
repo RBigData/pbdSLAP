@@ -513,7 +513,8 @@ void pddot_( N, DOT, X, IX, JX, DESCX, INCX, Y, IY, JY, DESCY, INCY )
          {
             scope = ( XisRow ? CROW : CCOLUMN );
             top = PB_Ctop( &ctxt, COMBINE, &scope, TOP_GET );
-            Cdgsum2d( ctxt, &scope, top, 1, 1, ((char *) DOT), 1, -1, 0 );
+            /*WCC Cdgsum2d( ctxt, &scope, top, 1, 1, ((char *) DOT), 1, -1, 0 ); */
+            Cdgsum2d( ctxt, &scope, top, 1, 1, ((double *) DOT), 1, -1, 0 );
          }
          if( RRorCC && XisR && YisR ) return;
       }
@@ -549,11 +550,23 @@ void pddot_( N, DOT, X, IX, JX, DESCX, INCX, Y, IY, JY, DESCY, INCY )
                else
                {
                   if( YisRow )
+                  {
+/*WCC
                      Cdgesd2d( ctxt, 1, YnpD, Mptr( ((char *) Y), Yii, Yjj,
                                Yld, size ), Yld, rdst, cdst );
+*/
+                     Cdgesd2d( ctxt, 1, YnpD, (double*) Mptr( ((char *) Y), Yii, Yjj,
+                               Yld, size ), Yld, rdst, cdst );
+                  }
                   else
+                  {
+/*WCC
                      Cdgesd2d( ctxt, YnpD, 1, Mptr( ((char *) Y), Yii, Yjj,
                                Yld, size ), Yld, rdst, cdst );
+*/
+                     Cdgesd2d( ctxt, YnpD, 1, (double*) Mptr( ((char *) Y), Yii, Yjj,
+                               Yld, size ), Yld, rdst, cdst );
+                  }
                }
             }
          }
@@ -576,9 +589,15 @@ void pddot_( N, DOT, X, IX, JX, DESCX, INCX, Y, IY, JY, DESCY, INCY )
                {
                   buf = PB_Cmalloc( XnpD * size );
                   if( YisRow )
-                     Cdgerv2d( ctxt, 1, XnpD, buf,    1, rsrc, csrc );
+                  {
+                     /*WCC Cdgerv2d( ctxt, 1, XnpD, buf,    1, rsrc, csrc ); */
+                     Cdgerv2d( ctxt, 1, XnpD, (double*) buf,    1, rsrc, csrc );
+                  }
                   else
-                     Cdgerv2d( ctxt, XnpD, 1, buf, XnpD, rsrc, csrc );
+                  {
+                     /*WCC Cdgerv2d( ctxt, XnpD, 1, buf, XnpD, rsrc, csrc ); */
+                     Cdgerv2d( ctxt, XnpD, 1, (double*) buf, XnpD, rsrc, csrc );
+                  }
                   dot( &XnpD, ((char *) DOT), Mptr( ((char *) X), Xii, Xjj, Xld,
                        size ), &Xlinc, buf, &ione );
                   if( buf ) free( buf );
@@ -587,12 +606,14 @@ void pddot_( N, DOT, X, IX, JX, DESCX, INCX, Y, IY, JY, DESCY, INCY )
             if( XisRow )
             {
                top = PB_Ctop( &ctxt, COMBINE, ROW, TOP_GET );
-               Cdgsum2d( ctxt, ROW,    top, 1, 1, ((char*)DOT), 1, -1, 0 );
+               /*WCC Cdgsum2d( ctxt, ROW,    top, 1, 1, ((char*)DOT), 1, -1, 0 ); */
+               Cdgsum2d( ctxt, ROW,    top, 1, 1, ((double*)DOT), 1, -1, 0 );
             }
             else
             {
                top = PB_Ctop( &ctxt, COMBINE, COLUMN, TOP_GET );
-               Cdgsum2d( ctxt, COLUMN, top, 1, 1, ((char*)DOT), 1, -1, 0 );
+               /*WCC Cdgsum2d( ctxt, COLUMN, top, 1, 1, ((char*)DOT), 1, -1, 0 ); */
+               Cdgsum2d( ctxt, COLUMN, top, 1, 1, ((double*)DOT), 1, -1, 0 );
             }
          }
       }
@@ -641,12 +662,14 @@ void pddot_( N, DOT, X, IX, JX, DESCX, INCX, Y, IY, JY, DESCY, INCY )
             if( XisRow )
             {
                top = PB_Ctop( &ctxt, COMBINE, ROW,    TOP_GET );
-               Cdgsum2d( ctxt, ROW,    top, 1, 1, ((char*)DOT), 1, -1, 0 );
+               /*WCC Cdgsum2d( ctxt, ROW,    top, 1, 1, ((char*)DOT), 1, -1, 0 ); */
+               Cdgsum2d( ctxt, ROW,    top, 1, 1, ((double*)DOT), 1, -1, 0 );
             }
             else
             {
                top = PB_Ctop( &ctxt, COMBINE, COLUMN, TOP_GET );
-               Cdgsum2d( ctxt, COLUMN, top, 1, 1, ((char*)DOT), 1, -1, 0 );
+               /*WCC Cdgsum2d( ctxt, COLUMN, top, 1, 1, ((char*)DOT), 1, -1, 0 ); */
+               Cdgsum2d( ctxt, COLUMN, top, 1, 1, ((double*)DOT), 1, -1, 0 );
             }
          }
       }
@@ -663,19 +686,37 @@ void pddot_( N, DOT, X, IX, JX, DESCX, INCX, Y, IY, JY, DESCY, INCY )
          {
            top = PB_Ctop( &ctxt, BCAST, COLUMN, TOP_GET );
            if( XmyprocR == XprocR )
-              Cdgebs2d( ctxt, COLUMN, top, 1, 1, ((char*)DOT), 1 );
+           {
+              /*WCC Cdgebs2d( ctxt, COLUMN, top, 1, 1, ((char*)DOT), 1 ); */
+              Cdgebs2d( ctxt, COLUMN, top, 1, 1, ((double*)DOT), 1 );
+           }
            else
+           {
+/*WCC
               Cdgebr2d( ctxt, COLUMN, top, 1, 1, ((char*)DOT), 1, XprocR,
                         XmyprocD );
+*/
+              Cdgebr2d( ctxt, COLUMN, top, 1, 1, ((double*)DOT), 1, XprocR,
+                        XmyprocD );
+           }
          }
          else
          {
            top = PB_Ctop( &ctxt, BCAST, ROW,    TOP_GET );
            if( XmyprocR == XprocR )
-              Cdgebs2d( ctxt, ROW,    top, 1, 1, ((char*)DOT), 1 );
+           {
+              /*WCC Cdgebs2d( ctxt, ROW,    top, 1, 1, ((char*)DOT), 1 ); */
+              Cdgebs2d( ctxt, ROW,    top, 1, 1, ((double*)DOT), 1 );
+           }
            else
+           {
+/*WCC
               Cdgebr2d( ctxt, ROW,    top, 1, 1, ((char*)DOT), 1, XmyprocD,
                         XprocR );
+*/
+              Cdgebr2d( ctxt, ROW,    top, 1, 1, ((double*)DOT), 1, XmyprocD,
+                        XprocR );
+           }
          }
       }
       else
@@ -694,20 +735,44 @@ void pddot_( N, DOT, X, IX, JX, DESCX, INCX, Y, IY, JY, DESCY, INCY )
                if( XmyprocR == XprocR )
                {
                   if( XisRow )
+                  {
+/*WCC
                      Cdgesd2d( ctxt, 1, 1, ((char *) DOT), 1, YprocR,
                                YmyprocD );
+*/
+                     Cdgesd2d( ctxt, 1, 1, ((double *) DOT), 1, YprocR,
+                               YmyprocD );
+                  }
                   else
+                  {
+/*WCC
                      Cdgesd2d( ctxt, 1, 1, ((char *) DOT), 1, YmyprocD,
                                YprocR );
+*/
+                     Cdgesd2d( ctxt, 1, 1, ((double *) DOT), 1, YmyprocD,
+                               YprocR );
+                  }
                }
                else if( YmyprocR == YprocR )
                {
                   if( XisRow )
+                  {
+/*WCC
                      Cdgerv2d( ctxt, 1, 1, ((char *) DOT), 1, XprocR,
                                XmyprocD );
+*/
+                     Cdgerv2d( ctxt, 1, 1, ((double *) DOT), 1, XprocR,
+                               XmyprocD );
+                  }
                   else
+                  {
+/*WCC
                      Cdgerv2d( ctxt, 1, 1, ((char *) DOT), 1, XmyprocD,
                                XprocR );
+*/
+                     Cdgerv2d( ctxt, 1, 1, ((double *) DOT), 1, XmyprocD,
+                               XprocR );
+                  }
                }
             }
          }
@@ -723,19 +788,37 @@ void pddot_( N, DOT, X, IX, JX, DESCX, INCX, Y, IY, JY, DESCY, INCY )
                {
                   top = PB_Ctop( &ctxt, BCAST, ROW,    TOP_GET );
                   if( YmyprocD == XprocR )
-                     Cdgebs2d( ctxt, ROW,    top, 1, 1, ((char*)DOT), 1 );
+                  {
+                     /*WCC Cdgebs2d( ctxt, ROW,    top, 1, 1, ((char*)DOT), 1 ); */
+                     Cdgebs2d( ctxt, ROW,    top, 1, 1, ((double*)DOT), 1 );
+                  }
                   else
+                  {
+/*WCC
                      Cdgebr2d( ctxt, ROW,    top, 1, 1, ((char*)DOT), 1,
                                YprocR, XprocR );
+*/
+                     Cdgebr2d( ctxt, ROW,    top, 1, 1, ((double*)DOT), 1,
+                               YprocR, XprocR );
+                  }
                }
                else
                {
                   top = PB_Ctop( &ctxt, BCAST, COLUMN, TOP_GET );
                   if( YmyprocD == XprocR )
-                     Cdgebs2d( ctxt, COLUMN, top, 1, 1, ((char*)DOT), 1 );
+                  {
+                     /*WCC Cdgebs2d( ctxt, COLUMN, top, 1, 1, ((char*)DOT), 1 ); */
+                     Cdgebs2d( ctxt, COLUMN, top, 1, 1, ((double*)DOT), 1 );
+                  }
                   else
+                  {
+/*WCC
                      Cdgebr2d( ctxt, COLUMN, top, 1, 1, ((char*)DOT), 1,
                                XprocR, YprocR );
+*/
+                     Cdgebr2d( ctxt, COLUMN, top, 1, 1, ((double*)DOT), 1,
+                               XprocR, YprocR );
+                  }
                }
             }
          }

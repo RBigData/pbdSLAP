@@ -17,10 +17,19 @@
 #include "PBblas.h"
 
 #ifdef __STDC__
+#ifdef FC_LEN_T
+void pdtrsm_( F_CHAR_T SIDE, F_CHAR_T UPLO, F_CHAR_T TRANS, F_CHAR_T DIAG,
+              int * M, int * N, double * ALPHA,
+              double * A, int * IA, int * JA, int * DESCA,
+              double * B, int * IB, int * JB, int * DESCB,
+              FC_LEN_T SIDE_len, FC_LEN_T UPLO_len, FC_LEN_T TRANS_len,
+              FC_LEN_T DIAG_len )
+#else
 void pdtrsm_( F_CHAR_T SIDE, F_CHAR_T UPLO, F_CHAR_T TRANS, F_CHAR_T DIAG,
               int * M, int * N, double * ALPHA,
               double * A, int * IA, int * JA, int * DESCA,
               double * B, int * IB, int * JB, int * DESCB )
+#endif
 #else
 void pdtrsm_( SIDE, UPLO, TRANS, DIAG, M, N, ALPHA,
               A, IA, JA, DESCA, B, IB, JB, DESCB )
@@ -324,7 +333,12 @@ void pdtrsm_( SIDE, UPLO, TRANS, DIAG, M, N, ALPHA,
 *  Algorithm selection is based on approximation of the communication volume
 *  for distributed and aligned operands.
 */
+#ifdef FC_LEN_T
+   nb = pilaenv_( &ctxt, C2F_CHAR( &type->type ),
+                  (FC_LEN_T) strlen(C2F_CHAR( &type->type )) );
+#else
    nb = pilaenv_( &ctxt, C2F_CHAR( &type->type ) );
+#endif
 /*
 *  ABestR, ABestL : both operands sub( A ) and sub( B ) are communicated
 *                   ( N >> M when SIDE is left and M >> N otherwise )

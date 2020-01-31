@@ -17,10 +17,19 @@
 #include "PBblas.h"
 
 #ifdef __STDC__
+#ifdef FC_LEN_T
+void pdtrmm_( F_CHAR_T SIDE, F_CHAR_T UPLO, F_CHAR_T TRANS, F_CHAR_T DIAG,
+              int * M, int * N, double * ALPHA,
+              double * A, int * IA, int * JA, int * DESCA,
+              double * B, int * IB, int * JB, int * DESCB,
+              FC_LEN_T SIDE_len, FC_LEN_T UPLO_len, FC_LEN_T TRANS_len,
+              FC_LEN_T DIAG_len )
+#else
 void pdtrmm_( F_CHAR_T SIDE, F_CHAR_T UPLO, F_CHAR_T TRANS, F_CHAR_T DIAG,
               int * M, int * N, double * ALPHA,
               double * A, int * IA, int * JA, int * DESCA,
               double * B, int * IB, int * JB, int * DESCB )
+#endif
 #else
 void pdtrmm_( SIDE, UPLO, TRANS, DIAG, M, N, ALPHA,
               A, IA, JA, DESCA, B, IB, JB, DESCB )
@@ -407,7 +416,12 @@ void pdtrmm_( SIDE, UPLO, TRANS, DIAG, M, N, ALPHA,
 *  logical block size returned by pilaenv_. Otherwise, it is assumed that the
 *  routine calling this routine has already selected an adequate topology.
 */
+#ifdef FC_LEN_T
+   nb       = pilaenv_( &ctxt, C2F_CHAR( &type->type ),
+                        (FC_LEN_T) strlen(C2F_CHAR( &type->type )) );
+#else
    nb       = pilaenv_( &ctxt, C2F_CHAR( &type->type ) );
+#endif
    ForceTop = ( ( *M > nb ) && ( *N > nb ) );
 
    if( ChooseAB )

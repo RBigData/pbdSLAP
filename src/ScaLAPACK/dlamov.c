@@ -13,6 +13,16 @@
 
 extern void xerbla_(const char *, const F_INTG_FCT *, size_t);
 
+#ifdef FC_LEN_T
+void LACPY(const char *UPLO,
+           const F_INTG_FCT *M,
+           const F_INTG_FCT *N,
+           const TYPE *A,
+           const F_INTG_FCT *LDA,
+           TYPE *B,
+           const F_INTG_FCT *LDB,
+           FC_LEN_T UPLO_len);
+#else
 void LACPY(const char *UPLO,
            const F_INTG_FCT *M,
            const F_INTG_FCT *N,
@@ -20,7 +30,18 @@ void LACPY(const char *UPLO,
            const F_INTG_FCT *LDA,
            TYPE *B,
            const F_INTG_FCT *LDB);
+#endif
 
+#ifdef FC_LEN_T
+void LAMOV(const char *UPLO,
+           const F_INTG_FCT *M,
+           const F_INTG_FCT *N,
+           const TYPE *A,
+           const F_INTG_FCT *LDA,
+           TYPE *B,
+           const F_INTG_FCT *LDB,
+           FC_LEN_T UPLO_len)
+#else
 void LAMOV(const char *UPLO,
            const F_INTG_FCT *M,
            const F_INTG_FCT *N,
@@ -28,6 +49,7 @@ void LAMOV(const char *UPLO,
            const F_INTG_FCT *LDA,
            TYPE *B,
            const F_INTG_FCT *LDB)
+#endif
 {
    const F_INTG_FCT m = *M;
    const F_INTG_FCT n = *N;
@@ -36,7 +58,12 @@ void LAMOV(const char *UPLO,
 
    if (B + m-1 + ldb*(n-1) < A || A + m-1 + lda*(n-1) < B)
      {
+#ifdef FC_LEN_T
+       LACPY(UPLO, M, N, A, LDA, B, LDB,
+             (FC_LEN_T) strlen(UPLO));
+#else
        LACPY(UPLO, M, N, A, LDA, B, LDB);
+#endif
      }
    else if (lda != ldb)
      {
@@ -49,8 +76,18 @@ void LAMOV(const char *UPLO,
          }
        else
          {
+#ifdef FC_LEN_T
+           LACPY(UPLO, M, N,   A, LDA, tmp,  &m,
+                 (FC_LEN_T) strlen(UPLO));
+#else
            LACPY(UPLO, M, N,   A, LDA, tmp,  &m);
+#endif
+#ifdef FC_LEN_T
+           LACPY(UPLO, M, N, tmp,  &m,   B, LDB,
+                 (FC_LEN_T) strlen(UPLO));
+#else
            LACPY(UPLO, M, N, tmp,  &m,   B, LDB);
+#endif
            free(tmp);
          }
      }

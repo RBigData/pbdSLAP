@@ -8,8 +8,14 @@
 void Cigsum2d(int ConTxt, char *scope, char *top, int m, int n, int *A,
               int lda, int rdest, int cdest)
 #else
+#ifdef FC_LEN_T
+F_VOID_FUNC igsum2d_(int *ConTxt, F_CHAR scope, F_CHAR top, int *m, int *n,
+                     int *A, int *lda, int *rdest, int *cdest,
+                     FC_LEN_T scope_len, FC_LEN_T top_len)
+#else
 F_VOID_FUNC igsum2d_(int *ConTxt, F_CHAR scope, F_CHAR top, int *m, int *n,
                      int *A, int *lda, int *rdest, int *cdest)
+#endif
 #endif
 /*
  *  -- V1.1 BLACS routine --
@@ -153,7 +159,8 @@ F_VOID_FUNC igsum2d_(int *ConTxt, F_CHAR scope, F_CHAR top, int *m, int *n,
       bp = BI_GetBuff(length*2);
       bp2 = &BI_AuxBuff;
       bp2->Buff = &bp->Buff[length];
-      BI_imvcopy(Mpval(m), Mpval(n), A, tlda, bp->Buff);
+      /*WCC BI_imvcopy(Mpval(m), Mpval(n), A, tlda, bp->Buff); */
+      BI_imvcopy(Mpval(m), Mpval(n), A, tlda, (int*) bp->Buff);
    }
    bp->dtype = bp2->dtype = MPI_INT;
    bp->N = bp2->N = N;
@@ -166,13 +173,17 @@ F_VOID_FUNC igsum2d_(int *ConTxt, F_CHAR scope, F_CHAR top, int *m, int *n,
          ierr=MPI_Reduce(bp->Buff, bp2->Buff, bp->N, bp->dtype, MPI_SUM,
                        dest, ctxt->scp->comm);
          if (ctxt->scp->Iam == dest)
-	    BI_ivmcopy(Mpval(m), Mpval(n), A, tlda, bp2->Buff);
+         {
+	    /*WCC BI_ivmcopy(Mpval(m), Mpval(n), A, tlda, bp2->Buff); */
+	    BI_ivmcopy(Mpval(m), Mpval(n), A, tlda, (int*) bp2->Buff);
+         }
       }
       else
       {
          ierr=MPI_Allreduce(bp->Buff, bp2->Buff, bp->N, bp->dtype, MPI_SUM,
 		          ctxt->scp->comm);
-	 BI_ivmcopy(Mpval(m), Mpval(n), A, tlda, bp2->Buff);
+	 /*WCC BI_ivmcopy(Mpval(m), Mpval(n), A, tlda, bp2->Buff); */
+	 BI_ivmcopy(Mpval(m), Mpval(n), A, tlda, (int*) bp2->Buff);
       }
       if (BI_ActiveQ) BI_UpdateBuffs(NULL);
       return;
@@ -226,7 +237,10 @@ F_VOID_FUNC igsum2d_(int *ConTxt, F_CHAR scope, F_CHAR top, int *m, int *n,
    if (bp != &BI_AuxBuff)
    {
       if ( (ctxt->scp->Iam == dest) || (dest == -1) )
-         BI_ivmcopy(Mpval(m), Mpval(n), A, tlda, bp->Buff);
+      {
+         /*WCC BI_ivmcopy(Mpval(m), Mpval(n), A, tlda, bp->Buff); */
+         BI_ivmcopy(Mpval(m), Mpval(n), A, tlda, (int*) bp->Buff);
+      }
       BI_UpdateBuffs(bp);
    }
    else

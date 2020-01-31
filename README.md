@@ -2,7 +2,7 @@
 
 * **License:** [![License](http://img.shields.io/badge/license-MPL%202-orange.svg?style=flat)](https://www.mozilla.org/MPL/2.0/)
 * **Download:** [![Download](http://cranlogs.r-pkg.org/badges/pbdSLAP)](https://cran.r-project.org/package=pbdSLAP)
-* **Status:** [![Build Status](https://travis-ci.org/snoweye/pbdSLAP.png)](https://travis-ci.org/snoweye/pbdSLAP)
+* **Status:** [![Build Status](https://travis-ci.org/snoweye/pbdSLAP.png)](https://travis-ci.org/snoweye/pbdSLAP) [![Appveyor Build status](https://ci.appveyor.com/api/projects/status/32r7s2skrgm9ubva?svg=true)](https://ci.appveyor.com/project/snoweye/pbdSLAP)
 * **Author:** See section below.
 
 

@@ -259,8 +259,12 @@ void pdamax_( N, AMAX, INDX, X, IX, JX, DESCX, INCX )
             if( Xnq > 0 )
             {
                Xld = Xd[LLD_];
+/*WCC
                Xlindx = Xjj - 1 +
                         idamax_( &Xnq, ((char*)(X+(Xii+Xjj*Xld))), &Xld );
+*/
+               Xlindx = Xjj - 1 +
+                        idamax_( &Xnq, ((double*)(X+(Xii+Xjj*Xld))), &Xld );
                Mindxl2g( Xgindx, Xlindx, Xinb, Xnb, mycol, Xsrc, npcol );
                work[0] = X[Xii+Xlindx*Xld];
                work[1] = ((double)( Xgindx+1 ));
@@ -283,7 +287,8 @@ l_10:
                {
                   dist = k * ( mydist - 1 );
                   dst  = MPosMod( dist, npcol );
-                  Cdgesd2d( ctxt, 2, 1, ((char*)work), 2, myrow, dst );
+                  /*WCC Cdgesd2d( ctxt, 2, 1, ((char*)work), 2, myrow, dst ); */
+                  Cdgesd2d( ctxt, 2, 1, ((double*)work), 2, myrow, dst );
                   goto l_20;
                }
                else
@@ -293,7 +298,11 @@ l_10:
 
                   if( mycol < src )
                   {
+/*WCC
                      Cdgerv2d( ctxt, 2, 1, ((char*) &work[2]), 2, myrow,
+                               src );
+*/
+                     Cdgerv2d( ctxt, 2, 1, ((double*) &work[2]), 2, myrow,
                                src );
                      if( ABS( work[0] ) < ABS( work[2] ) )
                      { work[0] = work[2]; work[1] = work[3]; }
@@ -311,11 +320,16 @@ l_20:
                rbtop = *PB_Ctop( &ctxt, BCAST, ROW, TOP_GET );
                if( mycol == 0 )
                {
-                  Cdgebs2d( ctxt, ROW, &rbtop, 2, 1, ((char*)work), 2 );
+                  /*WCC Cdgebs2d( ctxt, ROW, &rbtop, 2, 1, ((char*)work), 2 ); */
+                  Cdgebs2d( ctxt, ROW, &rbtop, 2, 1, ((double*)work), 2 );
                }
                else
                {
+/*WCC
                   Cdgebr2d( ctxt, ROW, &rbtop, 2, 1, ((char*)work), 2,
+                            myrow, 0 );
+*/
+                  Cdgebr2d( ctxt, ROW, &rbtop, 2, 1, ((double*)work), 2,
                             myrow, 0 );
                }
             }
@@ -342,8 +356,12 @@ l_20:
 *  Compute the local maximum and its corresponding local index
 */
                Xld = Xd[LLD_];
+/*WCC
                Xlindx = Xjj - 1 +
                         idamax_( &Xnq, ((char*)(X+(Xii+Xjj*Xld))), &Xld );
+*/
+               Xlindx = Xjj - 1 +
+                        idamax_( &Xnq, ((double*)(X+(Xii+Xjj*Xld))), &Xld );
                *AMAX = X[Xii+Xlindx*Xld];
             }
             else
@@ -357,7 +375,11 @@ l_20:
 *  Combine leave on all the local maximum if Xcol >= 0, i.e sub( X ) is
 *  distributed
 */
+/*WCC
                Cdgamx2d( ctxt, ROW, &rctop, 1, 1, ((char*)AMAX), 1,
+                         &idumm, &maxpos, 1, -1, mycol );
+*/
+               Cdgamx2d( ctxt, ROW, &rctop, 1, 1, ((double*)AMAX), 1,
                          &idumm, &maxpos, 1, -1, mycol );
 /*
 *  Broadcast the corresponding global index
@@ -369,11 +391,16 @@ l_20:
                   {
                      Mindxl2g( Xgindx, Xlindx, Xinb, Xnb, mycol, Xsrc, npcol );
                      *INDX = Xgindx + 1;
-                     Cigebs2d( ctxt, ROW, &rbtop, 1, 1, ((char*)INDX), 1 );
+                     /*WCC Cigebs2d( ctxt, ROW, &rbtop, 1, 1, ((char*)INDX), 1 ); */
+                     Cigebs2d( ctxt, ROW, &rbtop, 1, 1, ((int*)INDX), 1 );
                   }
                   else
                   {
+/*WCC
                      Cigebr2d( ctxt, ROW, &rbtop, 1, 1, ((char*)INDX), 1,
+                               myrow, maxpos );
+*/
+                     Cigebr2d( ctxt, ROW, &rbtop, 1, 1, ((int*)INDX), 1,
                                myrow, maxpos );
                   }
                }
@@ -418,8 +445,12 @@ l_20:
             if( Xnp > 0 )
             {
                Xld     = Xd[LLD_];
+/*WCC
                Xlindx  = Xii - 1 +
                          idamax_( &Xnp, ((char*)(X+(Xii+Xjj*Xld))), INCX );
+*/
+               Xlindx  = Xii - 1 +
+                         idamax_( &Xnp, ((double*)(X+(Xii+Xjj*Xld))), INCX );
                Mindxl2g( Xgindx, Xlindx, Ximb, Xmb, myrow, Xsrc, nprow );
                work[0] = X[Xlindx+Xjj*Xld];
                work[1] = ((double)( Xgindx+1 ));
@@ -442,7 +473,8 @@ l_30:
                {
                   dist = k * ( mydist - 1 );
                   dst  = MPosMod( dist, nprow );
-                  Cdgesd2d( ctxt, 2, 1, ((char*)work), 2, dst, mycol );
+                  /*WCC Cdgesd2d( ctxt, 2, 1, ((char*)work), 2, dst, mycol ); */
+                  Cdgesd2d( ctxt, 2, 1, ((double*)work), 2, dst, mycol );
                   goto l_40;
                }
                else
@@ -452,7 +484,11 @@ l_30:
 
                   if( myrow < src )
                   {
+/*WCC
                      Cdgerv2d( ctxt, 2, 1, ((char*) &work[2]), 2,
+                               src, mycol );
+*/
+                     Cdgerv2d( ctxt, 2, 1, ((double*) &work[2]), 2,
                                src, mycol );
                      if( ABS( work[0] ) < ABS( work[2] ) )
                      { work[0] = work[2]; work[1] = work[3]; }
@@ -470,11 +506,16 @@ l_40:
                cbtop = *PB_Ctop( &ctxt, BCAST, COLUMN, TOP_GET );
                if( myrow == 0 )
                {
-                  Cdgebs2d( ctxt, COLUMN, &cbtop, 2, 1, ((char*)work), 2 );
+                  /*WCC Cdgebs2d( ctxt, COLUMN, &cbtop, 2, 1, ((char*)work), 2 ); */
+                  Cdgebs2d( ctxt, COLUMN, &cbtop, 2, 1, ((double*)work), 2 );
                }
                else
                {
+/*WCC
                   Cdgebr2d( ctxt, COLUMN, &cbtop, 2, 1, ((char*)work), 2,
+                            0, mycol );
+*/
+                  Cdgebr2d( ctxt, COLUMN, &cbtop, 2, 1, ((double*)work), 2,
                             0, mycol );
                }
             }
@@ -502,8 +543,12 @@ l_40:
 *  Compute the local maximum and its corresponding local index
 */
                Xld = Xd[LLD_];
+/*WCC
                Xlindx = Xii - 1 +
                         idamax_( &Xnp, ((char*)(X+(Xii+Xjj*Xld))), INCX );
+*/
+               Xlindx = Xii - 1 +
+                        idamax_( &Xnp, ((double*)(X+(Xii+Xjj*Xld))), INCX );
                *AMAX = X[Xlindx+Xjj*Xld];
             }
             else
@@ -517,7 +562,11 @@ l_40:
 *  Combine leave on all the local maximum if Xrow >= 0, i.e sub( X ) is
 *  distributed.
 */
+/*WCC
                Cdgamx2d( ctxt, COLUMN, &cctop, 1, 1, ((char*)AMAX), 1,
+                         &maxpos, &idumm, 1, -1, mycol );
+*/
+               Cdgamx2d( ctxt, COLUMN, &cctop, 1, 1, ((double*)AMAX), 1,
                          &maxpos, &idumm, 1, -1, mycol );
 /*
 *  Broadcast the corresponding global index
@@ -529,11 +578,16 @@ l_40:
                   {
                      Mindxl2g( Xgindx, Xlindx, Ximb, Xmb, myrow, Xsrc, nprow );
                      *INDX = Xgindx + 1;
-                     Cigebs2d( ctxt, COLUMN, &cbtop, 1, 1, ((char*)INDX), 1 );
+                     /*WCC Cigebs2d( ctxt, COLUMN, &cbtop, 1, 1, ((char*)INDX), 1 ); */
+                     Cigebs2d( ctxt, COLUMN, &cbtop, 1, 1, ((int*)INDX), 1 );
                   }
                   else
                   {
+/*WCC
                      Cigebr2d( ctxt, COLUMN, &cbtop, 1, 1, ((char*)INDX), 1,
+                               maxpos, mycol );
+*/
+                     Cigebr2d( ctxt, COLUMN, &cbtop, 1, 1, ((int*)INDX), 1,
                                maxpos, mycol );
                   }
                }

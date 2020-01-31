@@ -12,8 +12,11 @@ MPI_LIB = $(shell ${R_SCMD} \
 ### Default Makeconf
 MkInclude = ${R_HOME}/etc${R_ARCH}/Makeconf
 
+### For gfortran
+GFORTRAN_FLAGS = -DUSE_FC_LEN_T
+
 ### Setup R package flags and substitute by configure for ${MPI_...}.
-PKG_CPPFLAGS = -I"$(MPI_INCLUDE)"
+PKG_CPPFLAGS = -I"$(MPI_INCLUDE)" $(GFORTRAN_FLAGS)
 PKG_CFLAGS =
 PKG_FFLAGS =
 ### Order is matter.
@@ -62,6 +65,10 @@ SLmake:
 	$(ECHO) 'MPI_INCLUDE = $(MPI_INCLUDE)' >> SLmake.inc
 	$(ECHO) 'MY_CC = $(CC)' >> SLmake.inc
 	$(ECHO) 'MY_FC = $(FC)' >> SLmake.inc
+	$(ECHO) 'PKG_CPPFLAGS = $(PKG_CPPFLAGS)' >> SLmake.inc
+	$(ECHO) 'PKG_CFLAGS = $(PKG_CFLAGS)' >> SLmake.inc
+	$(ECHO) 'PKG_FFLAGS = $(PKG_FFLAGS)' >> SLmake.inc
+	$(ECHO) 'PKG_LIBS = $(PKG_LIBS)' >> SLmake.inc
 	$(ECHO) 'R_SLAP = $(R_SLAP)' >> SLmake.inc
 	$(ECHO) 'include $(MkInclude)' >> SLmake.inc
 	@$(ECHO) '' >> SLmake.inc

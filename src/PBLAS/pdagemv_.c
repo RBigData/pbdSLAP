@@ -17,11 +17,20 @@
 #include "PBblas.h"
 
 #ifdef __STDC__
+#ifdef FC_LEN_T
+void pdagemv_( F_CHAR_T TRANS, int * M, int * N, double * ALPHA,
+               double * A, int * IA, int * JA, int * DESCA,
+               double * X, int * IX, int * JX, int * DESCX, int * INCX,
+               double * BETA,
+               double * Y, int * IY, int * JY, int * DESCY, int * INCY,
+               FC_LEN_T TRANS_len )
+#else
 void pdagemv_( F_CHAR_T TRANS, int * M, int * N, double * ALPHA,
                double * A, int * IA, int * JA, int * DESCA,
                double * X, int * IX, int * JX, int * DESCX, int * INCX,
                double * BETA,
                double * Y, int * IY, int * JY, int * DESCY, int * INCY )
+#endif
 #else
 void pdagemv_( TRANS, M, N, ALPHA, A, IA, JA, DESCA, X, IX, JX, DESCX,
                INCX, BETA, Y, IY, JY, DESCY, INCY )
@@ -400,9 +409,21 @@ void pdagemv_( TRANS, M, N, ALPHA, A, IA, JA, DESCA, X, IX, JX, DESCX,
       Anq = PB_Cnumroc( *N, 0, Ad0[INB_], Ad0[NB_], mycol, Ad0[CSRC_], npcol );
       if( ( Amp > 0 ) && ( Anq > 0 ) )
       {
+#ifdef FC_LEN_T
+         dagemv_( TRANS, &Amp, &Anq, ((double *) ALPHA), (double*) Mptr( ((char *) A),
+                  Aii, Ajj, Ald, type->size), &Ald, (double*) XA, &XAd[LLD_], (double*) tbeta,
+                  (double*) YA, &ione,
+                  (FC_LEN_T) strlen(TRANS) );
+#else
+/*WCC
          dagemv_( TRANS, &Amp, &Anq, ((char *) ALPHA), Mptr( ((char *) A),
                   Aii, Ajj, Ald, type->size), &Ald, XA, &XAd[LLD_], tbeta,
                   YA, &ione );
+*/
+         dagemv_( TRANS, &Amp, &Anq, ((double *) ALPHA), (double*) Mptr( ((char *) A),
+                  Aii, Ajj, Ald, type->size), &Ald, (double*) XA, &XAd[LLD_], (double*) tbeta,
+                  (double*) YA, &ione );
+#endif
       }
       if( XAfr ) free( XA );
 /*
@@ -411,7 +432,11 @@ void pdagemv_( TRANS, M, N, ALPHA, A, IA, JA, DESCA, X, IX, JX, DESCX,
       if( YAsum && ( Amp > 0 ) )
       {
          top = *PB_Ctop( &ctxt, COMBINE, ROW, TOP_GET );
+/*WCC
          Cdgsum2d( ctxt, ROW, &top, Amp, 1, YA, YAd[LLD_], myrow,
+                   YAd[CSRC_] );
+*/
+         Cdgsum2d( ctxt, ROW, &top, Amp, 1, (double*) YA, YAd[LLD_], myrow,
                    YAd[CSRC_] );
       }
    }
@@ -434,9 +459,21 @@ void pdagemv_( TRANS, M, N, ALPHA, A, IA, JA, DESCA, X, IX, JX, DESCX,
       Anq = PB_Cnumroc( *N, 0, Ad0[INB_], Ad0[NB_], mycol, Ad0[CSRC_], npcol );
       if( ( Amp > 0 ) && ( Anq > 0 ) )
       {
+#ifdef FC_LEN_T
+         dagemv_( TRANS, &Amp, &Anq, ((double *) ALPHA), (double*) Mptr( ((char *) A),
+                  Aii, Ajj, Ald, type->size ), &Ald, (double*) XA, &ione, (double*) tbeta, (double*) YA,
+                  &YAd[LLD_],
+                  (FC_LEN_T) strlen(TRANS) );
+#else
+/*WCC
          dagemv_( TRANS, &Amp, &Anq, ((char *) ALPHA), Mptr( ((char *) A),
                   Aii, Ajj, Ald, type->size ), &Ald, XA, &ione, tbeta, YA,
                   &YAd[LLD_] );
+*/
+         dagemv_( TRANS, &Amp, &Anq, ((double *) ALPHA), (double*) Mptr( ((char *) A),
+                  Aii, Ajj, Ald, type->size ), &Ald, (double*) XA, &ione, (double*) tbeta, (double*) YA,
+                  &YAd[LLD_] );
+#endif
       }
       if( XAfr ) free( XA );
 /*
@@ -445,7 +482,11 @@ void pdagemv_( TRANS, M, N, ALPHA, A, IA, JA, DESCA, X, IX, JX, DESCX,
       if( YAsum && ( Anq > 0 ) )
       {
          top = *PB_Ctop( &ctxt, COMBINE, COLUMN, TOP_GET );
+/*WCC
          Cdgsum2d( ctxt, COLUMN, &top, 1, Anq, YA, YAd[LLD_], YAd[RSRC_],
+                   mycol );
+*/
+         Cdgsum2d( ctxt, COLUMN, &top, 1, Anq, (double*) YA, YAd[LLD_], YAd[RSRC_],
                    mycol );
       }
    }

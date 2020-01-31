@@ -294,7 +294,12 @@ void PB_Cptran( TYPE, CONJUG, M, N, ALPHA, A, IA, JA, DESCA, BETA,
    }
 
    size   = TYPE->size; one = TYPE->one; zero = TYPE->zero;
+#ifdef FC_LEN_T
+   kb     = pilaenv_( &ctxt, C2F_CHAR( &TYPE->type ),
+                      (FC_LEN_T) strlen(C2F_CHAR( &TYPE->type )) );
+#else
    kb     = pilaenv_( &ctxt, C2F_CHAR( &TYPE->type ) );
+#endif
 
    Ainb1D = PB_Cfirstnb( ACnD, AiD, AinbD, AnbD );
    AnpD   = PB_Cnumroc( ACnD, 0, Ainb1D, AnbD, AmyprocD, ArocD, AnprocsD );

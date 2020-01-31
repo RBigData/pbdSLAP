@@ -103,8 +103,13 @@ void           Cigesd2d        ( int,       int,       int,
 void           Csgesd2d        ( int,       int,       int,
                                  char *,    int,       int,
                                  int );
+/*WCC
 void           Cdgesd2d        ( int,       int,       int,
                                  char *,    int,       int,
+                                 int );
+*/
+void           Cdgesd2d        ( int,       int,       int,
+                                 double *,  int,       int,
                                  int );
 void           Ccgesd2d        ( int,       int,       int,
                                  char *,    int,       int,
@@ -129,14 +134,24 @@ void           Cztrsd2d        ( int,       char *,    char *,
                                  int,       int,       char *,
                                  int,       int,       int );
 
+/*WCC
 void           Cigebs2d        ( int,       char *,    char *,
                                  int,       int,       char *,
+                                 int );
+*/
+void           Cigebs2d        ( int,       char *,    char *,
+                                 int,       int,       int *,
                                  int );
 void           Csgebs2d        ( int,       char *,    char *,
                                  int,       int,       char *,
                                  int );
+/*WCC
 void           Cdgebs2d        ( int,       char *,    char *,
                                  int,       int,       char *,
+                                 int );
+*/
+void           Cdgebs2d        ( int,       char *,    char *,
+                                 int,       int,       double *,
                                  int );
 void           Ccgebs2d        ( int,       char *,    char *,
                                  int,       int,       char *,
@@ -168,8 +183,13 @@ void           Cigerv2d        ( int,       int,       int,
 void           Csgerv2d        ( int,       int,       int,
                                  char *,    int,       int,
                                  int );
+/*WCC
 void           Cdgerv2d        ( int,       int,       int,
                                  char *,    int,       int,
+                                 int );
+*/
+void           Cdgerv2d        ( int,       int,       int,
+                                 double *,  int,       int,
                                  int );
 void           Ccgerv2d        ( int,       int,       int,
                                  char *,    int,       int,
@@ -194,14 +214,24 @@ void           Cztrrv2d        ( int,       char *,    char *,
                                  int,       int,       char *,
                                  int,       int,       int );
 
+/*WCC
 void           Cigebr2d        ( int,       char *,    char *,
                                  int,       int,       char *,
+                                 int,       int,       int );
+*/
+void           Cigebr2d        ( int,       char *,    char *,
+                                 int,       int,       int *,
                                  int,       int,       int );
 void           Csgebr2d        ( int,       char *,    char *,
                                  int,       int,       char *,
                                  int,       int,       int );
+/*WCC
 void           Cdgebr2d        ( int,       char *,    char *,
                                  int,       int,       char *,
+                                 int,       int,       int );
+*/
+void           Cdgebr2d        ( int,       char *,    char *,
+                                 int,       int,       double *,
                                  int,       int,       int );
 void           Ccgebr2d        ( int,       char *,    char *,
                                  int,       int,       char *,
@@ -240,8 +270,14 @@ void           Csgamx2d        ( int,       char *,    char *,
                                  int,       int,       char *,
                                  int,       int *,     int *,
                                  int,       int,       int );
+/*WCC
 void           Cdgamx2d        ( int,       char *,    char *,
                                  int,       int,       char *,
+                                 int,       int *,     int *,
+                                 int,       int,       int );
+*/
+void           Cdgamx2d        ( int,       char *,    char *,
+                                 int,       int,       double *,
                                  int,       int *,     int *,
                                  int,       int,       int );
 void           Ccgamx2d        ( int,       char *,    char *,
@@ -280,8 +316,13 @@ void           Cigsum2d        ( int,       char *,    char *,
 void           Csgsum2d        ( int,       char *,    char *,
                                  int,       int,       char *,
                                  int,       int,       int );
+/*WCC
 void           Cdgsum2d        ( int,       char *,    char *,
                                  int,       int,       char *,
+                                 int,       int,       int );
+*/
+void           Cdgsum2d        ( int,       char *,    char *,
+                                 int,       int,       double *,
                                  int,       int,       int );
 void           Ccgsum2d        ( int,       char *,    char *,
                                  int,       int,       char *,

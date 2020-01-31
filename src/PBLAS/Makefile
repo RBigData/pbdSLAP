@@ -40,6 +40,7 @@ double: integer $(PKG_PDBLAS)
 	( cd PBBLAS;  CDEFS='$(CDEFS)' PKG_CPPFLAGS='$(PKG_CPPFLAGS)' PKG_CFLAGS='$(PKG_CFLAGS)' MkInclude='$(MkInclude)' $(MAKE) )
 	( cd PTZBLAS; CDEFS='$(CDEFS)' PKG_CPPFLAGS='$(PKG_CPPFLAGS)' PKG_CFLAGS='$(PKG_CFLAGS)' MkInclude='$(MkInclude)' $(MAKE) )
 	( cd PTOOLS;  CDEFS='$(CDEFS)' PKG_CPPFLAGS='$(PKG_CPPFLAGS)' PKG_CFLAGS='$(PKG_CFLAGS)' MkInclude='$(MkInclude)' $(MAKE) )
+	( cd wcc_PTOOLS;  CDEFS='$(CDEFS)' PKG_CPPFLAGS='$(PKG_CPPFLAGS)' PKG_CFLAGS='$(PKG_CFLAGS)' MkInclude='$(MkInclude)' $(MAKE) )
 	$(ARCH) $(ARCHFLAGS) ../$(SCALAPACKLIB) $(PKG_PDBLAS)
 	$(RANLIB) ../$(SCALAPACKLIB)
 
@@ -48,6 +49,7 @@ clean :
 	( cd PBBLAS;  $(MAKE) clean )
 	( cd PTZBLAS; $(MAKE) clean )
 	( cd PTOOLS;  $(MAKE) clean )
+	( cd wcc_PTOOLS;  $(MAKE) clean )
 
 .SUFFIXES: .fo .co
 .f.fo :
