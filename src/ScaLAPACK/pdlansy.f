@@ -179,7 +179,7 @@
       DOUBLE PRECISION   RWORK( 2 )
 *     ..
 *     .. External Subroutines ..
-      EXTERNAL           BLACS_GRIDINFO, DAXPY, DCOMBSSQ,
+      EXTERNAL           BLACS_GRIDINFO, DAXPY, DCOMBSSQ_WCC,
      $                   DGAMX2D, DGSUM2D, DGEBR2D,
      $                   DGEBS2D, DLASSQ, PDCOL2ROW,
      $                   PDTREECOMB
@@ -812,7 +812,7 @@
          RWORK( 2 ) = SUM
 *
          CALL PDTREECOMB( ICTXT, 'All', 2, RWORK, IAROW, IACOL,
-     $                    DCOMBSSQ )
+     $                    DCOMBSSQ_WCC )
          VALUE = RWORK( 1 ) * SQRT( RWORK( 2 ) )
 *
       END IF
