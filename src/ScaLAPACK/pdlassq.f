@@ -152,7 +152,8 @@
       DOUBLE PRECISION   WORK( 2 )
 *     ..
 *     .. External Subroutines ..
-      EXTERNAL           BLACS_GRIDINFO, DCOMBSSQ, INFOG2L, PDTREECOMB
+      EXTERNAL           BLACS_GRIDINFO, DCOMBSSQ_WCC, INFOG2L,
+     $                   PDTREECOMB
 *     ..
 *     .. External Functions ..
       INTEGER            NUMROC
@@ -209,7 +210,7 @@
          WORK( 2 ) = SUMSQ
 *
          CALL PDTREECOMB( ICTXT, 'Rowwise', 2, WORK, -1, IXCOL,
-     $                    DCOMBSSQ )
+     $                    DCOMBSSQ_WCC )
 *
          SCALE = WORK( 1 )
          SUMSQ = WORK( 2 )
@@ -249,7 +250,7 @@
          WORK( 2 ) = SUMSQ
 *
          CALL PDTREECOMB( ICTXT, 'Columnwise', 2, WORK, -1, IXCOL,
-     $                    DCOMBSSQ )
+     $                    DCOMBSSQ_WCC )
 *
          SCALE = WORK( 1 )
          SUMSQ = WORK( 2 )
