@@ -261,6 +261,8 @@
       DOUBLE PRECISION   TMP1, TMP2, TMP3, TMP4, DUM1, DUM2, DUM3,
      $                   DUM4, ELEM1, ELEM2, ELEM3, ELEM4,
      $                   CS, SN, ELEM5, TMP, LWKOPT
+*WCC
+      DOUBLE PRECISION   ELEM2_A( 1 ), ELEM3_A( 1 )
 *     ..
 *     .. Local Arrays ..
       INTEGER            DESCH2( DLEN_ )
@@ -621,13 +623,23 @@
      $           ILOC4, JLOC4, HRSRC4, HCSRC4 )
             IF( MYROW.EQ.HRSRC2 .AND. MYCOL.EQ.HCSRC2 ) THEN
                ELEM2 = H((JLOC2-1)*LLDH+ILOC2)
-               IF( HRSRC1.NE.HRSRC2 .OR. HCSRC1.NE.HCSRC2 )
-     $            CALL DGESD2D( ICTXT, 1, 1, ELEM2, 1, HRSRC1, HCSRC1)
+*WCC               IF( HRSRC1.NE.HRSRC2 .OR. HCSRC1.NE.HCSRC2 )
+*WCC     $            CALL DGESD2D( ICTXT, 1, 1, ELEM2, 1, HRSRC1, HCSRC1)
+               IF( HRSRC1.NE.HRSRC2 .OR. HCSRC1.NE.HCSRC2 ) THEN
+                  ELEM2_A( 1 ) = ELEM2
+                  CALL DGESD2D( ICTXT, 1, 1, ELEM2_A, 1, HRSRC1, HCSRC1)
+                  ELEM2 = ELEM2_A( 1 )
+               END IF
             END IF
             IF( MYROW.EQ.HRSRC3 .AND. MYCOL.EQ.HCSRC3 ) THEN
                ELEM3 = H((JLOC3-1)*LLDH+ILOC3)
-               IF( HRSRC1.NE.HRSRC3 .OR. HCSRC1.NE.HCSRC3 )
-     $            CALL DGESD2D( ICTXT, 1, 1, ELEM3, 1, HRSRC1, HCSRC1)
+*WCC               IF( HRSRC1.NE.HRSRC3 .OR. HCSRC1.NE.HCSRC3 )
+*WCC     $            CALL DGESD2D( ICTXT, 1, 1, ELEM3, 1, HRSRC1, HCSRC1)
+               IF( HRSRC1.NE.HRSRC3 .OR. HCSRC1.NE.HCSRC3 ) THEN
+                  ELEM3_A( 1 ) = ELEM3
+                  CALL DGESD2D( ICTXT, 1, 1, ELEM3_A, 1, HRSRC1, HCSRC1)
+                  ELEM3 = ELEM3_A( 1 )
+               END IF
             END IF
             IF( MYROW.EQ.HRSRC4 .AND. MYCOL.EQ.HCSRC4 ) THEN
                WORK(1) = H((JLOC4-1)*LLDH+ILOC4)
@@ -641,10 +653,20 @@
             END IF
             IF( MYROW.EQ.HRSRC1 .AND. MYCOL.EQ.HCSRC1 ) THEN
                ELEM1 = H((JLOC1-1)*LLDH+ILOC1)
-               IF( HRSRC1.NE.HRSRC2 .OR. HCSRC1.NE.HCSRC2 )
-     $            CALL DGERV2D( ICTXT, 1, 1, ELEM2, 1, HRSRC2, HCSRC2)
-               IF( HRSRC1.NE.HRSRC3 .OR. HCSRC1.NE.HCSRC3 )
-     $            CALL DGERV2D( ICTXT, 1, 1, ELEM3, 1, HRSRC3, HCSRC3)
+*WCC               IF( HRSRC1.NE.HRSRC2 .OR. HCSRC1.NE.HCSRC2 )
+*WCC     $            CALL DGERV2D( ICTXT, 1, 1, ELEM2, 1, HRSRC2, HCSRC2)
+               IF( HRSRC1.NE.HRSRC2 .OR. HCSRC1.NE.HCSRC2 ) THEN
+                  ELEM2_A( 1 ) = ELEM2
+                  CALL DGERV2D( ICTXT, 1, 1, ELEM2_A, 1, HRSRC2, HCSRC2)
+                  ELEM2 = ELEM2_A( 1 )
+               END IF
+*WCC               IF( HRSRC1.NE.HRSRC3 .OR. HCSRC1.NE.HCSRC3 )
+*WCC     $            CALL DGERV2D( ICTXT, 1, 1, ELEM3, 1, HRSRC3, HCSRC3)
+               IF( HRSRC1.NE.HRSRC3 .OR. HCSRC1.NE.HCSRC3 ) THEN
+                  ELEM3_A( 1 ) = ELEM3
+                  CALL DGERV2D( ICTXT, 1, 1, ELEM3_A, 1, HRSRC3, HCSRC3)
+                  ELEM3 = ELEM3_A( 1 )
+               END IF
                IF( HRSRC1.NE.HRSRC4 .OR. HCSRC1.NE.HCSRC4 )
      $            CALL DGERV2D( ICTXT, 2, 1, WORK, 2, HRSRC4, HCSRC4 )
                ELEM4 = WORK(1)

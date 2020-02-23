@@ -248,6 +248,8 @@
      $                   NGLOB, NGU, NINT, NPCOL, NPROW, OFFSET,
      $                   ONEDCONTEXT, P, PREV, REXTRA, RREQ, SELF,
      $                   TORECV
+*WCC
+      INTEGER            TORECV_A( 1 )
       DOUBLE PRECISION   ALPHA, ATOLI, BETA, BNORM, DRECV, DSEND, GL,
      $                   GU, INITVL, INITVU, LSAVE, MID, PIVMIN, RELTOL,
      $                   SAFEMN, TMP1, TMP2, TNORM, ULP
@@ -782,8 +784,12 @@
   110          CONTINUE
             END IF
          ELSE
-            CALL IGEBR2D( ONEDCONTEXT, 'ALL', ' ', 1, 1, TORECV, 1, 0,
+*WCC            CALL IGEBR2D( ONEDCONTEXT, 'ALL', ' ', 1, 1, TORECV, 1, 0,
+*WCC     $                    I-1 )
+            TORECV_A( 1 ) = TORECV
+            CALL IGEBR2D( ONEDCONTEXT, 'ALL', ' ', 1, 1, TORECV_A, 1, 0,
      $                    I-1 )
+            TORECV = TORECV_A( 1 )
             IF( TORECV.NE.0 ) THEN
                CALL IGEBR2D( ONEDCONTEXT, 'ALL', ' ', TORECV, 1, IWORK,
      $                       TORECV, 0, I-1 )

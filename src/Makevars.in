@@ -23,7 +23,7 @@ SPMD_LDFLAGS = @SPMD_LDFLAGS@
 MkInclude = ${R_HOME}/etc${R_ARCH}/Makeconf
 
 ### For gfortran
-GFORTRAN_FLAGS = -DUSE_FC_LEN_T -fallow-argument-mismatch
+GFORTRAN_FLAGS = -DUSE_FC_LEN_T
 
 ### Setup R package flags and substitute by configure for ${MPI_...}.
 PKG_CPPFLAGS = $(SPMD_CPPFLAGS) $(GFORTRAN_FLAGS)
