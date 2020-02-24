@@ -9,6 +9,8 @@
 *     .. Scalar Arguments ..
       INTEGER            IV, IX, JV, JX, KASE, N
       DOUBLE PRECISION   EST
+*WCC
+      DOUBLE PRECISION   EST_A( 1 )
 *     ..
 *     .. Array Arguments ..
       INTEGER            DESCV( * ), DESCX( * ), ISGN( * )
@@ -161,6 +163,8 @@
      $                   ITER, IVXCOL, IVXROW, J, JLAST, JJVX, JUMP,
      $                   K, MYCOL, MYROW, NP, NPCOL, NPROW
       DOUBLE PRECISION   ALTSGN, ESTOLD, JLMAX, TEMP, XMAX
+*WCC
+      DOUBLE PRECISION   TEMP_A( 1 )
 *     ..
 *     .. Local Arrays ..
       DOUBLE PRECISION   WORK( 2 )
@@ -216,10 +220,17 @@
          IF( MYROW.EQ.IVXROW ) THEN
             V( IOFFVX ) = X( IOFFVX )
             EST = ABS( V( IOFFVX ) )
-            CALL DGEBS2D( ICTXT, 'Columnwise', ' ', 1, 1, EST, 1 )
+*WCC            CALL DGEBS2D( ICTXT, 'Columnwise', ' ', 1, 1, EST, 1 )
+            EST_A( 1 ) = EST
+            CALL DGEBS2D( ICTXT, 'Columnwise', ' ', 1, 1, EST_A, 1 )
+            EST = EST_A( 1 )
          ELSE
-            CALL DGEBR2D( ICTXT, 'Columnwise', ' ', 1, 1, EST, 1,
+*WCC            CALL DGEBR2D( ICTXT, 'Columnwise', ' ', 1, 1, EST, 1,
+*WCC     $                    IVXROW, MYCOL )
+            EST_A( 1 ) = EST
+            CALL DGEBR2D( ICTXT, 'Columnwise', ' ', 1, 1, EST_A, 1,
      $                    IVXROW, MYCOL )
+            EST = EST_A( 1 )
          END IF
 *        ... QUIT
          GO TO 150
@@ -227,10 +238,17 @@
       CALL PDASUM( N, EST, X, IX, JX, DESCX, 1 )
       IF( DESCX( M_ ).EQ.1 .AND. N.EQ.1 ) THEN
          IF( MYROW.EQ.IVXROW ) THEN
-            CALL DGEBS2D( ICTXT, 'Columnwise', ' ', 1, 1, EST, 1 )
+*WCC            CALL DGEBS2D( ICTXT, 'Columnwise', ' ', 1, 1, EST, 1 )
+            EST_A( 1 ) = EST
+            CALL DGEBS2D( ICTXT, 'Columnwise', ' ', 1, 1, EST_A, 1 )
+            EST = EST_A( 1 )
          ELSE
-            CALL DGEBR2D( ICTXT, 'Columnwise', ' ', 1, 1, EST, 1,
+*WCC            CALL DGEBR2D( ICTXT, 'Columnwise', ' ', 1, 1, EST, 1,
+*WCC     $                    IVXROW, MYCOL )
+            EST_A( 1 ) = EST
+            CALL DGEBR2D( ICTXT, 'Columnwise', ' ', 1, 1, EST_A, 1,
      $                    IVXROW, MYCOL )
+            EST = EST_A( 1 )
          END IF
       END IF
 *
@@ -285,10 +303,17 @@
       CALL PDASUM( N, EST, V, IV, JV, DESCV, 1 )
       IF( DESCV( M_ ).EQ.1 .AND. N.EQ.1 ) THEN
          IF( MYROW.EQ.IVXROW ) THEN
-            CALL DGEBS2D( ICTXT, 'Columnwise', ' ', 1, 1, EST, 1 )
+*WCC            CALL DGEBS2D( ICTXT, 'Columnwise', ' ', 1, 1, EST, 1 )
+            EST_A( 1 ) = EST
+            CALL DGEBS2D( ICTXT, 'Columnwise', ' ', 1, 1, EST_A, 1 )
+            EST = EST_A( 1 )
          ELSE
-            CALL DGEBR2D( ICTXT, 'Columnwise', ' ', 1, 1, EST, 1,
+*WCC            CALL DGEBR2D( ICTXT, 'Columnwise', ' ', 1, 1, EST, 1,
+*WCC     $                    IVXROW, MYCOL )
+            EST_A( 1 ) = EST
+            CALL DGEBR2D( ICTXT, 'Columnwise', ' ', 1, 1, EST_A, 1,
      $                    IVXROW, MYCOL )
+            EST = EST_A( 1 )
          END IF
       END IF
       IFLAG = 0
@@ -364,10 +389,17 @@
       CALL PDASUM( N, TEMP, X, IX, JX, DESCX, 1 )
       IF( DESCX( M_ ).EQ.1 .AND. N.EQ.1 ) THEN
          IF( MYROW.EQ.IVXROW ) THEN
-            CALL DGEBS2D( ICTXT, 'Columnwise', ' ', 1, 1, TEMP, 1 )
+*WCC            CALL DGEBS2D( ICTXT, 'Columnwise', ' ', 1, 1, TEMP, 1 )
+            TEMP_A( 1 ) = TEMP
+            CALL DGEBS2D( ICTXT, 'Columnwise', ' ', 1, 1, TEMP_A, 1 )
+            TEMP = TEMP_A( 1 )
          ELSE
-            CALL DGEBR2D( ICTXT, 'Columnwise', ' ', 1, 1, TEMP, 1,
+*WCC            CALL DGEBR2D( ICTXT, 'Columnwise', ' ', 1, 1, TEMP, 1,
+*WCC     $                    IVXROW, MYCOL )
+            TEMP_A( 1 ) = TEMP
+            CALL DGEBR2D( ICTXT, 'Columnwise', ' ', 1, 1, TEMP_A, 1,
      $                    IVXROW, MYCOL )
+            TEMP = TEMP_A( 1 )
          END IF
       END IF
       TEMP = TWO*( TEMP / DBLE( 3*N ) )

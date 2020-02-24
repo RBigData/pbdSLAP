@@ -16,6 +16,8 @@
       CHARACTER          COMPQ, JOB
       INTEGER            INFO, LIWORK, LWORK, M, N,
      $                   IT, JT, IQ, JQ
+*WCC
+      INTEGER            INFO_A( 1 )
       DOUBLE PRECISION   S, SEP
 *     ..
 *     .. Array Arguments ..
@@ -359,7 +361,11 @@
      $                   NB, NOEXSY, NPCOL, NPROCS, NPROW, SPACE,
      $                   T12ROWS, T12COLS, TCOLS, TCSRC, TROWS, TRSRC,
      $                   WRK1, IWRK1, WRK2, IWRK2, WRK3, IWRK3
+*WCC
+      INTEGER            MMAX_A( 1 )
       DOUBLE PRECISION   DPDUM1, ELEM, EST, SCALE, RNORM
+*WCC
+      DOUBLE PRECISION   DPDUM1_A( 1 )
 *     .. Local Arrays ..
       INTEGER            DESCT12( DLEN_ ), MBNB2( 2 )
 *     ..
@@ -524,9 +530,15 @@
  10         CONTINUE
             MMAX = M
             MMIN = M
-            IF( NPROCS.GT.1 )
-     $           CALL IGAMX2D( ICTXT, 'All', TOP, 1, 1, MMAX, 1, -1,
+*WCC            IF( NPROCS.GT.1 )
+*WCC     $           CALL IGAMX2D( ICTXT, 'All', TOP, 1, 1, MMAX, 1, -1,
+*WCC     $                -1, -1, -1, -1 )
+            IF( NPROCS.GT.1 ) THEN
+                 MMAX_A( 1 ) = MMAX
+                 CALL IGAMX2D( ICTXT, 'All', TOP, 1, 1, MMAX_A, 1, -1,
      $                -1, -1, -1, -1 )
+                 MMAX = MMAX_A( 1 )
+            END IF
             IF( NPROCS.GT.1 )
      $           CALL IGAMN2D( ICTXT, 'All', TOP, 1, 1, MMIN, 1, -1,
      $                -1, -1, -1, -1 )
@@ -603,9 +615,15 @@ c     $              IERR )
 *
 *     Global maximum on info
 *
-      IF( NPROCS.GT.1 )
-     $     CALL IGAMX2D( ICTXT, 'All', TOP, 1, 1, INFO, 1, -1, -1, -1,
+*WCC      IF( NPROCS.GT.1 )
+*WCC     $     CALL IGAMX2D( ICTXT, 'All', TOP, 1, 1, INFO, 1, -1, -1, -1,
+*WCC     $          -1, -1 )
+      IF( NPROCS.GT.1 ) THEN
+           INFO_A( 1 ) = INFO
+           CALL IGAMX2D( ICTXT, 'All', TOP, 1, 1, INFO_A, 1, -1, -1, -1,
      $          -1, -1 )
+           INFO = INFO_A( 1 )
+      END IF
 *
 *     Return if some argument is incorrect
 *
@@ -672,8 +690,12 @@ c     $        SCALE, IERR )
 *        Estimate the reciprocal of the condition number of the cluster
 *        of eigenvalues.
 *
+*WCC         RNORM = PDLANGE( 'Frobenius', N1, N2, WORK, 1, 1+ICOFFT12,
+*WCC     $        DESCT12, DPDUM1 )
+         DPDUM1_A( 1 ) =  DPDUM1
          RNORM = PDLANGE( 'Frobenius', N1, N2, WORK, 1, 1+ICOFFT12,
-     $        DESCT12, DPDUM1 )
+     $        DESCT12, DPDUM1_A )
+         DPDUM1 =  DPDUM1_A( 1 )
          IF( RNORM.EQ.ZERO ) THEN
             S = ONE
          ELSE

@@ -1,3 +1,9 @@
+2020-02-22: Ver. 0.3-0
+  * Fix codes warned by "-Wargument-mismatch" because gcc10 gives warning/error
+    with "-fallow-argument-mismatch" or not. The files include pdlacon.f,
+    pdlarf.f, pdlarz.f, pdlawil.f, pdtrord.f, pdtrsen.f, pdhseqr.f,
+    and pdstebz.f under "src/ScaLAPACK/".
+
 2020-01-31: Ver. 0.2-9
   * Push back "DCOMBSSQ" from "src/TOOLS/pdtreecomb.f" and rename as
     "DCOMBSSQ_WCC".
