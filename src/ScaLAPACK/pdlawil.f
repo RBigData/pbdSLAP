@@ -121,6 +121,8 @@
      $                   MODKM1, MYCOL, MYROW, NPCOL, NPROW, NUM, RIGHT,
      $                   RSRC, UP
       DOUBLE PRECISION   H11, H12, H21, H22, H33S, H44S, S, V1, V2, V3
+*WCC
+      DOUBLE PRECISION   H11_A( 1 ), H12_A( 1 ), H21_A( 1 ), V3_A( 1 )
 *     ..
 *     .. Local Arrays ..
       DOUBLE PRECISION   BUF( 4 )
@@ -168,7 +170,10 @@
             CALL INFOG2L( M+2, M+2, DESCA, NPROW, NPCOL, MYROW, MYCOL,
      $                    IROW, ICOL, RSRC, JSRC )
             IF( NPCOL.GT.1 ) THEN
-               CALL DGERV2D( CONTXT, 1, 1, V3, 1, MYROW, LEFT )
+*WCC               CALL DGERV2D( CONTXT, 1, 1, V3, 1, MYROW, LEFT )
+               V3_A( 1 ) = V3
+               CALL DGERV2D( CONTXT, 1, 1, V3_A, 1, MYROW, LEFT )
+               V3 = V3_A( 1 )
             ELSE
                V3 = A( ( ICOL-2 )*LDA+IROW )
             END IF
@@ -212,17 +217,26 @@
             CALL INFOG2L( M+2, M+2, DESCA, NPROW, NPCOL, MYROW, MYCOL,
      $                    IROW, ICOL, RSRC, JSRC )
             IF( NUM.GT.1 ) THEN
-               CALL DGERV2D( CONTXT, 1, 1, H11, 1, UP, LEFT )
+*WCC               CALL DGERV2D( CONTXT, 1, 1, H11, 1, UP, LEFT )
+               H11_A( 1 ) = H11
+               CALL DGERV2D( CONTXT, 1, 1, H11_A, 1, UP, LEFT )
+               H11 = H11_A( 1 )
             ELSE
                H11 = A( ( ICOL-3 )*LDA+IROW-2 )
             END IF
             IF( NPROW.GT.1 ) THEN
-               CALL DGERV2D( CONTXT, 1, 1, H12, 1, UP, MYCOL )
+*WCC               CALL DGERV2D( CONTXT, 1, 1, H12, 1, UP, MYCOL )
+               H12_A( 1 ) = H12
+               CALL DGERV2D( CONTXT, 1, 1, H12_A, 1, UP, MYCOL )
+               H12 = H12_A( 1 )
             ELSE
                H12 = A( ( ICOL-2 )*LDA+IROW-2 )
             END IF
             IF( NPCOL.GT.1 ) THEN
-               CALL DGERV2D( CONTXT, 1, 1, H21, 1, MYROW, LEFT )
+*WCC               CALL DGERV2D( CONTXT, 1, 1, H21, 1, MYROW, LEFT )
+               H21_A( 1 ) = H21
+               CALL DGERV2D( CONTXT, 1, 1, H21_A, 1, MYROW, LEFT )
+               H21 = H21_A( 1 )
             ELSE
                H21 = A( ( ICOL-3 )*LDA+IROW-1 )
             END IF

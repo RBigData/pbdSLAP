@@ -251,6 +251,8 @@
      $                   MPV, MYCOL, MYROW, NCC, NCV, NPCOL, NPROW,
      $                   NQC2, NQV, RDEST
       DOUBLE PRECISION   TAULOC
+*WCC
+      DOUBLE PRECISION   TAULOC_A( 1 )
 *     ..
 *     .. External Subroutines ..
       EXTERNAL           BLACS_GRIDINFO, DAXPY, DCOPY, DGEBR2D,
@@ -373,8 +375,12 @@
 *
                   ELSE
 *
+*WCC                     CALL DGEBR2D( ICTXT, 'Columnwise', ' ', 1, 1,
+*WCC     $                             TAULOC, 1, IVROW, MYCOL )
+                     TAULOC_A( 1 ) = TAULOC
                      CALL DGEBR2D( ICTXT, 'Columnwise', ' ', 1, 1,
-     $                             TAULOC, 1, IVROW, MYCOL )
+     $                             TAULOC_A, 1, IVROW, MYCOL )
+                     TAULOC = TAULOC_A( 1 )
 *
                   END IF
 *
@@ -533,8 +539,12 @@
 *
                ELSE
 *
-                  CALL DGEBR2D( ICTXT, 'Columnwise', ' ', 1, 1, TAULOC,
-     $                          1, IVROW, MYCOL )
+*WCC                  CALL DGEBR2D( ICTXT, 'Columnwise', ' ', 1, 1, TAULOC,
+*WCC     $                          1, IVROW, MYCOL )
+                  TAULOC_A( 1 ) = TAULOC
+                  CALL DGEBR2D( ICTXT, 'Columnwise', ' ', 1, 1,
+     $                          TAULOC_A, 1, IVROW, MYCOL )
+                  TAULOC = TAULOC_A( 1 )
 *
                END IF
 *
@@ -754,8 +764,12 @@
 *
                   ELSE
 *
-                     CALL DGEBR2D( ICTXT, 'Rowwise', ' ', 1, 1, TAULOC,
-     $                             1, MYROW, IVCOL )
+*WCC                     CALL DGEBR2D( ICTXT, 'Rowwise', ' ', 1, 1, TAULOC,
+*WCC     $                             1, MYROW, IVCOL )
+                     TAULOC_A( 1 ) = TAULOC
+                     CALL DGEBR2D( ICTXT, 'Rowwise', ' ', 1, 1,
+     $                             TAULOC_A, 1, MYROW, IVCOL )
+                     TAULOC = TAULOC_A( 1 )
 *
                   END IF
 *
@@ -868,8 +882,12 @@
 *
                ELSE
 *
-                  CALL DGEBR2D( ICTXT, 'Rowwise', ' ', 1, 1, TAULOC, 1,
-     $                          MYROW, IVCOL )
+*WCC                  CALL DGEBR2D( ICTXT, 'Rowwise', ' ', 1, 1, TAULOC, 1,
+*WCC     $                          MYROW, IVCOL )
+                  TAULOC_A( 1 ) = TAULOC
+                  CALL DGEBR2D( ICTXT, 'Rowwise', ' ', 1, 1, TAULOC_A,
+     $                          1, MYROW, IVCOL )
+                  TAULOC = TAULOC_A( 1 )
 *
                END IF
 *
