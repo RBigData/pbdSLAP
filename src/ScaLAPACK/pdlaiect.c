@@ -54,7 +54,7 @@ void pdlasnbt_( int *ieflag )
 *
 *  .. Local Scalars ..
 */
-   double x;
+   double x=0.0;
    int         negone=-1, errornum;
    unsigned int *ix; 
 /* ..
@@ -130,7 +130,7 @@ void pdlaiectb_( double *sigma, int *n, double *d, int *count )
 *
 *  .. Local Scalars ..
 */
-   double      lsigma, tmp, *pd, *pe2;
+   double      lsigma, tmp=0.0, *pd, *pe2;
    int         i;
 /* ..
 *  .. Executable Statements ..
@@ -196,7 +196,7 @@ void pdlaiectl_( double *sigma, int *n, double *d, int *count )
 *
 *  .. Local Scalars ..
 */
-   double      lsigma, tmp, *pd, *pe2;
+   double      lsigma, tmp=0.0, *pd, *pe2;
    int         i;
 /* ..
 *  .. Executable Statements ..

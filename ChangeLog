@@ -1,3 +1,9 @@
+2020-10-20: Ver. 0.3-1
+  * Fix gcc11 warning below.
+    pdlaiect.c:73:9: warning: 'x' is used uninitialized [-Wuninitialized]
+    pdlaiect.c:142:14: warning: 'tmp' is used uninitialized [-Wuninitialized]
+    pdlaiect.c:208:14: warning: 'tmp' is used uninitialized [-Wuninitialized]
+
 2020-02-22: Ver. 0.3-0
   * Fix codes warned by "-Wargument-mismatch" because gcc10 gives warning/error
     with "-fallow-argument-mismatch" or not. The files include pdlacon.f,
