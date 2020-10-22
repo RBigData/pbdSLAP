@@ -32,7 +32,7 @@ script:
   - R CMD INSTALL ./pbdSLAP_*.tar.gz
 
 sudo: required
-dist: trusty
+# dist: trusty
 
 notifications:
   email:
