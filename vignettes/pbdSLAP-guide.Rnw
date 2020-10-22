@@ -68,7 +68,7 @@ Oak Ridge, TN, USA \\
 \Address{
   Wei-Chen Chen\\
   E-mail: \email{wccsnow@gmail.com}\\
-  URL: \url{http://r-pbd.org/}
+  URL: \url{http://pbdr.org/}
 }
 %% It is also possible to add a telephone and fax number
 %% before the e-mail in the following format:
