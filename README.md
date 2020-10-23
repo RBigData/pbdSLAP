@@ -29,7 +29,7 @@ For installing pbdSLAP,
 More information about pbdSLAP can be found in
 
 1. pbdSLAP vignette at `pbdSLAP/inst/doc/pbdSLAP-guide.pdf`.
-2. http://pbdr.org/
+2. https://pbdr.org/
 
 
 
