@@ -1,4 +1,4 @@
-2020-10-20: Ver. 0.3-1
+2021-06-12: Ver. 0.3-1
   * Fix gcc11 warning below.
     pdlaiect.c:73:9: warning: 'x' is used uninitialized [-Wuninitialized]
     pdlaiect.c:142:14: warning: 'tmp' is used uninitialized [-Wuninitialized]
