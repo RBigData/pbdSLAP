@@ -6,6 +6,9 @@ stages:
 test:
   stage: test
   script:
+    - sudo apt-get update -q
+    - sudo apt-get install -y -q libopenmpi-dev openmpi-bin
+    - LD_PRELOAD=/usr/lib/openmpi/lib/libmpi.so
     #- R -e 'install.packages("fda")'
     - Rscript -e "install.packages(c('float','rlecuyer','pbdMPI'),repos='https://cran.r-project.org/')"
     - R CMD build --no-build-vignettes --no-manual --no-resave-data .
