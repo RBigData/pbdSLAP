@@ -1,0 +1,16 @@
+image: r-base
+
+stages:
+  - test
+
+test:
+  stage: test
+  script:
+    #- R -e 'install.packages("fda")'
+    - Rscript -e "install.packages(c('float','rlecuyer','pbdMPI'),repos='https://cran.r-project.org/')"
+    - R CMD build --no-build-vignettes --no-manual --no-resave-data .
+    #- R CMD INSTALL pbdSLAP*.tar.gz
+    - R CMD check pbdSLAP*.tar.gz --as-cran
+    - cat ./pbdSLAP.Rcheck/pbdSLAP-Ex.Rout
+    - cat ./pbdSLAP.Rcheck/pbdSLAP-Ex.timings
+
