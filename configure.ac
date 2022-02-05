@@ -1,5 +1,6 @@
 dnl Process this file with autoconf to produce a configure script
-AC_INIT(DESCRIPTION)
+AC_INIT
+AC_CONFIG_SRCDIR([DESCRIPTION])
 
 dnl Check chmod
 chmod +x ./inst/test_intface/00_make.*
@@ -94,4 +95,5 @@ AC_SUBST(CDEFS)
 AC_SUBST(CDEFS_CHECK)
 AC_SUBST(SPMD_CPPFLAGS)
 AC_SUBST(SPMD_LDFLAGS)
-AC_OUTPUT(src/Makevars)
+AC_CONFIG_FILES([src/Makevars])
+AC_OUTPUT
