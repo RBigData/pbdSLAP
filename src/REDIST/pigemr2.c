@@ -21,7 +21,7 @@
 #define ilacpy_ ilacpy
 #endif
 #define Clacpy Cigelacpy
-void  Clacpy();
+void  Clacpy(int, int, int, int, int, int);
 typedef struct {
   int   desctype;
   int   ctxt;
@@ -49,48 +49,48 @@ typedef struct {
 #define realloc myrealloc
 #endif
 /* Cblacs */
-extern void Cblacs_pcoord();
-extern int Cblacs_pnum();
-extern void Csetpvmtids();
-extern void Cblacs_get();
-extern void Cblacs_pinfo();
-extern void Cblacs_gridinfo();
-extern void Cblacs_gridinit();
-extern void Cblacs_exit();
-extern void Cblacs_gridexit();
-extern void Cblacs_setup();
-extern void Cigebs2d();
-extern void Cigebr2d();
-extern void Cigesd2d();
-extern void Cigerv2d();
-extern void Cigsum2d();
-extern void Cigamn2d();
-extern void Cigamx2d();
-extern void Cigesd2d();
-extern void Cigerv2d();
+extern void Cblacs_pcoord(int, int, int*, int*);
+extern int Cblacs_pnum(int, int, int);
+extern void Csetpvmtids(void);
+extern void Cblacs_get(int, int, int*);
+extern void Cblacs_pinfo(int*, int*);
+extern void Cblacs_gridinfo(int, int*, int*, int*, int*);
+extern void Cblacs_gridinit(int*, char*, int, int);
+extern void Cblacs_exit(int);
+extern void Cblacs_gridexit(int);
+extern void Cblacs_setup(int*, int*);
+extern void Cigebs2d(int, char*, char*, int, int, int*, int);
+extern void Cigebr2d(int, char*, char*, int, int, int*, int, int, int);
+extern void Cigesd2d(int, int, int, int*, int, int, int);
+extern void Cigerv2d(int, int, int, int*, int, int, int);
+extern void Cigsum2d(int, char*, char*, int, int, int*, int, int, int);
+extern void Cigamn2d(int, char*, char*, int, int, int*, int, int*, int*, int, int, int);
+extern void Cigamx2d(int, char*, char*, int, int, int*, int, int*, int*, int, int, int);
+//WCC extern void Cigesd2d();
+//WCC extern void Cigerv2d();
 /* lapack */
-void  ilacpy_();
+void  ilacpy_(const char*, const int*, const int*, const int*, const int*, int*, const int*);
 /* aux fonctions */
-extern int localindice();
-extern void *mr2d_malloc();
-extern int ppcm();
-extern int localsize();
-extern int memoryblocksize();
-extern int changeorigin();
-extern void paramcheck();
+extern int localindice(int, int, int, int, MDESC*);
+extern void *mr2d_malloc(long int);
+extern int ppcm(int, int);
+extern int localsize(int, int, int, int);
+extern int memoryblocksize(MDESC*);
+extern int changeorigin(int, int, int, int, int, int*, int*);
+extern void paramcheck(MDESC*, int, int, int, int, int, int, int);
 /* tools and others function */
 #define scanD0 igescanD0
 #define dispmat igedispmat
 #define setmemory igesetmemory
 #define freememory igefreememory
 #define scan_intervals igescan_intervals
-extern void scanD0();
-extern void dispmat();
-extern void setmemory();
-extern void freememory();
-extern int scan_intervals();
-extern void Cpigemr2do();
-extern void Cpigemr2d();
+extern void scanD0(char*, char*, int, int*, int*, int, int, MDESC*, int, int, int, int, MDESC*, int, int, int, int, IDESC*, int, IDESC*, int, int*);
+extern void dispmat(void);
+extern void setmemory(int**, int);
+extern void freememory(int*);
+extern int scan_intervals(char, int, int, int, MDESC*, MDESC*, int, int, int, int, IDESC*);
+extern void Cpigemr2do(int, int, int*, int, int, MDESC*, int*, int, int, MDESC*);
+extern void Cpigemr2d(int, int, int*, int, int, MDESC*, int*, int, int, MDESC*, int);
 /* some defines for Cpigemr2do */
 #define SENDBUFF 0
 #define RECVBUFF 1
@@ -110,9 +110,9 @@ extern void Cpigemr2d();
 /************************************************************************/
 /* Set the memory space with the malloc function */
 void
-setmemory(adpointer, blocksize)
-  int **adpointer;
-  int   blocksize;
+setmemory(int **adpointer, int blocksize)
+//WCC  int **adpointer;
+//WCC  int   blocksize;
 {
   assert(blocksize >= 0);
   if (blocksize == 0) {
@@ -125,8 +125,8 @@ setmemory(adpointer, blocksize)
 /******************************************************************/
 /* Free the memory space after the malloc */
 void
-freememory(ptrtobefreed)
-  int  *ptrtobefreed;
+freememory(int *ptrtobefreed)
+//WCC  int  *ptrtobefreed;
 {
   if (ptrtobefreed == NULL)
     return;
@@ -138,12 +138,12 @@ freememory(ptrtobefreed)
  * contains the result that are stocked in IDESC structure, the function
  * returns the number of intersections found */
 int 
-scan_intervals(type, ja, jb, n, ma, mb, q0, q1, col0, col1,
-	       result)
-  char  type;
-  int   ja, jb, n, q0, q1, col0, col1;
-  MDESC *ma, *mb;
-  IDESC *result;
+scan_intervals(char type, int ja, int jb, int n, MDESC *ma, MDESC *mb, int q0, int q1, int col0, int col1,
+	       IDESC *result)
+//WCC  char  type;
+//WCC  int   ja, jb, n, q0, q1, col0, col1;
+//WCC  MDESC *ma, *mb;
+//WCC  IDESC *result;
 {
   int   offset, j0, j1, templatewidth0, templatewidth1, nbcol0, nbcol1;
   int   l;	/* local indice on the beginning of the interval */

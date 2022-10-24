@@ -1,18 +1,18 @@
 #include <stdlib.h>
 
-void Creshape( context_in, major_in, context_out, major_out,
-                    first_proc, nprow_new, npcol_new )
-int context_in, *context_out, first_proc, major_in, major_out, nprow_new, npcol_new;
+void Creshape( int context_in, int major_in, int* context_out, int major_out,
+                    int first_proc, int nprow_new, int npcol_new )
+//WCC int context_in, *context_out, first_proc, major_in, major_out, nprow_new, npcol_new;
 /* major in, major out represent whether processors go row major (1) or
 column major (2) in the input and output grids */
 {
 
    /** called subprograms **/
-   void proc_inc();
-   void Cblacs_gridinfo();
-   int Cblacs_pnum();
-   void Cblacs_get();
-   void Cblacs_gridmap();
+   void proc_inc(int*, int*, int, int, int);
+   void Cblacs_gridinfo(int, int*, int*, int*, int*);
+   int Cblacs_pnum(int, int, int);
+   void Cblacs_get(int, int, int*);
+   void Cblacs_gridmap(int*, int*, int, int, int);
 
    /** variables **/
    int i, j;
@@ -74,32 +74,32 @@ column major (2) in the input and output grids */
 }
 
 /*************************************************************************/
-void reshape( context_in, major_in, context_out, major_out,
-                    first_proc, nprow_new, npcol_new )
-int *context_in, *context_out, *first_proc, *major_in, *major_out, *nprow_new, *npcol_new;
+void reshape( int* context_in, int* major_in, int* context_out, int* major_out,
+                    int* first_proc, int* nprow_new, int* npcol_new )
+//WCC int *context_in, *context_out, *first_proc, *major_in, *major_out, *nprow_new, *npcol_new;
 {
    Creshape( *context_in, *major_in, context_out, *major_out,
                     *first_proc, *nprow_new, *npcol_new );
 }
 /*************************************************************************/
-void RESHAPE( context_in, major_in, context_out, major_out,
-                    first_proc, nprow_new, npcol_new )
-int *context_in, *context_out, *first_proc, *major_in, *major_out, *nprow_new, *npcol_new;
+void RESHAPE( int* context_in, int* major_in, int* context_out, int* major_out,
+                    int* first_proc, int* nprow_new, int* npcol_new )
+//WCC int *context_in, *context_out, *first_proc, *major_in, *major_out, *nprow_new, *npcol_new;
 {
    Creshape( *context_in, *major_in, context_out, *major_out,
                     *first_proc, *nprow_new, *npcol_new );
 }
 /*************************************************************************/
-void reshape_( context_in, major_in, context_out, major_out,
-                    first_proc, nprow_new, npcol_new )
-int *context_in, *context_out, *first_proc, *major_in, *major_out, *nprow_new, *npcol_new;
+void reshape_( int* context_in, int* major_in, int* context_out, int* major_out,
+                    int* first_proc, int* nprow_new, int* npcol_new )
+//WCC int *context_in, *context_out, *first_proc, *major_in, *major_out, *nprow_new, *npcol_new;
 {
    Creshape( *context_in, *major_in, context_out, *major_out,
                     *first_proc, *nprow_new, *npcol_new );
 }
 /*************************************************************************/
-void proc_inc( myrow, mycol, nprow, npcol, major )
-int *myrow, *mycol, nprow, npcol, major;
+void proc_inc( int* myrow, int* mycol, int nprow, int npcol, int major )
+//WCC int *myrow, *mycol, nprow, npcol, major;
 {
    if( major == 1) /* row major */
    {

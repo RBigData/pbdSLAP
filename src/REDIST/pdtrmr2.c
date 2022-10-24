@@ -23,7 +23,7 @@
 #define dlacpy_ dlacpy
 #endif
 #define Clacpy Cdtrlacpy
-void  Clacpy();
+void  Clacpy(int, int, double*, int, double*, int);
 typedef struct {
   int   desctype;
   int   ctxt;
@@ -51,48 +51,48 @@ typedef struct {
 #define realloc myrealloc
 #endif
 /* Cblacs */
-extern void Cblacs_pcoord();
-extern int Cblacs_pnum();
-extern void Csetpvmtids();
-extern void Cblacs_get();
-extern void Cblacs_pinfo();
-extern void Cblacs_gridinfo();
-extern void Cblacs_gridinit();
-extern void Cblacs_exit();
-extern void Cblacs_gridexit();
-extern void Cblacs_setup();
-extern void Cigebs2d();
-extern void Cigebr2d();
-extern void Cigesd2d();
-extern void Cigerv2d();
-extern void Cigsum2d();
-extern void Cigamn2d();
-extern void Cigamx2d();
-extern void Cdgesd2d();
-extern void Cdgerv2d();
+extern void Cblacs_pcoord(int, int, int*, int*);
+extern int Cblacs_pnum(int, int, int);
+extern void Csetpvmtids(void);
+extern void Cblacs_get(int, int, int*);
+extern void Cblacs_pinfo(int*, int*);
+extern void Cblacs_gridinfo(int, int*, int*, int*, int*);
+extern void Cblacs_gridinit(int*, char*, int, int);
+extern void Cblacs_exit(int);
+extern void Cblacs_gridexit(int);
+extern void Cblacs_setup(int*, int*);
+extern void Cigebs2d(int, char*, char*, int, int, int*, int);
+extern void Cigebr2d(int, char*, char*, int, int, int*, int, int, int);
+extern void Cigesd2d(int, int, int, int*, int, int, int);
+extern void Cigerv2d(int, int, int, int*, int, int, int);
+extern void Cigsum2d(int, char*, char*, int, int, int*, int, int, int);
+extern void Cigamn2d(int, char*, char*, int, int, int*, int, int*, int*, int, int, int);
+extern void Cigamx2d(int, char*, char*, int, int, int*, int, int*, int*, int, int, int);
+extern void Cdgesd2d(int, int, int, double*, int, int, int);
+extern void Cdgerv2d(int, int, int, double*, int, int, int);
 /* lapack */
-void  dlacpy_();
+void  dlacpy_(const char*, const int*, const int*, const double*, const int*, double*, const int*);
 /* aux fonctions */
-extern int localindice();
-extern void *mr2d_malloc();
-extern int ppcm();
-extern int localsize();
-extern int memoryblocksize();
-extern int changeorigin();
-extern void paramcheck();
+extern int localindice(int, int, int, int, MDESC*);
+extern void *mr2d_malloc(long int);
+extern int ppcm(int, int);
+extern int localsize(int, int, int, int);
+extern int memoryblocksize(MDESC*);
+extern int changeorigin(int, int, int, int, int, int*, int*);
+extern void paramcheck(MDESC*, int, int, int, int, int, int, int);
 /* tools and others function */
 #define scanD0 dtrscanD0
 #define dispmat dtrdispmat
 #define setmemory dtrsetmemory
 #define freememory dtrfreememory
 #define scan_intervals dtrscan_intervals
-extern void scanD0();
-extern void dispmat();
-extern void setmemory();
-extern void freememory();
-extern int scan_intervals();
-extern void Cpdtrmr2do();
-extern void Cpdtrmr2d();
+extern void scanD0(char*, char*, int, double*, int*, int, int, MDESC*, int, int, int, int, MDESC*, int, int, int, int, IDESC*, int, IDESC*, int, double*);
+extern void dispmat(void);
+extern void setmemory(double**, int);
+extern void freememory(double*);
+extern int scan_intervals(char, int, int, int, MDESC*, MDESC*, int, int, int, int, IDESC*);
+extern void Cpdtrmr2do(char*, char*, int, int, double*, int, int, MDESC*, double*, int, int, MDESC*);
+extern void Cpdtrmr2d(char*, char*, int, int, double*, int, int, MDESC*, double*, int, int, MDESC*, int);
 /* some defines for Cpdtrmr2do */
 #define SENDBUFF 0
 #define RECVBUFF 1
@@ -112,9 +112,9 @@ extern void Cpdtrmr2d();
 /************************************************************************/
 /* Set the memory space with the malloc function */
 void
-setmemory(adpointer, blocksize)
-  double **adpointer;
-  int   blocksize;
+setmemory(double **adpointer, int blocksize)
+//WCC  double **adpointer;
+//WCC  int   blocksize;
 {
   assert(blocksize >= 0);
   if (blocksize == 0) {
@@ -127,8 +127,8 @@ setmemory(adpointer, blocksize)
 /******************************************************************/
 /* Free the memory space after the malloc */
 void
-freememory(ptrtobefreed)
-  double *ptrtobefreed;
+freememory(double *ptrtobefreed)
+//WCC  double *ptrtobefreed;
 {
   if (ptrtobefreed == NULL)
     return;
@@ -140,10 +140,10 @@ freememory(ptrtobefreed)
  * the first one from i, i,j can be negative out of borns, the number of
  * elements returned can be negative (means 0) */
 static2 int
-insidemat(uplo, diag, i, j, m, n, offset)
-  int   m, n, i, j;	/* coordonnees de depart, taille de la sous-matrice */
-  char *uplo, *diag;
-  int  *offset;
+insidemat(char *uplo, char *diag, int i, int j, int m, int n, int *offset)
+//WCC  int   m, n, i, j;	/* coordonnees de depart, taille de la sous-matrice */
+//WCC  char *uplo, *diag;
+//WCC  int  *offset;
 {
   /* tests outside mxn */
   assert(j >= 0 && j < n);
@@ -175,21 +175,21 @@ insidemat(uplo, diag, i, j, m, n, offset)
  * action can be the filling of the memory buffer, the count of the memory
  * buffer size or the setting of the memory with the element received) */
 static2 void
-intersect(uplo, diag,
-	  j, start, end,
-	  action,
-	  ptrsizebuff, pptrbuff, ptrblock,
-	  m, n,
-	  ma, ia, ja, templateheight0, templatewidth0,
-	  mb, ib, jb, templateheight1, templatewidth1)
-  int   action, *ptrsizebuff;
-  int   j, start, end;
-  double **pptrbuff, *ptrblock;
-  int   templateheight0, templatewidth0;
-  int   templateheight1, templatewidth1;
-  MDESC *ma, *mb;
-  int   ia, ja, ib, jb, m, n;
-  char *uplo, *diag;
+intersect(char *uplo, char *diag,
+	  int j, int start, int end,
+	  int action,
+	  int *ptrsizebuff, double **pptrbuff, double *ptrblock,
+	  int m, int n,
+	  MDESC *ma, int ia, int ja, int templateheight0, int templatewidth0,
+	  MDESC *mb, int ib, int jb, int templateheight1, int templatewidth1)
+//WCC  int   action, *ptrsizebuff;
+//WCC  int   j, start, end;
+//WCC  double **pptrbuff, *ptrblock;
+//WCC  int   templateheight0, templatewidth0;
+//WCC  int   templateheight1, templatewidth1;
+//WCC  MDESC *ma, *mb;
+//WCC  int   ia, ja, ib, jb, m, n;
+//WCC  char *uplo, *diag;
 /* Execute the action on the local memory for the current interval and
  * increment pptrbuff and ptrsizebuff of the intervalsize */
 /* Notice that if the interval is contigous in the virtual matrice, it is
@@ -244,12 +244,12 @@ intersect(uplo, diag,
  * contains the result that are stocked in IDESC structure, the function
  * returns the number of intersections found */
 int 
-scan_intervals(type, ja, jb, n, ma, mb, q0, q1, col0, col1,
-	       result)
-  char  type;
-  int   ja, jb, n, q0, q1, col0, col1;
-  MDESC *ma, *mb;
-  IDESC *result;
+scan_intervals(char type, int ja, int jb, int n, MDESC *ma, MDESC *mb, int q0, int q1, int col0, int col1,
+	       IDESC *result)
+//WCC  char  type;
+//WCC  int   ja, jb, n, q0, q1, col0, col1;
+//WCC  MDESC *ma, *mb;
+//WCC  IDESC *result;
 {
   int   offset, j0, j1, templatewidth0, templatewidth1, nbcol0, nbcol1;
   int   l;	/* local indice on the beginning of the interval */
@@ -314,26 +314,26 @@ scan_intervals(type, ja, jb, n, ma, mb, q0, q1, col0, col1,
 /*********************************************************************/
 /* Do the scanning of intervals and the requested action */
 void
-scanD0(uplo, diag, action, ptrbuff, ptrsizebuff,
-       m, n,
-       ma, ia, ja, p0, q0,
-       mb, ib, jb, p1, q1,
-       v_inter, vinter_nb,
-       h_inter, hinter_nb,
-       ptrblock)
-  int   action,	/* # of the action done on the intersected intervals  */
-       *ptrsizebuff;	/* size of the communication ptrbuffer (chosen to be
-			 * an output parameter in every cases) */
-  double *ptrbuff	/* address of the communication ptrbuffer (a
-			 * suffisant memory space is supposed to be allocated
-      before the call) */ , *ptrblock;
-  int   p0, q0, p1, q1;
-  IDESC *v_inter, *h_inter;
-  int   vinter_nb, hinter_nb;
-  int   m, n;
-  int   ia, ja, ib, jb;
-  MDESC *ma, *mb;
-  char *uplo, *diag;
+scanD0(char *uplo, char *diag, int action, double *ptrbuff, int *ptrsizebuff,
+       int m, int n,
+       MDESC *ma, int ia, int ja, int p0, int q0,
+       MDESC *mb, int ib, int jb, int p1, int q1,
+       IDESC *v_inter, int vinter_nb,
+       IDESC *h_inter, int hinter_nb,
+       double *ptrblock)
+//WCC  int   action,	/* # of the action done on the intersected intervals  */
+//WCC       *ptrsizebuff;	/* size of the communication ptrbuffer (chosen to be
+//WCC			 * an output parameter in every cases) */
+//WCC  double *ptrbuff	/* address of the communication ptrbuffer (a
+//WCC			 * suffisant memory space is supposed to be allocated
+//WCC      before the call) */ , *ptrblock;
+//WCC  int   p0, q0, p1, q1;
+//WCC  IDESC *v_inter, *h_inter;
+//WCC  int   vinter_nb, hinter_nb;
+//WCC  int   m, n;
+//WCC  int   ia, ja, ib, jb;
+//WCC  MDESC *ma, *mb;
+//WCC  char *uplo, *diag;
 {/* Rmk: the a+au type addresses are strict bounds as a+au does not belong to
   * the [a..a+au-1] interval of length au */
   int   templateheight1, templatewidth1;

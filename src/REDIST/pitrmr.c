@@ -173,7 +173,7 @@
 #define ilacpy_ ilacpy
 #endif
 #define Clacpy Citrlacpy
-void  Clacpy();
+void  Clacpy(int, int, int*, int, int*, int);
 typedef struct {
   int   desctype;
   int   ctxt;
@@ -201,48 +201,48 @@ typedef struct {
 #define realloc myrealloc
 #endif
 /* Cblacs */
-extern void Cblacs_pcoord();
-extern int Cblacs_pnum();
-extern void Csetpvmtids();
-extern void Cblacs_get();
-extern void Cblacs_pinfo();
-extern void Cblacs_gridinfo();
-extern void Cblacs_gridinit();
-extern void Cblacs_exit();
-extern void Cblacs_gridexit();
-extern void Cblacs_setup();
-extern void Cigebs2d();
-extern void Cigebr2d();
-extern void Cigesd2d();
-extern void Cigerv2d();
-extern void Cigsum2d();
-extern void Cigamn2d();
-extern void Cigamx2d();
-extern void Cigesd2d();
-extern void Cigerv2d();
+extern void Cblacs_pcoord(int, int, int*, int*);
+extern int Cblacs_pnum(int, int, int);
+extern void Csetpvmtids(void);
+extern void Cblacs_get(int, int, int*);
+extern void Cblacs_pinfo(int*, int*);
+extern void Cblacs_gridinfo(int, int*, int*, int*, int*);
+extern void Cblacs_gridinit(int*, char*, int, int);
+extern void Cblacs_exit(int);
+extern void Cblacs_gridexit(int);
+extern void Cblacs_setup(int*, int*);
+extern void Cigebs2d(int, char*, char*, int, int, int*, int);
+extern void Cigebr2d(int, char*, char*, int, int, int*, int, int, int);
+extern void Cigesd2d(int, int, int, int*, int, int, int);
+extern void Cigerv2d(int, int, int, int*, int, int, int);
+extern void Cigsum2d(int, char*, char*, int, int, int*, int, int, int);
+extern void Cigamn2d(int, char*, char*, int, int, int*, int, int*, int*, int, int, int);
+extern void Cigamx2d(int, char*, char*, int, int, int*, int, int*, int*, int, int, int);
+extern void Cdgesd2d(int, int, int, double*, int, int, int);
+extern void Cdgerv2d(int, int, int, double*, int, int, int);
 /* lapack */
-void  ilacpy_();
+void  ilacpy_(const char*, const int*, const int*, const int*, const int*, int*, const int*);
 /* aux fonctions */
-extern int localindice();
-extern void *mr2d_malloc();
-extern int ppcm();
-extern int localsize();
-extern int memoryblocksize();
-extern int changeorigin();
-extern void paramcheck();
+extern int localindice(int, int, int, int, MDESC*);
+extern void *mr2d_malloc(long int);
+extern int ppcm(int, int);
+extern int localsize(int, int, int, int);
+extern int memoryblocksize(MDESC*);
+extern int changeorigin(int, int, int, int, int, int*, int*);
+extern void paramcheck(MDESC*, int, int, int, int, int, int, int);
 /* tools and others function */
 #define scanD0 itrscanD0
 #define dispmat itrdispmat
 #define setmemory itrsetmemory
 #define freememory itrfreememory
 #define scan_intervals itrscan_intervals
-extern void scanD0();
-extern void dispmat();
-extern void setmemory();
-extern void freememory();
-extern int scan_intervals();
-extern void Cpitrmr2do();
-extern void Cpitrmr2d();
+extern void scanD0(char*, char*, int, int*, int*, int, int, MDESC*, int, int, int, int, MDESC*, int, int, int, int, IDESC*, int, IDESC*, int, int*);
+extern void dispmat(void);
+extern void setmemory(int**, int);
+extern void freememory(int*);
+extern int scan_intervals(char, int, int, int, MDESC*, MDESC*, int, int, int, int, IDESC*);
+extern void Cpitrmr2do(char*, char*, int, int, int*, int, int, MDESC*, int*, int, int, MDESC*);
+extern void Cpitrmr2d(char*, char*, int, int, int*, int, int, MDESC*, int*, int, int, MDESC*, int);
 /* some defines for Cpitrmr2do */
 #define SENDBUFF 0
 #define RECVBUFF 1
@@ -258,45 +258,45 @@ extern void Cpitrmr2d();
 #include <assert.h>
 #define DESCLEN 9
 void 
-fortran_mr2d(uplo, diag, m, n, A, ia, ja, desc_A,
-	     B, ib, jb, desc_B)
-  char *uplo, *diag;
-  int  *ia, *ib, *ja, *jb, *m, *n;
-  int   desc_A[DESCLEN], desc_B[DESCLEN];
-  int  *A, *B;
+fortran_mr2d(char *uplo, char *diag, int *m, int *n, int *A, int *ia, int *ja, int desc_A[DESCLEN],
+	     int *B, int *ib, int *jb, int desc_B[DESCLEN])
+//WCC  char *uplo, *diag;
+//WCC  int  *ia, *ib, *ja, *jb, *m, *n;
+//WCC  int   desc_A[DESCLEN], desc_B[DESCLEN];
+//WCC  int  *A, *B;
 {
   Cpitrmr2do(uplo, diag, *m, *n, A, *ia, *ja, (MDESC *) desc_A,
 	     B, *ib, *jb, (MDESC *) desc_B);
   return;
 }
 void 
-fortran_mr2dnew(uplo, diag, m, n, A, ia, ja, desc_A,
-		B, ib, jb, desc_B, gcontext)
-  char *uplo, *diag;
-  int  *ia, *ib, *ja, *jb, *m, *n;
-  int   desc_A[DESCLEN], desc_B[DESCLEN];
-  int  *A, *B;
-  int  *gcontext;
+fortran_mr2dnew(char *uplo, char *diag, int *m, int *n, int *A, int *ia, int *ja, int desc_A[DESCLEN],
+		int *B, int *ib, int *jb, int desc_B[DESCLEN], int *gcontext)
+//WCC  char *uplo, *diag;
+//WCC  int  *ia, *ib, *ja, *jb, *m, *n;
+//WCC  int   desc_A[DESCLEN], desc_B[DESCLEN];
+//WCC  int  *A, *B;
+//WCC  int  *gcontext;
 {
   Cpitrmr2d(uplo, diag, *m, *n, A, *ia, *ja, (MDESC *) desc_A,
 	    B, *ib, *jb, (MDESC *) desc_B, *gcontext);
   return;
 }
-static2 void init_chenille();
-static2 int inter_len();
-static2 int block2buff();
-static2 void buff2block();
-static2 void gridreshape();
+static2 void init_chenille(int, int, int, int*, int, int*, int**, int**, int*);
+static2 int inter_len(int, IDESC*, int, IDESC*);
+static2 int block2buff(IDESC*, int, IDESC*, int, int*, MDESC*, int*);
+static2 void buff2block(IDESC*, int, IDESC*, int, int*, int*, MDESC*);
+static2 void gridreshape(int*);
 void
-Cpitrmr2do(uplo, diag, m, n,
-	   ptrmyblock, ia, ja, ma,
-	   ptrmynewblock, ib, jb, mb)
-  char *uplo, *diag;
-  int  *ptrmyblock, *ptrmynewblock;
+Cpitrmr2do(char *uplo, char *diag, int m, int n,
+	   int *ptrmyblock, int ia, int ja, MDESC *ma,
+	   int *ptrmynewblock, int ib, int jb, MDESC *mb)
+//WCC  char *uplo, *diag;
+//WCC  int  *ptrmyblock, *ptrmynewblock;
 /* pointers to the memory location of the matrix and the redistributed matrix */
-  MDESC *ma;
-  MDESC *mb;
-  int   ia, ja, ib, jb, m, n;
+//WCC  MDESC *ma;
+//WCC  MDESC *mb;
+//WCC  int   ia, ja, ib, jb, m, n;
 {
   int   dummy, nprocs;
   int   gcontext;
@@ -313,15 +313,15 @@ Cpitrmr2do(uplo, diag, m, n,
 			 * idem B puis ia,ja puis ib,jb */
 #define MAGIC_MAX 100000000
 void
-Cpitrmr2d(uplo, diag, m, n,
-	  ptrmyblock, ia, ja, ma,
-	  ptrmynewblock, ib, jb, mb, globcontext)
-  char *uplo, *diag;
-  int  *ptrmyblock, *ptrmynewblock;
+Cpitrmr2d(char *uplo, char *diag, int m, int n,
+	  int *ptrmyblock, int ia, int ja, MDESC *ma,
+	  int *ptrmynewblock, int ib, int jb, MDESC *mb, int globcontext)
+//WCC  char *uplo, *diag;
+//WCC  int  *ptrmyblock, *ptrmynewblock;
 /* pointers to the memory location of the matrix and the redistributed matrix */
-  MDESC *ma;
-  MDESC *mb;
-  int   ia, ja, ib, jb, m, n, globcontext;
+//WCC  MDESC *ma;
+//WCC  MDESC *mb;
+//WCC  int   ia, ja, ib, jb, m, n, globcontext;
 {
   int  *ptrsendbuff, *ptrrecvbuff, *ptrNULL = 0;
   int  *recvptr;
@@ -589,10 +589,10 @@ after_comm:
   }	/* { int tot,nr,ns ...} */
   /* don't forget to clean up things! */
   if (myprow1 >= 0 && mypcol1 >= 0) {
-    freememory((char *) ptrrecvbuff);
+    freememory((int *) ptrrecvbuff);
   };
   if (myprow0 >= 0 && mypcol0 >= 0) {
-    freememory((char *) ptrsendbuff);
+    freememory((int *) ptrsendbuff);
   };
   if (nprow != 1)
     Cblacs_gridexit(gcontext);
@@ -601,9 +601,9 @@ after_comm:
   free(param);
 }/* distrib */
 static2 void 
-init_chenille(mypnum, nprocs, n0, proc0, n1, proc1, psend, precv, myrang)
-  int   nprocs, mypnum, n0, n1;
-  int  *proc0, *proc1, **psend, **precv, *myrang;
+init_chenille(int mypnum, int nprocs, int n0, int *proc0, int n1, int *proc1, int **psend, int **precv, int *myrang)
+//WCC  int   nprocs, mypnum, n0, n1;
+//WCC  int  *proc0, *proc1, **psend, **precv, *myrang;
 {
   int   ns, nr, i, tot;
   int  *sender, *recver, *g0, *g1;
@@ -657,9 +657,9 @@ init_chenille(mypnum, nprocs, n0, proc0, n1, proc1, psend, precv, myrang)
     }
 }
 void 
-Clacpy(m, n, a, lda, b, ldb)
-  int  *a, *b;
-  int   m, n, lda, ldb;
+Clacpy(int m, int n, int *a, int lda, int *b, int ldb)
+//WCC  int  *a, *b;
+//WCC  int   m, n, lda, ldb;
 {
   int   i, j;
   lda -= m;
@@ -673,8 +673,8 @@ Clacpy(m, n, a, lda, b, ldb)
   }
 }
 static2 void 
-gridreshape(ctxtp)
-  int  *ctxtp;
+gridreshape(int *ctxtp)
+//WCC  int  *ctxtp;
 {
   int   ori, final;	/* original context, and new context created, with
 			 * line form */

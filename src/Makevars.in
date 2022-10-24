@@ -16,7 +16,7 @@ EXT_LIBS = @EXT_LIBS@
 EXT_OBJS = @EXT_OBJS@
 CDEFS = @CDEFS@
 CDEFS_CHECK = @CDEFS_CHECK@
-SPMD_CPPFLAGS = @SPMD_CPPFLAGS@
+SPMD_CPPFLAGS = @SPMD_CPPFLAGS@ # -Wstrict-prototypes -Wdeprecated-non-prototype
 SPMD_LDFLAGS = @SPMD_LDFLAGS@
 
 ### R Default Makeconf

@@ -1,3 +1,6 @@
+2022-10-16: Ver. 0.3-3
+  * Fix "deprecated-non-prototype" and "strict-prototypes" warnings.
+
 2022-02-03: Ver. 0.3-2
   * Update autoconf to 2.71.
 

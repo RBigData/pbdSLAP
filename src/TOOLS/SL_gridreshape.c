@@ -7,10 +7,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int SL_Cgridreshape(ctxt, pstart, row_major_in, row_major_out, P, Q)
-int ctxt, pstart, row_major_in, row_major_out, P, Q;
+int SL_Cgridreshape(int ctxt, int pstart, int row_major_in, int row_major_out, int P, int Q)
+//WCC int ctxt, pstart, row_major_in, row_major_out, P, Q;
 {
-   int Cblacs_pnum();
+   int Cblacs_pnum(int, int, int);
    int nctxt, P0, Q0, Np, i, *g;
 
    Cblacs_gridinfo(ctxt, &P0, &Q0, &i, &Np);
@@ -53,29 +53,29 @@ int ctxt, pstart, row_major_in, row_major_out, P, Q;
    return(nctxt);
 }
 
-int sl_gridreshape_(ctxt, pstart, row_major_in, row_major_out, P, Q)
-int *ctxt, *pstart, *row_major_in, *row_major_out, *P, *Q;
+int sl_gridreshape_(int *ctxt, int *pstart, int *row_major_in, int *row_major_out, int *P, int *Q)
+//WCC int *ctxt, *pstart, *row_major_in, *row_major_out, *P, *Q;
 {
    return( SL_Cgridreshape(*ctxt, *pstart, *row_major_in, *row_major_out,
                            *P, *Q) );
 }
 
-int SL_GRIDRESHAPE(ctxt, pstart, row_major_in, row_major_out, P, Q)
-int *ctxt, *pstart, *row_major_in, *row_major_out, *P, *Q;
+int SL_GRIDRESHAPE(int *ctxt, int *pstart, int *row_major_in, int *row_major_out, int *P, int *Q)
+//WCC int *ctxt, *pstart, *row_major_in, *row_major_out, *P, *Q;
 {
    return( SL_Cgridreshape(*ctxt, *pstart, *row_major_in, *row_major_out,
                            *P, *Q) );
 }
 
-int sl_gridreshape__(ctxt, pstart, row_major_in, row_major_out, P, Q)
-int *ctxt, *pstart, *row_major_in, *row_major_out, *P, *Q;
+int sl_gridreshape__(int *ctxt, int *pstart, int *row_major_in, int *row_major_out, int *P, int *Q)
+//WCC int *ctxt, *pstart, *row_major_in, *row_major_out, *P, *Q;
 {
    return( SL_Cgridreshape(*ctxt, *pstart, *row_major_in, *row_major_out,
                            *P, *Q) );
 }
 
-int sl_gridreshape(ctxt, pstart, row_major_in, row_major_out, P, Q)
-int *ctxt, *pstart, *row_major_in, *row_major_out, *P, *Q;
+int sl_gridreshape(int *ctxt, int *pstart, int *row_major_in, int *row_major_out, int *P, int *Q)
+//WCC int *ctxt, *pstart, *row_major_in, *row_major_out, *P, *Q;
 {
    return( SL_Cgridreshape(*ctxt, *pstart, *row_major_in, *row_major_out,
                            *P, *Q) );

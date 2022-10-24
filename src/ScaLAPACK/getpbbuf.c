@@ -3,15 +3,15 @@
 
 #include "tools.h"
 
-char * getpbbuf( mess, length )
+char * getpbbuf( char *mess, int length )
 /*
 *  .. Scalar Arguments ..
 */
-   int         length;
+//WCC   int         length;
 /*
 *  .. Array Arguments ..
 */
-   char        * mess;
+//WCC   char        * mess;
 {
 /*
 *  Purpose
@@ -29,7 +29,7 @@ char * getpbbuf( mess, length )
 /* ..
 *  .. External Functions ..
 */
-   void        blacs_abort_();
+   void        blacs_abort_(int*, int*);
 /* ..
 *  .. Executable Statements ..
 */

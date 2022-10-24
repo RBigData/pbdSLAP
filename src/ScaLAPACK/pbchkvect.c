@@ -12,17 +12,17 @@
 */
 #include "tools.h"
 
-void pbchkvect( n, npos0, ix, jx, desc_X, incx, dpos0, iix, jjx, ixrow,
-                ixcol, nprow, npcol, myrow, mycol, info )
+void pbchkvect( int n, int npos0, int ix, int jx, int desc_X[], int incx, int dpos0, int *iix, int *jjx, int *ixrow,
+                int *ixcol, int nprow, int npcol, int myrow, int mycol, int *info )
 /*
 *  .. Scalar Arguments ..
 */
-   int         dpos0, * iix, incx, * info, ix, * ixcol, * ixrow, * jjx,
-               jx, myrow, mycol, npcol, nprow, n, npos0;
+//WCC   int         dpos0, * iix, incx, * info, ix, * ixcol, * ixrow, * jjx,
+//WCC               jx, myrow, mycol, npcol, nprow, n, npos0;
 /*
 *  .. Array Arguments ..
 */
-   int         desc_X[];
+//WCC   int         desc_X[];
 {
 /*
 *
@@ -120,7 +120,7 @@ void pbchkvect( n, npos0, ix, jx, desc_X, incx, dpos0, iix, jjx, ixrow,
 /* ..
 *  .. External Functions ..
 */
-   F_INTG_FCT  numroc_();
+   F_INTG_FCT  numroc_(int*, int*, int*, int*, int*);
 /*
 *  .. Executable Statements ..
 */
