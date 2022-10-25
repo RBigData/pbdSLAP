@@ -577,9 +577,9 @@ after_comm:
   free(param);
 }/* distrib */
 static2 void 
-init_chenille(mypnum, nprocs, n0, proc0, n1, proc1, psend, precv, myrang)
-  int   nprocs, mypnum, n0, n1;
-  int  *proc0, *proc1, **psend, **precv, *myrang;
+init_chenille(int mypnum, int nprocs, int n0, int *proc0, int n1, int *proc1, int **psend, int **precv, int *myrang)
+//WCC  int   nprocs, mypnum, n0, n1;
+//WCC  int  *proc0, *proc1, **psend, **precv, *myrang;
 {
   int   ns, nr, i, tot;
   int  *sender, *recver, *g0, *g1;
@@ -650,11 +650,11 @@ int _m,_n,_lda,_ldb; \
     } \
 }
 static2 int 
-block2buff(vi, vinb, hi, hinb, ptra, ma, buff)
-  int   hinb, vinb;
-  IDESC *hi, *vi;
-  MDESC *ma;
-  int  *buff, *ptra;
+block2buff(IDESC *vi, int vinb, IDESC *hi, int hinb, int *ptra, MDESC *ma, int *buff)
+//WCC  int   hinb, vinb;
+//WCC  IDESC *hi, *vi;
+//WCC  MDESC *ma;
+//WCC  int  *buff, *ptra;
 {
   int   h, v, sizebuff;
   int  *ptr2;
@@ -672,11 +672,11 @@ block2buff(vi, vinb, hi, hinb, ptra, ma, buff)
   return sizebuff;
 }
 static2 void 
-buff2block(vi, vinb, hi, hinb, buff, ptrb, mb)
-  int   hinb, vinb;
-  IDESC *hi, *vi;
-  MDESC *mb;
-  int  *buff, *ptrb;
+buff2block(IDESC *vi, int vinb, IDESC *hi, int hinb, int *buff, int *ptrb, MDESC *mb)
+//WCC  int   hinb, vinb;
+//WCC  IDESC *hi, *vi;
+//WCC  MDESC *mb;
+//WCC  int  *buff, *ptrb;
 {
   int   h, v, sizebuff;
   int  *ptr2;
@@ -693,9 +693,9 @@ buff2block(vi, vinb, hi, hinb, buff, ptrb, mb)
   }
 }
 static2 int 
-inter_len(hinb, hi, vinb, vi)
-  int   hinb, vinb;
-  IDESC *hi, *vi;
+inter_len(int hinb, IDESC *hi, int vinb, IDESC *vi)
+//WCC  int   hinb, vinb;
+//WCC  IDESC *hi, *vi;
 {
   int   hlen, vlen, h, v;
   hlen = 0;
@@ -723,8 +723,8 @@ Clacpy(int m, int n, int *a, int lda, int *b, int ldb)
   }
 }
 static2 void 
-gridreshape(ctxtp)
-  int  *ctxtp;
+gridreshape(int *ctxtp)
+//WCC  int  *ctxtp;
 {
   int   ori, final;	/* original context, and new context created, with
 			 * line form */
