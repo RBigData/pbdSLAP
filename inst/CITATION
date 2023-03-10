@@ -1,12 +1,12 @@
 citHeader("To cite pbdSLAP in a publication use:")
 
-citEntry(
-  entry = "Misc",
+bibentry(
+  bibtype = "Misc",
   title = "{pbdSLAP}: Programming with Big Data -- Scalable Linear Algebra Packages",
-  author = personList(as.person("Wei-Chen Chen"),
-                      as.person("Drew Schmidt"),
-                      as.person("George Ostrouchov"),
-                      as.person("Pragneshkumar Patel")),
+  author = c(as.person("Wei-Chen Chen"),
+             as.person("Drew Schmidt"),
+             as.person("George Ostrouchov"),
+             as.person("Pragneshkumar Patel")),
   year = "2012",
   note = "{R} Package",
   url = "https://cran.r-project.org/package=pbdSLAP",
@@ -14,13 +14,13 @@ citEntry(
   key = "Chen2012pbdSLAPpackage"
 )
 
-citEntry(
-  entry = "Manual",
+bibentry(
+  bibtype = "Manual",
   title = "A Quick Guide for the {pbdSLAP} Package",
-  author = personList(as.person("Wei-Chen Chen"),
-                      as.person("Drew Schmidt"),
-                      as.person("George Ostrouchov"),
-                      as.person("Pragneshkumar Patel")),
+  author = c(as.person("Wei-Chen Chen"),
+             as.person("Drew Schmidt"),
+             as.person("George Ostrouchov"),
+             as.person("Pragneshkumar Patel")),
   year = "2012",
   note = "{R} Vignette",
   url = "https://cran.r-project.org/package=pbdSLAP",

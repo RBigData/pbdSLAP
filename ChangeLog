@@ -1,3 +1,8 @@
+2023-03-10: Ver. 0.3-4
+  * Change "citEntry()" to "bibentry(bibtype = ...)".
+  * Change "personList()" to "c()".
+  * Change "sprintf()" to "snprintf()".
+
 2022-10-16: Ver. 0.3-3
   * Fix "deprecated-non-prototype" and "strict-prototypes" warnings.
 
