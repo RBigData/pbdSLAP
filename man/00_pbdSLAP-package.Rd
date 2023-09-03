@@ -9,15 +9,6 @@
   pbdMPI based on ScaLAPACK version 2.0.2.
 }
 \details{
-\tabular{ll}{
-  Package: \tab pbdSLAP\cr
-  Type: \tab Package\cr
-%  Version: \tab 0.1-2\cr
-%  Date: \tab 2010-02-18\cr
-  License: \tab MPL2\cr
-  LazyLoad: \tab yes\cr
-}
-
   This package requires \pkg{pbdMPI} and MPI system. The main purpose of
   \pkg{pbdSLAP} is to provide several scalable linear algebra packages
   containing double precision libraries for \pkg{pbdDMAC} or other useful
