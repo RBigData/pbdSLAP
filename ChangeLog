@@ -1,5 +1,6 @@
 2023-09-03: Ver. 0.3-5
   * Remove the meta table from the doc.
+  * Modify CITATION.
 
 2023-03-10: Ver. 0.3-4
   * Change "citEntry()" to "bibentry(bibtype = ...)".
