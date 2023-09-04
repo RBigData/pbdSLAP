@@ -14,7 +14,8 @@ void BI_BlacsErr(int ConTxt, int line, char *file, char *form, ...)
    BLACSCONTEXT *ctxt;
 
    va_start(argptr, form);
-   vsprintf(cline, form, argptr);
+   //WCC vsprintf(cline, form, argptr);
+   snprintf(cline, 100, form, argptr);
    va_end(argptr);
 
    if (ConTxt > -1)

@@ -9,7 +9,7 @@
 --- 'pbdSLAP' Installation:
 0. Download and extract 'pbdSLAP'
 
-     > tar zxvf pbdSLAP_0.1-9.tar.gz
+     > tar zxvf pbdSLAP_*.*-*.tar.gz
 
 1. Default Installation:
    This should work with most platforms with OpenMPI installed. The
@@ -35,9 +35,9 @@
    ("set_mpisrc.bat" is available in "pbdMPI/INSTALL.win.bin")
 
      C:/> set_mpisrc
-     C:/> tar zxvf pbdSLAP_0.1-9.tar.gz
+     C:/> tar zxvf pbdSLAP_*.*-*.tar.gz
      C:/> R CMD INSTALL --build pbdSLAP
-     C:/> R CMD INSTALL pbdSLAP_0.1-9.zip
+     C:/> R CMD INSTALL pbdSLAP_*.*-*.zip
 
 --- Testing:
    Suppose all environments are set correctly, I can run test examples by
@@ -60,7 +60,7 @@
    ("set_mpi.bat" is available in "pbdMPI/INSTALL.win.bin")
 
      C:/> set_mpi
-     C:/> R CMD INSTALL pbdSLAP_0.1-9.zip
+     C:/> R CMD INSTALL pbdSLAP_*.*-*.zip
 
 --- Testing:
    Suppose all environments are set correctly, I can run test examples by

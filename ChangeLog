@@ -1,3 +1,15 @@
+2023-09-03: Ver. 0.3-5
+  * Remove the meta table from the doc.
+  * Modify CITATION.
+
+2023-03-10: Ver. 0.3-4
+  * Change "citEntry()" to "bibentry(bibtype = ...)".
+  * Change "personList()" to "c()".
+  * Change "sprintf()" to "snprintf()".
+
+2022-10-16: Ver. 0.3-3
+  * Fix "deprecated-non-prototype" and "strict-prototypes" warnings.
+
 2022-02-03: Ver. 0.3-2
   * Update autoconf to 2.71.
 

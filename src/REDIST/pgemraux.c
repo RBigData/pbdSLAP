@@ -23,7 +23,7 @@
 #define ilacpy_ ilacpy
 #endif
 #define Clacpy Cigelacpy
-void  Clacpy();
+void  Clacpy(int, int, int, int, int, int);
 typedef struct {
   int   desctype;
   int   ctxt;
@@ -51,48 +51,48 @@ typedef struct {
 #define realloc myrealloc
 #endif
 /* Cblacs */
-extern void Cblacs_pcoord();
-extern int Cblacs_pnum();
-extern void Csetpvmtids();
-extern void Cblacs_get();
-extern void Cblacs_pinfo();
-extern void Cblacs_gridinfo();
-extern void Cblacs_gridinit();
-extern void Cblacs_exit();
-extern void Cblacs_gridexit();
-extern void Cblacs_setup();
-extern void Cigebs2d();
-extern void Cigebr2d();
-extern void Cigesd2d();
-extern void Cigerv2d();
-extern void Cigsum2d();
-extern void Cigamn2d();
-extern void Cigamx2d();
-extern void Cigesd2d();
-extern void Cigerv2d();
+extern void Cblacs_pcoord(int, int, int*, int*);
+extern int Cblacs_pnum(int, int, int);
+extern void Csetpvmtids(void);
+extern void Cblacs_get(int, int, int*);
+extern void Cblacs_pinfo(int*, int*);
+extern void Cblacs_gridinfo(int, int*, int*, int*, int*);
+extern void Cblacs_gridinit(int*, char*, int, int);
+extern void Cblacs_exit(int);
+extern void Cblacs_gridexit(int);
+extern void Cblacs_setup(int*, int*);
+extern void Cigebs2d(int, char*, char*, int, int, int*, int);
+extern void Cigebr2d(int, char*, char*, int, int, int*, int, int, int);
+extern void Cigesd2d(int, int, int, int*, int, int, int);
+extern void Cigerv2d(int, int, int, int*, int, int, int);
+extern void Cigsum2d(int, char*, char*, int, int, int*, int, int, int);
+extern void Cigamn2d(int, char*, char*, int, int, int*, int, int*, int*, int, int, int);
+extern void Cigamx2d(int, char*, char*, int, int, int*, int, int*, int*, int, int, int);
+//WCC extern void Cigesd2d();
+//WCC extern void Cigerv2d();
 /* lapack */
-void  ilacpy_();
+void  ilacpy_(const char*, const int*, const int*, const int*, const int*, int*, const int*);
 /* aux fonctions */
-extern int localindice();
-extern void *mr2d_malloc();
-extern int ppcm();
-extern int localsize();
-extern int memoryblocksize();
-extern int changeorigin();
-extern void paramcheck();
+extern int localindice(int, int, int, int, MDESC*);
+extern void *mr2d_malloc(long int);
+extern int ppcm(int, int);
+extern int localsize(int, int, int, int);
+extern int memoryblocksize(MDESC*);
+extern int changeorigin(int, int, int, int, int, int*, int*);
+extern void paramcheck(MDESC*, int, int, int, int, int, int, int);
 /* tools and others function */
 #define scanD0 igescanD0
 #define dispmat igedispmat
 #define setmemory igesetmemory
 #define freememory igefreememory
 #define scan_intervals igescan_intervals
-extern void scanD0();
-extern void dispmat();
-extern void setmemory();
-extern void freememory();
-extern int scan_intervals();
-extern void Cpigemr2do();
-extern void Cpigemr2d();
+extern void scanD0(char*, char*, int, int*, int*, int, int, MDESC*, int, int, int, int, MDESC*, int, int, int, int, IDESC*, int, IDESC*, int, int*);
+extern void dispmat(void);
+extern void setmemory(int**, int);
+extern void freememory(int*);
+extern int scan_intervals(char, int, int, int, MDESC*, MDESC*, int, int, int, int, IDESC*);
+extern void Cpigemr2do(int, int, int*, int, int, MDESC*, int*, int, int, MDESC*);
+extern void Cpigemr2d(int, int, int*, int, int, MDESC*, int*, int, int, MDESC*, int);
 /* some defines for Cpigemr2do */
 #define SENDBUFF 0
 #define RECVBUFF 1
@@ -107,8 +107,8 @@ extern void Cpigemr2d();
 #include <stdlib.h>
 #include <assert.h>
 void *
-mr2d_malloc(n)
-  long int   n;
+mr2d_malloc(long int n)
+//WCC  long int   n;
 {
   void *ptr;
   assert(n > 0);
@@ -122,8 +122,8 @@ mr2d_malloc(n)
   return ptr;
 }
 int 
-pgcd(a, b)
-  int   a, b;
+pgcd(int a, int b)
+//WCC  int   a, b;
 {
   int   aux;
   if (a < b)
@@ -137,8 +137,8 @@ pgcd(a, b)
   }
 }
 int 
-ppcm(a, b)
-  int   a, b;
+ppcm(int a, int b)
+//WCC  int   a, b;
 {
   int   pg;
   pg = pgcd(a, b);
@@ -149,8 +149,8 @@ ppcm(a, b)
  * grid of processors with p rows with blocksize nbrow : this procedure can
  * also be used to compute the number of cols by replacing rows by cols */
 int 
-localsize(myprow, p, nbrow, m)
-  int   myprow, p, nbrow, m;
+localsize(int myprow, int p, int nbrow, int m)
+//WCC  int   myprow, p, nbrow, m;
 {
   int   templateheight, blockheight;
   templateheight = p * nbrow;
@@ -178,8 +178,8 @@ localsize(myprow, p, nbrow, m)
 /****************************************************************/
 /* Returns the exact memory block size corresponding to the parameters */
 int
-memoryblocksize(a)
-  MDESC *a;
+memoryblocksize(MDESC *a)
+//WCC  MDESC *a;
 {
   int   myprow, mypcol, p, q;
   /* Compute the (myprow,mypcol) indices of processor mypnum in P0xQ0 We
@@ -192,8 +192,8 @@ memoryblocksize(a)
 	localsize(mypcol, q, a->nbcol, a->n);
 }
 void 
-checkequal(ctxt, a)
-  int   a, ctxt;
+checkequal(int ctxt, int a)
+//WCC  int   a, ctxt;
 {
   int   np, dummy, nbrow, myp, b;
   Cblacs_gridinfo(ctxt, &nbrow, &np, &dummy, &myp);
@@ -211,10 +211,10 @@ checkequal(ctxt, a)
   }
 }
 void 
-paramcheck(a, i, j, m, n, p, q, gcontext)
-  MDESC *a;
+paramcheck(MDESC *a, int i, int j, int m, int n, int p, int q, int gcontext)
+//WCC  MDESC *a;
 /*WCC  int   i, j, m, n, p, q; */
-  int   i, j, m, n, p, q, gcontext; //WCC:add
+//WCC  int   i, j, m, n, p, q, gcontext; //WCC:add
 {
   int   p2, q2, myprow, mypcol;
 #ifndef NDEBUG
@@ -272,9 +272,9 @@ nbrow=%d,lda=%d,sprow=%d\n",
  * i' with i'< blocksize return the line number on the local process where
  * the new matrix begin, the new process number, and i' */
 int 
-changeorigin(myp, sp, p, bs, i, decal, newsp)
-  int   myp, sp, p, bs, i;
-  int  *decal, *newsp;
+changeorigin(int myp, int sp, int p, int bs, int i, int *decal, int *newsp)
+//WCC  int   myp, sp, p, bs, i;
+//WCC  int  *decal, *newsp;
 {
   int   tempheight, firstblock, firsttemp;
   /* we begin by changing the parameters so that ia < templatewidth,... */
@@ -291,9 +291,9 @@ changeorigin(myp, sp, p, bs, i, decal, newsp)
 /******************************************************************/
 /* Return the indice in local memory of element of indice a in the matrix */
 int
-localindice(ig, jg, templateheight, templatewidth, a)
-  int   templateheight, templatewidth, ig, jg;
-  MDESC *a;
+localindice(int ig, int jg, int templateheight, int templatewidth, MDESC *a)
+//WCC  int   templateheight, templatewidth, ig, jg;
+//WCC  MDESC *a;
 /* Return the indice in local memory (scattered distribution) of the element
  * of indice a in global matrix */
 {
