@@ -12,7 +12,7 @@ all: double
 
 double: $(PKG_DMRSRC) $(PKG_ALLAUX)
 	$(ARCH) $(ARCHFLAGS) ../$(SCALAPACKLIB) $(PKG_DMRSRC) $(PKG_ALLAUX)
-	$(RANLIB) ../$(SCALAPACKLIB)
+	# $(RANLIB) ../$(SCALAPACKLIB)
 
 clean:
 	rm -f *.co

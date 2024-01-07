@@ -57,7 +57,7 @@ all: double
 double: $(PKG_DLASRC) $(PKG_DZLAUX) $(PKG_DZLAUX_C) $(PKG_ALLAUX) $(PKG_ALLAUX_C)
 	$(ARCH) $(ARCHFLAGS) ../$(SCALAPACKLIB) $(PKG_DLASRC) $(PKG_DZLAUX) \
 	        $(PKG_DZLAUX_C) $(PKG_ALLAUX) $(PKG_ALLAUX_C)
-	$(RANLIB) ../$(SCALAPACKLIB)
+	# $(RANLIB) ../$(SCALAPACKLIB)
 
 clean :
 	rm -f *.fo *.co

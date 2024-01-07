@@ -80,6 +80,7 @@ $(R_SLAP): SLmake
 	( cd PBLAS; $(MAKE) )
 	( cd REDIST; $(MAKE) )
 	( cd ScaLAPACK; $(MAKE) )
+	$(RANLIB) $(R_SLAP)
 
 clean:
 	@$(RM) -rf *.o *.d *.rc *.so* *.dll *.dylib *.a *.lib *.inc \

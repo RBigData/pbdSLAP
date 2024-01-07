@@ -11,7 +11,7 @@ PKG_PBDBLASAUX = $(PBDBLASAUX:.o=.fo)
 
 double: $(PKG_PBDBLASAUX)
 	$(ARCH) $(ARCHFLAGS) ../../$(SCALAPACKLIB) $(PKG_PBDBLASAUX)
-	$(RANLIB) ../../$(SCALAPACKLIB)
+	# $(RANLIB) ../../$(SCALAPACKLIB)
 
 #---------------------------------------------------------------------------
 

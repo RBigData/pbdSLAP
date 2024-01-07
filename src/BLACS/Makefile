@@ -78,7 +78,7 @@ $(PKG_Fintobj): Bdef.h Bconfig.h
 all : $(PKG_internal) $(PKG_Fintobj) $(PKG_Cintobj)
 	$(ARCH) $(ARCHFLAGS) ../$(SCALAPACKLIB) \
                 $(PKG_internal) $(PKG_Fintobj) $(PKG_Cintobj)
-	$(RANLIB) ../$(SCALAPACKLIB)
+	# $(RANLIB) ../$(SCALAPACKLIB)
 
 #  -----------------------
 #  Delete the object files

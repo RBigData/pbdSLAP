@@ -28,7 +28,7 @@ PKG_DZPBTZ = $(DZPBTZ:.o=.fo)
 double: $(PKG_APBTZ) $(PKG_IPBTZ) $(PKG_DPBTZ) $(PKG_DZPBTZ)
 	$(ARCH) $(ARCHFLAGS) ../../$(SCALAPACKLIB) \
                 $(PKG_APBTZ) $(PKG_IPBTZ) $(PKG_DPBTZ) $(PKG_DZPBTZ)
-	$(RANLIB) ../../$(SCALAPACKLIB)
+	# $(RANLIB) ../../$(SCALAPACKLIB)
 
 #---------------------------------------------------------------------------
 
