@@ -28,11 +28,11 @@ dlapackaux:
 integer: $(PKG_ATOOLS) $(PKG_ATOOLS_C) $(PKG_ITOOLS)
 	$(ARCH) $(ARCHFLAGS) ../$(SCALAPACKLIB) \
                 $(PKG_ATOOLS) $(PKG_ATOOLS_C) $(PKG_ITOOLS)
-	$(RANLIB) ../$(SCALAPACKLIB)
+	# $(RANLIB) ../$(SCALAPACKLIB)
 
 double: dlapackaux integer $(PKG_DTOOLS)
 	$(ARCH) $(ARCHFLAGS) ../$(SCALAPACKLIB) $(PKG_DTOOLS)
-	$(RANLIB) ../$(SCALAPACKLIB)
+	# $(RANLIB) ../$(SCALAPACKLIB)
 
 clean :
 	rm -f *.fo *.co

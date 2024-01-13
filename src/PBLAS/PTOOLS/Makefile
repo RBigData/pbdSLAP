@@ -35,7 +35,12 @@ ALLCTOOLS = \
 
 #---------------------------------------------------------------------------
 
-ALLTOOLS = $(ALLCTOOLS)
+WCC_ALLCTOOLS = \
+    wcc_PB_Citypeset.o
+
+#---------------------------------------------------------------------------
+
+ALLTOOLS = $(ALLCTOOLS) $(WCC_ALLCTOOLS)
 
 #---------------------------------------------------------------------------
 #  The C PBLAS tools
@@ -45,7 +50,11 @@ DCTOOLS = PB_Cdtypeset.o
 
 #---------------------------------------------------------------------------
 
-DTOOLS = $(DCTOOLS)
+WCC_DCTOOLS = wcc_PB_Cdtypeset.o
+
+#---------------------------------------------------------------------------
+
+DTOOLS = $(DCTOOLS) $(WCC_DCTOOLS)
 
 #---------------------------------------------------------------------------
 
@@ -53,7 +62,7 @@ PKG_DPTOOLS = $(ALLTOOLS:.o=.co) $(DTOOLS:.o=.co)
 
 double: $(PKG_DPTOOLS)
 	$(ARCH) $(ARCHFLAGS) ../../$(SCALAPACKLIB) $(PKG_DPTOOLS)
-	$(RANLIB) ../../$(SCALAPACKLIB)
+	# $(RANLIB) ../../$(SCALAPACKLIB)
 
 clean:
 	rm -f *.fo *.co

@@ -2,7 +2,7 @@ useDynLib(pbdSLAP)
 # exportPattern("[[:alpha:]]+")
 # exportPattern("^[\\.]")
 
-import(methods, rlecuyer, pbdMPI)
+import(methods, pbdMPI)
 
 export(
   ### "R/blacs.r"
