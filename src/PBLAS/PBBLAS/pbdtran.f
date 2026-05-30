@@ -307,14 +307,16 @@
 *
               IDEX = (I/NPROW) * NB
               IF( MYROW.EQ.JCROW .AND. MYCOL.EQ.MCCOL ) THEN
-                CALL PBDTR2AT( ICONTXT, 'Col', TRANS, MP-IDEX, N, NB,
+*WCC                CALL PBDTR2AT( ICONTXT, 'Col', TRANS, MP-IDEX, N, NB,
+                CALL PBDTR2AT( ICONTXT, 'C', TRANS, MP-IDEX, N, NB,
      $                         A(IDEX+1,1), LDA, TBETA, C(1,JDEX+1),
      $                         LDC, LCMP, LCMQ )
 *
 *             The source node sends blocks to a destination node
 *
               ELSE
-                CALL PBDTR2BT( ICONTXT, 'Col', TRANS, MP-IDEX, N, NB,
+*WCC                CALL PBDTR2BT( ICONTXT, 'Col', TRANS, MP-IDEX, N, NB,
+                CALL PBDTR2BT( ICONTXT, 'C', TRANS, MP-IDEX, N, NB,
      $                         A(IDEX+1,1), LDA, ZERO, WORK, N,
      $                         LCMP*NB )
                 CALL DGESD2D( ICONTXT, N, MQ0, WORK, N, JCROW, MCCOL )
@@ -327,7 +329,8 @@
                 CALL DGERV2D( ICONTXT, N, MQ0, C, LDC, MCROW, IACOL )
               ELSE
                 CALL DGERV2D( ICONTXT, N, MQ0, WORK, N, MCROW, IACOL )
-                CALL PBDTR2AF( ICONTXT, 'Row', N, MQ-JDEX, NB, WORK, N,
+*WCC                CALL PBDTR2AF( ICONTXT, 'Row', N, MQ-JDEX, NB, WORK, N,
+                CALL PBDTR2AF( ICONTXT, 'R', N, MQ-JDEX, NB, WORK, N,
      $                         TBETA, C(1,JDEX+1), LDC, LCMP, LCMQ,
      $                         MQ0 )
               END IF
@@ -356,11 +359,13 @@
           DO 30 I = 0, LCMP-1
             IF( MRCOL.EQ.MOD( NPROW*I+MRROW, NPCOL ) ) THEN
               IF( LCMQ.EQ.1.AND.(ICROW.EQ.-1.OR.ICROW.EQ.MYROW) ) THEN
-                 CALL PBDTR2BT( ICONTXT, 'Col', TRANS, MP-I*NB, N, NB,
+*WCC                 CALL PBDTR2BT( ICONTXT, 'Col', TRANS, MP-I*NB, N, NB,
+                CALL PBDTR2BT( ICONTXT, 'C', TRANS, MP-I*NB, N, NB,
      $                          A(I*NB+1,1), LDA, BETA, C, LDC,
      $                          LCMP*NB )
               ELSE
-                 CALL PBDTR2BT( ICONTXT, 'Col', TRANS, MP-I*NB, N, NB,
+*WCC                 CALL PBDTR2BT( ICONTXT, 'Col', TRANS, MP-I*NB, N, NB,
+                 CALL PBDTR2BT( ICONTXT, 'C', TRANS, MP-I*NB, N, NB,
      $                          A(I*NB+1,1), LDA, ZERO, WORK, N,
      $                          LCMP*NB )
               END IF
@@ -479,14 +484,16 @@
 *
                JDEX = (I/NPCOL) * NB
                IF( MYROW.EQ.MCROW .AND. MYCOL.EQ.JCCOL ) THEN
-                 CALL PBDTR2AT( ICONTXT, 'Row', TRANS, M, NQ-JDEX, NB,
+*WCC                 CALL PBDTR2AT( ICONTXT, 'Row', TRANS, M, NQ-JDEX, NB,
+                 CALL PBDTR2AT( ICONTXT, 'R', TRANS, M, NQ-JDEX, NB,
      $                          A(1,JDEX+1), LDA, TBETA, C(IDEX+1,1),
      $                          LDC, LCMP, LCMQ )
 *
 *              The source node sends blocks to a destination node
 *
                ELSE
-                 CALL PBDTR2BT( ICONTXT, 'Row', TRANS, M, NQ-JDEX, NB,
+*WCC                 CALL PBDTR2BT( ICONTXT, 'Row', TRANS, M, NQ-JDEX, NB,
+                 CALL PBDTR2BT( ICONTXT, 'R', TRANS, M, NQ-JDEX, NB,
      $                          A(1,JDEX+1), LDA, ZERO, WORK, NP0,
      $                          LCMQ*NB )
                  CALL DGESD2D( ICONTXT, NP0, M, WORK, NP0,
@@ -500,7 +507,8 @@
                 CALL DGERV2D( ICONTXT, NP0, M, C, LDC, IAROW, MCCOL )
               ELSE
                 CALL DGERV2D( ICONTXT, NP0, M, WORK, NP0, IAROW, MCCOL )
-                CALL PBDTR2AF( ICONTXT, 'Col', NP-IDEX, M, NB, WORK,
+*WCC                CALL PBDTR2AF( ICONTXT, 'Col', NP-IDEX, M, NB, WORK,
+                CALL PBDTR2AF( ICONTXT, 'C', NP-IDEX, M, NB, WORK,
      $                         NP0, TBETA, C(IDEX+1,1), LDC, LCMP, LCMQ,
      $                         NP0 )
               END IF
@@ -529,11 +537,13 @@
           DO 50 I = 0, LCMQ-1
             IF( MRROW.EQ.MOD(NPCOL*I+MRCOL, NPROW) ) THEN
               IF( LCMP.EQ.1.AND.(ICCOL.EQ.-1.OR.ICCOL.EQ.MYCOL) ) THEN
-                CALL PBDTR2BT( ICONTXT, 'Row', TRANS, M, NQ-I*NB, NB,
+*WCC                CALL PBDTR2BT( ICONTXT, 'Row', TRANS, M, NQ-I*NB, NB,
+                CALL PBDTR2BT( ICONTXT, 'R', TRANS, M, NQ-I*NB, NB,
      $                         A(1,I*NB+1), LDA, BETA, C, LDC,
      $                         LCMQ*NB )
               ELSE
-                CALL PBDTR2BT( ICONTXT, 'Row', TRANS, M, NQ-I*NB, NB,
+*WCC                CALL PBDTR2BT( ICONTXT, 'Row', TRANS, M, NQ-I*NB, NB,
+                CALL PBDTR2BT( ICONTXT, 'R', TRANS, M, NQ-I*NB, NB,
      $                         A(1,I*NB+1), LDA, ZERO, WORK, NP0,
      $                         LCMQ*NB )
               END IF

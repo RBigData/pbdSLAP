@@ -1,6 +1,6 @@
 Package: pbdSLAP
-Version: 0.3-7
-Date: 2024-11-11
+Version: 0.3-8
+Date: 2026-05-29
 Title: Programming with Big Data -- Scalable Linear Algebra Packages
 Authors@R: c(person("Wei-Chen", "Chen", role = c("aut", "cre"), email =
         "wccsnow@gmail.com"), person("Drew", "Schmidt", role = "aut"),
