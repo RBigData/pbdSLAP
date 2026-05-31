@@ -7,7 +7,9 @@
 *     October 15, 1999
 *
 *     .. Scalar Arguments ..
-      CHARACTER*( * )    NAME, OPTS
+*WCC      CHARACTER*( * )    NAME, OPTS
+      CHARACTER(LEN=8)   NAME
+      CHARACTER(LEN=2)   OPTS
       INTEGER            ICTXT, ISPEC, N1, N2, N3, N4
 *     ..
 *

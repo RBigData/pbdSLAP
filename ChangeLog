@@ -1,6 +1,8 @@
 2026-05-29: Ver. 0.3-8
-  * Fix "adist" (3/1) warnings in "src/PBLAS/PBBLAS/pbdtran.f" caught by
-    gfortran-16.0.1 using "PKG_FFLAGS = -Wcharacter-truncation"
+  * Fix "adist" warnings caught by gfortran-16.0.1
+    using "PKG_FFLAGS = -Wcharacter-truncation"
+  * Fix "Old-style character length" warnings caught by gfortran-16.0.1
+    using "PKG_FFLAGS = -Wall -pedantic -mtune=native"
 
 2024-11-01: Ver. 0.3-7
   * Remove "$(ALL_CPPFLAGS)" from FCFLAG.

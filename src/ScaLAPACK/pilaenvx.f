@@ -12,7 +12,9 @@
       IMPLICIT NONE
 *
 *     .. Scalar Arguments ..
-      CHARACTER*( * )    NAME, OPTS
+*WCC      CHARACTER*( * )    NAME, OPTS
+      CHARACTER(LEN=8)   NAME
+      CHARACTER(LEN=2)   OPTS
       INTEGER            ICTXT, ISPEC, N1, N2, N3, N4
 *     ..
 *
@@ -135,7 +137,7 @@
       INTEGER            I, IC, IZ, NB, NBMIN, NX, NPROW, NPCOL, MYROW,
      $                   MYCOL
       LOGICAL            CNAME, SNAME
-      CHARACTER          C1*1, C2*2, C4*2, C3*3, SUBNAM*6
+      CHARACTER          C1*1, C2*2, C4*2, C3*3, SUBNAM*8
 *     ..
 *     .. Intrinsic Functions ..
       INTRINSIC          CHAR, ICHAR, INT, MIN, REAL
