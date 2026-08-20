@@ -11,7 +11,7 @@
 *     David Walker,  Oak Ridge National Laboratory
 *
 *     .. Scalar Arguments ..
-      CHARACTER*1        TRANS, XDIST
+      CHARACTER(LEN=1)   TRANS, XDIST
       INTEGER            ICONTXT, INCX, INCY, IXCOL, IXROW, IYCOL,
      $                   IYROW, N, NB, NZ
       DOUBLE PRECISION   BETA
@@ -723,7 +723,7 @@
 *     April 28, 1996
 *
 *     .. Scalar Arguments ..
-      CHARACTER*1          TRANS
+      CHARACTER(LEN=1)     TRANS
       INTEGER              ICONTXT, N, NB, NZ, INCX, INCY, JINX, JINY
       DOUBLE PRECISION     BETA
 *     ..

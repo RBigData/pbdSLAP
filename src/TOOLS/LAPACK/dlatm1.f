@@ -144,7 +144,15 @@
 *     Compute D according to COND and MODE
 *
       IF( MODE.NE.0 ) THEN
-         GO TO ( 10, 30, 50, 70, 90, 110 )ABS( MODE )
+*WCC     GO TO ( 10, 30, 50, 70, 90, 110 )ABS( MODE )
+         SELECT CASE( ABS( MODE ) )
+            CASE ( 1 ) ; GO TO 10
+            CASE ( 2 ) ; GO TO 30
+            CASE ( 3 ) ; GO TO 50
+            CASE ( 4 ) ; GO TO 70
+            CASE ( 5 ) ; GO TO 90
+            CASE ( 6 ) ; GO TO 110
+         END SELECT
 *
 *        One large D value:
 *

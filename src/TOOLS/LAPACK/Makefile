@@ -10,9 +10,13 @@ PKG_ALLAUX = $(ALLAUX:.o=.fo)
 PKG_DZATGEN = $(DZATGEN:.o=.fo)
 PKG_DMATGEN = $(DMATGEN:.o=.fo)
 
-double: $(PKG_ALLAUX) $(PKG_DMATGEN) $(PKG_DZATGEN)
+all: double
 	$(ARCH) $(ARCHFLAGS) ../../$(SCALAPACKLIB) \
-                $(PKG_ALLAUX) $(PKG_DMATGEN) $(PKG_DZATGEN)
+	        $(PKG_ALLAUX) $(PKG_DMATGEN) $(PKG_DZATGEN)
+
+double: $(PKG_ALLAUX) $(PKG_DMATGEN) $(PKG_DZATGEN)
+	# $(ARCH) $(ARCHFLAGS) ../../$(SCALAPACKLIB) \
+        #         $(PKG_ALLAUX) $(PKG_DMATGEN) $(PKG_DZATGEN)
 	# $(RANLIB) ../../$(SCALAPACKLIB)
 
 clean :

@@ -6,7 +6,7 @@
 *     April 1, 1998
 *
 *     .. Scalar Arguments ..
-      CHARACTER*1        HERM, UPLO
+      CHARACTER(LEN=1)   HERM, UPLO
       INTEGER            IOFFD, LDA, M, N
       DOUBLE PRECISION   ALPHA, BETA
 *     ..

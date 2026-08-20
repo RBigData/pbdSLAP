@@ -1,6 +1,8 @@
 include ../../SLmake.inc
 
 all: double
+	$(ARCH) $(ARCHFLAGS) ../../$(SCALAPACKLIB) \
+	        $(PKG_APBTZ) $(PKG_IPBTZ) $(PKG_DPBTZ) $(PKG_DZPBTZ)
 
 APBTZ = \
     pxerbla.o
@@ -26,8 +28,8 @@ PKG_DPBTZ = $(DPBTZ:.o=.fo)
 PKG_DZPBTZ = $(DZPBTZ:.o=.fo)
 
 double: $(PKG_APBTZ) $(PKG_IPBTZ) $(PKG_DPBTZ) $(PKG_DZPBTZ)
-	$(ARCH) $(ARCHFLAGS) ../../$(SCALAPACKLIB) \
-                $(PKG_APBTZ) $(PKG_IPBTZ) $(PKG_DPBTZ) $(PKG_DZPBTZ)
+	# $(ARCH) $(ARCHFLAGS) ../../$(SCALAPACKLIB) \
+        #         $(PKG_APBTZ) $(PKG_IPBTZ) $(PKG_DPBTZ) $(PKG_DZPBTZ)
 	# $(RANLIB) ../../$(SCALAPACKLIB)
 
 #---------------------------------------------------------------------------

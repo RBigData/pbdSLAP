@@ -6,7 +6,7 @@
 *     April 28, 1996
 *
 *     .. Scalar Arguments ..
-      CHARACTER*1        XDIST
+      CHARACTER(LEN=1)   XDIST
       INTEGER            ICONTXT, INCX, INCY, LCMP, LCMQ, N, NB, NINT,
      $                   NZ
       DOUBLE PRECISION   BETA

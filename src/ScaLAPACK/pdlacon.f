@@ -210,7 +210,14 @@
          RETURN
       END IF
 *
-      GO TO ( 20, 40, 70, 110, 140 )JUMP
+*WCC  GO TO ( 20, 40, 70, 110, 140 )JUMP
+      SELECT CASE( JUMP )
+         CASE ( 1 ) ; GO TO 20
+         CASE ( 2 ) ; GO TO 40
+         CASE ( 3 ) ; GO TO 70
+         CASE ( 4 ) ; GO TO 110
+         CASE ( 5 ) ; GO TO 140
+      END SELECT
 *
 *     ................ ENTRY   (JUMP = 1)
 *     FIRST ITERATION.  X HAS BEEN OVERWRITTEN BY A*X

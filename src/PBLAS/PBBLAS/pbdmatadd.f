@@ -6,7 +6,7 @@
 *     April 28, 1996
 *
 *     .. Scalar Arguments ..
-      CHARACTER*1        MODE
+      CHARACTER(LEN=1)   MODE
       INTEGER            ICONTXT, LDA, LDB, M, N
       DOUBLE PRECISION   ALPHA, BETA
 *     ..

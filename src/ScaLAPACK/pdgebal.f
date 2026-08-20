@@ -262,7 +262,11 @@
      $             DESCA(M_) )
 *
    30 CONTINUE
-      GO TO ( 40, 80 )IEXC
+*WCC  GO TO ( 40, 80 )IEXC
+      SELECT CASE( IEXC )
+         CASE ( 1 ) ; GO TO 40
+         CASE ( 2 ) ; GO TO 80
+      END SELECT
 *
 *     Search for rows isolating an eigenvalue and push them down.
 *

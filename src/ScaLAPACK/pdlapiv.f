@@ -7,7 +7,7 @@
 *     November 15, 1997
 *
 *     .. Scalar Arguments ..
-      CHARACTER*1        DIREC, PIVROC, ROWCOL
+      CHARACTER(LEN=1)   DIREC, PIVROC, ROWCOL
       INTEGER            IA, IP, JA, JP, M, N
 *     ..
 *     .. Array Arguments ..

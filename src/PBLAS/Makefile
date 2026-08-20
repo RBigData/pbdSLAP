@@ -1,6 +1,10 @@
 include ../SLmake.inc
 
 all: double
+	$(ARCH) $(ARCHFLAGS) ../$(SCALAPACKLIB) \
+	        $(PKG_PIBLAS)
+	$(ARCH) $(ARCHFLAGS) ../$(SCALAPACKLIB) \
+	        $(PKG_PDBLAS)
 
 APPBLAS = pilaenv.o
 
@@ -33,14 +37,14 @@ PKG_PIBLAS = $(PIBLAS1:.o=.co) $(APPBLAS:.o=.fo)
 PKG_PDBLAS = $(PDBLAS1:.o=.co) $(PDBLAS2:.o=.co) $(PDBLAS3:.o=.co) $(APPBLAS:.o=.fo)
 
 integer: $(PKG_PIBLAS)
-	$(ARCH) $(ARCHFLAGS) ../$(SCALAPACKLIB) $(PKG_PIBLAS)
+	# $(ARCH) $(ARCHFLAGS) ../$(SCALAPACKLIB) $(PKG_PIBLAS)
 	# $(RANLIB) ../$(SCALAPACKLIB)
 
 double: integer $(PKG_PDBLAS)
-	( cd PBBLAS;  CDEFS='$(CDEFS)' PKG_CPPFLAGS='$(PKG_CPPFLAGS)' PKG_CFLAGS='$(PKG_CFLAGS)' MkInclude='$(MkInclude)' $(MAKE) )
-	( cd PTZBLAS; CDEFS='$(CDEFS)' PKG_CPPFLAGS='$(PKG_CPPFLAGS)' PKG_CFLAGS='$(PKG_CFLAGS)' MkInclude='$(MkInclude)' $(MAKE) )
-	( cd PTOOLS;  CDEFS='$(CDEFS)' PKG_CPPFLAGS='$(PKG_CPPFLAGS)' PKG_CFLAGS='$(PKG_CFLAGS)' MkInclude='$(MkInclude)' $(MAKE) )
-	$(ARCH) $(ARCHFLAGS) ../$(SCALAPACKLIB) $(PKG_PDBLAS)
+	cd PBBLAS;  CDEFS='$(CDEFS)' PKG_CPPFLAGS='$(PKG_CPPFLAGS)' PKG_CFLAGS='$(PKG_CFLAGS)' MkInclude='$(MkInclude)' $(MAKE) && cd ../ ; \
+	cd PTZBLAS; CDEFS='$(CDEFS)' PKG_CPPFLAGS='$(PKG_CPPFLAGS)' PKG_CFLAGS='$(PKG_CFLAGS)' MkInclude='$(MkInclude)' $(MAKE) && cd ../ ; \
+	cd PTOOLS;  CDEFS='$(CDEFS)' PKG_CPPFLAGS='$(PKG_CPPFLAGS)' PKG_CFLAGS='$(PKG_CFLAGS)' MkInclude='$(MkInclude)' $(MAKE) && cd ../
+	# $(ARCH) $(ARCHFLAGS) ../$(SCALAPACKLIB) $(PKG_PDBLAS)
 	# $(RANLIB) ../$(SCALAPACKLIB)
 
 clean :

@@ -7,7 +7,7 @@
 *     April 1, 1998
 *
 *     .. Scalar Arguments ..
-      CHARACTER*1        DIAG, TRANS, UPLO
+      CHARACTER(LEN=1)   DIAG, TRANS, UPLO
       INTEGER            INCX, INCY, LDA, N
       DOUBLE PRECISION   ALPHA, BETA
 *     ..

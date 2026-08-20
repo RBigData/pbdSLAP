@@ -6,7 +6,7 @@
 *     April 28, 1996
 *
 *     .. Scalar Arguments ..
-      CHARACTER*1        ADIST
+      CHARACTER(LEN=1)   ADIST
       INTEGER            ICONTXT, IGD, LDA, M, MCCOL, MCROW, MNB, MYCOL,
      $                   MYROW, N, NPCOL, NPROW
 *     ..

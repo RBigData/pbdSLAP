@@ -6,7 +6,7 @@
 *     April 1, 1998
 *
 *     .. Scalar Arguments ..
-      CHARACTER*1        DIAG, UPLO
+      CHARACTER(LEN=1)   DIAG, UPLO
       INTEGER            IOFFD, LDA, LDB, M, N
 *     ..
 *     .. Array Arguments ..

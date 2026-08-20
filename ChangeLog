@@ -1,3 +1,19 @@
+2026-05-29: Ver. 0.3-8
+  * Fix "adist" warnings caught by gfortran-16.0.1
+    using "PKG_FFLAGS = -Wcharacter-truncation"
+  * Fix "Old-style character length" warnings caught by gfortran-16.0.1
+    using "PKG_FFLAGS = -Wall -pedantic -mtune=native"
+
+2024-11-01: Ver. 0.3-7
+  * Remove "$(ALL_CPPFLAGS)" from FCFLAG.
+  * Adjust "$(ARCH)" to avoid .o truncation.
+  * Test with clang18.
+  * Rmark "$(ALL_CPPFLAGS)" from "src/SLmake.inc.org".
+
+2024-10-26: Ver. 0.3-6
+  * Fix "Obsolescent feature: Computed GOTO".
+  * Fix "Obsolescent feature: Old-style character length".
+
 2024-01-06: Ver. 0.3-5
   * Remove "rlecuyer".
   * Fix CRAN errors in windows caused by "ar" and "ranlib" (Bad address).

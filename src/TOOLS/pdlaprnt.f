@@ -10,7 +10,8 @@
       INTEGER            IA, ICPRNT, IRPRNT, JA, M, N, NOUT
 *     ..
 *     .. Array Arguments ..
-      CHARACTER*(*)      CMATNM
+*WCC      CHARACTER*(*)      CMATNM
+      CHARACTER(LEN=8)   CMATNM
       INTEGER            DESCA( * )
       DOUBLE PRECISION   A( * ), WORK( * )
 *     ..

@@ -7,7 +7,7 @@
 *     April 1, 1998
 *
 *     .. Scalar Arguments ..
-      CHARACTER*1        TRANS
+      CHARACTER(LEN=1)   TRANS
       INTEGER            INCX, INCY, LDA, M, N
       DOUBLE PRECISION   ALPHA, BETA
 *     ..

@@ -12,7 +12,9 @@
       IMPLICIT NONE
 *
 *     .. Scalar Arguments ..
-      CHARACTER*( * )    NAME, OPTS
+*WCC      CHARACTER*( * )    NAME, OPTS
+      CHARACTER(LEN=8)   NAME
+      CHARACTER(LEN=2)   OPTS
       INTEGER            ICTXT, ISPEC, N1, N2, N3, N4
 *     ..
 *
@@ -135,7 +137,7 @@
       INTEGER            I, IC, IZ, NB, NBMIN, NX, NPROW, NPCOL, MYROW,
      $                   MYCOL
       LOGICAL            CNAME, SNAME
-      CHARACTER          C1*1, C2*2, C4*2, C3*3, SUBNAM*6
+      CHARACTER          C1*1, C2*2, C4*2, C3*3, SUBNAM*8
 *     ..
 *     .. Intrinsic Functions ..
       INTRINSIC          CHAR, ICHAR, INT, MIN, REAL
@@ -147,9 +149,29 @@
 *     .. Executable Statements ..
 *
       IF( ISPEC.GT.23 ) GO TO 990
-      GO TO ( 10, 10, 10, 80, 90, 100, 110, 120,
-     $        130, 140, 150, 160, 160, 160, 160, 160,
-     $        170, 180, 190, 200, 210, 220, 230, 160)ISPEC
+*WCC  GO TO ( 10, 10, 10, 80, 90, 100, 110, 120,
+*WCC $        130, 140, 150, 160, 160, 160, 160, 160,
+*WCC $        170, 180, 190, 200, 210, 220, 230, 160)ISPEC
+      SELECT CASE( ISPEC )
+         CASE ( 1:3 ) ; GO TO 10
+         CASE ( 4 ) ; GO TO 80
+         CASE ( 5 ) ; GO TO 90
+         CASE ( 6 ) ; GO TO 100
+         CASE ( 7 ) ; GO TO 110
+         CASE ( 8 ) ; GO TO 120
+         CASE ( 9 ) ; GO TO 130
+         CASE ( 10 ) ; GO TO 140
+         CASE ( 11 ) ; GO TO 150
+         CASE ( 12:16 ) ; GO TO 160
+         CASE ( 17 ) ; GO TO 170
+         CASE ( 18 ) ; GO TO 180
+         CASE ( 19 ) ; GO TO 190
+         CASE ( 20 ) ; GO TO 200
+         CASE ( 21 ) ; GO TO 210
+         CASE ( 22 ) ; GO TO 220
+         CASE ( 23 ) ; GO TO 230
+         CASE ( 24 ) ; GO TO 160
+      END SELECT
 *
 *     Invalid value for ISPEC
 *
@@ -217,7 +239,12 @@
       C3 = SUBNAM( 4: 6 )
       C4 = C3( 2: 3 )
 *
-      GO TO ( 50, 60, 70 )ISPEC
+*WCC  GO TO ( 50, 60, 70 )ISPEC
+      SELECT CASE( ISPEC )
+         CASE ( 1 ) ; GO TO 50
+         CASE ( 2 ) ; GO TO 60
+         CASE ( 3 ) ; GO TO 70
+      END SELECT
 *
    50 CONTINUE
 *

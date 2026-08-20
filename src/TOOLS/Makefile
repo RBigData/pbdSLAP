@@ -21,17 +21,21 @@ PKG_ITOOLS = $(ITOOLS:.o=.fo)
 PKG_DTOOLS = $(DTOOLS:.o=.fo)
 
 all: double
+	$(ARCH) $(ARCHFLAGS) ../$(SCALAPACKLIB) \
+	        $(PKG_ATOOLS) $(PKG_ATOOLS_C) $(PKG_ITOOLS)
+	$(ARCH) $(ARCHFLAGS) ../$(SCALAPACKLIB) \
+	        $(PKG_DTOOLS)
 
 dlapackaux:
-	( cd LAPACK; $(MAKE) double )
+	cd LAPACK; $(MAKE) double && cd ../
 
 integer: $(PKG_ATOOLS) $(PKG_ATOOLS_C) $(PKG_ITOOLS)
-	$(ARCH) $(ARCHFLAGS) ../$(SCALAPACKLIB) \
-                $(PKG_ATOOLS) $(PKG_ATOOLS_C) $(PKG_ITOOLS)
+	# $(ARCH) $(ARCHFLAGS) ../$(SCALAPACKLIB) \
+        #         $(PKG_ATOOLS) $(PKG_ATOOLS_C) $(PKG_ITOOLS)
 	# $(RANLIB) ../$(SCALAPACKLIB)
 
 double: dlapackaux integer $(PKG_DTOOLS)
-	$(ARCH) $(ARCHFLAGS) ../$(SCALAPACKLIB) $(PKG_DTOOLS)
+	# $(ARCH) $(ARCHFLAGS) ../$(SCALAPACKLIB) $(PKG_DTOOLS)
 	# $(RANLIB) ../$(SCALAPACKLIB)
 
 clean :

@@ -9,7 +9,8 @@
       INTEGER            ICTXT, INFO
 *     ..
 *     .. Array Arguments ..
-      CHARACTER*(*)      SRNAME
+*WCC      CHARACTER*(*)      SRNAME
+      CHARACTER(LEN=8)   SRNAME
 *     ..
 *
 *  Purpose

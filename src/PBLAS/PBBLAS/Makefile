@@ -1,6 +1,8 @@
 include ../../SLmake.inc
 
 all: double
+	$(ARCH) $(ARCHFLAGS) ../../$(SCALAPACKLIB) \
+	        $(PKG_PBDBLASAUX)
 
 PBDBLASAUX = pbdtran.o pbdmatadd.o pbdtrsrt.o pbdtrget.o \
              pbdtrnv.o pbdvecadd.o pbdtrst1.o
@@ -10,7 +12,7 @@ PKG_PBDBLASAUX = $(PBDBLASAUX:.o=.fo)
 #---------------------------------------------------------------------------
 
 double: $(PKG_PBDBLASAUX)
-	$(ARCH) $(ARCHFLAGS) ../../$(SCALAPACKLIB) $(PKG_PBDBLASAUX)
+	# $(ARCH) $(ARCHFLAGS) ../../$(SCALAPACKLIB) $(PKG_PBDBLASAUX)
 	# $(RANLIB) ../../$(SCALAPACKLIB)
 
 #---------------------------------------------------------------------------

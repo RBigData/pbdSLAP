@@ -173,7 +173,12 @@
 *        Swap the adjacent diagonal blocks.
 *
          K = N1 + N1 + N2 - 3
-         GO TO ( 10, 20, 30 )K
+*WCC     GO TO ( 10, 20, 30 )K
+         SELECT CASE( K )
+            CASE ( 1 ) ; GO TO 10
+            CASE ( 2 ) ; GO TO 20
+            CASE ( 3 ) ; GO TO 30
+         END SELECT
 *
    10    CONTINUE
 *

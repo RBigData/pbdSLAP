@@ -7,7 +7,9 @@
 *     October 15, 1999
 *
 *     .. Scalar Arguments ..
-      CHARACTER*( * )    NAME, OPTS
+*WCC      CHARACTER*( * )    NAME, OPTS
+      CHARACTER(LEN=8)   NAME
+      CHARACTER(LEN=2)   OPTS
       INTEGER            ICTXT, ISPEC, N1, N2, N3, N4
 *     ..
 *
@@ -117,9 +119,9 @@
 *     .. Local Scalars ..
       LOGICAL            CNAME, GLOBAL, SNAME
       CHARACTER          C1
-      CHARACTER*2        C2, C4
-      CHARACTER*3        C3
-      CHARACTER*8        SUBNAM
+      CHARACTER(LEN=2)   C2, C4
+      CHARACTER(LEN=3)   C3
+      CHARACTER(LEN=8)   SUBNAM
       INTEGER            I, IC, IDUMM, IZ, MSZ, NB
 *     ..
 *     .. Intrinsic Functions ..
@@ -137,7 +139,14 @@
 *
 *
 *
-      GO TO ( 10, 10, 10, 10, 10 )ISPEC
+*WCC  GO TO ( 10, 10, 10, 10, 10 )ISPEC
+      SELECT CASE( ISPEC )
+         CASE ( 1 ) ; GO TO 10
+         CASE ( 2 ) ; GO TO 10
+         CASE ( 3 ) ; GO TO 10
+         CASE ( 4 ) ; GO TO 10
+         CASE ( 5 ) ; GO TO 10
+      END SELECT
 *
 *     Invalid value for ISPEC
 *
@@ -212,7 +221,14 @@
          C3 = C4
       END IF
 *
-      GO TO ( 50, 60, 70, 80, 90 )ISPEC
+*WCC  GO TO ( 50, 60, 70, 80, 90 )ISPEC
+      SELECT CASE( ISPEC )
+         CASE ( 1 ) ; GO TO 50
+         CASE ( 2 ) ; GO TO 60
+         CASE ( 3 ) ; GO TO 70
+         CASE ( 4 ) ; GO TO 80
+         CASE ( 5 ) ; GO TO 90
+      END SELECT
 *
    50 CONTINUE
 *

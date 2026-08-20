@@ -7,7 +7,7 @@
 *
 *     .. Scalar Arguments ..
       INTEGER            ICTXT
-      CHARACTER*1        PREC
+      CHARACTER(LEN=1)   PREC
 *     ..
 *
 *  Purpose

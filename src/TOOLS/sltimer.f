@@ -193,7 +193,7 @@
 *     May 1, 1997
 *
 *     .. Scalar Arguments ..
-      CHARACTER*1        TIMETYPE
+      CHARACTER(LEN=1)   TIMETYPE
       INTEGER            I
 *     ..
 *

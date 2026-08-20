@@ -28,7 +28,7 @@ GFORTRAN_FLAGS = -DUSE_FC_LEN_T
 ### Setup R package flags and substitute by configure for ${MPI_...}.
 PKG_CPPFLAGS = $(SPMD_CPPFLAGS) $(GFORTRAN_FLAGS)
 PKG_CFLAGS = # -Wincompatible-pointer-types
-PKG_FFLAGS = 
+PKG_FFLAGS = # -Wall -pedantic -mtune=native -Wcharacter-truncation
 ### Order is matter.
 PKG_LIBS = $(EXT_LDFLAGS) $(FLIBS) $(SPMD_LDFLAGS)
 SLAP_FFLAGS = $(R_XTRA_FFLAGS) $(FPICFLAGS) $(SHLIB_FFLAGS) $(SAFE_FFLAGS)
@@ -88,11 +88,11 @@ SLmake:
 	cat SLmake.inc.org >> SLmake.inc
 
 $(R_SLAP): SLmake
-	( cd BLACS; $(MAKE) )
-	( cd TOOLS; $(MAKE) )
-	( cd PBLAS; $(MAKE) )
-	( cd REDIST; $(MAKE) )
-	( cd ScaLAPACK; $(MAKE) )
+	cd BLACS; $(MAKE) && cd ../; \
+	cd TOOLS; $(MAKE) && cd ../; \
+	cd PBLAS; $(MAKE) && cd ../; \
+	cd REDIST; $(MAKE) && cd ../; \
+	cd ScaLAPACK; $(MAKE) && cd ../
 	$(RANLIB) $(R_SLAP)
 
 clean:

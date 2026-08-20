@@ -1,6 +1,8 @@
 include ../../SLmake.inc
 
 all: double
+	$(ARCH) $(ARCHFLAGS) ../../$(SCALAPACKLIB) \
+	        $(PKG_DPTOOLS)
 
 #---------------------------------------------------------------------------
 #  The following line defines auxiliary routines needed by the PBLAS tools
@@ -61,7 +63,7 @@ DTOOLS = $(DCTOOLS) $(WCC_DCTOOLS)
 PKG_DPTOOLS = $(ALLTOOLS:.o=.co) $(DTOOLS:.o=.co)
 
 double: $(PKG_DPTOOLS)
-	$(ARCH) $(ARCHFLAGS) ../../$(SCALAPACKLIB) $(PKG_DPTOOLS)
+	# $(ARCH) $(ARCHFLAGS) ../../$(SCALAPACKLIB) $(PKG_DPTOOLS)
 	# $(RANLIB) ../../$(SCALAPACKLIB)
 
 clean:

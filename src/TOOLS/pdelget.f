@@ -6,7 +6,7 @@
 *     May 1, 1997
 *
 *     .. Scalar Arguments ..
-      CHARACTER*1        SCOPE, TOP
+      CHARACTER(LEN=1)   SCOPE, TOP
       INTEGER            IA, JA
       DOUBLE PRECISION   ALPHA
 *     ..
